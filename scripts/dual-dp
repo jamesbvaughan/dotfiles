@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Enable a second monitor connected via Display Port
+xrandr --output DP1 --auto --left-of eDP1
+sh ~/.fehbg &
+echo "Second monitor enabled."

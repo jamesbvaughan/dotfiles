@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Enable a second monitor connected via HDMI
+xrandr --output HDMI1 --auto --left-of eDP1
+sh ~/.fehbg &
+echo "Second monitor enabled."

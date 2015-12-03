@@ -1,0 +1,12 @@
+! Clear caps lock
+clear Lock
+keycode 66 = Mode_switch NoSymbol Mode_switch
+
+! Remap arrow keys
+keycode 43 = h H Left H
+keycode 44 = j J Down J
+keycode 45 = k K Up K
+keycode 46 = l L Right L
+
+! Alt fix
+keycode 37 = Control_L NoSymbol Alt_L

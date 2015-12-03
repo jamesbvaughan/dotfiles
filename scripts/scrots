@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Take a screenshot from a selection and put it in the screenshot directory
+scrot -s -e 'mv $f ~/Pictures/screenshots/'

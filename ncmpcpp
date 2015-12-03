@@ -1,0 +1,32 @@
+##### music visualizer #####
+visualizer_fifo_path = /tmp/mpd.fifo
+visualizer_output_name = my_fifo
+visualizer_in_stereo = yes
+# visualizer_sample_multipler = 1
+visualizer_sync_interval = 30
+visualizer_type = wave
+visualizer_look = ●▮
+
+##### local files #####
+mpd_music_dir = /home/james/music
+
+
+## Available values:
+##
+## - 0 - default window color (discards all other colors)
+## - 1 - black
+## - 2 - red
+## - 3 - green
+## - 4 - yellow
+## - 5 - blue
+## - 6 - magenta
+## - 7 - cyan
+## - 8 - white
+## - 9 - end of current color
+
+## - b - bold text
+## - u - underline text
+## - r - reverse colors
+## - a - use alternative character set
+## "The" word while sorting items in browser, tags in
+## media library, etc.

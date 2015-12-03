@@ -1,0 +1,31 @@
+interval=5
+color=#dddddd
+
+[music]
+label=
+command=mpc status | perl -ne 'if (/\[playing\]/) {CORE::say (" ", `mpc current | tr -d "\n"`)}'
+signal=2
+interval=once
+
+[weather]
+label=
+command=~/.bin/weather.py
+interval=300
+
+[volume]
+command=volume
+interval=once
+signal=1
+
+[backlight]
+label=
+command=~/.bin/backlight.sh
+interval=once
+signal=3
+
+[battery]
+command=.bin/battery.sh
+
+[datetime]
+command=echo $(date '+%-k:%M')
+interval=30

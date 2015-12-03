@@ -1,0 +1,43 @@
+rofi.font:	Fira Mono 24
+rofi.opacity: 85
+rofi.lines: 3
+rofi.width: 40
+rofi.fg: #dddddd
+rofi.bg: #222222
+rofi.color-enabled: true
+rofi.color-normal: #222222, #666666, #222222, #222222, #dddddd
+rofi.color-window: #222222, #222222
+rofi.bw: 0
+rofi.padding: 10
+rofi.auto-select: true
+rofi.key-run: control+space
+rofi.separator-style: solid
+rofi.hide-scrollbar: true
+
+URxvt.font: xft:Fira Mono for Powerline:size=10,xft:FontAwesome:size=10
+URxvt.scrollBar: false
+URxvt.perl-ext-common: default,clipboard,matcher
+URxvt.iso14755: False
+URxvt.clipboard.copycmd:  xsel -ib
+URxvt.clipboard.pastecmd: xsel -ob
+URxvt.url-launcher: /usr/bin/chromium
+URxvt.matcher.button: 1
+URxvt.matcher.rend.0: Uline Bold fg5
+URxvt.foreground: #dddddd
+URxvt.background: #141414
+URxvt*color0:  #2E3436
+URxvt*color1:  #a40000
+URxvt*color2:  #4E9A06
+URxvt*color3:  #C4A000
+URxvt*color4:  #3465A4
+URxvt*color5:  #75507B
+URxvt*color6:  #ce5c00
+URxvt*color7:  #babdb9
+URxvt*color8:  #555753
+URxvt*color9:  #EF2929
+URxvt*color10: #8AE234
+URxvt*color11: #FCE94F
+URxvt*color12: #729FCF
+URxvt*color13: #AD7FA8
+URxvt*color14: #fcaf3e
+URxvt*color15: #EEEEEC
