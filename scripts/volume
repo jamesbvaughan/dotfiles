@@ -7,13 +7,13 @@ elif [ "$BLOCK_BUTTON" = 4 ];then
 	amixer -q set Master 5%- unmute;
 fi
 
-$VOLUME=$(amixer get Master | grep -E -o '[0-9][0-9]?[0-9]?%' | head -1 | tr -d "%")
-$SYMBOL=
+VOLUME=$(amixer get Master | grep -E -o '[0-9][0-9]?[0-9]?%' | head -1 | tr -d "%")
+SYMBOL=
 
 if [ "$VOLUME" -ge "50" ]; then
-	$SYMBOL=
+	SYMBOL=
 elif [ "$VOLUME" -eq "0" ]; then
-	$SYMBOL=
+	SYMBOL=
 fi
 
 echo "$SYMBOL $VOLUME%"

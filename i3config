@@ -57,7 +57,7 @@ new_window              pixel $bordersize
 #######################################################################
 
 # workspace names
-set $main 1
+set $main 1
 set $web 2 
 set $code 3 
 set $music 4 
@@ -69,6 +69,8 @@ set $extra 8 
 assign [class="Atom"] $code
 assign [class="Gimp"] $photo
 assign [class="Darktable"] $photo
+assign [class="chromium"] $web
+assign [title="Messenger"] $chat
 
 
 # auto back-and-forth workspaces
@@ -312,7 +314,11 @@ exec --no-startup-id dunst
 exec --no-startup-id mopidy
 
 # natural scrolling
-exec xinput set-button-map 13 1 2 3 5 4 6 7 8 9 10 11 12
+exec natural-scrolling
+
+# detect monitors
+exec xrandr
+exec srandrd ~/.bin/displays.sh
 
 ######################################################################
 #                              system                                #
@@ -340,12 +346,10 @@ bindsym $mod+Pause mode "$mode_system"
 #                                bar                                 #
 ######################################################################
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
 bar {
   status_command i3blocks
-  font pango:Fira Mono Medium, Awesome 12
-  # separator_symbol " "
+  font pango:Fira Mono Medium, FontAwesome 12
+  separator_symbol "​"
   position top
   tray_output eDP1
   strip_workspace_numbers yes

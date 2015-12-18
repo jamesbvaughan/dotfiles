@@ -94,6 +94,10 @@ alias s="git status"
 alias ss="ssh -Y vaughan@lnxsrv.seas.ucla.edu"
 alias go="cd ~/projects/hangout"
 
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
 ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR

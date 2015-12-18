@@ -10,8 +10,10 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-commentary'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tomasr/molokai'
+Plugin 'bling/vim-airline'
+Plugin 'chriskempson/base16-vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'jelera/vim-javascript-syntax'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -60,7 +62,7 @@ endif " has("autocmd")
 " Only define it when not defined already.
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
+		\ | wincmd p | diffthis
 endif
 
 " set F2 to paste toggle
@@ -78,10 +80,6 @@ set number
 " toggle line numbers
 nnoremap <F3> :set nonumber !<CR>
 
-" better colors for dark bg
-set background=dark
-colorscheme ron
-
 " Syntastic stuff
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -95,8 +93,8 @@ let g:syntastic_cpp_compiler_options = '-std=c++0x'
 let g:syntastic_javascript_checkers = ['jshint']
 
 " set Shift-h and Shift-l to move between open buffers
-map <S-h> :bn <CR>
-map <S-l> :bp <CR>
+map <S-h> :bp <CR>
+map <S-l> :bn <CR>
 
 " set C-v and C-b to move between panes
 map <C-v> :sp <CR>
@@ -104,6 +102,8 @@ map <C-b> :vsp <CR>
 
 " set better tab shortcuts
 map <C-h> :wincmd h <CR>
+map <C-j> :wincmd j <CR>
+map <C-k> :wincmd k <CR>
 map <C-l> :wincmd l <CR>
 
 " open NERDTree
@@ -143,3 +143,15 @@ set shell=bash\ --norc
 
 " fix tab thing
 set shiftwidth=4
+
+" theme
+set background=dark
+colorscheme ron
+let g:airline_theme = 'bubblegum'
+
+" airline
+let g:airline_powerline_fonts = 1
+set laststatus=2
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'

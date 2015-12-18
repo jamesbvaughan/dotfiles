@@ -1,0 +1,4 @@
+#!/bin/sh
+
+NUM=$(xinput | grep Synaptics | sed -E 's/.*=([0-9][0-9]?).*/\1/')
+xinput set-button-map $NUM 1 2 3 5 4 6 7 8 9 19 11 12
