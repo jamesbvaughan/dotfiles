@@ -8,6 +8,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
+Plugin 'myint/syntastic-extras'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-commentary'
 Plugin 'bling/vim-airline'
@@ -65,9 +66,6 @@ if !exists(":DiffOrig")
 		\ | wincmd p | diffthis
 endif
 
-" set F2 to paste toggle
-set pastetoggle=<F2>
-
 " auto reload .vimrc on save
 augroup reload_vimrc " {
     autocmd!
@@ -77,37 +75,16 @@ augroup END " }
 " show line numbers
 set number
 
-" toggle line numbers
-nnoremap <F3> :set nonumber !<CR>
-
 " Syntastic stuff
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_cpp_compiler_options = '-std=c++0x'
 let g:syntastic_javascript_checkers = ['jshint']
-
-" set Shift-h and Shift-l to move between open buffers
-map <S-h> :bp <CR>
-map <S-l> :bn <CR>
-
-" set C-v and C-b to move between panes
-map <C-v> :sp <CR>
-map <C-b> :vsp <CR>
-
-" set better tab shortcuts
-map <C-h> :wincmd h <CR>
-map <C-j> :wincmd j <CR>
-map <C-k> :wincmd k <CR>
-map <C-l> :wincmd l <CR>
-
-" open NERDTree
-map <C-t> :NERDTreeToggle <CR>
 
 " hide annoying warning when using YCM with C family
 let g:ycm_confirm_extra_conf = 0
@@ -115,15 +92,12 @@ let g:ycm_confirm_extra_conf = 0
 " change default Explore viewing style
 let g:netrw_liststyle=3
 
-" open up Explore with space-k
-:let mapleader=" "
-map <leader>k :Explore<cr>
-
 " allow background buffers
 set hidden
 
 " change tab length
 set tabstop=4
+set shiftwidth=4
 
 " highlight search terms as I search
 set hlsearch
@@ -133,25 +107,53 @@ set incsearch
 set nobackup
 set noswapfile
 
-" no more shift-; for controls
-map ; :
-
-map <F5> :setlocal spell! spelllang=en_us <CR>
-
 " set bash as default vim shell
 set shell=bash\ --norc
 
-" fix tab thing
-set shiftwidth=4
-
-" theme
+" theme stuff
 set background=dark
 colorscheme ron
-let g:airline_theme = 'bubblegum'
 
 " airline
-let g:airline_powerline_fonts = 1
 set laststatus=2
+let g:airline_theme = 'bubblegum'
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+
+
+" MY BINDINGS
+
+" set F2 to paste toggle
+set pastetoggle=<F2>
+
+" toggle line numbers
+nnoremap <F3> :set nonumber !<CR>
+
+" set Shift-h and Shift-l to move between open buffers
+map <S-h> :bp <CR>
+map <S-l> :bn <CR>
+
+" set C-v and C-b to open new panes
+map <C-v> :sp <CR>
+map <C-b> :vsp <CR>
+
+" set better pane navigation shortcuts
+map <C-h> :wincmd h <CR>
+map <C-j> :wincmd j <CR>
+map <C-k> :wincmd k <CR>
+map <C-l> :wincmd l <CR>
+
+" open NERDTree
+map <C-t> :NERDTreeToggle <CR>
+
+" open up Explore with space-k
+:let mapleader=" "
+map <leader>k :Explore<cr>
+
+" no more shift-; for controls
+map ; :
+
+" toggle spelling mistake highlighting
+map <F5> :setlocal spell! spelllang=en_us <CR>

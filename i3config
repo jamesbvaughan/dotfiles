@@ -6,7 +6,7 @@ set $mod         Mod4
 set $gsi         20
 set $gso         0
 
-set $bordersize 0 
+set $bordersize 0
 
 set $background  #222222
 set $text_regular	#666666
@@ -305,7 +305,7 @@ exec --no-startup-id sh ~/.fehbg &
 # exec --no-startup-id xset dpms 900
 
 # start compton
-exec --no-startup-id compton --config ~/.config/compton.conf -b 
+exec --no-startup-id compton --config ~/.config/compton.conf -b
 
 # start dunst
 exec --no-startup-id dunst
@@ -333,7 +333,7 @@ mode "$mode_system" {
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
