@@ -313,6 +313,9 @@ exec --no-startup-id dunst
 # start mopidy
 exec --no-startup-id mopidy
 
+# start youtube-mpv
+exec --no-startup-id python ~/software/youtube-mpb/ytdl-server.py3
+
 # natural scrolling
 exec natural-scrolling
 

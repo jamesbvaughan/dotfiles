@@ -2,7 +2,7 @@ color=#dddddd
 
 [music]
 label=
-command=mpc status | perl -ne 'if (/\[playing\]/) {CORE::say (" ", `mpc current | tr -d "\n"`)}'
+command=~/.bin/music.sh
 signal=2
 interval=once
 
@@ -17,7 +17,7 @@ command=~/.bin/weather.py
 interval=300
 
 [volume]
-command=volume.sh
+command=volume
 interval=once
 signal=1
 

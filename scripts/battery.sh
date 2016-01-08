@@ -9,9 +9,9 @@ if test "$(cat /sys/class/power_supply/ACAD/online)" = 1; then
 	echo
 	echo \#22dd22
 elif test "$CURRENT" -le 15; then
- 	echo
+	echo
 	echo \#dd2222
 elif test "$CURRENT" -le 30; then
-	echo 
- 	echo \#dddd22
+	echo
+	echo \#dddd22
 fi

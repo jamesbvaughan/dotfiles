@@ -10,6 +10,9 @@ visualizer_look = ●▮
 ##### local files #####
 mpd_music_dir = /home/james/music
 
+## library faster
+# media_library_display_date = "no"
+
 
 ## Available values:
 ##
