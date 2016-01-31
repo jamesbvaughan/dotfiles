@@ -55,7 +55,7 @@ plugins=(git colored-man-pages colorize command-not-found cp sudo)
 
 # User configuration
 
-export PATH=$HOME/.bin:/usr/local/bin:$PATH
+export PATH=$HOME/.npm-global/bin:$HOME/.bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 
@@ -90,9 +90,16 @@ bindkey '^xe' edit-command-line
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias pingg="ping -c 3 8.8.8.8"
-alias s="git status"
-alias ss="ssh -Y vaughan@lnxsrv.seas.ucla.edu"
+alias gs="git status"
+alias ss="ssh -X vaughan@lnxsrv.seas.ucla.edu"
 alias go="cd ~/projects/hangout"
+
+# Web searches
+alias sa="s -p amazon"
+alias sr="s -p reddit"
+alias sc="s -p soundcloud"
+alias sw="s -p wikipedia"
+alias syt="s -p youtube"
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"

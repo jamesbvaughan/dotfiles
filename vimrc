@@ -14,8 +14,10 @@ Plugin 'tpope/vim-commentary'
 Plugin 'bling/vim-airline'
 Plugin 'chriskempson/base16-vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'jelera/vim-javascript-syntax'
+Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'othree/html5.vim'
+Plugin 'tpope/vim-markdown'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -40,6 +42,10 @@ if has("autocmd")
 
   " For all text files set 'textwidth' to 78 characters.
   autocmd FileType text setlocal textwidth=78
+
+  " Only rln in normal mode
+  autocmd InsertEnter * :set rnu!
+  autocmd InsertLeave * :set rnu
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
@@ -74,7 +80,8 @@ augroup reload_vimrc " {
 augroup END " }
 
 " show line numbers
-set number
+set nu
+set rnu
 
 " Syntastic stuff
 set statusline+=%#warningmsg#
@@ -158,3 +165,9 @@ map ; :
 
 " toggle spelling mistake highlighting
 map <F5> :setlocal spell! spelllang=en_us <CR>
+
+" jsx thing
+" let g:jsx_ext_required = 0
+
+nnoremap <C-n> :set rnu!<cr>
+set scrolloff=5

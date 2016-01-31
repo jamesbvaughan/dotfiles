@@ -286,6 +286,9 @@ bindsym $mod+r mode "resize"
 #                              startup                                #
 #######################################################################
 
+# set wallpaper
+exec --no-startup-id sh ~/.fehbg &
+
 # move to home workspace
 exec --no-startup-id "i3-msg 'workspace $main'"
 
@@ -297,9 +300,6 @@ exec --no-startup-id urxvtd -q -f -o
 
 # rofi
 exec --no-startup-id rofi &
-
-# set wallpaper
-exec --no-startup-id sh ~/.fehbg &
 
 # suspend screen after a while
 # exec --no-startup-id xset dpms 900
