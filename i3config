@@ -58,13 +58,13 @@ new_window              pixel $bordersize
 
 # workspace names
 set $main 1
-set $web 2 
-set $code 3 
+set $code 2 
+set $web 3 
 set $music 4 
 set $term 5 
 set $photo 6 
 set $chat 7 
-set $extra 8 
+set $extra 
 
 assign [class="Atom"] $code
 assign [class="Gimp"] $photo
@@ -87,20 +87,20 @@ bindsym $mod+n move workspace to output right
 
 # switch to workspace
 bindsym $mod+1 workspace number $main
-bindsym $mod+2 workspace number $web
-bindsym $mod+3 workspace number $code
+bindsym $mod+2 workspace number $code
+bindsym $mod+3 workspace number $web
 bindsym $mod+4 workspace number $music
 bindsym $mod+5 workspace number $term
 bindsym $mod+6 workspace number $photo
 bindsym $mod+7 workspace number $chat
-bindsym $mod+8 workspace $extra
-bindsym $mod+9 workspace $extra
-bindsym $mod+0 workspace $extra
+bindsym $mod+8 workspace 8 $extra
+bindsym $mod+9 workspace 9 $extra
+bindsym $mod+0 workspace 10 $extra
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $main
-bindsym $mod+Shift+2 move container to workspace number $web
-bindsym $mod+Shift+3 move container to workspace number $code
+bindsym $mod+Shift+2 move container to workspace number $code
+bindsym $mod+Shift+3 move container to workspace number $web
 bindsym $mod+Shift+4 move container to workspace number $music
 bindsym $mod+Shift+5 move container to workspace number $term
 bindsym $mod+Shift+6 move container to workspace number $photo
@@ -206,7 +206,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 #                                gaps                                 #
 #######################################################################
 
-set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps Gaps: (o) outer, (i) inner, (0), (1), (2) for presets
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
 set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
 bindsym $mod+Shift+g mode "$mode_gaps"
@@ -214,6 +214,9 @@ bindsym $mod+Shift+g mode "$mode_gaps"
 mode "$mode_gaps" {
         bindsym o      mode "$mode_gaps_outer"
         bindsym i      mode "$mode_gaps_inner"
+		bindsym 0	gaps inner current set 0; mode "default"
+		bindsym 1	gaps inner current set 2; mode "default"
+		bindsym 2	gaps inner current set 20; mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }

@@ -55,7 +55,7 @@ plugins=(git colored-man-pages colorize command-not-found cp sudo)
 
 # User configuration
 
-export PATH=$HOME/.npm-global/bin:$HOME/.bin:/usr/local/bin:$PATH
+export PATH=$HOME/.npm-global/bin:$HOME/.bin:/usr/local/bin:$PATH:$HOME/software/webstorm/bin
 # export MANPATH="/usr/local/man:$MANPATH"
 
 
@@ -90,7 +90,6 @@ bindkey '^xe' edit-command-line
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias pingg="ping -c 3 8.8.8.8"
-alias gs="git status"
 alias ss="ssh -X vaughan@lnxsrv.seas.ucla.edu"
 alias go="cd ~/projects/hangout"
 
@@ -101,6 +100,18 @@ alias sc="s -p soundcloud"
 alias sw="s -p wikipedia"
 alias syt="s -p youtube"
 
+# Git
+alias gs="git status"
+alias gc="git commit"
+alias gcm="git commit -m"
+alias gp="git push"
+
+# Npm
+alias ni="npm install"
+alias nig="npm install -g"
+alias nis="npm install --save"
+alias ns="npm start"
+
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
@@ -109,5 +120,8 @@ ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
+
+# Android
+ANDROID_HOME=/home/james/Android/Sdk
 
 source $ZSH/oh-my-zsh.sh
