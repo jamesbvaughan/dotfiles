@@ -2,7 +2,7 @@
 clear Lock
 keycode 66 = Mode_switch NoSymbol Mode_switch
 
-! Remap arrow keys
+! Remap arrow keys w/ caps-lock
 keycode 43 = h H Left H
 keycode 44 = j J Down J
 keycode 45 = k K Up K

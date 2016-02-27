@@ -1,3 +1,4 @@
+! Rofi ==========================================================
 rofi.font:	Fira Mono 24
 rofi.opacity: 85
 rofi.lines: 3
@@ -12,6 +13,7 @@ rofi.key-run: control+space
 rofi.separator-style: solid
 rofi.hide-scrollbar: true
 
+! rxvt ==========================================================
 URxvt.font: xft:Fira Mono for Powerline:size=10,xft:FontAwesome:size=10
 URxvt.scrollBar: false
 URxvt.perl-ext-common: default,clipboard,matcher
@@ -22,7 +24,7 @@ URxvt.url-launcher: /usr/bin/chromium
 URxvt.matcher.button: 1
 URxvt.matcher.rend.0: Uline Bold fg5
 
-! Colors
+! colors ========================================================
 *.foreground: #dddddd
 *.fg: #dddddd
 *.background: #222222

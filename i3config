@@ -66,12 +66,12 @@ set $photo 6 
 set $chat 7 
 set $extra 
 
+# assign certain programs to specific workspaces
 assign [class="Atom"] $code
 assign [class="Gimp"] $photo
 assign [class="Darktable"] $photo
 assign [class="chromium"] $web
 assign [title="Messenger"] $chat
-
 
 # auto back-and-forth workspaces
 workspace_auto_back_and_forth yes
@@ -80,46 +80,61 @@ workspace_auto_back_and_forth yes
 bindsym $mod+Tab workspace next
 bindsym $mod+shift+Tab workspace prev
 
+# use default workspace layout
 workspace_layout default
 
 # toggle workspaces between outputs
 bindsym $mod+n move workspace to output right
 
 # switch to workspace
-bindsym $mod+1 workspace number $main
-bindsym $mod+2 workspace number $code
-bindsym $mod+3 workspace number $web
-bindsym $mod+4 workspace number $music
-bindsym $mod+5 workspace number $term
-bindsym $mod+6 workspace number $photo
-bindsym $mod+7 workspace number $chat
+bindsym $mod+1 workspace $main
+bindsym $mod+2 workspace $code
+bindsym $mod+3 workspace $web
+bindsym $mod+4 workspace $music
+bindsym $mod+5 workspace $term
+bindsym $mod+6 workspace $photo
+bindsym $mod+7 workspace $chat
 bindsym $mod+8 workspace 8 $extra
 bindsym $mod+9 workspace 9 $extra
 bindsym $mod+0 workspace 10 $extra
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $main
-bindsym $mod+Shift+2 move container to workspace number $code
-bindsym $mod+Shift+3 move container to workspace number $web
-bindsym $mod+Shift+4 move container to workspace number $music
-bindsym $mod+Shift+5 move container to workspace number $term
-bindsym $mod+Shift+6 move container to workspace number $photo
-bindsym $mod+Shift+7 move container to workspace number $chat
-bindsym $mod+Shift+8 move container to workspace $extra
-bindsym $mod+Shift+9 move container to workspace $extra
-bindsym $mod+Shift+0 move container to workspace $extra
+bindsym $mod+Shift+1 move container to workspace $main
+bindsym $mod+Shift+2 move container to workspace $code
+bindsym $mod+Shift+3 move container to workspace $web
+bindsym $mod+Shift+4 move container to workspace $music
+bindsym $mod+Shift+5 move container to workspace $term
+bindsym $mod+Shift+6 move container to workspace $photo
+bindsym $mod+Shift+7 move container to workspace $chat
+bindsym $mod+Shift+8 move container to workspace 8 $extra
+bindsym $mod+Shift+9 move container to workspace 9 $extra
+bindsym $mod+Shift+0 move container to workspace 10 $extra
 
 
 #######################################################################
 #                      personal keybindings                           #
 #######################################################################
 
-# use these keys for focus, movement, and resize directions when reaching for
-# the arrows is not convenient
+# use vi keys for movement
 set $left h
 set $down j
 set $up k
 set $right l
+
+# change focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# move focused window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# kill focused window
+bindsym $mod+q kill
 
 # volume control keys
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute && pkill -RTMIN+1 i3blocks
@@ -152,24 +167,6 @@ bindsym $mod+Return exec --no-startup-id urxvtc
 # lock the screen
 bindsym $mod+Shift+z exec .bin/lock.sh
 
-# kill focused window
-bindsym $mod+q kill
-
-# start dmenu-desktop
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
-# change focus
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
-
-# move focused window
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
-
 # split in horizontal orientation
 bindsym $mod+b split h, exec --no-startup-id urxvtc
 
@@ -196,8 +193,10 @@ bindsym $mod+minus scratchpad show
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+
+# restart i3 inplace
 bindsym $mod+Shift+r restart
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
@@ -317,7 +316,7 @@ exec --no-startup-id dunst
 exec --no-startup-id mopidy
 
 # start youtube-mpv
-exec --no-startup-id python ~/software/youtube-mpb/ytdl-server.py3
+exec --no-startup-id python2 ~/software/youtube-mpb/ytdl-server.py
 
 # natural scrolling
 exec natural-scrolling
