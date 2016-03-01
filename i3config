@@ -3,8 +3,6 @@
 #######################################################################
 
 set $mod         Mod4
-set $gsi         20
-set $gso         0
 
 set $bordersize 0
 
@@ -46,8 +44,6 @@ font                    pango:Fira Mono Medium, Awesome 10
 #######################################################################
 
 hide_edge_borders       none
-gaps                    inner $gsi
-gaps                    outer $gso
 new_float               pixel $bordersize
 new_window              pixel $bordersize
 
@@ -177,7 +173,7 @@ bindsym $mod+v split v, exec --no-startup-id urxvtc
 bindsym $mod+grave fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+# bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -205,44 +201,49 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 #                                gaps                                 #
 #######################################################################
 
+set $gsi 10
+set $gso 0
+
+gaps inner $gsi
+gaps outer $gso
+
 set $mode_gaps Gaps: (o) outer, (i) inner, (0), (1), (2) for presets
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
 set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
 bindsym $mod+Shift+g mode "$mode_gaps"
 
 mode "$mode_gaps" {
-        bindsym o      mode "$mode_gaps_outer"
-        bindsym i      mode "$mode_gaps_inner"
-		bindsym 0	gaps inner current set 0; mode "default"
-		bindsym 1	gaps inner current set 2; mode "default"
-		bindsym 2	gaps inner current set 20; mode "default"
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+	bindsym o		mode "$mode_gaps_outer"
+	bindsym i		mode "$mode_gaps_inner"
+	bindsym 0		gaps inner current set 0; mode "default"
+	bindsym 1		gaps inner current set 2; mode "default"
+	bindsym 2		gaps inner current set $gsi; mode "default"
+ 	bindsym Return		mode "default"
+ 	bindsym Escape		mode "default"
 }
-
 mode "$mode_gaps_inner" {
-        bindsym plus  gaps inner current plus 5
-        bindsym minus gaps inner current minus 5
-        bindsym 0     gaps inner current set 0
+	bindsym plus  gaps inner current plus 1
+	bindsym minus gaps inner current minus 1
+	bindsym 0     gaps inner current set 0
 
-        bindsym Shift+plus  gaps inner all plus 5
-        bindsym Shift+minus gaps inner all minus 5
-        bindsym Shift+0     gaps inner all set 0
+	bindsym Shift+plus  gaps inner all plus 5
+	bindsym Shift+minus gaps inner all minus 5
+	bindsym Shift+0     gaps inner all set 0
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 mode "$mode_gaps_outer" {
-        bindsym plus  gaps outer current plus 5
-        bindsym minus gaps outer current minus 5
-        bindsym 0     gaps outer current set 0
+	bindsym plus  gaps outer current plus 5
+	bindsym minus gaps outer current minus 5
+	bindsym 0     gaps outer current set 0
 
-        bindsym Shift+plus  gaps outer all plus 5
-        bindsym Shift+minus gaps outer all minus 5
-        bindsym Shift+0     gaps outer all set 0
+	bindsym Shift+plus  gaps outer all plus 5
+	bindsym Shift+minus gaps outer all minus 5
+	bindsym Shift+0     gaps outer all set 0
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 
 # use smart gaps
@@ -259,6 +260,9 @@ floating_modifier $mod
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
+# toggle sticky
+bindsym $mod+s sticky toggle
+
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
@@ -274,6 +278,7 @@ mode "resize" {
         bindsym $down       resize grow height 5 px or 5 ppt
         bindsym $up         resize shrink height 5 px or 5 ppt
         bindsym $right      resize grow width 5 px or 5 ppt
+        bindsym 2      			resize set 480 px 270 px
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -301,7 +306,8 @@ exec --no-startup-id nm-applet
 exec --no-startup-id urxvtd -q -f -o
 
 # rofi
-exec --no-startup-id rofi &
+# exec --no-startup-id rofi &
+bindsym control+space exec --no-startup-id j4-dmenu-desktop --dmenu="rofi -i -dmenu -p ''"
 
 # suspend screen after a while
 # exec --no-startup-id xset dpms 900
@@ -316,7 +322,7 @@ exec --no-startup-id dunst
 exec --no-startup-id mopidy
 
 # start youtube-mpv
-exec --no-startup-id python2 ~/software/youtube-mpb/ytdl-server.py
+exec --no-startup-id python ~/software/youtube-mpb/ytdl-server.py3
 
 # natural scrolling
 exec natural-scrolling

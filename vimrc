@@ -9,22 +9,29 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'				" Vundle
 
 " Plugins that I like
+Plugin 'bling/vim-airline'				" Vim Airline
+Plugin 'chriskempson/base16-vim'	" Base16 Theme
 Plugin 'kien/ctrlp.vim'						" CtrlP
 Plugin 'scrooloose/syntastic'			" Syntastic
 Plugin 'myint/syntastic-extras'		" Syntastic Extras
-Plugin 'tpope/vim-commentary'			" Vim Commentary
-Plugin 'bling/vim-airline'				" Vim Airline
-Plugin 'chriskempson/base16-vim'	" Base16 Theme
-Plugin 'tpope/vim-fugitive'				" Vim Fugitive
+Plugin 'ntpeters/vim-better-whitespace' " Whitespace
+Plugin 'tpope/vim-commentary'			" Commentary
+Plugin 'tpope/vim-eunuch'					" Unix Commands
+Plugin 'tpope/vim-fugitive'				" Fugitive
+Plugin 'tpope/vim-repeat'					" Repeat
+Plugin 'tpope/vim-sensible'				" Sensible Defaults
+Plugin 'tpope/vim-surround'				" Surround
 Plugin 'Valloric/YouCompleteMe'		" YouCompleteMe
 
 " Language Syntax Support
-Plugin 'pangloss/vim-javascript'	" Javascript
-Plugin 'mxw/vim-jsx'							" JSX
-Plugin 'othree/html5.vim'					" HTML5
-Plugin 'tpope/vim-markdown'				" Markdown
 Plugin 'groenewege/vim-less'			" Less
 Plugin 'hail2u/vim-css3-syntax'		" CSS3
+Plugin 'mxw/vim-jsx'							" JSX
+Plugin 'othree/html5.vim'					" HTML5
+Plugin 'pangloss/vim-javascript'	" Javascript
+Plugin 'tpope/vim-dotenv'					" Procfile and .env
+Plugin 'tpope/vim-markdown'				" Markdown
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -33,10 +40,8 @@ filetype plugin indent on    " required
 
 set scrolloff=5					" start scrolling before bottom of pane
 set hidden							" allow background buffers
-set shell=bash\ --norc	" set bash as default vim shell
 
 set hlsearch						" highlight search terms as I search
-set incsearch						" incremental search
 
 set nu									" show line numbers
 set rnu									" show relative line numbers
@@ -57,6 +62,9 @@ set noswapfile
 
 " set leader to space
 :let mapleader=" "
+
+" close pane with leader+q
+map <leader>q :q<CR>
 
 set pastetoggle=<F2>		" set F2 to paste toggle
 
@@ -99,11 +107,8 @@ map <F5> :setlocal spell! spelllang=en_us <CR>
 " Plugin Settings ===============================================
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_cpp_compiler_options = '-std=c++0x'
@@ -113,7 +118,6 @@ let g:syntastic_javascript_checkers = ['jsxhint']
 let g:ycm_confirm_extra_conf = 1
 
 " Airline
-set laststatus=2
 let g:airline_theme = 'bubblegum'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -132,19 +136,8 @@ let g:netrw_liststyle=3
 
 " Other =========================================================
 
-" Switch syntax highlighting on, when the terminal has colors
-if &t_Co > 2 || has("gui_running")
-  syntax on
-endif
-
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
-
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
 
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
@@ -157,6 +150,9 @@ if has("autocmd")
   autocmd InsertEnter * :set rnu!
   autocmd InsertLeave * :set rnu
 
+	" Strip whitespace on save
+	autocmd BufWritePre * StripWhitespace
+
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
   " (happens when dropping a file on gvim).
@@ -168,8 +164,6 @@ if has("autocmd")
     \ endif
 
   augroup END
-else
-  set autoindent		" always set autoindenting on
 endif " has("autocmd")
 
 " Convenient command to see the difference between the current buffer and the
