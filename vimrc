@@ -1,6 +1,8 @@
 " James Vaughan's vimrc =========================================
-set nocompatible              " be iMproved, required
-filetype off                  " required
+if !has('nvim')
+	set nocompatible              " be iMproved, required
+	filetype off                  " required
+endif
 
 " Plugins =======================================================
 " set the runtime path to include Vundle and initialize
@@ -15,6 +17,7 @@ Plugin 'kien/ctrlp.vim'						" CtrlP
 Plugin 'scrooloose/syntastic'			" Syntastic
 Plugin 'myint/syntastic-extras'		" Syntastic Extras
 Plugin 'ntpeters/vim-better-whitespace' " Whitespace
+Plugin 'rdnetto/YCM-Generator' 		" YCM Generator
 Plugin 'tpope/vim-commentary'			" Commentary
 Plugin 'tpope/vim-eunuch'					" Unix Commands
 Plugin 'tpope/vim-fugitive'				" Fugitive
@@ -24,6 +27,7 @@ Plugin 'tpope/vim-surround'				" Surround
 Plugin 'Valloric/YouCompleteMe'		" YouCompleteMe
 
 " Language Syntax Support
+Plugin 'gnuplot.vim'							" Gnuplot
 Plugin 'groenewege/vim-less'			" Less
 Plugin 'hail2u/vim-css3-syntax'		" CSS3
 Plugin 'mxw/vim-jsx'							" JSX
@@ -31,6 +35,7 @@ Plugin 'othree/html5.vim'					" HTML5
 Plugin 'pangloss/vim-javascript'	" Javascript
 Plugin 'tpope/vim-dotenv'					" Procfile and .env
 Plugin 'tpope/vim-markdown'				" Markdown
+
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -40,8 +45,6 @@ filetype plugin indent on    " required
 
 set scrolloff=5					" start scrolling before bottom of pane
 set hidden							" allow background buffers
-
-set hlsearch						" highlight search terms as I search
 
 set nu									" show line numbers
 set rnu									" show relative line numbers
@@ -56,6 +59,15 @@ set shiftwidth=2
 " no backup files
 set nobackup
 set noswapfile
+
+" regular vim only settings
+if !has('nvim')
+	set hlsearch					" highlight search terms as I search
+endif
+
+" neovim only settings
+if has('nvim')
+endif
 
 
 " My Keybindings ================================================
@@ -94,6 +106,9 @@ map <C-l> :wincmd l <CR>
 " open up Explore with space-k
 map <leader>k :Explore<cr>
 
+" open location list with space-l
+map <leader>l :lopen<cr>
+
 " clear search highlights
 map <leader>o :noh<cr>
 
@@ -115,7 +130,8 @@ let g:syntastic_cpp_compiler_options = '-std=c++0x'
 let g:syntastic_javascript_checkers = ['jsxhint']
 
 " YouCompleteMe
-let g:ycm_confirm_extra_conf = 1
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
 
 " Airline
 let g:airline_theme = 'bubblegum'
@@ -138,6 +154,11 @@ let g:netrw_liststyle=3
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
+
+	" Turn on filetype detection
+	filetype on
+	filetype indent on
+	filetype plugin on
 
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx

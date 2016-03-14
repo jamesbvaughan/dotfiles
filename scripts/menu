@@ -12,23 +12,11 @@ soup = BeautifulSoup(html.text, "html.parser")
 cell_types = ["menugridcell", "menugridcell_last"]
 
 for table in soup.find_all(class_="menugridtable"):
-    try:
-        print(table.find(class_="menumealheader").contents[0].strip() + ":")
-    except:
-        pass
+    print(table.find(class_="menumealheader").contents[0].strip() or "")
     halls = table.find_all(class_="menulocheader")
     for i in range(0,2):
-        try:
-            print('\t' + halls[i].string)
-        except:
-            pass
+        print(('\t' + halls[i].string) or "")
         for cell in table.find_all(class_=cell_types[i]):
-            try:
-                print("\t\t" + cell.li.string)
-            except:
-                pass
+            print(("\t\t" + cell.li.string) or "")
             for item in cell.find_all(class_=re.compile("^itemlink")):
-                try:
-                    print("\t\t\t" + item.string)
-                except:
-                    pass
+                print(("\t\t\t" + item.string) or "")

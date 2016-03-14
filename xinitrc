@@ -7,4 +7,15 @@ if [ -s ~/.Xmodmap ]; then
     xmodmap ~/.Xmodmap
 fi
 
+/* i3 */
 exec i3
+
+/* budgie */
+/* export XDG_CURRENT_DESKTOP=Budgie:GNOME */
+/* exec budgie-desktop */
+
+/* gnome */
+/* exec gnome-session */
+
+/* kde plasma */
+/* exec startkde */

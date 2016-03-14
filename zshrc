@@ -42,6 +42,7 @@ bindkey '^xe' edit-command-line
 alias pingg="ping -c 3 8.8.8.8"
 alias ss="ssh -X vaughan@lnxsrv.seas.ucla.edu"
 alias go="cd ~/projects/hangout"
+alias vim="nvim"
 
 # Web searches
 alias sa="s -p amazon"

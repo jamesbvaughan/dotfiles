@@ -54,12 +54,12 @@ new_window              pixel $bordersize
 
 # workspace names
 set $main 1
-set $code 2 
-set $web 3 
-set $music 4 
-set $term 5 
-set $photo 6 
-set $chat 7 
+set $code 2
+set $web 3
+set $music 4
+set $term 5
+set $photo 6
+set $chat 7
 set $extra 
 
 # assign certain programs to specific workspaces
@@ -67,6 +67,8 @@ assign [class="Atom"] $code
 assign [class="Gimp"] $photo
 assign [class="Darktable"] $photo
 assign [class="chromium"] $web
+assign [class="Spotify"] $music
+assign [title="Soundnode"] $music
 assign [title="Messenger"] $chat
 
 # auto back-and-forth workspaces
@@ -207,6 +209,13 @@ set $gso 0
 gaps inner $gsi
 gaps outer $gso
 
+# use smart gaps
+smart_gaps on
+
+# toggle outer gaps
+bindsym $mod+control+space gaps outer all set 100
+bindsym $mod+shift+control+space gaps outer all set 0
+
 set $mode_gaps Gaps: (o) outer, (i) inner, (0), (1), (2) for presets
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
 set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
@@ -218,8 +227,8 @@ mode "$mode_gaps" {
 	bindsym 0		gaps inner current set 0; mode "default"
 	bindsym 1		gaps inner current set 2; mode "default"
 	bindsym 2		gaps inner current set $gsi; mode "default"
- 	bindsym Return		mode "default"
- 	bindsym Escape		mode "default"
+	bindsym Return		mode "default"
+	bindsym Escape		mode "default"
 }
 mode "$mode_gaps_inner" {
 	bindsym plus  gaps inner current plus 1
@@ -246,9 +255,6 @@ mode "$mode_gaps_outer" {
 	bindsym Escape mode "default"
 }
 
-# use smart gaps
-smart_gaps on
-
 
 #######################################################################
 #                              floating                               #
@@ -265,6 +271,12 @@ bindsym $mod+s sticky toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
+
+# enable floating automatically for some apps
+for_window [class="gnuplot"] floating enable
+for_window [class="feh"] floating enable
+for_window [class="baobab"] floating enable
+for_window [title="Task Manager - Chromium"] floating enable
 
 
 #######################################################################
