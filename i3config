@@ -66,6 +66,7 @@ set $extra 
 assign [class="Atom"] $code
 assign [class="Gimp"] $photo
 assign [class="Darktable"] $photo
+assign [class="Blender"] $photo
 assign [class="chromium"] $web
 assign [class="Spotify"] $music
 assign [title="Soundnode"] $music
@@ -277,6 +278,7 @@ for_window [class="gnuplot"] floating enable
 for_window [class="feh"] floating enable
 for_window [class="baobab"] floating enable
 for_window [title="Task Manager - Chromium"] floating enable
+for_window [title="Blender User Preferences"] floating enable
 
 
 #######################################################################
@@ -318,8 +320,8 @@ exec --no-startup-id nm-applet
 exec --no-startup-id urxvtd -q -f -o
 
 # rofi
-# exec --no-startup-id rofi &
-bindsym control+space exec --no-startup-id j4-dmenu-desktop --dmenu="rofi -i -dmenu -p ''"
+exec --no-startup-id rofi &
+# bindsym control+space exec --no-startup-id j4-dmenu-desktop --dmenu="rofi -i -dmenu -p ''"
 
 # suspend screen after a while
 # exec --no-startup-id xset dpms 900

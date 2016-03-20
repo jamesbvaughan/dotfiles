@@ -35,7 +35,7 @@ Plugin 'othree/html5.vim'					" HTML5
 Plugin 'pangloss/vim-javascript'	" Javascript
 Plugin 'tpope/vim-dotenv'					" Procfile and .env
 Plugin 'tpope/vim-markdown'				" Markdown
-
+" Plugin 'elzr/vim-json'            " JSON
 
 call vundle#end()            " required
 filetype plugin indent on    " required

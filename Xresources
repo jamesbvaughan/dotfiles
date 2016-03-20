@@ -9,7 +9,8 @@ rofi.color-window: #222222, #222222
 rofi.bw: 0
 rofi.padding: 10
 rofi.auto-select: true
-! rofi.key-run: control+space
+rofi.key-run: control+space
+rofi.key-window: control+shift+space
 rofi.fuzzy: true
 rofi.separator-style: solid
 rofi.hide-scrollbar: true
