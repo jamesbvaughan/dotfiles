@@ -68,7 +68,7 @@ assign [class="Gimp"] $photo
 assign [class="Darktable"] $photo
 assign [class="Blender"] $photo
 assign [class="chromium"] $web
-assign [class="Spotify"] $music
+assign [title="Spotify"] $music
 assign [title="Soundnode"] $music
 assign [title="Messenger"] $chat
 
@@ -372,6 +372,7 @@ bindsym $mod+Pause mode "$mode_system"
 ######################################################################
 
 bar {
+	i3bar_command i3bar
   status_command i3blocks
   font pango:Fira Mono Medium, FontAwesome 12
   separator_symbol "​"
@@ -385,5 +386,11 @@ bar {
     active_workspace $background $background $text_highlighted
     inactive_workspace $background $background $text_regular
     urgent_workspace $background $background $notify
+    # background #22222233
+    # statusline $text_regular
+    # focused_workspace $background $background $text_highlighted
+    # active_workspace $background $background $text_highlighted
+    # inactive_workspace $background $background $text_regular
+    # urgent_workspace $background $background $notify
   }
 }
