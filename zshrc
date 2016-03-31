@@ -1,13 +1,11 @@
 # Path to your oh-my-zsh installation.
 ZSH=/usr/share/oh-my-zsh/
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
 ZSH_THEME="agnoster"
-
 DEFAULT_USER="james"
+export PATH=$HOME/.npm-global/bin:$HOME/.bin:/usr/local/bin:$PATH
+export LANG=en_US.UTF-8
+export EDITOR='vim'
+export SSH_KEY_PATH="~/.ssh"
 
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
@@ -19,20 +17,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colored-man-pages colorize command-not-found cp sudo)
-
-# User configuration
-
-export PATH=$HOME/.npm-global/bin:$HOME/.bin:/usr/local/bin:$PATH:$HOME/software/webstorm/bin
-
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
-
-# preferred editor
-export EDITOR='vim'
-
-# ssh
-export SSH_KEY_PATH="~/.ssh"
+plugins=(gitfast colored-man-pages colorize command-not-found sudo)
 
 autoload edit-command-line
 zle -N edit-command-line
@@ -63,6 +48,16 @@ alias ni="npm install"
 alias nig="npm install -g"
 alias nis="npm install --save"
 alias ns="npm start"
+
+# Spotify
+alias spotify="spotify --force-device-scale-factor=1.0000001"
+
+# Reddit Reverse Search
+alias reddit="node /home/james/projects/reverse-reddit-search/app.js"
+
+# Transfer.sh
+transfer() { if [ $# -eq 0 ]; then echo "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
+tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; }
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
