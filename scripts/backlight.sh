@@ -19,4 +19,4 @@ fi
 xbacklight -set $NEW_LIGHT -time 0 -steps 1
 
 # Output the new light level
-echo $(printf '%.*f' 0 $(xbacklight -get))
+echo $(printf '%.*f%%' 0 $(xbacklight -get))

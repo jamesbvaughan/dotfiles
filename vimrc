@@ -12,28 +12,28 @@ Plugin 'gmarik/Vundle.vim'				" Vundle
 
 " Plugins that I like
 Plugin 'bling/vim-airline'				" Vim Airline
-Plugin 'chriskempson/base16-vim'	" Base16 Theme
+" Plugin 'chriskempson/base16-vim'	" Base16 Theme
 Plugin 'kien/ctrlp.vim'						" CtrlP
 Plugin 'scrooloose/syntastic'			" Syntastic
 Plugin 'myint/syntastic-extras'		" Syntastic Extras
 Plugin 'ntpeters/vim-better-whitespace' " Whitespace
 Plugin 'rdnetto/YCM-Generator' 		" YCM Generator
 Plugin 'tpope/vim-commentary'			" Commentary
-Plugin 'tpope/vim-eunuch'					" Unix Commands
+" Plugin 'tpope/vim-eunuch'					" Unix Commands
 Plugin 'tpope/vim-fugitive'				" Fugitive
-Plugin 'tpope/vim-repeat'					" Repeat
+" Plugin 'tpope/vim-repeat'					" Repeat
 Plugin 'tpope/vim-sensible'				" Sensible Defaults
-Plugin 'tpope/vim-surround'				" Surround
+" Plugin 'tpope/vim-surround'				" Surround
 Plugin 'Valloric/YouCompleteMe'		" YouCompleteMe
 
 " Language Syntax Support
-Plugin 'gnuplot.vim'							" Gnuplot
+" Plugin 'gnuplot.vim'							" Gnuplot
 Plugin 'groenewege/vim-less'			" Less
 Plugin 'hail2u/vim-css3-syntax'		" CSS3
 Plugin 'mxw/vim-jsx'							" JSX
 Plugin 'othree/html5.vim'					" HTML5
 Plugin 'pangloss/vim-javascript'	" Javascript
-Plugin 'tpope/vim-dotenv'					" Procfile and .env
+" Plugin 'tpope/vim-dotenv'					" Procfile and .env
 Plugin 'tpope/vim-markdown'				" Markdown
 " Plugin 'elzr/vim-json'            " JSON
 
@@ -52,31 +52,25 @@ set rnu									" show relative line numbers
 set background=dark			" set theme
 colorscheme ron					" set colorscheme
 
-" change tab length
-set tabstop=2
+set tabstop=2						" change tab length
 set shiftwidth=2
 
-" no backup files
-set nobackup
+set nobackup						" no backup files
 set noswapfile
 
-" regular vim only settings
-if !has('nvim')
+if !has('nvim')					" regular vim only settings
 	set hlsearch					" highlight search terms as I search
 endif
 
-" neovim only settings
-if has('nvim')
+if has('nvim')					" neovim only settings
 endif
 
 
 " My Keybindings ================================================
 
-" set leader to space
-:let mapleader=" "
+:let mapleader=" "			" set leader to space
 
-" close pane with leader+q
-map <leader>q :q<CR>
+map <leader>q :q<CR>		" close pane with leader+q
 
 set pastetoggle=<F2>		" set F2 to paste toggle
 

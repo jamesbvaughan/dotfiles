@@ -36,7 +36,7 @@ client.urgent           $red $red $background $red
 #                                font                                 #
 #######################################################################
 
-font                    pango:Fira Mono Medium, Awesome 10
+font                    pango:Fira Sans Medium, Awesome 10
 
 
 #######################################################################
@@ -68,6 +68,7 @@ assign [class="Gimp"] $photo
 assign [class="Darktable"] $photo
 assign [class="Blender"] $photo
 assign [class="chromium"] $web
+assign [class="google-chrome"] $web
 assign [title="Spotify"] $music
 assign [title="Soundnode"] $music
 assign [title="Messenger"] $chat
@@ -147,12 +148,20 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10 -time 0 -steps 1 && pkill -R
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10 -time 0 -steps 1 && pkill -RTMIN+3 i3blocks
 
 # Media player controls
-bindsym XF86AudioPlay exec mpc toggle
-bindsym XF86AudioNext exec mpc next
-bindsym XF86AudioPrev exec mpc prev
-bindsym $mod+Shift+p exec mpc toggle
-bindsym $mod+Shift+Right exec mpc next
-bindsym $mod+Shift+Left exec mpc prev
+#
+# Mopidy
+# bindsym XF86AudioPlay exec mpc toggle
+# bindsym XF86AudioNext exec mpc next
+# bindsym XF86AudioPrev exec mpc prev
+# bindsym $mod+Shift+p exec mpc toggle
+# bindsym $mod+Shift+Right exec mpc next
+# bindsym $mod+Shift+Left exec mpc prev
+#
+# Spotify
+bindsym XF86AudioPlay exec playerctl -p spotify play-pause
+bindsym XF86AudioNext exec playerctl -p spotify next
+bindsym XF86AudioPrev exec playerctl -p spotify previous
+
 
 # scrot
 bindsym $mod+Shift+s exec scrots
@@ -374,7 +383,7 @@ bindsym $mod+Pause mode "$mode_system"
 bar {
 	i3bar_command i3bar
   status_command i3blocks
-  font pango:Fira Mono Medium, FontAwesome 12
+  font pango:Fira Sans SemiBold, FontAwesome 12
   separator_symbol "​"
   position top
   tray_output eDP1

@@ -1,5 +1,5 @@
 [global]
-    font = Fira Mono Medium 10
+    font = Fira Sans Medium 10
 
     # Allow a small subset of html markup:
     #   <b>bold</b>

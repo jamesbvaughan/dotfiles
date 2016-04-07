@@ -1,5 +1,5 @@
 ! Rofi ==========================================================
-rofi.font:	Fira Mono 24
+rofi.font:	Fira Sans 24
 rofi.opacity: 85
 rofi.lines: 3
 rofi.width: 40

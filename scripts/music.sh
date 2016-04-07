@@ -6,8 +6,3 @@ if [ "$BLOCK_BUTTON" = 1 ];then
 else
 	mpc status | perl -ne 'if (/\[playing\]/) {CORE::say (`mpc current | tr -d "\n"`)}'
 fi
-
-#STATUS=$()
-# echo $STATUS
-
-
