@@ -28,6 +28,7 @@ alias pingg="ping -c 3 8.8.8.8"
 alias ss="ssh -X vaughan@lnxsrv.seas.ucla.edu"
 alias go="cd ~/projects/hangout"
 alias vim="nvim"
+alias emacs="emacs -nw"
 
 # Web searches
 alias sa="s -p amazon"
@@ -50,7 +51,7 @@ alias nis="npm install --save"
 alias ns="npm start"
 
 # Spotify
-alias spotify="spotify --force-device-scale-factor=1.0000001"
+# alias spotify="spotify --force-device-scale-factor=1.0000001"
 
 # Reddit Reverse Search
 alias reddit="node /home/james/projects/reverse-reddit-search/app.js"

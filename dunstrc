@@ -37,7 +37,7 @@
     # window allows bounces back and forth.
     # This option conflicts with "word_wrap".
     # Set to 0 to disable.
-    bounce_freq = 0
+    bounce_freq = 20
 
     # Show age of message if message is older than show_age_threshold
     # seconds.
@@ -104,7 +104,7 @@
     history_length = 20
 
     # Display indicators for URLs (U) and actions (A).
-    show_indicators = yes
+    show_indicators = no
 
     # The height of a single line.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -145,7 +145,8 @@
     icon_position = off
 
     # Paths to default icons.
-    icon_folders = /usr/share/icons/Numix/16x16/status/:/usr/share/icons/Numix/16x16/devices/
+    # icon_folders = /usr/share/icons/Numix/16/status/:/usr/share/icons/Numix/16/devices/
+    icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
 [frame]
     width = 3
@@ -162,7 +163,7 @@
     # close = ctrl+space
 
     # Close all notifications.
-    close_all = ctrl+shift+space
+    close_all = ctrl+shift+grave
 
     # Redisplay last message(s).
     # On the US keyboard layout "grave" is normally above TAB and left
@@ -170,7 +171,7 @@
     history = ctrl+grave
 
     # Context menu.
-    context = ctrl+shift+period
+    context = mod4+c
 
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.

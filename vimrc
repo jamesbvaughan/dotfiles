@@ -84,8 +84,8 @@ nnoremap <C-n> :set rnu!<cr>
 map ; :
 
 " set C-v and C-b to open new panes
-map <C-v> :sp <CR>
-map <C-b> :vsp <CR>
+" map <C-v> :sp <CR>
+" map <C-b> :vsp <CR>
 
 " set Shift-h and Shift-l to move between open buffers
 map <S-h> :bp <CR>

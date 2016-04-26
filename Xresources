@@ -1,19 +1,20 @@
 ! Rofi ==========================================================
 rofi.font:	Fira Sans 24
-rofi.opacity: 85
 rofi.lines: 3
 rofi.width: 40
 rofi.color-enabled: true
+rofi.opacity: 85
 rofi.color-normal: #222222, #666666, #222222, #222222, #dddddd
-rofi.color-window: #222222, #222222
+rofi.color-window: #222222, #666666
 rofi.bw: 0
 rofi.padding: 10
-rofi.auto-select: true
+rofi.separator-style: none
+rofi.hide-scrollbar: true
+rofi.auto-select: false
 rofi.key-run: control+space
 rofi.key-window: control+shift+space
 rofi.fuzzy: true
-rofi.separator-style: solid
-rofi.hide-scrollbar: true
+rofi.terminal: urxvtc
 
 ! rxvt ==========================================================
 URxvt.font: xft:Fira Mono for Powerline:size=10,xft:FontAwesome:size=10
@@ -24,7 +25,7 @@ URxvt.clipboard.copycmd:  xsel -ib
 URxvt.clipboard.pastecmd: xsel -ob
 URxvt.url-launcher: /usr/bin/chromium
 URxvt.matcher.button: 1
-URxvt.matcher.rend.0: Uline Bold fg5
+URxvt.matcher.rend.0: Uline Bold fg0
 
 ! colors ========================================================
 *.foreground: #dddddd

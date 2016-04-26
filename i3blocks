@@ -13,12 +13,12 @@ interval=18000
 
 [weather]
 label=
-command=~/.bin/weather.py
-interval=300
+command=sh /home/james/.bin/weather
+interval=600
 
 [volume]
-command=volume
-interval=once
+command=/home/james/.bin/volume
+interval=60
 signal=1
 
 [backlight]

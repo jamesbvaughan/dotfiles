@@ -4,13 +4,13 @@
 
 set $mod         Mod4
 
-set $bordersize 0
+set $bordersize 5
 
-set $background  #222222
-set $text_regular	#666666
-set $text_highlighted	#dddddd
+set $bg  #222222
+set $regular	#666666
+set $highlighted	#dddddd
 set $notify #fb4934
-set $foreground  #222222
+set $red #ff0000
 
 
 #######################################################################
@@ -26,10 +26,11 @@ for_window [class="^.*"] border pixel $bordersize
 #                               colors                                #
 #######################################################################
 
-client.focused          $foreground $foreground $text_highlighted $foreground
-client.focused_inactive $foreground $foreground $text_regular $foreground
-client.unfocused        $foreground $foreground $text_regular $foreground
-client.urgent           $red $red $background $red
+# class                 border  backgr. text    indicator child_border
+client.focused          #ff0000	#00ff00	#0000ff	$highlighted	$highlighted
+client.focused_inactive #ff0000	#00ff00	#0000ff	$regular	$regular
+client.unfocused        #ff0000	#00ff00	#0000ff	$regular	$regular
+client.urgent           #ff0000	#00ff00	#0000ff	$red	$red
 
 
 #######################################################################
@@ -43,7 +44,7 @@ font                    pango:Fira Sans Medium, Awesome 10
 #                               borders                               #
 #######################################################################
 
-hide_edge_borders       none
+hide_edge_borders       both
 new_float               pixel $bordersize
 new_window              pixel $bordersize
 
@@ -68,10 +69,11 @@ assign [class="Gimp"] $photo
 assign [class="Darktable"] $photo
 assign [class="Blender"] $photo
 assign [class="chromium"] $web
-assign [class="google-chrome"] $web
+# assign [class="google-chrome"] $web
 assign [title="Spotify"] $music
 assign [title="Soundnode"] $music
 assign [title="Messenger"] $chat
+assign [class="Franz"] $chat
 
 # auto back-and-forth workspaces
 workspace_auto_back_and_forth yes
@@ -165,6 +167,7 @@ bindsym XF86AudioPrev exec playerctl -p spotify previous
 
 # scrot
 bindsym $mod+Shift+s exec scrots
+bindsym $mod+Print exec screenshot.sh
 
 # messenger
 bindsym $mod+Shift+f exec --no-startup-id messengerfordesktop
@@ -213,7 +216,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 #                                gaps                                 #
 #######################################################################
 
-set $gsi 10
+set $gsi 14
 set $gso 0
 
 gaps inner $gsi
@@ -285,6 +288,7 @@ bindsym $mod+space focus mode_toggle
 # enable floating automatically for some apps
 for_window [class="gnuplot"] floating enable
 for_window [class="feh"] floating enable
+for_window [class="mpv"] floating enable
 for_window [class="baobab"] floating enable
 for_window [title="Task Manager - Chromium"] floating enable
 for_window [title="Blender User Preferences"] floating enable
@@ -336,16 +340,16 @@ exec --no-startup-id rofi &
 # exec --no-startup-id xset dpms 900
 
 # start compton
-exec --no-startup-id compton --config ~/.config/compton.conf -b
+exec --no-startup-id compton -b
 
 # start dunst
 exec --no-startup-id dunst
 
 # start mopidy
-exec --no-startup-id mopidy
+# exec --no-startup-id mopidy
 
 # start youtube-mpv
-exec --no-startup-id python ~/software/youtube-mpb/ytdl-server.py3
+exec --no-startup-id python3 ~/software/youtube-mpv/ytdl-server.py3
 
 # natural scrolling
 exec natural-scrolling
@@ -383,23 +387,23 @@ bindsym $mod+Pause mode "$mode_system"
 bar {
 	i3bar_command i3bar
   status_command i3blocks
-  font pango:Fira Sans SemiBold, FontAwesome 12
+  font pango:Fira Sans SemiBold, FontAwesome 11
   separator_symbol "​"
   position top
   tray_output eDP1
   strip_workspace_numbers yes
   colors {
-    background $background
-    statusline $text_regular
-    focused_workspace $background $background $text_highlighted
-    active_workspace $background $background $text_highlighted
-    inactive_workspace $background $background $text_regular
-    urgent_workspace $background $background $notify
+    background $bg
+    statusline $regular
+    focused_workspace $bg $bg $highlighted
+    active_workspace $bg $bg $highlighted
+    inactive_workspace $bg $bg $regular
+    urgent_workspace $bg $bg $notify
     # background #22222233
-    # statusline $text_regular
-    # focused_workspace $background $background $text_highlighted
-    # active_workspace $background $background $text_highlighted
-    # inactive_workspace $background $background $text_regular
-    # urgent_workspace $background $background $notify
+    # statusline $regular
+    # focused_workspace $bg $bg $highlighted
+    # active_workspace $bg $bg $highlighted
+    # inactive_workspace $bg $bg $regular
+    # urgent_workspace $bg $bg $notify
   }
 }
