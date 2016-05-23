@@ -1,24 +1,10 @@
-! Rofi ==========================================================
-rofi.font:	Fira Sans 24
-rofi.lines: 3
-rofi.width: 40
-rofi.color-enabled: true
-rofi.opacity: 85
-rofi.color-normal: #222222, #666666, #222222, #222222, #dddddd
-rofi.color-window: #222222, #666666
-rofi.bw: 0
-rofi.padding: 10
-rofi.separator-style: none
-rofi.hide-scrollbar: true
-rofi.auto-select: false
-rofi.key-run: control+space
-rofi.key-window: control+shift+space
-rofi.fuzzy: true
-rofi.terminal: urxvtc
-
 ! rxvt ==========================================================
-URxvt.font: xft:Fira Mono for Powerline:size=10,xft:FontAwesome:size=10
+URxvt.font: xft:Fira Mono Medium for Powerline:pixelsize=13,xft:Fura Code:pixelsize=13
+URxvt.lineSpace: 0
+URxvt.letterSpace: 0
 URxvt.scrollBar: false
+URxvt.fading: 25
+URxvt.cursorBlink: true
 URxvt.perl-ext-common: default,clipboard,matcher
 URxvt.iso14755: False
 URxvt.clipboard.copycmd:  xsel -ib

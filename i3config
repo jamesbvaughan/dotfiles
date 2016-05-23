@@ -27,10 +27,10 @@ for_window [class="^.*"] border pixel $bordersize
 #######################################################################
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #ff0000	#00ff00	#0000ff	$highlighted	$highlighted
-client.focused_inactive #ff0000	#00ff00	#0000ff	$regular	$regular
-client.unfocused        #ff0000	#00ff00	#0000ff	$regular	$regular
-client.urgent           #ff0000	#00ff00	#0000ff	$red	$red
+client.focused          $bg	$bg	$highlighted	$highlighted	$highlighted
+client.focused_inactive $bg	$bg	$regular	$regular	$regular
+client.unfocused        $bg	$bg	$regular	$regular	$regular
+client.urgent           $bg	$bg	$regular	$red	$red
 
 
 #######################################################################
@@ -70,7 +70,7 @@ assign [class="Darktable"] $photo
 assign [class="Blender"] $photo
 assign [class="chromium"] $web
 # assign [class="google-chrome"] $web
-assign [title="Spotify"] $music
+assign [class="spotify"] $music
 assign [title="Soundnode"] $music
 assign [title="Messenger"] $chat
 assign [class="Franz"] $chat
@@ -96,9 +96,9 @@ bindsym $mod+4 workspace $music
 bindsym $mod+5 workspace $term
 bindsym $mod+6 workspace $photo
 bindsym $mod+7 workspace $chat
-bindsym $mod+8 workspace 8 $extra
-bindsym $mod+9 workspace 9 $extra
-bindsym $mod+0 workspace 10 $extra
+bindsym $mod+8 workspace 8$extra
+bindsym $mod+9 workspace 9$extra
+bindsym $mod+0 workspace 10$extra
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $main
@@ -108,9 +108,9 @@ bindsym $mod+Shift+4 move container to workspace $music
 bindsym $mod+Shift+5 move container to workspace $term
 bindsym $mod+Shift+6 move container to workspace $photo
 bindsym $mod+Shift+7 move container to workspace $chat
-bindsym $mod+Shift+8 move container to workspace 8 $extra
-bindsym $mod+Shift+9 move container to workspace 9 $extra
-bindsym $mod+Shift+0 move container to workspace 10 $extra
+bindsym $mod+Shift+8 move container to workspace 8$extra
+bindsym $mod+Shift+9 move container to workspace 9$extra
+bindsym $mod+Shift+0 move container to workspace 10$extra
 
 
 #######################################################################
@@ -150,7 +150,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10 -time 0 -steps 1 && pkill -R
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10 -time 0 -steps 1 && pkill -RTMIN+3 i3blocks
 
 # Media player controls
-#
+
 # Mopidy
 # bindsym XF86AudioPlay exec mpc toggle
 # bindsym XF86AudioNext exec mpc next
@@ -158,7 +158,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10 -time 0 -steps 1 && pkill 
 # bindsym $mod+Shift+p exec mpc toggle
 # bindsym $mod+Shift+Right exec mpc next
 # bindsym $mod+Shift+Left exec mpc prev
-#
+
 # Spotify
 bindsym XF86AudioPlay exec playerctl -p spotify play-pause
 bindsym XF86AudioNext exec playerctl -p spotify next
@@ -167,7 +167,10 @@ bindsym XF86AudioPrev exec playerctl -p spotify previous
 
 # scrot
 bindsym $mod+Shift+s exec scrots
-bindsym $mod+Print exec screenshot.sh
+bindsym $mod+Print exec /home/james/.bin/screenshot.sh
+
+# calc
+bindsym $mod+equal exec /home/james/.bin/=
 
 # messenger
 bindsym $mod+Shift+f exec --no-startup-id messengerfordesktop
@@ -209,7 +212,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec /home/james/.bin/leave.sh
 
 
 #######################################################################
@@ -333,8 +337,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id urxvtd -q -f -o
 
 # rofi
-exec --no-startup-id rofi &
-# bindsym control+space exec --no-startup-id j4-dmenu-desktop --dmenu="rofi -i -dmenu -p ''"
+bindsym control+space exec rofi -show run
 
 # suspend screen after a while
 # exec --no-startup-id xset dpms 900
@@ -352,33 +355,12 @@ exec --no-startup-id dunst
 exec --no-startup-id python3 ~/software/youtube-mpv/ytdl-server.py3
 
 # natural scrolling
-exec natural-scrolling
+# exec natural-scrolling
 
 # detect monitors
 exec xrandr
 exec srandrd ~/.bin/displays.sh
 
-######################################################################
-#                              system                                #
-######################################################################
-
-set $Locker sh /home/james/.bin/lock.sh && sleep 1
-
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
-
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-bindsym $mod+Pause mode "$mode_system"
 
 ######################################################################
 #                                bar                                 #
@@ -387,23 +369,17 @@ bindsym $mod+Pause mode "$mode_system"
 bar {
 	i3bar_command i3bar
   status_command i3blocks
-  font pango:Fira Sans SemiBold, FontAwesome 11
+  font pango:Fira Mono Medium, FontAwesome 11
   separator_symbol "​"
   position top
   tray_output eDP1
   strip_workspace_numbers yes
   colors {
     background $bg
-    statusline $regular
+    statusline $highlighted
     focused_workspace $bg $bg $highlighted
     active_workspace $bg $bg $highlighted
     inactive_workspace $bg $bg $regular
     urgent_workspace $bg $bg $notify
-    # background #22222233
-    # statusline $regular
-    # focused_workspace $bg $bg $highlighted
-    # active_workspace $bg $bg $highlighted
-    # inactive_workspace $bg $bg $regular
-    # urgent_workspace $bg $bg $notify
   }
 }

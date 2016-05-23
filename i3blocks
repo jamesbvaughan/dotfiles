@@ -4,7 +4,7 @@ color=#dddddd
 label=
 command=~/.bin/playing.sh
 signal=2
-interval=2
+interval=once
 
 [updates]
 label=
@@ -13,7 +13,7 @@ interval=18000
 
 [weather]
 label=
-command=sh /home/james/.bin/weather
+command=/home/james/.bin/weather.sh
 interval=600
 
 [volume]
@@ -29,8 +29,9 @@ signal=3
 
 [battery]
 command=.bin/battery.sh
-interval=2
+interval=10
 
 [datetime]
-command=echo  $(date '+%-k:%M')
+label=
+command=date '+%-k:%M'
 interval=30

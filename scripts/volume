@@ -1,11 +1,11 @@
 #!/bin/sh
 
 # change and display the volume level
-if [ "$BLOCK_BUTTON" = 5 ];then
-	amixer -q set Master 5%+ unmute;
-elif [ "$BLOCK_BUTTON" = 4 ];then
-	amixer -q set Master 5%- unmute;
-fi
+case $BLOCK_BUTTON in
+	1) amixer -q set Master toggle ;;
+	4) amixer -q set Master 5%- unmute ;;
+	5) amixer -q set Master 5%+ unmute ;;
+esac
 
 VOLUME=$(amixer get Master | grep -E -o -m 1 '[0-9]+%' | tr -d '%')
 SYMBOL=

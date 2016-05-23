@@ -13,7 +13,8 @@ Plugin 'gmarik/Vundle.vim'				" Vundle
 " Plugins that I like
 Plugin 'bling/vim-airline'				" Vim Airline
 " Plugin 'chriskempson/base16-vim'	" Base16 Theme
-Plugin 'kien/ctrlp.vim'						" CtrlP
+" Plugin 'ryanoasis/vim-devicons'		" Devicons
+Plugin 'ctrlpvim/ctrlp.vim'						" CtrlP
 Plugin 'scrooloose/syntastic'			" Syntastic
 Plugin 'myint/syntastic-extras'		" Syntastic Extras
 Plugin 'ntpeters/vim-better-whitespace' " Whitespace
@@ -52,14 +53,26 @@ set rnu									" show relative line numbers
 set background=dark			" set theme
 colorscheme ron					" set colorscheme
 
+set expandtab
 set tabstop=2						" change tab length
 set shiftwidth=2
+
+" set cursorline
+" set colorcolumn=80,120
+
+set ignorecase
+set smartcase
 
 set nobackup						" no backup files
 set noswapfile
 
+set foldmethod=syntax		" folding stuff
+set foldnestmax=1
+set foldlevelstart=1
+
 if !has('nvim')					" regular vim only settings
 	set hlsearch					" highlight search terms as I search
+	set foldenable
 endif
 
 if has('nvim')					" neovim only settings
@@ -71,6 +84,8 @@ endif
 :let mapleader=" "			" set leader to space
 
 map <leader>q :q<CR>		" close pane with leader+q
+
+map <leader>a za				" close pane with leader+q
 
 set pastetoggle=<F2>		" set F2 to paste toggle
 
@@ -96,6 +111,10 @@ map <C-h> :wincmd h <CR>
 map <C-j> :wincmd j <CR>
 map <C-k> :wincmd k <CR>
 map <C-l> :wincmd l <CR>
+
+" better navigation with wrapped lines
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
 " open up Explore with space-k
 map <leader>k :Explore<cr>
@@ -126,6 +145,7 @@ let g:syntastic_javascript_checkers = ['jsxhint']
 " YouCompleteMe
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_completion = 1
+set splitbelow " open preview window on bottom
 
 " Airline
 let g:airline_theme = 'bubblegum'

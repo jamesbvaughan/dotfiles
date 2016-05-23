@@ -2,7 +2,7 @@
 ZSH=/usr/share/oh-my-zsh/
 ZSH_THEME="agnoster"
 DEFAULT_USER="james"
-export PATH=$HOME/.npm-global/bin:$HOME/.bin:/usr/local/bin:$PATH
+export PATH=$HOME/.npm-global/bin:$HOME/.bin:/usr/local/bin:$PATH:$HOME/.gem/ruby/2.3.0/bin
 export LANG=en_US.UTF-8
 export EDITOR='vim'
 export SSH_KEY_PATH="~/.ssh"
