@@ -33,6 +33,7 @@ Plugin 'groenewege/vim-less'			" Less
 Plugin 'hail2u/vim-css3-syntax'		" CSS3
 Plugin 'mxw/vim-jsx'							" JSX
 Plugin 'othree/html5.vim'					" HTML5
+Plugin 'derekwyatt/vim-scala'     " Scala
 Plugin 'pangloss/vim-javascript'	" Javascript
 " Plugin 'tpope/vim-dotenv'					" Procfile and .env
 Plugin 'tpope/vim-markdown'				" Markdown

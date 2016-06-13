@@ -4,7 +4,7 @@ color=#dddddd
 label=
 command=~/.bin/playing.sh
 signal=2
-interval=once
+interval=2
 
 [updates]
 label=

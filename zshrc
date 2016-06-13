@@ -6,6 +6,7 @@ export PATH=$HOME/.npm-global/bin:$HOME/.bin:/usr/local/bin:$PATH:$HOME/.gem/rub
 export LANG=en_US.UTF-8
 export EDITOR='vim'
 export SSH_KEY_PATH="~/.ssh"
+[ "$TERM" = xterm ] && export TERM=xterm-256color
 
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
