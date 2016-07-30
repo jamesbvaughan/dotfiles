@@ -1,15 +1,15 @@
 " James Vaughan's vimrc ========================================================
 " Plugins =====================================================================-
 call plug#begin('~/.config/nvim/plugged')
-  Plug 'Valloric/YouCompleteMe'
+  " Plug 'Valloric/YouCompleteMe'
   Plug 'dracula/vim'
-  Plug 'hail2u/vim-css3-syntax'
+  " Plug 'hail2u/vim-css3-syntax'
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'mxw/vim-jsx'
-  Plug 'myint/syntastic-extras'
-  Plug 'rdnetto/YCM-Generator'
-  Plug 'scrooloose/syntastic'
+  " Plug 'myint/syntastic-extras'
+  " Plug 'rdnetto/YCM-Generator'
+  " Plug 'scrooloose/syntastic'
   Plug 'tpope/vim-commentary'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -45,14 +45,14 @@ let g:airline#extensions#tabline#buffers_label = ''
 let g:airline#extensions#tabline#buffer_min_count = 2
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_javascript_checkers = ['eslint']
 
 " My Keybindings ===============================================================
 map ; :
