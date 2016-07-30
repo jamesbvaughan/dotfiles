@@ -1,7 +1,6 @@
 #######################################################################
 #                              variables                              #
 #######################################################################
-
 set $mod         Mod4
 
 set $bordersize 5
@@ -12,33 +11,31 @@ set $highlighted	#dddddd
 set $notify #fb4934
 set $red #ff0000
 
+# Dracula Colors
+set $bg #282A36
+set $regular #4D4D4D
+set $highlighted #F8F8F2
 
 #######################################################################
 #                           random settings                           #
 #######################################################################
-
 focus_follows_mouse yes
 popup_during_fullscreen smart
 for_window [class="^.*"] border pixel $bordersize
 
-
 #######################################################################
 #                               colors                                #
 #######################################################################
-
 # class                 border  backgr. text    indicator child_border
 client.focused          $bg	$bg	$highlighted	$highlighted	$highlighted
 client.focused_inactive $bg	$bg	$regular	$regular	$regular
 client.unfocused        $bg	$bg	$regular	$regular	$regular
 client.urgent           $bg	$bg	$regular	$red	$red
 
-
 #######################################################################
 #                                font                                 #
 #######################################################################
-
 font                    pango:Fira Sans Medium, Awesome 10
-
 
 #######################################################################
 #                               borders                               #
