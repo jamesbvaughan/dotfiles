@@ -1,4 +1,5 @@
-" Plugins ======================================================================
+" James Vaughan's vimrc ========================================================
+" Plugins =====================================================================-
 call plug#begin('~/.config/nvim/plugged')
   Plug 'Valloric/YouCompleteMe'
   Plug 'dracula/vim'
@@ -38,8 +39,12 @@ let g:airline_right_sep = ''
 let g:airline#extensions#tabline#buffers_label = ''
 let g:airline#extensions#tabline#buffer_min_count = 2
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#buffers_label = ''
+let g:airline#extensions#tabline#buffer_min_count = 2
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -52,14 +57,11 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 
 " My Keybindings ===============================================================
-" use ; for commands
 map ; :
-
-" set leader to space
 let mapleader=" "
-
-" clear search highlights
-map <leader>o :noh<cr>
+map <C-p> :FZF<cr>
+map <leader>o :noh<cr>  " clear search highlights
+map <leader>w :set wrap !<cr>   " toggle word wrap
 
 " set Shift-h and Shift-l to move between open buffers
 map <S-h> :bp<cr>
@@ -80,3 +82,8 @@ map <F5> :setlocal spell! spelllang=en_us<cr>
 
 " fuzzy finder
 map <C-p> :FZF<cr>
+
+augroup reload_vimrc " {
+  autocmd!
+  autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END " }
