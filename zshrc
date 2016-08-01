@@ -4,6 +4,7 @@ export FZF_DEFAULT_COMMAND='ag -g "" --ignore node_modules'
 export HOMEBREW_GITHUB_API_TOKEN=9e51d435081597018249134b38a9003cf7eda160
 export LANG=en_US.UTF-8
 export PATH="/usr/local/bin:$HOME/.bin:$PATH:$HOME/.rvm/bin"
+[ $TERM = "xterm" ] && TERM=xterm-256color
 DEFAULT_USER="james"
 ENABLE_CORRECTION="true"
 ZSH_THEME="agnoster"
