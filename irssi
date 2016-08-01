@@ -1,0 +1,113 @@
+servers = (
+  {
+    address = "chat.freenode.net";
+    chatnet = "Freenode";
+    port = "6697";
+    use_ssl = "yes";
+    ssl_cert = "~/.irssi/irssi.pem";
+    ssl_verify = "no";
+    autoconnect = "yes";
+  }
+);
+
+chatnets = {
+  Freenode = {
+    type = "IRC";
+    max_kicks = "1";
+    max_msgs = "4";
+    max_whois = "1";
+  };
+};
+
+channels = (
+  { name = "#choo"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#vim"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#neovim"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#archlinux"; chatnet = "freenode"; autojoin = "yes"; }
+);
+
+aliases = {
+  C = "CLEAR";
+  DATE = "TIME";
+  DEHIGHLIGHT = "DEHILIGHT";
+  DESCRIBE = "ACTION";
+  DHL = "DEHILIGHT";
+  EXIT = "QUIT";
+  HIGHLIGHT = "HILIGHT";
+  HL = "HILIGHT";
+  HOST = "USERHOST";
+  J = "JOIN";
+  K = "KICK";
+  LEAVE = "PART";
+  M = "MSG";
+  N = "NAMES";
+  P = "PART";
+  Q = "QUERY";
+  RUN = "SCRIPT LOAD";
+  T = "TOPIC";
+  UNSET = "SET -clear";
+  W = "WHO";
+  WI = "WHOIS";
+  WL = "WINDOW LIST";
+};
+
+statusbar = {
+  items = {
+    barstart = "{sbstart}";
+    barend = "{sbend}";
+
+    topicbarstart = "{topicsbstart}";
+    topicbarend = "{topicsbend}";
+
+    time = "{sb $Z}";
+    user = "{sb {sbnickmode $cumode}$N{sbmode $usermode}{sbaway $A}}";
+
+    window = "{sb $winref:$tag/$itemname{sbmode $M}}";
+    window_empty = "{sb $winref{sbservertag $tag}}";
+
+    prompt = "{prompt $[.15]itemname}";
+    prompt_empty = "{prompt $winname}";
+
+    topic = " $topic";
+    topic_empty = " Irssi v$J - http://www.irssi.org";
+
+    lag = "{sb Lag: $0-}";
+    act = "{sb Act: $0-}";
+    more = "-- more --";
+  };
+
+  default = {
+    window = { disabled = "yes"; };
+    window_inact = { disabled = "yes"; };
+    topic = { disabled = "yes"; };
+    awl_0 = {
+      placement = "top";
+      items = {
+        barstart = { priority = "100"; };
+        awl_0 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
+  };
+};
+settings = {
+  core = {
+    real_name = "James Vaughan";
+    user_name = "james";
+    nick = "jamesbvaughan";
+  };
+  "fe-text" = { actlist_sort = "refnum"; };
+  "irc/core" = { skip_motd = "yes"; };
+  "perl/core/scripts" = {
+    awl_shared_sbar = "OFF";
+    awl_viewer = "no";
+    awl_placement = "top";
+  };
+};
+keyboard = (
+  { key = "control-l"; id = "next_window_item"; data = ""; },
+  { key = "^l"; id = "next_window"; data = ""; },
+  { key = "ctrl-l"; id = "next_window"; data = ""; },
+  { key = "^L"; id = "next_window"; data = ""; },
+  { key = "^H"; id = "previous_window"; data = ""; }
+);
