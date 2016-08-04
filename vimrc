@@ -18,72 +18,54 @@ call plug#begin('~/.config/nvim/plugged')
 call plug#end()
 
 " My Settings ==================================================================
-set scrolloff=5        " start scrolling before bottom of pane
+color dracula          " set colorscheme
+set colorcolumn=80     " highlight max length column
+set expandtab          " tabs to spaces
 set hidden             " allow background buffers
+set ignorecase         " case insensitive searching
+set nobackup           " no backup files
+set noswapfile         " no swap files
 set number             " show line numbers
 set relativenumber     " show relative line numbers
-color dracula          " set colorscheme
+set scrolloff=5        " start scrolling before bottom of pane
+set shiftwidth=2       " shift width 2
+set smartcase          " only use case sensitive search when uppercase
 set tabstop=2          " change tab length
-set shiftwidth=2
-set expandtab
-set colorcolumn=80     " highlight max length column
-set ignorecase
-set smartcase
-set nobackup           " no backup files
-set noswapfile
 
 " Airline
-let g:airline_theme = 'dracula'
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline#extensions#tabline#buffers_label = ''
 let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline#extensions#tabline#buffers_label = ''
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#buffers_label = ''
-let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline_left_sep = ''
+let g:airline_powerline_fonts = 1
+let g:airline_right_sep = ''
+let g:airline_section_x = ''
+let g:airline_section_y = ''
+let g:airline_theme = 'dracula'
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
+set statusline+=%#warningmsg#
+set statusline+=%*
+set statusline+=%{SyntasticStatuslineFlag()}
 
 " My Keybindings ===============================================================
 map ; :
 let mapleader=" "
-map <C-p> :FZF<cr>
-map <leader>o :noh<cr>  " clear search highlights
-map <leader>w :set wrap !<cr>   " toggle word wrap
-
-" set Shift-h and Shift-l to move between open buffers
-map <S-h> :bp<cr>
-map <S-l> :bn<cr>
-
-" set better pane navigation shortcuts
-map <C-h> :wincmd h<cr>
-map <C-j> :wincmd j<cr>
-map <C-k> :wincmd k<cr>
-map <C-l> :wincmd l<cr>
-
-" better navigation with wrapped lines
-noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
-noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
-
-" toggle spelling mistake highlighting
-map <F5> :setlocal spell! spelllang=en_us<cr>
-
-" fuzzy finder
-map <C-p> :FZF<cr>
-
-augroup reload_vimrc " {
-  autocmd!
-  autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END " }
+map <leader>o :noh<cr>                             " clear search highlights
+map <leader>w :set wrap !<cr>                      " toggle word wrap
+map <leader>s :setlocal spell! spelllang=en_us<cr> " toggle spell checking
+map <leader>a :sort<cr>                            " sort lines
+map <C-p>     :FZF<cr>                             " fuzzy file searching
+map <S-h>     :bp<cr>                              " previous buffer
+map <S-l>     :bn<cr>                              " next buffer
+map <C-h>     :wincmd h<cr>                        " window left
+map <C-j>     :wincmd j<cr>                        " window below
+map <C-k>     :wincmd k<cr>                        " window above
+map <C-l>     :wincmd l<cr>                        " window right
