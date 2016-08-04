@@ -3,11 +3,11 @@ export ZSH=~/.oh-my-zsh
 export FZF_DEFAULT_COMMAND='ag -g "" --ignore node_modules'
 export HOMEBREW_GITHUB_API_TOKEN=9e51d435081597018249134b38a9003cf7eda160
 export LANG=en_US.UTF-8
-export PATH="/usr/local/bin:$HOME/.bin:$PATH:$HOME/.rvm/bin"
+export PATH="$HOME/.rvm/bin:/usr/local/bin:$HOME/.bin:$PATH"
 [ $TERM = "xterm" ] && TERM=xterm-256color
 DEFAULT_USER="james"
 ENABLE_CORRECTION="true"
-ZSH_THEME="agnoster"
+ZSH_THEME="dracula"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -17,7 +17,6 @@ plugins=(gitfast colored-man-pages colorize command-not-found sudo)
 
 # aliases
 alias vim="nvim"
-
 alias ag="ag --ignore node_modules"
 
 alias gc="git commit"
