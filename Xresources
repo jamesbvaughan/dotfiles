@@ -1,7 +1,7 @@
 ! rxvt ==========================================================
 URxvt.font: xft:Fira Mono Medium for Powerline:pixelsize=12, \
             xft:Fura Code:pixelsize=12, \
-            xft:Noto Emoji:pixelsize=11
+            xft:EmojiOne Color:pixelsize=11
 URxvt.lineSpace: 0
 URxvt.letterSpace: 0
 URxvt.scrollBar: false
