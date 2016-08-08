@@ -2,6 +2,7 @@
 " Plugins =====================================================================-
 call plug#begin('~/.config/nvim/plugged')
   Plug 'Valloric/YouCompleteMe'
+  Plug 'lambdatoast/elm.vim'
   Plug 'dracula/vim'
   Plug 'hail2u/vim-css3-syntax'
   Plug 'junegunn/fzf'
