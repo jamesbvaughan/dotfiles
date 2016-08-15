@@ -1,5 +1,5 @@
 ! rxvt ==========================================================
-URxvt.font:               xft:Fira Mono Medium:pixelsize=12,\
+URxvt.font:               xft:Fira Mono Medium for Powerline:pixelsize=12,\
                           xft:Symbola:pixelsize=9
 URxvt.lineSpace:          0
 URxvt.letterSpace:        0

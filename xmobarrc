@@ -1,0 +1,25 @@
+Config
+  { font = "xft:Fira Mono Medium:size=10:antialias=true,Noto Emoji:size=10"
+  , bgColor =          "#282A36"
+  , fgColor =          "#F8F8F2"
+  , border =           BottomB
+  , borderColor =      "#6272a4"
+  , template =         "%unsafestdinreader%}{%bright% %default:Master% %battery% %time% "
+  , commands =
+      [ Run Date "%R" "time" 50
+      , Run UnsafeStdinReader
+      , Run Volume "default" "Master" [ "-t", "🔉<volume>%" ] 50
+      , Run Brightness                [ "-t", "💡<percent>%"
+                                      , "--"
+                                      , "-D", "intel_backlight"
+                                      ] 50
+      , Run BatteryP ["BAT1"]         [ "-t", "<acstatus><left>%"
+                                      , "--Low", "15"
+                                      , "--low", "#ff5555"
+                                      , "--"
+                                      , "-f", "ACAD/online"
+                                      , "-O", "🔌"
+                                      , "-o", "🔋"
+                                      ] 50
+      ]
+  }

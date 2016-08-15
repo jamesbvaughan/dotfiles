@@ -1,23 +1,12 @@
-xrdb .Xresources
-
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 
+urxvtd -q -f -o
 xset r rate 250 25
+xinput --set-prop 15 'libinput Natural Scrolling Enabled' 1
+xinput --set-prop 15 'libinput Horizonal Scroll Enabled' 0
+[[ -f ~/.Xmodmap    ]] && xmodmap ~/.Xmodmap
+[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+feh --bg-scale ~/junk/draculamanda.png
 
-if [ -s ~/.Xmodmap ]; then
-    xmodmap ~/.Xmodmap
-fi
-
-/* i3 */
-exec i3
-
-/* budgie */
-/* export XDG_CURRENT_DESKTOP=Budgie:GNOME */
-/* exec budgie-desktop */
-
-/* gnome */
-/* exec gnome-session */
-
-/* kde plasma */
-/* exec startkde */
+exec xmonad

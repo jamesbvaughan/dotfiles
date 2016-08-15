@@ -333,26 +333,11 @@ exec --no-startup-id "i3-msg 'workspace $main'"
 # network manager
 exec --no-startup-id nm-applet
 
-# urxvtd
-exec --no-startup-id urxvtd -q -f -o
-
-# suspend screen after a while
-# exec --no-startup-id xset dpms 900
-
 # start compton
 exec --no-startup-id compton -b
 
 # start dunst
 exec --no-startup-id dunst
-
-# start mopidy
-# exec --no-startup-id mopidy
-
-# start youtube-mpv
-# exec --no-startup-id python3 ~/software/youtube-mpv/ytdl-server.py3
-
-# natural scrolling
-# exec natural-scrolling
 
 # detect monitors
 # exec xrandr

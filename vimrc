@@ -1,17 +1,19 @@
 " James Vaughan's vimrc ========================================================
 " Plugins =====================================================================-
 call plug#begin('~/.config/nvim/plugged')
-  Plug 'Valloric/YouCompleteMe'
-  Plug 'lambdatoast/elm.vim'
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'carlitux/deoplete-ternjs'
   Plug 'dracula/vim'
+  Plug 'eagletmt/neco-ghc'
   Plug 'hail2u/vim-css3-syntax'
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
+  Plug 'lambdatoast/elm.vim'
   Plug 'mxw/vim-jsx'
   Plug 'myint/syntastic-extras'
   Plug 'pangloss/vim-javascript'
-  Plug 'rdnetto/YCM-Generator'
   Plug 'scrooloose/syntastic'
+  Plug 'ternjs/tern_for_vim'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
   Plug 'vim-airline/vim-airline'
@@ -42,7 +44,6 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline_left_sep = ''
 let g:airline_powerline_fonts = 1
 let g:airline_right_sep = ''
-let g:airline_section_x = ''
 let g:airline_section_y = ''
 let g:airline_theme = 'dracula'
 
@@ -55,6 +56,28 @@ let g:syntastic_javascript_checkers = ['eslint']
 set statusline+=%#warningmsg#
 set statusline+=%*
 set statusline+=%{SyntasticStatuslineFlag()}
+
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+" if !exists('g:deoplete#omni#input_patterns')
+"   let g:deoplete#omni#input_patterns = {}
+" endif
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
+
+" omnifuncs
+" augroup omnifuncs
+"   autocmd!
+"   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+"   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"   autocmd FileType javascript setlocal omnifunc=tern#Complete
+"   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+" augroup end
+
+" tern
+" let g:tern_show_arguments_hints = 'on_hold'
+" let g:tern_show_signature_in_pum = 1
 
 " My Keybindings ===============================================================
 map ; :
