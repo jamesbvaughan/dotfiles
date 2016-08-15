@@ -58,14 +58,14 @@ set statusline+=%{SyntasticStatuslineFlag()}
 " My Keybindings ===============================================================
 map ; :
 let mapleader=" "
-map <leader>o :noh<cr>                             " clear search highlights
-map <leader>w :set wrap !<cr>                      " toggle word wrap
-map <leader>s :setlocal spell! spelllang=en_us<cr> " toggle spell checking
-map <leader>a :sort<cr>                            " sort lines
-map <C-p>     :FZF<cr>                             " fuzzy file searching
-map <S-h>     :bp<cr>                              " previous buffer
-map <S-l>     :bn<cr>                              " next buffer
-map <C-h>     :wincmd h<cr>                        " window left
-map <C-j>     :wincmd j<cr>                        " window below
-map <C-k>     :wincmd k<cr>                        " window above
-map <C-l>     :wincmd l<cr>                        " window right
+map <leader>o :noh<cr>|                            " clear search highlights
+map <leader>w :set wrap !<cr>|                     " toggle word wrap
+map <leader>s :setlocal spell! spelllang=en_us<cr>|" toggle spell checking
+map <leader>a :sort<cr>|                           " sort lines
+map <C-p>     :FZF<cr>|                            " fuzzy file searching
+map <S-h>     :bp<cr>|                             " previous buffer
+map <S-l>     :bn<cr>|                             " next buffer
+map <C-h>     :wincmd h<cr>|                       " window left
+map <C-j>     :wincmd j<cr>|                       " window below
+map <C-k>     :wincmd k<cr>|                       " window above
+map <C-l>     :wincmd l<cr>|                       " window right
