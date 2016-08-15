@@ -10,19 +10,21 @@ servers = (
   }
 );
 
-chatnets = {
-  Freenode = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "4";
-    max_whois = "1";
-  };
+chatnets = { 
+  Freenode = { type = "IRC"; max_msgs = "4"; max_whois = "1"; };
 };
 
 channels = (
   { name = "#choo"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#vim"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#neovim"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#raspberrypi"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#irssi"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#mosh"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#i3"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#twilio"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#reactjs"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#web"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#archlinux"; chatnet = "freenode"; autojoin = "yes"; }
 );
 
@@ -52,30 +54,6 @@ aliases = {
 };
 
 statusbar = {
-  items = {
-    barstart = "{sbstart}";
-    barend = "{sbend}";
-
-    topicbarstart = "{topicsbstart}";
-    topicbarend = "{topicsbend}";
-
-    time = "{sb $Z}";
-    user = "{sb {sbnickmode $cumode}$N{sbmode $usermode}{sbaway $A}}";
-
-    window = "{sb $winref:$tag/$itemname{sbmode $M}}";
-    window_empty = "{sb $winref{sbservertag $tag}}";
-
-    prompt = "{prompt $[.15]itemname}";
-    prompt_empty = "{prompt $winname}";
-
-    topic = " $topic";
-    topic_empty = " Irssi v$J - http://www.irssi.org";
-
-    lag = "{sb Lag: $0-}";
-    act = "{sb Act: $0-}";
-    more = "-- more --";
-  };
-
   default = {
     window = { disabled = "yes"; };
     window_inact = { disabled = "yes"; };
@@ -105,9 +83,6 @@ settings = {
   };
 };
 keyboard = (
-  { key = "control-l"; id = "next_window_item"; data = ""; },
-  { key = "^l"; id = "next_window"; data = ""; },
-  { key = "ctrl-l"; id = "next_window"; data = ""; },
   { key = "^L"; id = "next_window"; data = ""; },
   { key = "^H"; id = "previous_window"; data = ""; }
 );
