@@ -10,9 +10,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'junegunn/fzf.vim'
   Plug 'lambdatoast/elm.vim'
   Plug 'mxw/vim-jsx'
-  Plug 'myint/syntastic-extras'
+  Plug 'neomake/neomake'
   Plug 'pangloss/vim-javascript'
-  Plug 'scrooloose/syntastic'
   Plug 'ternjs/tern_for_vim'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
@@ -24,8 +23,10 @@ call plug#end()
 color dracula          " set colorscheme
 set colorcolumn=80     " highlight max length column
 set expandtab          " tabs to spaces
+set fillchars=vert:\│  " change vertical split character
 set hidden             " allow background buffers
 set ignorecase         " case insensitive searching
+set lazyredraw         " only redraw when needed
 set nobackup           " no backup files
 set noswapfile         " no swap files
 set number             " show line numbers
@@ -41,7 +42,6 @@ let g:airline#extensions#tabline#buffers_label = ''
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#fnametruncate = 8
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_left_sep = ''
 let g:airline_powerline_fonts = 1
@@ -49,45 +49,24 @@ let g:airline_right_sep = ''
 let g:airline_section_y = ''
 let g:airline_theme = 'dracula'
 
-" Syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-set statusline+=%#warningmsg#
-set statusline+=%*
-set statusline+=%{SyntasticStatuslineFlag()}
+" Neomake
+autocmd BufWritePost * Neomake
+let g:neomake_open_list = 0
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
-" if !exists('g:deoplete#omni#input_patterns')
-"   let g:deoplete#omni#input_patterns = {}
-" endif
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 inoremap <expr><tab>   pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
 
-" omnifuncs
-" augroup omnifuncs
-"   autocmd!
-"   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-"   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"   autocmd FileType javascript setlocal omnifunc=tern#Complete
-"   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-" augroup end
-
-" tern
-" let g:tern_show_arguments_hints = 'on_hold'
-" let g:tern_show_signature_in_pum = 1
-
 " My Keybindings ===============================================================
 map ; :
 let mapleader=" "
-map <leader>o :noh<cr>|                             " clear search highlights
-map <leader>w :set wrap !<cr>|                      " toggle word wrap
+map <leader>o :nohlsearch<cr>|                      " clear search highlights
+map <leader>w :set wrap!<cr>|                       " toggle word wrap
 map <leader>s :setlocal spell! spelllang=en_us<cr>| " toggle spell checking
 map <leader>a :sort<cr>|                            " sort lines
+map <leader>r :so ~/.vimrc<cr>|                     " reload vimrc
 map <C-p>     :FZF<cr>|                             " fuzzy file searching
 map <S-h>     :bp<cr>|                              " previous buffer
 map <S-l>     :bn<cr>|                              " next buffer
