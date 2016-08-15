@@ -1,5 +1,5 @@
 " James Vaughan's vimrc ========================================================
-" Plugins =====================================================================-
+" Plugins ======================================================================
 call plug#begin('~/.config/nvim/plugged')
   Plug 'Shougo/deoplete.nvim'
   Plug 'carlitux/deoplete-ternjs'
@@ -40,7 +40,9 @@ let g:airline#extensions#tabline#buffer_min_count = 2
 let g:airline#extensions#tabline#buffers_label = ''
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#fnametruncate = 8
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_left_sep = ''
 let g:airline_powerline_fonts = 1
 let g:airline_right_sep = ''
@@ -63,7 +65,7 @@ let g:deoplete#enable_at_startup = 1
 "   let g:deoplete#omni#input_patterns = {}
 " endif
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <expr><tab>   pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
 
 " omnifuncs
@@ -82,14 +84,14 @@ inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
 " My Keybindings ===============================================================
 map ; :
 let mapleader=" "
-map <leader>o :noh<cr>|                            " clear search highlights
-map <leader>w :set wrap !<cr>|                     " toggle word wrap
-map <leader>s :setlocal spell! spelllang=en_us<cr>|" toggle spell checking
-map <leader>a :sort<cr>|                           " sort lines
-map <C-p>     :FZF<cr>|                            " fuzzy file searching
-map <S-h>     :bp<cr>|                             " previous buffer
-map <S-l>     :bn<cr>|                             " next buffer
-map <C-h>     :wincmd h<cr>|                       " window left
-map <C-j>     :wincmd j<cr>|                       " window below
-map <C-k>     :wincmd k<cr>|                       " window above
-map <C-l>     :wincmd l<cr>|                       " window right
+map <leader>o :noh<cr>|                             " clear search highlights
+map <leader>w :set wrap !<cr>|                      " toggle word wrap
+map <leader>s :setlocal spell! spelllang=en_us<cr>| " toggle spell checking
+map <leader>a :sort<cr>|                            " sort lines
+map <C-p>     :FZF<cr>|                             " fuzzy file searching
+map <S-h>     :bp<cr>|                              " previous buffer
+map <S-l>     :bn<cr>|                              " next buffer
+map <C-h>     :wincmd h<cr>|                        " window left
+map <C-j>     :wincmd j<cr>|                        " window below
+map <C-k>     :wincmd k<cr>|                        " window above
+map <C-l>     :wincmd l<cr>|                        " window right
