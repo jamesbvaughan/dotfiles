@@ -1,8 +1,0 @@
-#!/bin/sh
-# Send my public ip to Google Domains Dynamic DNS
-
-PUBLIC_IP=`curl -s https://api.ipify.org`
-RESULT=`curl -s https://MkMSnO7ekBGfsRvv:D45qbUDPwHaa4vTK@domains.google.com/nic/update\?hostname\=ssh.jamesbvaughan.com\&myip\=$PUBLIC_IP`
-DATE=`date`
-
-echo "$DATE: $0: $RESULT"
