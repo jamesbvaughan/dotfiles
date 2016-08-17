@@ -1,22 +1,22 @@
 import XMonad
 import XMonad.Util.Run
 import XMonad.Layout.Spacing
+import XMonad.Layout.NoBorders
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 
-myConfig = desktopConfig
 myModMask = mod4Mask
 myBorderWidth = 3
 myTerminal = "urxvtc"
-myLayoutHook = desktopLayoutModifiers $ spacing 5 $ Tall 1 0.03 0.5
-myLogHook h = dynamicLogWithPP $ xmobarPP { ppOutput = hPutStrLn h }
+myLayoutHook = desktopLayoutModifiers myLayout
+myLayout = spaced ||| full
+  where 
+    spaced = smartBorders $ smartSpacing 5 $ Tall 1 0.03 0.5
+    full = smartBorders Full
 
-main = do
-  h <- spawnPipe "killall xmobar; xmobar"
-  xmonad myConfig
+main = xmonad =<< xmobar desktopConfig
     { terminal =    myTerminal
     , modMask =     myModMask
     , borderWidth = myBorderWidth
     , layoutHook =  myLayoutHook
-    , logHook =     myLogHook h
     }
