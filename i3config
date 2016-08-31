@@ -135,39 +135,9 @@ bindsym $mod+Shift+$right move right
 # kill focused window
 bindsym $mod+q kill
 
-# volume control keys
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioMute exec amixer -q set Master toggle && pkill -RTMIN+1 i3blocks
-bindsym $mod+Shift+Up exec amixer -q set Master 5%+ unmute && pkill -RTMIN+1 i3blocks
-bindsym $mod+Shift+Down exec amixer -q set Master 5%- unmute && pkill -RTMIN+1 i3blocks
-
-# Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10 -time 0 -steps 1 && pkill -RTMIN+3 i3blocks
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10 -time 0 -steps 1 && pkill -RTMIN+3 i3blocks
-
-# Media player controls
-
-# Mopidy
-# bindsym XF86AudioPlay exec mpc toggle
-# bindsym XF86AudioNext exec mpc next
-# bindsym XF86AudioPrev exec mpc prev
-# bindsym $mod+Shift+p exec mpc toggle
-# bindsym $mod+Shift+Right exec mpc next
-# bindsym $mod+Shift+Left exec mpc prev
-
-# Spotify
-bindsym XF86AudioPlay exec playerctl -p spotify play-pause
-bindsym XF86AudioNext exec playerctl -p spotify next
-bindsym XF86AudioPrev exec playerctl -p spotify previous
-
-
 # scrot
 bindsym $mod+Shift+s exec scrots
 bindsym $mod+Print exec /home/james/.bin/screenshot.sh
-
-# rofi
-bindsym control+space exec rofi -show run
 
 # calc
 bindsym $mod+equal exec /home/james/.bin/=

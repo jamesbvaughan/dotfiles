@@ -2,7 +2,7 @@ Config
   { font = "xft:Fira Mono Medium:size=10:antialias=true,Noto Emoji:size=10"
   , bgColor =          "#282A36"
   , fgColor =          "#F8F8F2"
-  , template = "%StdinReader% }{ %bright% %default:Master% %battery% %time% "
+  , template = "%StdinReader% }{ %bright% %default:Master% %battery% %time%   "
   , commands =
       [ Run Date "%R" "time" 50
       , Run StdinReader
