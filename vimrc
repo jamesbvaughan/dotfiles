@@ -1,6 +1,8 @@
 " James Vaughan's vimrc ========================================================
+filetype plugin on
 " Plugins ======================================================================
 call plug#begin('~/.config/nvim/plugged')
+  Plug 'ElmCast/elm-vim'
   Plug 'Shougo/deoplete.nvim'
   Plug 'carlitux/deoplete-ternjs'
   Plug 'dracula/vim'
@@ -8,11 +10,11 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'hail2u/vim-css3-syntax'
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
-  Plug 'lambdatoast/elm.vim'
   Plug 'mxw/vim-jsx'
   Plug 'neomake/neomake'
   Plug 'pangloss/vim-javascript'
   Plug 'ternjs/tern_for_vim'
+  Plug 'the-lambda-church/merlin'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
   Plug 'vim-airline/vim-airline'
@@ -21,12 +23,12 @@ call plug#end()
 
 " My Settings ==================================================================
 color dracula          " set colorscheme
+set autoread           " auto read files changed outside vim
 set colorcolumn=80     " highlight max length column
 set expandtab          " tabs to spaces
 set fillchars=vert:\│  " change vertical split character
 set hidden             " allow background buffers
 set ignorecase         " case insensitive searching
-set lazyredraw         " only redraw when needed
 set nobackup           " no backup files
 set noswapfile         " no swap files
 set number             " show line numbers
@@ -55,9 +57,21 @@ let g:neomake_open_list = 0
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#omni#input_patterns = {}
+let g:deoplete#omni#input_patterns.elm = '[^ ,;\t\[()\]]'
+let g:deoplete#omni#input_patterns.javascript = '[^. *\t]\.\w*'
+let g:deoplete#omni#input_patterns.ocaml = '[^. *\t]\.\w*\|\h\w*|#'
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0'
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 inoremap <expr><tab>   pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
+
+" Merlin
+" let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+" execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 " My Keybindings ===============================================================
 map ; :

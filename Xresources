@@ -1,18 +1,20 @@
 ! rxvt ==========================================================
-URxvt.font:               xft:Fira Mono Medium for Powerline:pixelsize=12,\
-                          xft:Symbola:pixelsize=9
-URxvt.lineSpace:          0
-URxvt.letterSpace:        0
-URxvt.fading:             25
-URxvt.scrollBar:          false
-URxvt.cursorBlink:        false
-URxvt.iso14755:           false
-URxvt.perl-ext-common:    default,clipboard,matcher
-URxvt.clipboard.copycmd:  xsel -ib
-URxvt.clipboard.pastecmd: xsel -ob
-URxvt.url-launcher:       /usr/bin/chromium
-URxvt.matcher.button:     1
-URxvt.matcher.rend.0:     Uline Bold
+URxvt.font:                xft:Fira Mono Medium for Powerline:pixelsize=12,\
+                           xft:Symbola:pixelsize=9
+URxvt.clipboard.copycmd:   xsel -ib
+URxvt.clipboard.pastecmd:  xsel -ob
+URxvt.cursorBlink:         false
+URxvt.fading:              25
+URxvt.iso14755:            false
+URxvt.letterSpace:         0
+URxvt.lineSpace:           0
+URxvt.matcher.button:      1
+URxvt.matcher.rend.0:      Uline Bold
+URxvt.perl-ext-common:     default,clipboard,matcher,resize-font
+URxvt.resize-font.bigger:  C--
+URxvt.resize-font.smaller: C-=
+URxvt.scrollBar:           false
+URxvt.url-launcher:        /usr/bin/chromium
 
 ! Dracula Xresources palette
 *.foreground: #F8F8F2
