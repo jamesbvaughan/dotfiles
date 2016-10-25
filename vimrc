@@ -7,6 +7,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'carlitux/deoplete-ternjs'
   Plug 'dracula/vim'
   Plug 'eagletmt/neco-ghc'
+  Plug 'elixir-lang/vim-elixir'
   Plug 'hail2u/vim-css3-syntax'
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
