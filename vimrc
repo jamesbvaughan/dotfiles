@@ -53,6 +53,8 @@ let g:airline_theme = 'dracula'
 
 " Neomake
 autocmd BufWritePost * Neomake
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_cpp_enabled_makers = ['gcc']
 let g:neomake_open_list = 0
 
 " Deoplete
