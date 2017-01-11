@@ -4,31 +4,32 @@ import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 import XMonad.Layout.DecorationMadness
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Renamed
 import XMonad.Layout.Spacing
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
 
-myModMask = mod4Mask
+
 myBorderWidth = 3
 myTerminal = "urxvtc"
-myLayoutHook = desktopLayoutModifiers myLayout
-myConfig = desktopConfig
 myFocusedBorderColor = "#6272a4"
 myAdditionalKeys =
   [ ("M-<Tab>", nextWS)
   , ("M-S-<Tab>", prevWS)
   ]
-myLayout = spaced ||| full
+myLayout = tall ||| wide ||| full
   where
-    spaced = smartBorders $ smartSpacing 5 $ Tall 1 0.03 0.5
-    full =   noBorders Full
+    tall = renamed [Replace "tall"] $ smartBorders $ smartSpacing 5 $ Tall 1 0.03 0.5
+    wide = renamed [Replace "wide"] $ Mirror tall
+    full = renamed [Replace "full"] $ noBorders Full
 
-main = xmonad =<< xmobar (myConfig
+
+main = xmonad =<< xmobar (desktopConfig
   { terminal = myTerminal
-  , modMask = myModMask
+  , modMask = mod4Mask
   , focusedBorderColor = myFocusedBorderColor
   , borderWidth = myBorderWidth
-  , layoutHook = myLayoutHook
+  , layoutHook = desktopLayoutModifiers myLayout
   }
   `additionalKeysP`
   myAdditionalKeys)
