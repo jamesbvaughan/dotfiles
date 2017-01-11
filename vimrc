@@ -15,7 +15,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'neomake/neomake'
   Plug 'pangloss/vim-javascript'
   Plug 'ternjs/tern_for_vim'
-  Plug 'the-lambda-church/merlin'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
   Plug 'vim-airline/vim-airline'
@@ -69,10 +68,6 @@ let g:tern#arguments = ["--persistent"]
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 inoremap <expr><tab>   pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
-
-" Merlin
-" let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-" execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 " My Keybindings ===============================================================
 map ; :
