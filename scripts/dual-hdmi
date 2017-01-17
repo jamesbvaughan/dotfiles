@@ -3,5 +3,11 @@
 # Enable a second monitor connected via HDMI
 # xrandr --output HDMI1 --auto --left-of eDP1
 xrandr --output HDMI1 --auto --pos 0x0 --output eDP1 --auto --pos 1920x312
+
+# Map the touchscreen to stay on the laptop screen
+xinput --map-to-output 11 eDP1
+
+# Fix the wallpaper
 sh ~/.fehbg &
-echo "Second monitor enabled."
+
+notify-send "Second monitor enabled."
