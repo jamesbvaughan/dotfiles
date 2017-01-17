@@ -20,6 +20,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-fugitive'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
+  Plug 'wlangstroth/vim-racket'
 call plug#end()
 
 " My Settings ==================================================================
@@ -38,6 +39,7 @@ set scrolloff=5        " start scrolling before bottom of pane
 set shiftwidth=2       " shift width 2
 set smartcase          " only use case sensitive search when uppercase
 set tabstop=2          " change tab length
+let g:filetype_pl="prolog"
 
 " Airline
 let g:airline#extensions#tabline#buffer_min_count = 2
@@ -71,6 +73,9 @@ let g:tern#arguments = ["--persistent"]
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 inoremap <expr><tab>   pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
+
+" Elm
+" let g:elm_format_autosave = 1
 
 " Merlin
 " let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
