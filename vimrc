@@ -67,6 +67,7 @@ let g:deoplete#omni#input_patterns.javascript = '[^. *\t]\.\w*'
 let g:deoplete#omni#input_patterns.ocaml = '[^. *\t]\.\w*\|\h\w*|#'
 let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = '0'
+let g:tern#filetypes = ["js","javascript.jsx","jsx","javascript"]
 let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
