@@ -11,6 +11,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'hail2u/vim-css3-syntax'
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
+  Plug 'mattn/emmet-vim'
   Plug 'mxw/vim-jsx'
   Plug 'neomake/neomake'
   Plug 'pangloss/vim-javascript'
