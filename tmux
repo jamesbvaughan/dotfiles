@@ -19,4 +19,6 @@ setw -g mode-keys vi
 
 set -s escape-time 0
 
+set -g mouse on
+
 bind-key r source-file ~/.tmux.conf \; display-message "configuration reloaded"
