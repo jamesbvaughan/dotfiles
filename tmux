@@ -39,9 +39,10 @@ bind-key r source-file ~/.tmux.conf \; display-message "configuration reloaded"
 set -g status-bg colour0
 set -g status-fg colour7
 set -g status-left-length 40
-set -g status-left '#[fg=colour16,bg=colour4] #(whoami)@#(hostname) '
+set -g status-left '#[fg=colour16,bg=colour4] #(hostname) '
 set -ag status-left '#[fg=colour16,bg=colour12] #S '
-set -g status-right '#[fg=colour16,bg=colour12,bold] %d/%m'
+set -g status-right '#[fg=colour16,bg=colour11,bold] #(battery)% '
+set -ag status-right '#[fg=colour16,bg=colour12,bold] %d/%m'
 set -ag status-right ' #[fg=colour16,bg=colour4,bold] %H:%M '
 
 # window list
