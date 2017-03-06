@@ -2,9 +2,9 @@
 export ZSH=~/.oh-my-zsh
 export FZF_DEFAULT_COMMAND='ag -g "" --ignore node_modules'
 export HOMEBREW_GITHUB_API_TOKEN=9e51d435081597018249134b38a9003cf7eda160
-export LANG=en_US.UTF-8
+export LANG=en_US.utf8
 export PATH="$HOME/.rvm/bin:/usr/local/bin:$HOME/.bin:$PATH"
-[ $TERM = "xterm" ] && TERM=xterm-256color
+TERM=xterm-256color
 DEFAULT_USER="james"
 ENABLE_CORRECTION="true"
 ZSH_THEME="dracula"

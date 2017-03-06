@@ -1,8 +1,20 @@
-vim
-zsh
-oh-my-zsh
-chromium
-atom
-node/npm
-hosts file
-flux
+#!/bin/sh
+# install:
+#   - vim
+#   - zsh
+#   - oh-my-zsh
+#   - tmux
+#   - chromium
+#   - nodejs
+#   - npm
+#   - ruby
+#   - rubygems
+
+# pull_configs:
+#   - .vimrc
+#   - .tmux.conf
+#   - .ssh/*
+#   - .zshrc
+
+git config --global user.email "james@jamesbvaughan.com"
+git config --global user.name "James Vaughan"
