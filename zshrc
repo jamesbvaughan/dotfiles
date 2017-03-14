@@ -4,15 +4,11 @@ export FZF_DEFAULT_COMMAND='ag -g "" --ignore node_modules'
 export HOMEBREW_GITHUB_API_TOKEN=9e51d435081597018249134b38a9003cf7eda160
 export LANG=en_US.utf8
 export PATH="$HOME/.rvm/bin:/usr/local/bin:$HOME/.bin:$PATH"
-TERM=xterm-256color
+export TERM=xterm-256color
 DEFAULT_USER="james"
 ENABLE_CORRECTION="true"
 ZSH_THEME="dracula"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(gitfast colored-man-pages colorize command-not-found sudo)
 
 # aliases
