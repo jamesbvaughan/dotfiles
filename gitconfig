@@ -1,0 +1,9 @@
+[user]
+	name = James Vaughan
+	email = james@jamesbvaughan.com
+[push]
+	default = simple
+[credential]
+	helper = cache --timeout=3600
+[core]
+	editor = vim
