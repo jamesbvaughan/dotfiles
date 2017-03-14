@@ -9,8 +9,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'eagletmt/neco-ghc'
   Plug 'elixir-lang/vim-elixir'
   Plug 'hail2u/vim-css3-syntax'
-  Plug 'junegunn/fzf'
-  Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'mattn/emmet-vim'
   Plug 'mxw/vim-jsx'
   Plug 'neomake/neomake'

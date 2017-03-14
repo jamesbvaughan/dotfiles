@@ -18,7 +18,7 @@ bind -r H resize-pane -L 5
 bind -r L resize-pane -R 5
 
 # fix color problems
-set -g default-terminal "xterm-256color"
+set -g default-terminal "screen-256color"
 
 # vim keys
 setw -g mode-keys vi
