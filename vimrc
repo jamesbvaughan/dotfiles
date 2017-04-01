@@ -4,10 +4,12 @@ filetype plugin on
 call plug#begin('~/.config/nvim/plugged')
   Plug 'ElmCast/elm-vim'
   Plug 'Shougo/deoplete.nvim'
+  Plug 'altercation/vim-colors-solarized'
   Plug 'carlitux/deoplete-ternjs'
   Plug 'dracula/vim'
   Plug 'eagletmt/neco-ghc'
   Plug 'elixir-lang/vim-elixir'
+  Plug 'fatih/vim-go'
   Plug 'hail2u/vim-css3-syntax'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'mattn/emmet-vim'
@@ -17,13 +19,15 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'ternjs/tern_for_vim'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-vinegar'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'wlangstroth/vim-racket'
 call plug#end()
 
 " My Settings ==================================================================
-color dracula          " set colorscheme
+color solarized          " set colorscheme
+set background=dark
 set autoread           " auto read files changed outside vim
 set colorcolumn=80     " highlight max length column
 set expandtab          " tabs to spaces
@@ -51,7 +55,7 @@ let g:airline_left_sep = ''
 let g:airline_powerline_fonts = 1
 let g:airline_right_sep = ''
 let g:airline_section_y = ''
-let g:airline_theme = 'dracula'
+let g:airline_theme = 'solarized'
 
 " Neomake
 autocmd BufWritePost * Neomake
@@ -73,6 +77,12 @@ let g:tern#arguments = ["--persistent"]
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 inoremap <expr><tab>   pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
+
+" Netrw
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+let g:netrw_browse_split = 4
+let g:netrw_winsize = 25
 
 " My Keybindings ===============================================================
 map ; :

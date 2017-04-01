@@ -142,7 +142,7 @@
     browser = /usr/bin/chromium
 
     # Align icons left/right/off
-    icon_position = off
+    icon_position = left
 
     # Paths to default icons.
     # icon_folders = /usr/share/icons/Numix/16/status/:/usr/share/icons/Numix/16/devices/
@@ -150,7 +150,7 @@
 
 [frame]
     width = 3
-    color = "#dddddd"
+    color = "#93a1a1"
 
 [shortcuts]
 
@@ -174,20 +174,18 @@
     context = mod4+c
 
 [urgency_low]
-    # IMPORTANT: colors have to be defined in quotation marks.
-    # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#222222"
-    foreground = "#666666"
+    background = "#586e75"
+    foreground = "#eee8d5"
     timeout = 10
 
 [urgency_normal]
-    background = "#222222"
-    foreground = "#dddddd"
-    timeout = 10
+    background = "#073642"
+    foreground = "#eee8d5"
+    timeout = 5
 
 [urgency_critical]
-    background = "#222222"
-    foreground = "#ffffff"
+    background = "#dc322f"
+    foreground = "#eee8d5"
     timeout = 0
 
 
