@@ -8,7 +8,8 @@ set $bordersize 4
 set $inner_gap_size 6
 set $outer_gap_size 0
 
-set $tray_display eDP1
+# set $tray_display eDP1
+set $tray_display HDMI1
 
 #######################################################################
 #                              colors                                 #

@@ -1,11 +1,15 @@
 ! theme ========================================================================
 #include ".Xresources.d/solarized-dark"
 
+! c-h fix ======================================================================
+#include ".Xresources.d/termfix"
+
 ! font =========================================================================
-*font: xft:Fira Mono Medium for Powerline:pixelsize=12,xft:Symbola:pixelsize=9
+*font: xft:Fira Mono Medium for Powerline:pixelsize=12,xft:Symbola:pixelsize=9,xft:wunconsiji:pixelsize=9
 
 ! rxvt =========================================================================
 URxvt.cursorBlink:         false
+URxvt.letterSpace:         0
 URxvt.fading:              25
 URxvt.perl-ext-common:     default,clipboard,matcher,resize-font
 URxvt.matcher.button:      1
