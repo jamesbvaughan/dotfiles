@@ -37,7 +37,7 @@ set -g mouse-resize-pane on
 set -g mouse on
 
 # reload configuration
-bind-key r source-file ~/.tmux.conf \; display-message "configuration reloaded"
+bind-key r source-file ~/.tmux.conf
 
 # statusline
 set -g status-bg colour0
