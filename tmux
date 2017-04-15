@@ -24,6 +24,9 @@ bind -r L resize-pane -R 5
 # fix color problems
 set -g default-terminal "screen-256color"
 
+# don't rename windows for me
+set-option -g allow-rename off
+
 # vim keys
 setw -g mode-keys vi
 
@@ -31,25 +34,53 @@ setw -g mode-keys vi
 set -s escape-time 0
 
 # mouse support
-set -g mouse-select-window on
-set -g mouse-select-pane on
-set -g mouse-resize-pane on
-set -g mouse on
+set -gq mouse-select-window on
+set -gq mouse-select-pane on
+set -gq mouse-resize-pane on
+set -gq mouse on
 
 # reload configuration
 bind-key r source-file ~/.tmux.conf
 
-# statusline
-set -g status-bg colour0
-set -g status-fg colour7
+# statusline left
 set -g status-left-length 40
-set -g status-left '#[fg=colour16,bg=colour4] #(hostname) '
-set -ag status-left '#[fg=colour16,bg=colour12] #S '
-set -g status-right '#[fg=colour16,bg=colour11,bold] #(battery)% '
-set -ag status-right '#[fg=colour16,bg=colour12,bold] %d/%m'
-set -ag status-right ' #[fg=colour16,bg=colour4,bold] %H:%M '
+set -g status-left '#[fg=colour33] #(hostname):#S '
+
+# statusline right
+set -g status-right '#(battery)% '
+set -ag status-right '%d/%m '
+set -ag status-right '%H:%M '
 
 # window list
-setw -g window-status-format "#[bg=colour0,fg=colour8] #I:#W "
-setw -g window-status-current-format "#[fg=colour12,bg=colour0] #I:#W "
+setw -g window-status-format "#I:#W "
 
+# colors
+# default statusbar colors
+set-option -g status-bg colour235 #base02
+set-option -g status-fg colour136 #yellow
+set-option -g status-attr default
+
+# default window title colors
+set-window-option -g window-status-fg colour244 #base0
+set-window-option -g window-status-bg default
+#set-window-option -g window-status-attr dim
+
+# active window title colors
+set-window-option -g window-status-current-fg colour166 #orange
+set-window-option -g window-status-current-bg default
+#set-window-option -g window-status-current-attr bright
+
+# pane border
+set-option -g pane-border-fg colour235 #base02
+set-option -g pane-active-border-fg colour240 #base01
+
+# message text
+set-option -g message-bg colour235 #base02
+set-option -g message-fg colour166 #orange
+
+# pane number display
+set-option -g display-panes-active-colour colour33 #blue
+set-option -g display-panes-colour colour166 #orange
+
+# clock
+set-window-option -g clock-mode-colour colour64 #green

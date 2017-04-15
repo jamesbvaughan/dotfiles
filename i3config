@@ -3,18 +3,22 @@
 #######################################################################
 set $mod         Mod4
 
-set $bordersize 5
+set $bordersize 4
 
-set $bg  #222222
-set $regular  #666666
-set $highlighted  #dddddd
-set $notify #fb4934
-set $red #ff0000
+set $inner_gap_size 6
+set $outer_gap_size 0
 
-# Dracula Colors
-set $bg #282A36
-set $regular #4D4D4D
-set $highlighted #F8F8F2
+# set $tray_display eDP1
+set $tray_display HDMI1
+
+#######################################################################
+#                              colors                                 #
+#######################################################################
+set_from_resource $bg background #000000
+set_from_resource $regular color10 #333333
+set_from_resource $highlighted color14 #ffffff
+set_from_resource $notify color3 #fb4934
+set_from_resource $red color1 #ff0000
 
 #######################################################################
 #                           random settings                           #
@@ -26,11 +30,11 @@ for_window [class="^.*"] border pixel $bordersize
 #######################################################################
 #                               colors                                #
 #######################################################################
-# class                 border  backgr. text    indicator child_border
-client.focused          $bg  $bg  $highlighted  $highlighted  $highlighted
-client.focused_inactive $bg  $bg  $regular  $regular  $regular
-client.unfocused        $bg  $bg  $regular  $regular  $regular
-client.urgent           $bg  $bg  $regular  $red  $red
+# class                 border background text         indicator    child_border
+client.focused          $bg    $bg        $highlighted $highlighted $highlighted
+client.focused_inactive $bg    $bg        $regular     $regular     $regular
+client.unfocused        $bg    $bg        $regular     $regular     $regular
+client.urgent           $bg    $bg        $regular     $red         $red
 
 #######################################################################
 #                                font                                 #
@@ -66,7 +70,7 @@ assign [class="Gimp"] $photo
 assign [class="Darktable"] $photo
 assign [class="Blender"] $photo
 assign [class="chromium"] $web
-# assign [class="google-chrome"] $web
+assign [class="google-chrome"] $web
 assign [class="spotify"] $music
 assign [title="Soundnode"] $music
 assign [title="Messenger"] $chat
@@ -142,9 +146,6 @@ bindsym $mod+Print exec /home/james/.bin/screenshot.sh
 # calc
 bindsym $mod+equal exec /home/james/.bin/=
 
-# messenger
-bindsym $mod+Shift+f exec --no-startup-id messengerfordesktop
-
 # start a terminal
 bindsym $mod+Return exec --no-startup-id urxvtc
 
@@ -190,11 +191,8 @@ bindsym $mod+Shift+e exec /home/james/.bin/leave.sh
 #                                gaps                                 #
 #######################################################################
 
-set $gsi 14
-set $gso 0
-
-gaps inner $gsi
-gaps outer $gso
+gaps inner $inner_gap_size
+gaps outer $outer_gap_size
 
 # use smart gaps
 smart_gaps on
@@ -213,7 +211,7 @@ mode "$mode_gaps" {
   bindsym i    mode "$mode_gaps_inner"
   bindsym 0    gaps inner current set 0; mode "default"
   bindsym 1    gaps inner current set 2; mode "default"
-  bindsym 2    gaps inner current set $gsi; mode "default"
+  bindsym 2    gaps inner current set $inner_gap_size; mode "default"
   bindsym Return    mode "default"
   bindsym Escape    mode "default"
 }
@@ -274,16 +272,16 @@ for_window [title="Blender User Preferences"] floating enable
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-        bindsym $left       resize shrink width 5 px or 5 ppt
-        bindsym $down       resize grow height 5 px or 5 ppt
-        bindsym $up         resize shrink height 5 px or 5 ppt
-        bindsym $right      resize grow width 5 px or 5 ppt
-        bindsym 2            resize set 480 px 270 px
+    # These bindings trigger as soon as you enter the resize mode
+    bindsym $left       resize shrink width 5 px or 5 ppt
+    bindsym $down       resize grow height 5 px or 5 ppt
+    bindsym $up         resize shrink height 5 px or 5 ppt
+    bindsym $right      resize grow width 5 px or 5 ppt
+    bindsym 2            resize set 480 px 270 px
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
     bindsym $mod+r mode "default"
 }
 
@@ -294,25 +292,8 @@ bindsym $mod+r mode "resize"
 #                              startup                                #
 #######################################################################
 
-# set wallpaper
-exec --no-startup-id sh ~/.fehbg &
-
 # move to home workspace
 exec --no-startup-id "i3-msg 'workspace $main'"
-
-# network manager
-exec --no-startup-id nm-applet
-
-# start compton
-exec --no-startup-id compton -b
-
-# start dunst
-exec --no-startup-id dunst
-
-# detect monitors
-# exec xrandr
-# exec srandrd ~/.bin/displays.sh
-
 
 ######################################################################
 #                                bar                                 #
@@ -324,7 +305,7 @@ bar {
   font pango:Fira Mono Medium, FontAwesome 11
   separator_symbol "​"
   position top
-  tray_output eDP1
+  tray_output $tray_display
   strip_workspace_numbers yes
   colors {
     background $bg
