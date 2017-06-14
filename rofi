@@ -1,17 +1,15 @@
 ! Rofi ==========================================================
-rofi.font:	Fira Sans 24
+rofi.font:	Vulf Mono Black 48
 rofi.lines: 3
-rofi.width: 40
+rofi.width: 50
 rofi.color-enabled: true
-rofi.opacity: 85
-rofi.color-normal: #222222, #666666, #222222, #222222, #dddddd
-rofi.color-window: #222222, #666666
+rofi.opacity: 80
+rofi.color-normal: #073642, #839496, #073642, #073642, #fdf6e3
+rofi.color-window: #073642, #839496
 rofi.bw: 0
 rofi.padding: 10
 rofi.separator-style: none
 rofi.hide-scrollbar: true
 rofi.auto-select: false
-rofi.key-run: control+space
-rofi.key-window: control+shift+space
 rofi.fuzzy: true
 rofi.terminal: urxvtc

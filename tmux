@@ -47,7 +47,7 @@ set -g status-left-length 40
 set -g status-left '#[fg=colour33] #(hostname):#S '
 
 # statusline right
-set -g status-right '#(battery)% '
+set -g status-right '#(cat /sys/class/power_supply/BAT1/capacity)% '
 set -ag status-right '%d/%m '
 set -ag status-right '%H:%M '
 
