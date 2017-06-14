@@ -40,7 +40,7 @@ set -gq mouse-resize-pane on
 set -gq mouse on
 
 # reload configuration
-bind-key r source-file ~/.tmux.conf \; display-message "configuration reloaded"
+bind-key r source-file ~/.tmux.conf
 
 # statusline left
 set -g status-left-length 40
