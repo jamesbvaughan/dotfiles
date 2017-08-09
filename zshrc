@@ -5,7 +5,7 @@ export PATH="$HOME/.bin:$PATH"
 export TERM=xterm-256color
 DEFAULT_USER="james"
 ENABLE_CORRECTION="true"
-ZSH_THEME="james"
+ZSH_THEME="robbyrussell"
 
 plugins=(docker gitfast colored-man-pages colorize command-not-found sudo)
 
