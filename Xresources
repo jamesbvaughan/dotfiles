@@ -1,14 +1,8 @@
 ! theme ========================================================================
 #include ".Xresources.d/solarized-dark"
 
-! c-h fix ======================================================================
-#include ".Xresources.d/termfix"
-
 ! font =========================================================================
-*font: xft:Vulf Mono Code:pixelsize=13,xft:Symbola:pixelsize=9,xft:wunconsiji:pixelsize=9
-*italicFont: xft:Vulf Mono Code:pixelsize=13:style=bold italic
-*boldFont: xft:Vulf Mono Code:pixelsize=13:style=bold
-*boldItalicFont: xft:Vulf Mono Code:pixelsize=13:style=bold italic
+*font: xft:Noto Mono:pixelsize=13
 
 ! rxvt =========================================================================
 URxvt.cursorBlink:         false

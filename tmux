@@ -11,6 +11,10 @@ bind -n M-j select-pane -D
 bind -n M-k select-pane -U
 bind -n M-l select-pane -R
 
+# window switching bindings
+bind -n M-n next-window
+bind -n M-p previous-window
+
 # window splitting bindings
 bind | split-window -h
 bind - split-window -v
@@ -43,44 +47,35 @@ set -gq mouse on
 bind-key r source-file ~/.tmux.conf
 
 # statusline left
-set -g status-left-length 40
-set -g status-left '#[fg=colour33] #(hostname):#S '
+set -g status-left-length 100
+set -g status-left '#[bg=colour6] #h '
+set -ag status-left '#[bg=default] '
+set -ag status-left '#[bg=colour1] #S '
+set -ag status-left '#[bg=default] '
 
 # statusline right
-set -g status-right '#(cat /sys/class/power_supply/BAT1/capacity)% '
-set -ag status-right '%d/%m '
-set -ag status-right '%H:%M '
+set -g status-right-length 100
+set -g status-right '#[bg=colour5] %A %H:%M '
+set -ag status-right '#[bg=default] '
+set -ag status-right '#[bg=colour13] #I '
 
 # window list
-setw -g window-status-format "#I:#W "
+set-window-option -g window-status-bg colour4
+set-window-option -g window-status-current-bg colour2
+set-window-option -g window-status-current-format ' #W '
+setw -g window-status-format " #W "
+set -g status-justify centre
+set-option -g status-position top
 
 # colors
 # default statusbar colors
-set-option -g status-bg colour235 #base02
-set-option -g status-fg colour136 #yellow
-set-option -g status-attr default
-
-# default window title colors
-set-window-option -g window-status-fg colour244 #base0
-set-window-option -g window-status-bg default
-#set-window-option -g window-status-attr dim
-
-# active window title colors
-set-window-option -g window-status-current-fg colour166 #orange
-set-window-option -g window-status-current-bg default
-#set-window-option -g window-status-current-attr bright
+set-option -g status-bg colour8
+set-option -g status-fg colour8
 
 # pane border
-set-option -g pane-border-fg colour235 #base02
-set-option -g pane-active-border-fg colour240 #base01
+set-option -g pane-border-fg colour4
+set-option -g pane-active-border-fg colour2
 
 # message text
-set-option -g message-bg colour235 #base02
-set-option -g message-fg colour166 #orange
-
-# pane number display
-set-option -g display-panes-active-colour colour33 #blue
-set-option -g display-panes-colour colour166 #orange
-
-# clock
-set-window-option -g clock-mode-colour colour64 #green
+set-option -g message-bg colour8
+set-option -g message-fg colour9
