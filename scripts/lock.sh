@@ -10,7 +10,7 @@ xset dpms force off
 xset dpms 5 5 5
 
 # Lock the screen
-i3lock-wrapper --nofork --logo --ignore-empty-password
+i3lock-wrapper --nofork --ignore-empty-password
 
 # Raise screen timeout
 xset -dpms

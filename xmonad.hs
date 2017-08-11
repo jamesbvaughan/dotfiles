@@ -16,7 +16,7 @@ myTerminal = "urxvtc"
 
 myFocusedBorderColor = "#268bd2"
 
-myWorkspaces = ["web", "term", "music", "4", "5"]
+myWorkspaces = ["web", "term", "music", "misc", "aux"]
 
 myAdditionalKeys =
   [ ("M-<Tab>", nextWS)
@@ -41,3 +41,4 @@ main = do
     }
     `additionalKeysP`
     myAdditionalKeys
+
