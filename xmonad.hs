@@ -30,7 +30,7 @@ myLayout = tall ||| wide ||| full
     full = renamed [Replace "full"] $ noBorders Full
 
 main = do
-  spawnPipe "polybar -r jamesbar"
+  spawnPipe "sleep 0.1; polybar -r jamesbar"
   xmonad $ desktopConfig
     { terminal = myTerminal
     , modMask = mod4Mask
