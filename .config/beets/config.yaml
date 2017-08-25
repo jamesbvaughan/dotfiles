@@ -1,0 +1,7 @@
+directory: ~/Music
+library: ~/Music/library.db
+import:
+  move: yes
+ui:
+  color: yes
+plugins: fetchart

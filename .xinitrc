@@ -8,6 +8,9 @@ export GDK_DPI_SCALE=0.5
 # Load up some keybindings
 xbindkeys --file ~/.xbindkeysrc
 
+# Disable the system beep
+xset -b
+
 # Set the delay before and the speed of keypress repetition
 xset r rate 250 25
 

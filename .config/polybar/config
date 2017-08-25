@@ -38,8 +38,8 @@ font-0 = Noto:size=18
 font-1 = Noto Emoji:size=15
 
 modules-left = ewmh xwindow
-modules-center = date japan-time
-modules-right = wlan volume battery
+modules-center = date
+modules-right = mpd volume battery
 
 tray-position = right
 tray-maxsize = 200
@@ -50,7 +50,7 @@ tray-underline = ${colors.blue}
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:30:...%
+label = %title:0:50:...%
 label-underline = ${colors.green}
 
 [module/ewmh]
@@ -147,13 +147,6 @@ format-underline = ${colors.blue}
 
 label = %date%%time%
 
-[module/japan-time]
-type = custom/script
-exec = "TZ=Japan date +%H:%M"
-interval = 30
-format-underline = ${colors.magenta}
-
-
 [module/volume]
 type = internal/volume
 
@@ -191,10 +184,12 @@ battery = BAT0
 adapter = AC
 full-at = 98
 
-format-charging = <animation-charging> <label-charging>
+; format-charging = <animation-charging> <label-charging>
+format-charging = <label-charging>
 format-charging-underline = ${colors.orange}
 
-format-discharging = <ramp-capacity> <label-discharging>
+; format-discharging = <ramp-capacity> <label-discharging>
+format-discharging = <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
 format-full-prefix = "🔋 "

@@ -10,7 +10,7 @@ servers = (
   }
 );
 
-chatnets = { 
+chatnets = {
   Freenode = { type = "IRC"; max_msgs = "4"; max_whois = "1"; };
 };
 
