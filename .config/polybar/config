@@ -1,6 +1,5 @@
 [colors]
 background = ${xrdb:color8:#222}
-background-alt = ${xrdb:color0:#111}
 foreground = ${xrdb:color7:#ddd}
 foreground-alt = ${xrdb:color10:#aaa}
 red = ${xrdb:color1:#f00}
@@ -11,11 +10,6 @@ magenta = ${xrdb:color5:#faa}
 cyan = ${xrdb:color6:#aaf}
 orange= ${xrdb:color9:#ffa}
 violet = ${xrdb:color13:#faf}
-
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
-
 
 [bar/jamesbar]
 monitor = ${env:MONITOR:eDP-1}
@@ -39,185 +33,96 @@ font-1 = Noto Emoji:size=15
 
 modules-left = ewmh xwindow
 modules-center = date
-modules-right = mpd volume battery
+modules-right = mpd backlight volume battery
 
 tray-position = right
 tray-maxsize = 200
 tray-padding = 4
 tray-detached = false
-tray-underline = ${colors.blue}
-
-
-[module/xwindow]
-type = internal/xwindow
-label = %title:0:50:...%
-label-underline = ${colors.green}
 
 [module/ewmh]
 type = internal/xworkspaces
 format = <label-state>
 pin-workspaces = false
-enable-click = false
-enable-scroll = false
 label-active-foreground = ${colors.foreground}
 label-active-underline = ${colors.violet}
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-underline = ${colors.violet}
 label-active = " %name% "
 label-empty = " %name% "
-label-monitor-underline = ${colors.magenta}
 
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:50:...%
+label-underline = ${colors.yellow}
+
+[module/date]
+type = internal/date
+interval = 5
+time = %H:%M
+time-alt = %H:%M:%S
+format-underline = ${colors.blue}
+label = %time%
 
 [module/mpd]
 type = internal/mpd
 format-online = <label-song>
 label-song = ♫ %artist% - %title%
 label-song-underline = ${colors.cyan}
-
-icon-prev = ⏮️
-icon-stop = ⏹️
-icon-play = ▶️
-icon-pause = ⏸️
-icon-next = ⏭️
-
 label-song-maxlen = 40
 label-song-ellipsis = true
 
-
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <label> <bar>
-label = BL
-
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+format = <bar>
 bar-width = 10
 bar-indicator = |
 bar-indicator-foreground = #ff
 bar-indicator-font = 2
 bar-fill = ─
 bar-fill-font = 2
-bar-fill-foreground = #9f78e1
+bar-fill-foreground = ${colors.violet}
 bar-empty = ─
 bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
-
-
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
-
-
-[module/wlan]
-type = internal/network
-interface = wlp4s0
-interval = 3.0
-
-format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
-label-connected = %essid%
-
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
-
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = ${colors.foreground-alt}
-
-
-[module/date]
-type = internal/date
-interval = 5
-
-date =
-date-alt = "%Y-%m-%d "
-
-time = %H:%M
-time-alt = %H:%M:%S
-
-; format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.blue}
-
-label = %date%%time%
+format-underline = ${colors.green}
 
 [module/volume]
 type = internal/volume
-
-format-volume = <label-volume> <bar-volume>
-label-volume = "🔉"
+master-mixer = "UMC2014HD 192k Output"
+format-volume = <bar-volume>
 label-volume-foreground = ${root.foreground}
-
-format-volume-underline = ${colors.yellow}
-
-format-muted-prefix = " "
+format-volume-underline = ${colors.magenta}
 format-muted-foreground = ${colors.foreground-alt}
-label-muted = sound muted
-
-bar-volume-width = 5
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
+bar-volume-width = 10
+bar-volume-foreground-0 = ${colors.green}
+bar-volume-foreground-1 = ${colors.green}
+bar-volume-foreground-2 = ${colors.green}
+bar-volume-foreground-3 = ${colors.green}
+bar-volume-foreground-4 = ${colors.green}
+bar-volume-foreground-5 = ${colors.green}
+bar-volume-foreground-6 = ${colors.green}
+bar-volume-foreground-7 = ${colors.yellow}
+bar-volume-foreground-8 = ${colors.red}
 bar-volume-gradient = false
 bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = —
-bar-volume-fill-font = 2
-bar-volume-empty = —
-bar-volume-empty-font = 2
+bar-volume-fill = ─
+bar-volume-empty = ─
 bar-volume-empty-foreground = ${colors.foreground-alt}
-
 
 [module/battery]
 type = internal/battery
 battery = BAT0
 adapter = AC
 full-at = 98
-
-; format-charging = <animation-charging> <label-charging>
 format-charging = <label-charging>
-format-charging-underline = ${colors.orange}
-
-; format-discharging = <ramp-capacity> <label-discharging>
 format-discharging = <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
-
-format-full-prefix = "🔋 "
-format-full-prefix-foreground = ${colors.foreground-alt}
+format-charging-underline = ${colors.orange}
 format-full-underline = ${self.format-charging-underline}
-
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-foreground = ${colors.foreground}
-
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground}
-animation-charging-framerate = 750
-
+format-discharging-underline = ${self.format-charging-underline}
 
 [settings]
 screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
-
-
-[global/wm]
-; margin-top = 5
-margin-bottom = 0
 
 ; vim:ft=dosini

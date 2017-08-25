@@ -1,5 +1,5 @@
 # James' startup file
-# This is run when the x server is started
+# This is run when the X server is started
 
 # Make GTK apps look better on HiDPI displays
 export GDK_SCALE=2

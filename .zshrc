@@ -6,7 +6,6 @@ export FZF_DEFAULT_OPTS='
 '
 export EDITOR="vim"
 DEFAULT_USER="james"
-ENABLE_CORRECTION="true"
 ZSH_THEME="james"
 
 plugins=(gitfast colored-man-pages colorize sudo)

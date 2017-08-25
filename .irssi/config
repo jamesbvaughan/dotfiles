@@ -15,21 +15,15 @@ chatnets = {
 };
 
 channels = (
-  { name = "#choo"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#vim"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#neovim"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#raspberrypi"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#irssi"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#mosh"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#i3"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#twilio"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#reactjs"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#web"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#archlinux"; chatnet = "freenode"; autojoin = "yes"; }
 );
 
 aliases = {
-  C = "CLEAR";
   DATE = "TIME";
   DEHIGHLIGHT = "DEHILIGHT";
   DESCRIBE = "ACTION";
@@ -38,19 +32,12 @@ aliases = {
   HIGHLIGHT = "HILIGHT";
   HL = "HILIGHT";
   HOST = "USERHOST";
-  J = "JOIN";
-  K = "KICK";
   LEAVE = "PART";
   M = "MSG";
   N = "NAMES";
-  P = "PART";
   Q = "QUERY";
   RUN = "SCRIPT LOAD";
-  T = "TOPIC";
   UNSET = "SET -clear";
-  W = "WHO";
-  WI = "WHOIS";
-  WL = "WINDOW LIST";
 };
 
 statusbar = {
@@ -68,6 +55,7 @@ statusbar = {
     };
   };
 };
+
 settings = {
   core = {
     real_name = "James Vaughan";
@@ -82,6 +70,7 @@ settings = {
     awl_placement = "top";
   };
 };
+
 keyboard = (
   { key = "^L"; id = "next_window"; data = ""; },
   { key = "^H"; id = "previous_window"; data = ""; }
