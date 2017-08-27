@@ -33,7 +33,7 @@ font-1 = Noto Emoji:size=15
 
 modules-left = ewmh xwindow
 modules-center = date
-modules-right = mpd backlight volume battery
+modules-right = mpd backlight battery
 
 tray-position = right
 tray-maxsize = 200
