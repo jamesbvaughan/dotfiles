@@ -13,6 +13,9 @@
 "xbacklight -dec 10"
   XF86MonBrightnessDown
 
+"rofi -show window"
+  Control + Shift + space
+
 "rofi -show run"
   Control + space
 

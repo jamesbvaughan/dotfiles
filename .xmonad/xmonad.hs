@@ -38,6 +38,7 @@ main = do
     , focusedBorderColor = myFocusedBorderColor
     , borderWidth = myBorderWidth
     , layoutHook = desktopLayoutModifiers myLayout
+    , handleEventHook = fullscreenEventHook
     }
     `additionalKeysP`
     myAdditionalKeys
