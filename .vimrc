@@ -5,6 +5,7 @@ filetype plugin on
 call plug#begin('~/.vim/plugged')
   Plug 'altercation/vim-colors-solarized'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
   Plug 'tpope/vim-commentary'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -51,7 +52,9 @@ let g:airline_theme = 'solarized'
 let g:ycm_autoclose_preview_window_after_completion = 1
 
 " FZF
-map <C-p> :FZF<cr>
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+map <C-p> :Files<cr>
 
 " My Keybindings ===============================================================
 map ; :
