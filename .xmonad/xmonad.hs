@@ -3,25 +3,13 @@ import XMonad.Actions.CycleWS
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageDocks
 import XMonad.Layout.DecorationMadness
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Renamed
 import XMonad.Layout.Spacing
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
-
-myBorderWidth = 0
-
-myTerminal = "urxvtc"
-
-myFocusedBorderColor = "#268bd2"
-
-myWorkspaces = ["web", "term", "music", "misc", "aux"]
-
-myAdditionalKeys =
-  [ ("M-<Tab>", nextWS)
-  , ("M-S-<Tab>", prevWS)
-  ]
 
 myLayout = tall ||| wide ||| full
   where
@@ -32,14 +20,15 @@ myLayout = tall ||| wide ||| full
 main = do
   spawnPipe "sleep 0.1; polybar -r jamesbar"
   xmonad $ desktopConfig
-    { terminal = myTerminal
+    { terminal = "urxvtc"
     , modMask = mod4Mask
-    , workspaces = myWorkspaces
-    , focusedBorderColor = myFocusedBorderColor
-    , borderWidth = myBorderWidth
+    , workspaces = ["web", "term", "music", "misc", "aux"]
+    , focusedBorderColor = "#268bd2"
+    , borderWidth = 0
     , layoutHook = desktopLayoutModifiers myLayout
-    , handleEventHook = fullscreenEventHook
-    }
-    `additionalKeysP`
-    myAdditionalKeys
+    , handleEventHook = handleEventHook desktopConfig <+> fullscreenEventHook
+    } `additionalKeysP`
+    [ ("M-<Tab>", nextWS)
+    , ("M-S-<Tab>", prevWS)
+    ]
 

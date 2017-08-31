@@ -24,6 +24,6 @@ URxvt.url-select.underline: true
 URxvt.iso14755: false
 URxvt.iso14755_52: false
 
-! includes ========================================================================
+! includes =====================================================================
 #include ".Xresources.d/solarized-dark"
 #include ".Xresources.d/rofi"

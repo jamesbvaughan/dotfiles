@@ -125,4 +125,8 @@ format-discharging-underline = ${self.format-charging-underline}
 [settings]
 screenchange-reload = true
 
+[global/wm]
+margin-bottom = 0
+;margin-top = 50
+
 ; vim:ft=dosini

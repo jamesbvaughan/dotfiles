@@ -5,6 +5,9 @@
 export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
 
+# Start JACK
+~/.bin/start_jack.sh &
+
 # Load up some keybindings
 xbindkeys --file ~/.xbindkeysrc
 
