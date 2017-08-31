@@ -1,0 +1,7 @@
+"\e[A": history-search-backward
+"\e[B": history-search-forward 
+"\e[Z": menu-complete-backward
+TAB: menu-complete
+set show-all-if-ambiguous on
+set completion-ignore-case on
+set echo-control-characters off
