@@ -7,11 +7,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'elixir-lang/vim-elixir'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'slashmili/alchemist.vim'
   Plug 'tpope/vim-commentary'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'Valloric/YouCompleteMe'
-  Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " My Settings ==================================================================
@@ -54,8 +55,6 @@ let g:airline_theme = 'solarized'
 let g:ycm_autoclose_preview_window_after_completion = 1
 
 " FZF
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 map <C-p> :Files<cr>
 
 " My Keybindings ===============================================================
