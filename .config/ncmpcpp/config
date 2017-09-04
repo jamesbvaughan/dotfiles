@@ -1,2 +1,18 @@
 ncmpcpp_directory = ~/.config/ncmpcpp
 mpd_music_dir = ~/Music
+
+screen_switcher_mode = "playlist,media_library"
+
+media_library_primary_tag = album_artist
+song_library_format = "%t"
+ignore_leading_the = yes
+
+header_visibility = no
+
+progressbar_look = "──"
+progressbar_elapsed_color = yellow
+
+statusbar_visibility = no
+song_status_format = "%A - %t"
+
+message_delay_time = 2

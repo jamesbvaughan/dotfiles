@@ -28,19 +28,19 @@ padding-right = 0
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = Noto:size=18
-font-1 = Noto Emoji:size=15
+font-0 = DejaVu Sans:size=18
+font-1 = DejaVuSansMono Nerd Font:size=18
 
-modules-left = ewmh xwindow
-modules-center = date
-modules-right = mpd backlight battery
+modules-left = workspaces xwindow
+modules-center = time
+modules-right = music volume battery
 
 tray-position = right
 tray-maxsize = 200
 tray-padding = 4
 tray-detached = false
 
-[module/ewmh]
+[module/workspaces]
 type = internal/xworkspaces
 format = <label-state>
 pin-workspaces = false
@@ -48,79 +48,73 @@ label-active-foreground = ${colors.foreground}
 label-active-underline = ${colors.violet}
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-underline = ${colors.violet}
-label-active = " %name% "
-label-empty = " %name% "
+label-active = "  %icon%  "
+label-empty = "  %icon%  "
+label-occupied = "OCCUPIED"
+label-urgent = "URGENT"
+icon-0 = web;
+icon-1 = term;
+icon-2 = music;
+icon-3 = misc;
+icon-4 = aux;
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:50:...%
+label = "  %title%"
+label-maxlen = 50
 label-underline = ${colors.yellow}
 
-[module/date]
+[module/time]
 type = internal/date
 interval = 5
 time = %H:%M
-time-alt = %H:%M:%S
 format-underline = ${colors.blue}
-label = %time%
+label = "  %time%"
 
-[module/mpd]
+[module/music]
 type = internal/mpd
-format-online = <label-song>
-label-song = ♫ %artist% - %title%
-label-song-underline = ${colors.cyan}
+format-online = <icon-prev> <toggle> <icon-next> <label-song>
+label-song = "  %artist% - %title%"
 label-song-maxlen = 40
 label-song-ellipsis = true
+label-song-underline = ${colors.cyan}
 
-[module/backlight]
-type = internal/backlight
-card = intel_backlight
-format = <bar>
-bar-width = 10
-bar-indicator = |
-bar-indicator-foreground = #ff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = ${colors.violet}
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
-format-underline = ${colors.green}
+icon-play = "  "
+icon-pause = "  "
+icon-prev = "  "
+icon-next = "  "
 
 [module/volume]
 type = internal/volume
-master-mixer = "UMC2014HD 192k Output"
-format-volume = <bar-volume>
-label-volume-foreground = ${root.foreground}
-format-volume-underline = ${colors.magenta}
-format-muted-foreground = ${colors.foreground-alt}
-bar-volume-width = 10
-bar-volume-foreground-0 = ${colors.green}
-bar-volume-foreground-1 = ${colors.green}
-bar-volume-foreground-2 = ${colors.green}
-bar-volume-foreground-3 = ${colors.green}
-bar-volume-foreground-4 = ${colors.green}
-bar-volume-foreground-5 = ${colors.green}
-bar-volume-foreground-6 = ${colors.green}
-bar-volume-foreground-7 = ${colors.yellow}
-bar-volume-foreground-8 = ${colors.red}
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-fill = ─
-bar-volume-empty = ─
-bar-volume-empty-foreground = ${colors.foreground-alt}
+master-soundcard = "hw:1"
+master-mixer = "UMC204HD 192k Output"
+format-volume = <ramp-volume> <label-volume>
+label-muted = "  muted"
+ramp-volume-0 = " "
+ramp-volume-1 = " "
+ramp-volume-2 = " "
+format-volume-underline = ${colors.green}
 
 [module/battery]
 type = internal/battery
 battery = BAT0
 adapter = AC
 full-at = 98
-format-charging = <label-charging>
-format-discharging = <label-discharging>
+format-charging = <animation-charging> <label-charging>
+format-discharging = " <ramp-capacity> <label-discharging>"
 format-charging-underline = ${colors.orange}
 format-full-underline = ${self.format-charging-underline}
 format-discharging-underline = ${self.format-charging-underline}
+animation-charging-0 = " "
+animation-charging-1 = " "
+animation-charging-2 = " "
+animation-charging-3 = " "
+animation-charging-4 = " "
+ramp-capacity-0 = " "
+ramp-capacity-1 = " "
+ramp-capacity-2 = " "
+ramp-capacity-3 = " "
+ramp-capacity-4 = " "
 
 [settings]
 screenchange-reload = true

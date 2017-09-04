@@ -4,6 +4,7 @@ filetype plugin on
 " Plugins ======================================================================
 call plug#begin('~/.vim/plugged')
   Plug 'altercation/vim-colors-solarized'
+  Plug 'elixir-lang/vim-elixir'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   Plug 'tpope/vim-commentary'

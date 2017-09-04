@@ -5,6 +5,8 @@ export FZF_DEFAULT_OPTS='
   --color info:254,prompt:37,spinner:108,pointer:235,marker:235
 '
 export EDITOR="vim"
+export HISTSIZE=10000
+export HISTFILESIZE=20000
 
 alias gc="git commit"
 alias gcm="git commit -m"
@@ -18,6 +20,8 @@ alias nig="npm install --global"
 alias nis="npm install --save"
 alias nisd="npm install --save-dev"
 alias ns="npm start"
+
+shopt -s histappend
 
 source ~/.fzf.bash
 source ~/.james-prompt.bash

@@ -7,12 +7,12 @@ Xft.antialias: 1
 Xft.rgba: rgb
 
 ! font =========================================================================
-*font: xft:Noto Mono:pixelsize=24
+*font: xft:DejaVuSansMono Nerd Font Mono:pixelsize=24
 
 ! rxvt =========================================================================
 URxvt.cursorBlink: false
 URxvt.letterSpace: -1
-URxvt.fading: 25
+URxvt.fading: 0
 URxvt.perl-ext-common: default,matcher,resize-font,selection-to-clipboard,url-select
 URxvt.matcher.button: 1
 URxvt.matcher.rend.0: Uline fg5
