@@ -26,6 +26,9 @@ nm-applet &
 # Set the desktop wallpaper
 ~/.fehbg &
 
+# Start redshift
+pgrep redshift &> /dev/null || redshift &> /dev/null &
+
 # Load the Xresource settings
 xrdb -merge ~/.Xresources
 

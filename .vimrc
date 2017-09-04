@@ -11,15 +11,16 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'Valloric/YouCompleteMe'
+  Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " My Settings ==================================================================
 color solarized        " set colorscheme
 set background=dark    " use a dark background
+set encoding=utf-8     " set encoding
 set autoread           " auto read files changed outside vim
 set colorcolumn=80     " highlight max length column
 set expandtab          " tabs to spaces
-set fillchars=vert:\│  " change vertical split character
 set hidden             " allow background buffers
 set hlsearch           " highlight the search query
 set ignorecase         " case insensitive searching

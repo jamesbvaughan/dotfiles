@@ -13,12 +13,11 @@ import XMonad.Util.Run
 myLayout = tall ||| wide ||| full
   where
     tall = smartBorders $ Tall 1 0.03 0.5
-    -- tall = smartBorders $ spacingWithEdge 5 $ Tall 1 0.03 0.5
     wide = Mirror tall
     full = noBorders Full
 
 main = do
-  -- spawnPipe "sleep 0.1; polybar -r jamesbar"
+  safeSpawnProg "~/.config/polybar/launch.sh"
   xmonad $ desktopConfig
     { terminal = "urxvtc"
     , modMask = mod4Mask
