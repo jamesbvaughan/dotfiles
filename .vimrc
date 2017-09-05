@@ -16,7 +16,7 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 " My Settings ==================================================================
-color solarized        " set colorscheme
+color solarized       " set colorscheme
 set background=dark    " use a dark background
 set encoding=utf-8     " set encoding
 set autoread           " auto read files changed outside vim

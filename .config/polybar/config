@@ -35,7 +35,7 @@ modules-center = time
 modules-right = music volume battery
 
 tray-position = right
-tray-maxsize = 200
+tray-maxsize = 128
 tray-padding = 00
 tray-detached = false
 
@@ -54,8 +54,7 @@ label-urgent = "URGENT"
 icon-0 = web;
 icon-1 = term;
 icon-2 = music;
-icon-3 = misc;
-icon-4 = aux;
+icon-default = 
 
 [module/xwindow]
 type = internal/xwindow
@@ -73,7 +72,7 @@ label = "  %time%"
 [module/music]
 type = internal/mpd
 format-online = <icon-prev> <toggle> <icon-next> <label-song>
-label-song = "  %artist% - %title%"
+label-song = "%artist% - %title%"
 label-song-maxlen = 40
 label-song-ellipsis = true
 label-song-underline = ${colors.cyan}
