@@ -1,0 +1,10 @@
+set imap_user=yoyovaughan@gmail.com
+set imap_pass=ilnwtjktxnlnhjvy
+
+set folder = imaps://imap.gmail.com/
+set spoolfile = +INBOX
+set record = "+[Gmail]/Sent Mail"
+set postponed = "+[Gmail]/Drafts"
+
+set header_cache = ~/.cache/mutt
+set message_cachedir = ~/.cache/mutt

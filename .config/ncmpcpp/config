@@ -1,18 +1,24 @@
 ncmpcpp_directory = ~/.config/ncmpcpp
 mpd_music_dir = ~/Music
 
+header_visibility = no
+titles_visibility = no
+statusbar_visibility = no
+
 screen_switcher_mode = "playlist,media_library"
 
 media_library_primary_tag = album_artist
 song_library_format = "%t"
 ignore_leading_the = yes
 
-header_visibility = no
-
 progressbar_look = "──"
 progressbar_elapsed_color = yellow
 
-statusbar_visibility = no
-song_status_format = "%A - %t"
-
 message_delay_time = 2
+
+visualizer_fifo_path = ~/.config/mpd/visualizer.fifo
+visualizer_output_name = visualizer_fifo
+visualizer_sync_interval = 30
+visualizer_in_stereo = no
+visualizer_type = wave
+visualizer_look = "█"
