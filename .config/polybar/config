@@ -22,7 +22,7 @@ foreground = ${colors.foreground}
 line-size = 8
 
 padding-left = 1
-padding-right = 0
+padding-right = 1
 
 module-margin-left = 1
 module-margin-right = 1
@@ -30,14 +30,31 @@ module-margin-right = 1
 font-0 = DejaVu Sans:size=18
 font-1 = DejaVuSansMono Nerd Font:size=18
 
-modules-left = workspaces xwindow
-modules-center = time
-modules-right = music volume battery
+modules-left = fs xwindow
+modules-center = workspaces
+modules-right = music network network-wired volume volume-usb battery time
 
-tray-position = right
+; tray-position = right
 tray-maxsize = 128
 tray-padding = 00
 tray-detached = false
+
+[module/fs]
+type = internal/fs
+mount-0 = /
+label-mounted = "  %percentage_used%%"
+label-mounted-underline = ${colors.red}
+
+[module/network]
+type = internal/network
+interface = wlp4s0
+label-connected = "  %essid%"
+label-connected-underline = ${colors.magenta}
+
+[module/network-wired]
+inherit = module/network
+interface = enp0s31f6
+label-connected = "  connected"
 
 [module/workspaces]
 type = internal/xworkspaces
@@ -71,8 +88,8 @@ label = "  %time%"
 
 [module/music]
 type = internal/mpd
-format-online = <icon-prev> <toggle> <icon-next> <label-song>
-label-song = "%artist% - %title%"
+format-online = <toggle> <label-song>
+label-song = "  %artist% - %title%"
 label-song-maxlen = 40
 label-song-ellipsis = true
 label-song-underline = ${colors.cyan}
@@ -84,21 +101,27 @@ icon-next = "  "
 
 [module/volume]
 type = internal/volume
-master-soundcard = "hw:1"
-master-mixer = "UMC204HD 192k Output"
 format-volume = <ramp-volume> <label-volume>
 label-muted = "  muted"
 ramp-volume-0 = " "
 ramp-volume-1 = " "
-ramp-volume-2 = " "
+ramp-volume-2 = " "
+ramp-volume-3 = " "
+ramp-volume-4 = " "
+ramp-volume-5 = " "
 format-volume-underline = ${colors.green}
+
+[module/volume-usb]
+inherit = module/volume
+master-soundcard = "hw:1"
+master-mixer = "UMC204HD 192k Output"
 
 [module/battery]
 type = internal/battery
 battery = BAT0
 adapter = AC
 full-at = 98
-label-full = "  %percentage%%"
+label-full = "  %percentage%%"
 format-charging = <animation-charging> <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
 format-charging-underline = ${colors.orange}

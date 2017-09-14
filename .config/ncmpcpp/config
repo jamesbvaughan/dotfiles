@@ -2,7 +2,6 @@ ncmpcpp_directory = ~/.config/ncmpcpp
 mpd_music_dir = ~/Music
 
 header_visibility = no
-titles_visibility = no
 statusbar_visibility = no
 
 screen_switcher_mode = "playlist,media_library"

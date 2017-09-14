@@ -1,0 +1,17 @@
+URxvt.font: xft:DejaVuSansMono Nerd Font Mono:pixelsize=24
+URxvt.cursorBlink: false
+URxvt.letterSpace: -1
+URxvt.fading: 0
+URxvt.perl-ext-common: default,matcher,resize-font,selection-to-clipboard,url-select
+URxvt.matcher.button: 1
+URxvt.matcher.rend.0: Uline fg5
+URxvt.scrollBar: false
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.launcher: /usr/bin/xdg-open
+URxvt.url-select.underline: true
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.intensityStyles: false
+
+! vim: ft=xdefaults:

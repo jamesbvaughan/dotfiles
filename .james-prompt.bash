@@ -1,24 +1,25 @@
-source ~/.git-prompt.sh
+source $BASH_DIR/git-prompt.sh
 
 PROMPT_COMMAND=_prompt_command
 
 _prompt_command() {
   local EXIT="$?"
 
-  local RCol='\[\e[00m\]'
+  local ResetStyle='\[\e[0m\]'
+  local Bold='\[\e[1m\]'
 
   local Red='\[\e[31m\]'
-  local Gre='\[\e[32m\]'
-  local Yel='\[\e[33m\]'
-  local Blu='\[\e[34m\]'
-  local Cya='\[\e[36m\]'
-  local Pur='\[\e[35m\]'
+  local Green='\[\e[32m\]'
+  local Yellow='\[\e[33m\]'
+  local Blue='\[\e[34m\]'
+  local Purple='\[\e[35m\]'
+  local Cyan='\[\e[36m\]'
 
   if [ $EXIT != 0 ]; then
       local PREFIX="${Red}✗"
   else
-      local PREFIX="${Gre}➜"
+      local PREFIX="${Green}➜"
   fi
 
-  __git_ps1 "$PREFIX ${Blu}\W${Cya}" "\[\e[00m\] "
+  __git_ps1 "${Bold}$PREFIX ${Blue}\W${Cyan}" "${ResetStyle} "
 }

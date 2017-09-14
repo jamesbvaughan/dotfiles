@@ -1,29 +1,4 @@
-Xft.dpi: 150
-Xft.autohint: 0
-Xft.lcdfilter:  lcddefault
-Xft.hintstyle:  hintfull
-Xft.hinting: 1
-Xft.antialias: 1
-Xft.rgba: rgb
-
-! font =========================================================================
-*font: xft:DejaVuSansMono Nerd Font Mono:pixelsize=24
-
-! rxvt =========================================================================
-URxvt.cursorBlink: false
-URxvt.letterSpace: -1
-URxvt.fading: 0
-URxvt.perl-ext-common: default,matcher,resize-font,selection-to-clipboard,url-select
-URxvt.matcher.button: 1
-URxvt.matcher.rend.0: Uline fg5
-URxvt.scrollBar: false
-URxvt.url-launcher: /usr/bin/xdg-open
-URxvt.keysym.M-u: perl:url-select:select_next
-URxvt.url-select.launcher: /usr/bin/xdg-open
-URxvt.url-select.underline: true
-URxvt.iso14755: false
-URxvt.iso14755_52: false
-
-! includes =====================================================================
 #include ".Xresources.d/solarized-dark"
 #include ".Xresources.d/rofi"
+#include ".Xresources.d/urxvt"
+#include ".Xresources.d/hidpi"

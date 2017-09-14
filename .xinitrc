@@ -21,13 +21,13 @@ xset r rate 250 25
 dunst &
 
 # Start the NetworkManager system tray applet
-nm-applet &
+# nm-applet &
 
 # Set the desktop wallpaper
 ~/.fehbg &
 
 # Start redshift
-pgrep redshift &> /dev/null || redshift &> /dev/null &
+# pgrep redshift &> /dev/null || redshift &> /dev/null &
 
 # Load the Xresource settings
 xrdb -merge ~/.Xresources
@@ -36,7 +36,7 @@ xrdb -merge ~/.Xresources
 xautolock -detectsleep -locker lock.sh &
 
 # Start the compositor
-compton   --daemon --fade-delta=3
+compton   --daemon --no-fading --no-shadow
 
 # Start the rxvt-unicode terminal daemon
 urxvtd    --quiet --opendisplay --fork
