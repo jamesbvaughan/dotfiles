@@ -1,10 +1,35 @@
-set imap_user=yoyovaughan@gmail.com
-set imap_pass=ilnwtjktxnlnhjvy
+source ~/.mutt/mutt-colors-solarized-dark-16.muttrc
+source "gpg -dq ~/.mutt/vars.gpg |"
+
+set imap_user = $my_user
+set imap_pass = $my_pass
+set smtp_pass = $my_pass
+set smtp_url = $my_smtp_url
 
 set folder = imaps://imap.gmail.com/
 set spoolfile = +INBOX
-set record = "+[Gmail]/Sent Mail"
 set postponed = "+[Gmail]/Drafts"
+set mbox = "+[Gmail]/All Mail"
+set record = ""
 
 set header_cache = ~/.cache/mutt
 set message_cachedir = ~/.cache/mutt
+
+set implicit_autoview
+auto_view text/html
+set mailcap_path = ~/.mutt/mailcap
+
+set index_format = "%2C %Z %{%b %d} %-15.15L %s"
+set pager_index_lines = 10
+set pager_stop = yes
+set pager_context = 5
+
+set fast_reply = yes
+set include = yes
+
+set sort = threads
+set strict_threads = yes
+
+unset collapse_unread
+bind index - collapse-thread
+bind index _ collapse-all
