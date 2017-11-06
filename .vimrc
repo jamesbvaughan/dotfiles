@@ -15,8 +15,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'elixir-lang/vim-elixir'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
+  Plug 'mxw/vim-jsx'
   Plug 'ryanoasis/vim-devicons'
+  Plug 'pangloss/vim-javascript'
   Plug 'slashmili/alchemist.vim'
+  Plug 'ternjs/tern_for_vim'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-surround'
   Plug 'vim-airline/vim-airline'
@@ -31,7 +34,7 @@ set background=dark       " use a dark background
 set colorcolumn=80        " highlight max length column
 set encoding=utf-8        " set encoding
 set autoread              " auto read files changed outside vim
-set clipboard=unnamedplus " use the system clipboard
+" set clipboard=unnamedplus " use the system clipboard
 set hidden                " allow background buffers
 set hlsearch              " highlight the search query
 set ignorecase            " case insensitive searching
@@ -79,11 +82,11 @@ map <leader>o :nohlsearch<cr>|                      " clear search highlights
 map <leader>w :set wrap!<cr>|                       " toggle word wrap
 map <leader>s :setlocal spell! spelllang=en_us<cr>| " toggle spell checking
 map <leader>a :sort<cr>|                            " sort lines
-map <leader>r :so ~/.vimrc<cr>|                     " reload vimrc
-map <S-h>     :bp<cr>|                              " previous buffer
-map <S-l>     :bn<cr>|                              " next buffer
+map <leader>r :source ~/.vimrc<cr>|                     " reload vimrc
+map <S-h>     :bprevious<cr>|                              " previous buffer
+map <S-l>     :bnext<cr>|                              " next buffer
 map <C-h>     :wincmd h<cr>|                        " window left
 map <C-j>     :wincmd j<cr>|                        " window below
 map <C-k>     :wincmd k<cr>|                        " window above
 map <C-l>     :wincmd l<cr>|                        " window right
-map <C-w>     :bdelete<cr>|                         " close the current buffer
+map <C-w>     :bprevious\|bdelete #<CR>|            " close the current buffer

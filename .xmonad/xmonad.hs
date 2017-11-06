@@ -10,23 +10,48 @@ import XMonad.Layout.Spacing
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
 
-myLayout = tall ||| wide ||| full
-  where
-    tall = smartBorders $ Tall 1 0.03 0.5
-    wide = Mirror tall
-    full = noBorders Full
-
 main = do
-  safeSpawnProg "~/.config/polybar/launch.sh"
+
+  safeSpawnProg "sleep 1 && ~/.config/polybar/launch.sh"
+
   xmonad $ desktopConfig
     { terminal = "urxvtc"
+
     , modMask = mod4Mask
-    , workspaces = ["web", "term", "music", "misc", "aux"]
+
+    , workspaces =
+      [ "web"
+      , "term"
+      , "music"
+      , "misc"
+      , "aux"
+      ]
+
     , focusedBorderColor = "#268bd2"
+
     , normalBorderColor = "#073642"
+
     , borderWidth = 5
-    , layoutHook = desktopLayoutModifiers myLayout
+
+    , layoutHook = desktopLayoutModifiers $
+        let
+          tall = smartBorders $ Tall 1 0.03 0.5
+          wide = Mirror tall
+          full = noBorders Full
+        in
+          tall ||| wide ||| full
+
     , handleEventHook = handleEventHook desktopConfig <+> fullscreenEventHook
+
+    , manageHook = composeAll
+      [ className =? "Cadence.py" --> doFloat
+      , className =? "Catia.py" --> doFloat
+      , className =? "Pavucontrol" --> doFloat
+      , className =? "Jack-rack" --> doFloat
+      , className =? "ardour_plugin_editor" --> doFloat
+      ]
+      <+> manageHook desktopConfig
+
     } `additionalKeysP`
     [ ("M-<Tab>", nextWS)
     , ("M-S-<Tab>", prevWS)

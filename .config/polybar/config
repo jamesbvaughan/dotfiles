@@ -13,13 +13,13 @@ violet = ${xrdb:color13:#faf}
 
 [bar/jamesbar]
 monitor = ${env:MONITOR:eDP-1}
-height = 40
+height = 30
 fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 8
+line-size = 0
 
 padding-left = 1
 padding-right = 1
@@ -27,43 +27,39 @@ padding-right = 1
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = DejaVu Sans:size=18
-font-1 = DejaVuSansMono Nerd Font:size=18
+font-0 = DejaVu Sans:size=18:weight=bold;4
+font-1 = DejaVuSansMono Nerd Font:size=18;4
 
 modules-left = fs xwindow
 modules-center = workspaces
 modules-right = music network network-wired volume volume-usb battery time
 
 ; tray-position = right
-tray-maxsize = 128
-tray-padding = 00
-tray-detached = false
+; tray-maxsize = 128
+; tray-padding = 00
+; tray-detached = false
 
 [module/fs]
 type = internal/fs
 mount-0 = /
 label-mounted = "  %percentage_used%%"
+label-mounted-foreground = ${colors.red}
 label-mounted-underline = ${colors.red}
 
-[module/network]
-type = internal/network
-interface = wlp4s0
-label-connected = "  %essid%"
-label-connected-underline = ${colors.magenta}
-
-[module/network-wired]
-inherit = module/network
-interface = enp0s31f6
-label-connected = "  connected"
+[module/xwindow]
+type = internal/xwindow
+label = "  %title%"
+label-maxlen = 50
+label-foreground = ${colors.yellow}
 
 [module/workspaces]
 type = internal/xworkspaces
 format = <label-state>
 pin-workspaces = false
 label-active-foreground = ${colors.foreground}
-label-active-underline = ${colors.violet}
-label-empty-foreground = ${colors.foreground-alt}
-label-empty-underline = ${colors.violet}
+; label-active-foreground = ${colors.violet}
+; label-empty-foreground = ${colors.foreground-alt}
+label-empty-foreground = ${colors.violet}
 label-active = "  %icon%  "
 label-empty = "  %icon%  "
 label-occupied = "OCCUPIED"
@@ -73,31 +69,29 @@ icon-1 = term;
 icon-2 = music;
 icon-default = 
 
-[module/xwindow]
-type = internal/xwindow
-label = "  %title%"
-label-maxlen = 50
-label-underline = ${colors.yellow}
-
-[module/time]
-type = internal/date
-interval = 5
-time = %H:%M
-format-underline = ${colors.blue}
-label = "  %time%"
-
 [module/music]
 type = internal/mpd
 format-online = <toggle> <label-song>
 label-song = "  %artist% - %title%"
 label-song-maxlen = 40
 label-song-ellipsis = true
-label-song-underline = ${colors.cyan}
+label-song-foreground = ${colors.cyan}
 
 icon-play = "  "
 icon-pause = "  "
 icon-prev = "  "
 icon-next = "  "
+
+[module/network]
+type = internal/network
+interface = wlp4s0
+label-connected = "  %essid%"
+label-connected-foreground = ${colors.magenta}
+
+[module/network-wired]
+inherit = module/network
+interface = enp0s31f6
+label-connected = "  connected"
 
 [module/volume]
 type = internal/volume
@@ -109,7 +103,7 @@ ramp-volume-2 = " "
 ramp-volume-3 = " "
 ramp-volume-4 = " "
 ramp-volume-5 = " "
-format-volume-underline = ${colors.green}
+format-volume-foreground = ${colors.green}
 
 [module/volume-usb]
 inherit = module/volume
@@ -124,9 +118,9 @@ full-at = 98
 label-full = "  %percentage%%"
 format-charging = <animation-charging> <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
-format-charging-underline = ${colors.orange}
-format-full-underline = ${self.format-charging-underline}
-format-discharging-underline = ${self.format-charging-underline}
+format-charging-foreground = ${colors.orange}
+format-full-foreground = ${self.format-charging-foreground}
+format-discharging-foreground = ${self.format-charging-foreground}
 animation-charging-0 = " "
 animation-charging-1 = " "
 animation-charging-2 = " "
@@ -137,6 +131,13 @@ ramp-capacity-1 = " "
 ramp-capacity-2 = " "
 ramp-capacity-3 = " "
 ramp-capacity-4 = " "
+
+[module/time]
+type = internal/date
+interval = 5
+time = %H:%M
+format-foreground = ${colors.blue}
+label = "  %time%"
 
 [settings]
 screenchange-reload = true

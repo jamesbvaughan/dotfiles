@@ -2,11 +2,11 @@
 # This is run when the X server is started
 
 # Make GTK apps look better on HiDPI displays
-export GDK_SCALE=2
-export GDK_DPI_SCALE=0.5
+# export GDK_SCALE=2
+# export GDK_DPI_SCALE=0.5
 
 # Start JACK
-~/.bin/start_jack.sh &
+# ~/.bin/start_jack.sh &
 
 # Load up some keybindings
 xbindkeys --file ~/.xbindkeysrc
@@ -30,13 +30,13 @@ dunst &
 # pgrep redshift &> /dev/null || redshift &> /dev/null &
 
 # Load the Xresource settings
-xrdb -merge ~/.Xresources
+xrdb ~/.Xresources
 
 # Start the screen locker
 xautolock -detectsleep -locker lock.sh &
 
 # Start the compositor
-compton   --daemon --no-fading --no-shadow
+# compton   --daemon --no-fading --no-shadow
 
 # Start the rxvt-unicode terminal daemon
 urxvtd    --quiet --opendisplay --fork

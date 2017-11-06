@@ -1,4 +1,4 @@
 #include ".Xresources.d/solarized-dark"
 #include ".Xresources.d/rofi"
 #include ".Xresources.d/urxvt"
-#include ".Xresources.d/hidpi"
+/* #include ".Xresources.d/hidpi" */
