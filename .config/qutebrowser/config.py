@@ -1,5 +1,6 @@
 uiFont = "12pt DejaVu Sans"
 uiFontBold = "bold {}".format(uiFont)
+monospaceFont = '"12pt DejaVu Sans Mono"'
 
 config.bind("<Ctrl-W>", 'fake-key <Ctrl-Backspace>', mode='insert')
 config.bind("<Ctrl-A>", 'fake-key <Home>', mode='insert')
@@ -37,6 +38,7 @@ c.editor.command = ["urxvt", "-e", "vim", "{}"]
 c.fonts.completion.entry = uiFont
 c.fonts.completion.category = uiFontBold
 c.fonts.downloads = uiFont
+c.fonts.monospace = monospaceFont
 c.fonts.tabs = uiFont
 c.fonts.statusbar = uiFont
 c.fonts.hints = uiFont

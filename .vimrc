@@ -12,6 +12,7 @@ endif
 " Plugins ======================================================================
 call plug#begin('~/.vim/plugged')
   Plug 'altercation/vim-colors-solarized'
+  Plug 'easymotion/vim-easymotion'
   Plug 'elixir-lang/vim-elixir'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
@@ -30,16 +31,19 @@ call plug#end()
 
 " My Settings ==================================================================
 color solarized           " set colorscheme
+set autoread              " auto read files changed outside vim
 set background=dark       " use a dark background
+set clipboard^=unnamed,unnamedplus " use the system clipboard
 set colorcolumn=80        " highlight max length column
 set encoding=utf-8        " set encoding
-set autoread              " auto read files changed outside vim
-" set clipboard=unnamedplus " use the system clipboard
 set expandtab             " tabs to spaces
+set formatoptions+=j
 set hidden                " allow background buffers
 set hlsearch              " highlight the search query
 set ignorecase            " case insensitive searching
 set laststatus=2          " always show airline
+set list
+set listchars=tab:>-,trail:·
 set mouse=a               " enable the mouse
 set nobackup              " no backup files
 set noesckeys             " removes some delays in insert mode
@@ -51,7 +55,6 @@ set scrolloff=5           " start scrolling 5 lines before bottom of pane
 set shiftwidth=2          " shift lines by 2 characters
 set smartcase             " only use case sensitive search when uppercase
 set tabstop=2             " change default tab length
-let g:filetype_pl="prolog"
 
 " Airline
 let g:airline#extensions#tabline#buffer_min_count = 2
@@ -76,8 +79,10 @@ map <C-p> :Files<cr>
 " Ale
 let g:ale_lint_on_text_changed = 'never'
 
+" EasyMotion
+map <leader>f <Plug>(easymotion-prefix)s
+
 " My Keybindings ===============================================================
-map ; :
 let mapleader=" "
 map <leader>o :nohlsearch<cr>|                      " clear search highlights
 map <leader>w :set wrap!<cr>|                       " toggle word wrap
@@ -91,3 +96,5 @@ map <C-j>     :wincmd j<cr>|                        " window below
 map <C-k>     :wincmd k<cr>|                        " window above
 map <C-l>     :wincmd l<cr>|                        " window right
 map <C-w>     :bprevious\|bdelete #<CR>|            " close the current buffer
+vnoremap < <gv|                                     " keep lines selected
+vnoremap > >gv|                                     " keep lines selected
