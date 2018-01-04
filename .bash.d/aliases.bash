@@ -12,5 +12,6 @@ alias nisd="npm install --save-dev"
 alias ns="npm start"
 
 alias ls="ls --color=auto --file-type --human-readable"
+alias grep="grep --color"
 
 alias vim="vim -X"

@@ -4,8 +4,12 @@
 "amixer -q set Master 5%- unmute"
   XF86AudioLowerVolume
 
-"amixer -q set Master toggle"
+# "amixer -q set Master toggle"
+"notify-send mute"
   XF86AudioMute
+
+"playerctl play-pause"
+  Alt + p
 
 "xbacklight -inc 10"
   XF86MonBrightnessUp
@@ -13,17 +17,14 @@
 "xbacklight -dec 10"
   XF86MonBrightnessDown
 
-"rofi -show window"
-  Control + Shift + space
-
-"rofi -show run"
+"rofi -show drun"
   Control + space
+
+"rofi-pass"
+  Mod4 + p
 
 "screenshot.sh"
   Mod4 + Print
-
-"spelling.sh"
-  Mod4 + s
 
 "display.sh"
   Mod4 + d

@@ -24,32 +24,27 @@ line-size = 0
 padding-left = 1
 padding-right = 1
 
-module-margin-left = 1
+module-margin-left = 0
 module-margin-right = 1
 
-font-0 = DejaVu Sans:size=18:weight=bold;4
-font-1 = DejaVuSansMono Nerd Font:size=18;4
+font-0 = DejaVu Sans Mono:pixelsize=20;5
+font-1 = DejaVu Sans Mono Nerd Font Mono:pixelsize=26;5
 
-modules-left = fs xwindow
+modules-left = network network-wired fs xwindow
 modules-center = workspaces
-modules-right = music network network-wired volume volume-usb battery time
-
-; tray-position = right
-; tray-maxsize = 128
-; tray-padding = 00
-; tray-detached = false
+modules-right = music volume volume-usb backlight battery time
 
 [module/fs]
 type = internal/fs
 mount-0 = /
-label-mounted = "  %percentage_used%%"
+label-mounted = " %percentage_used%%"
 label-mounted-foreground = ${colors.red}
 label-mounted-underline = ${colors.red}
 
 [module/xwindow]
 type = internal/xwindow
-label = "  %title%"
-label-maxlen = 50
+label = " %title%"
+label-maxlen = 40
 label-foreground = ${colors.yellow}
 
 [module/workspaces]
@@ -60,8 +55,8 @@ label-active-foreground = ${colors.foreground}
 ; label-active-foreground = ${colors.violet}
 ; label-empty-foreground = ${colors.foreground-alt}
 label-empty-foreground = ${colors.violet}
-label-active = "  %icon%  "
-label-empty = "  %icon%  "
+label-active = " %icon% "
+label-empty = " %icon% "
 label-occupied = "OCCUPIED"
 label-urgent = "URGENT"
 icon-0 = web;
@@ -71,9 +66,9 @@ icon-default = 
 
 [module/music]
 type = internal/mpd
-format-online = <toggle> <label-song>
-label-song = "  %artist% - %title%"
-label-song-maxlen = 40
+format-online = <label-song>
+label-song = " %title%"
+label-song-maxlen = 31
 label-song-ellipsis = true
 label-song-foreground = ${colors.cyan}
 
@@ -85,24 +80,24 @@ icon-next = "  "
 [module/network]
 type = internal/network
 interface = wlp4s0
-label-connected = "  %essid%"
+label-connected = " %essid%"
 label-connected-foreground = ${colors.magenta}
 
 [module/network-wired]
 inherit = module/network
 interface = enp0s31f6
-label-connected = "  connected"
+label-connected = " connected"
 
 [module/volume]
 type = internal/volume
 format-volume = <ramp-volume> <label-volume>
-label-muted = "  muted"
-ramp-volume-0 = " "
-ramp-volume-1 = " "
-ramp-volume-2 = " "
-ramp-volume-3 = " "
-ramp-volume-4 = " "
-ramp-volume-5 = " "
+label-muted = " muted"
+ramp-volume-0 = ""
+ramp-volume-1 = ""
+ramp-volume-2 = ""
+ramp-volume-3 = ""
+ramp-volume-4 = ""
+ramp-volume-5 = ""
 format-volume-foreground = ${colors.green}
 
 [module/volume-usb]
@@ -110,34 +105,41 @@ inherit = module/volume
 master-soundcard = "hw:1"
 master-mixer = "UMC204HD 192k Output"
 
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+format = <label>
+label = " %percentage%%"
+format-foreground = ${colors.violet}
+
 [module/battery]
 type = internal/battery
 battery = BAT0
 adapter = AC
 full-at = 98
-label-full = "  %percentage%%"
+label-full = " %percentage%%"
 format-charging = <animation-charging> <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
 format-charging-foreground = ${colors.orange}
 format-full-foreground = ${self.format-charging-foreground}
 format-discharging-foreground = ${self.format-charging-foreground}
-animation-charging-0 = " "
-animation-charging-1 = " "
-animation-charging-2 = " "
-animation-charging-3 = " "
-animation-charging-4 = " "
-ramp-capacity-0 = " "
-ramp-capacity-1 = " "
-ramp-capacity-2 = " "
-ramp-capacity-3 = " "
-ramp-capacity-4 = " "
+animation-charging-0 = ""
+animation-charging-1 = ""
+animation-charging-2 = ""
+animation-charging-3 = ""
+animation-charging-4 = ""
+ramp-capacity-0 = ""
+ramp-capacity-1 = ""
+ramp-capacity-2 = ""
+ramp-capacity-3 = ""
+ramp-capacity-4 = ""
 
 [module/time]
 type = internal/date
 interval = 5
 time = %H:%M
 format-foreground = ${colors.blue}
-label = "  %time%"
+label = " %time%"
 
 [settings]
 screenchange-reload = true

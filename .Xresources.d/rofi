@@ -1,4 +1,4 @@
-rofi.font: Noto 48
+rofi.font: DejaVu Sans Mono Nerd Font Mono 48
 rofi.lines: 3
 rofi.width: 50
 rofi.color-enabled: true
@@ -7,10 +7,9 @@ rofi.color-normal: #073642, #839496, #073642, #073642, #fdf6e3
 rofi.color-window: #073642, #839496
 rofi.bw: 0
 rofi.padding: 10
-rofi.separator-style: none
-rofi.hide-scrollbar: true
 rofi.auto-select: false
-rofi.fuzzy: true
+rofi.matching: fuzzy
 rofi.terminal: urxvtc
+rofi.yoffset: -150
 
 ! vim: ft=xdefaults:

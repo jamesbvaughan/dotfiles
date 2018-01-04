@@ -9,10 +9,12 @@ shopt -s histappend
 shopt -s autocd
 
 source $BASH_DIR/aliases.bash
+source $BASH_DIR/beets.bash
 source $BASH_DIR/fzf.bash
 source $BASH_DIR/prompt.bash
 source $BASH_DIR/colored-man-pages.bash
 source /usr/share/doc/pkgfile/command-not-found.bash
 source /usr/share/bash-completion/bash_completion
+source /usr/share/nvm/init-nvm.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

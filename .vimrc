@@ -13,6 +13,7 @@ endif
 call plug#begin('~/.vim/plugged')
   Plug 'altercation/vim-colors-solarized'
   Plug 'easymotion/vim-easymotion'
+  Plug 'digitaltoad/vim-pug'
   Plug 'elixir-lang/vim-elixir'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
@@ -96,5 +97,3 @@ map <C-j>     :wincmd j<cr>|                        " window below
 map <C-k>     :wincmd k<cr>|                        " window above
 map <C-l>     :wincmd l<cr>|                        " window right
 map <C-w>     :bprevious\|bdelete #<CR>|            " close the current buffer
-vnoremap < <gv|                                     " keep lines selected
-vnoremap > >gv|                                     " keep lines selected

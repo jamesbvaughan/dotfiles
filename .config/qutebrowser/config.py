@@ -1,6 +1,5 @@
-uiFont = "12pt DejaVu Sans"
+uiFont = "24px DejaVu Sans Mono"
 uiFontBold = "bold {}".format(uiFont)
-monospaceFont = '"12pt DejaVu Sans Mono"'
 
 config.bind("<Ctrl-W>", 'fake-key <Ctrl-Backspace>', mode='insert')
 config.bind("<Ctrl-A>", 'fake-key <Home>', mode='insert')
@@ -38,19 +37,17 @@ c.editor.command = ["urxvt", "-e", "vim", "{}"]
 c.fonts.completion.entry = uiFont
 c.fonts.completion.category = uiFontBold
 c.fonts.downloads = uiFont
-c.fonts.monospace = monospaceFont
 c.fonts.tabs = uiFont
 c.fonts.statusbar = uiFont
 c.fonts.hints = uiFont
 c.fonts.keyhint = uiFont
 
 c.tabs.width.indicator = 0
-tabPadding = 5
 c.tabs.padding = {
-    'top': tabPadding,
-    'bottom': tabPadding,
-    'left': tabPadding,
-    'right': tabPadding,
+    'top': 1,
+    'bottom': 1,
+    'left': 5,
+    'right': 5,
 }
 c.tabs.title.format_pinned = ""
 c.tabs.title.format = "{title}"
@@ -64,6 +61,8 @@ c.url.searchengines = {
     'a': 'https://smile.amazon.com/s?field-keywords={}',
     'r': 'https://reddit.com/r/{}',
 }
+
+c.zoom.default = '150%'
 
 solarized = {
     'base03': '#002b36',
@@ -152,13 +151,9 @@ c.colors.statusbar.url.warn.fg = solarized['yellow']
 # c.colors.tabs.bar.bg = '#555555'
 c.colors.tabs.even.bg = solarized['base02']
 c.colors.tabs.even.fg = solarized['base1']
-c.colors.tabs.indicator.error = solarized['red']
-c.colors.tabs.indicator.start = solarized['violet']
-c.colors.tabs.indicator.stop = solarized['orange']
-# c.colors.tabs.indicator.system = 'rgb'
 c.colors.tabs.odd.bg = solarized['base03']
 c.colors.tabs.odd.fg = solarized['base1']
-c.colors.tabs.selected.even.bg = solarized['violet']
+c.colors.tabs.selected.even.bg = solarized['base1']
 c.colors.tabs.selected.even.fg = solarized['base2']
-c.colors.tabs.selected.odd.bg = solarized['violet']
+c.colors.tabs.selected.odd.bg = solarized['base1']
 c.colors.tabs.selected.odd.fg = solarized['base2']

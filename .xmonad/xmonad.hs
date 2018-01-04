@@ -1,55 +1,44 @@
 import XMonad
 import XMonad.Actions.CycleWS
-import XMonad.Config.Kde
+import XMonad.Config.Desktop
+import XMonad.Hooks.ManageDocks
 import XMonad.Layout.Fullscreen
+import XMonad.Layout.NoBorders
+import XMonad.Layout.Spacing
 import XMonad.Util.EZConfig
-import qualified XMonad.StackSet as W
-
--- import XMonad.Config.Desktop
--- import XMonad.Hooks.DynamicLog
--- import XMonad.Hooks.EwmhDesktops
--- import XMonad.Hooks.ManageDocks
--- import XMonad.Layout.DecorationMadness
--- import XMonad.Layout.NoBorders
--- import XMonad.Layout.Spacing
--- import XMonad.Util.Run
+import XMonad.Util.Run
 
 
-myManageHook = composeAll . concat $
-  [[className =? c --> doFloat | c <- myFloats]
-  ,[title =? t --> doFloat | t <- myOtherFloats]
-  ,[className =? c --> doF (W.shift "2") | c <- webApps]
-  ,[className =? c --> doF (W.shift "3") | c <- ircApps]
-  ]
+myLayoutHook = tall ||| wide ||| full
   where
-    myFloats = ["MPlayer", "Gimp", "plasmashell", "Plasma", "krunner", "Kmix", "Klipper", "Plasmoidviewer"]
-    myOtherFloats = ["alsamixer", "plasma-desktop", "win7", "Desktop — Plasma"]
-    webApps = ["Firefox-bin", "Opera"]
-    ircApps = ["Ksirc"]
+    tall = smartSpacingWithEdge 10 $ smartBorders $ Tall 1 0.03 0.5
+    wide = Mirror tall
+    full = noBorders Full
 
 
 main = do
+  spawn "~/.config/polybar/launch.sh"
+  xmonad $ fullscreenSupport desktopConfig
+    { terminal = "urxvtc"
 
-  xmonad $ fullscreenSupport kde4Config
-    { terminal = "urxvt"
+    , workspaces = ["web", "term", "music", "3", "4"]
+
+    , layoutHook = desktopLayoutModifiers myLayoutHook
 
     , modMask = mod4Mask
 
-    , borderWidth = 0
+    , borderWidth = 5
 
-    , manageHook = manageHook kde4Config <+> myManageHook
+    , normalBorderColor = "#586e75"
 
-    -- , manageHook = composeAll
-    --   [ className =? "Cadence.py" --> doFloat
-    --   , className =? "Catia.py" --> doFloat
-    --   , className =? "Pavucontrol" --> doFloat
-    --   , className =? "Jack-rack" --> doFloat
-    --   , className =? "ardour_plugin_editor" --> doFloat
-    --   ]
-    --   <+> manageHook desktopConfig
+    , focusedBorderColor = "#eee8d5"
 
-    } `additionalKeysP`
+    }
+    `additionalKeysP`
     [ ("M-<Tab>", nextWS)
     , ("M-S-<Tab>", prevWS)
+    ]
+    `removeKeysP`
+    [ "M-p"
     ]
 
