@@ -42,13 +42,14 @@ c.fonts.statusbar = uiFont
 c.fonts.hints = uiFont
 c.fonts.keyhint = uiFont
 
-c.tabs.width.indicator = 0
+c.tabs.indicator.width = 0
 c.tabs.padding = {
     'top': 1,
     'bottom': 1,
     'left': 5,
     'right': 5,
 }
+c.tabs.show = "multiple"
 c.tabs.title.format_pinned = ""
 c.tabs.title.format = "{title}"
 
@@ -60,6 +61,7 @@ c.url.searchengines = {
     'y': 'https://youtube.com/results?search_query={}',
     'a': 'https://smile.amazon.com/s?field-keywords={}',
     'r': 'https://reddit.com/r/{}',
+    'i': 'https://index.investopedia.com/index?q={}',
 }
 
 c.zoom.default = '150%'

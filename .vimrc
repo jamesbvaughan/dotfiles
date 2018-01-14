@@ -12,6 +12,7 @@ endif
 " Plugins ======================================================================
 call plug#begin('~/.vim/plugged')
   Plug 'altercation/vim-colors-solarized'
+  Plug 'airblade/vim-gitgutter'
   Plug 'easymotion/vim-easymotion'
   Plug 'digitaltoad/vim-pug'
   Plug 'elixir-lang/vim-elixir'
@@ -48,6 +49,7 @@ set listchars=tab:>-,trail:·
 set mouse=a               " enable the mouse
 set nobackup              " no backup files
 set noesckeys             " removes some delays in insert mode
+set noshowmode            " doesn't show the current mode in the command bar
 set noswapfile            " no swap files
 set number                " show line numbers
 set relativenumber        " show relative line numbers
@@ -65,11 +67,13 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#ale#enabled = 1
+let g:airline_section_z = '%p%% %v:%l/%L'
 let g:airline_left_sep = ''
-let g:airline_powerline_fonts = 1
 let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_powerline_fonts = 1
 let g:airline_section_y = ''
-let g:airline_theme = 'solarized'
+let g:airline_skip_empty_sections = 1
 
 " YCM
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -83,13 +87,20 @@ let g:ale_lint_on_text_changed = 'never'
 " EasyMotion
 map <leader>f <Plug>(easymotion-prefix)s
 
+" GitGutter
+set updatetime=250
+let g:gitgutter_sign_added = '•'
+let g:gitgutter_sign_modified = '•'
+let g:gitgutter_sign_removed = '•'
+
 " My Keybindings ===============================================================
 let mapleader=" "
-map <leader>o :nohlsearch<cr>|                      " clear search highlights
-map <leader>w :set wrap!<cr>|                       " toggle word wrap
-map <leader>s :setlocal spell! spelllang=en_us<cr>| " toggle spell checking
 map <leader>a :sort<cr>|                            " sort lines
+map <leader>g :GitGutterSignsToggle<cr>|            " toggle gitgutter signs
+map <leader>o :nohlsearch<cr>|                      " clear search highlights
 map <leader>r :source ~/.vimrc<cr>|                 " reload vimrc
+map <leader>s :setlocal spell! spelllang=en_us<cr>| " toggle spell checking
+map <leader>w :set wrap!<cr>|                       " toggle word wrap
 map <S-h>     :bprevious<cr>|                       " previous buffer
 map <S-l>     :bnext<cr>|                           " next buffer
 map <C-h>     :wincmd h<cr>|                        " window left

@@ -13,7 +13,7 @@ violet = ${xrdb:color13:#faf}
 
 [bar/jamesbar]
 monitor = ${env:MONITOR:eDP-1}
-height = 30
+height = 35
 fixed-center = true
 
 background = ${colors.background}
@@ -27,12 +27,16 @@ padding-right = 1
 module-margin-left = 0
 module-margin-right = 1
 
-font-0 = DejaVu Sans Mono:pixelsize=20;5
-font-1 = DejaVu Sans Mono Nerd Font Mono:pixelsize=26;5
+font-0 = DejaVuSansMono:pixelsize=20;5
+font-1 = DejaVuSansMono Nerd Font Mono:pixelsize=26;5
 
-modules-left = network network-wired fs xwindow
+; modules-left = network network-wired fs xwindow
+modules-left = fs xwindow
 modules-center = workspaces
-modules-right = music volume volume-usb backlight battery time
+modules-right = kdeconnect music volume volume-usb backlight battery time
+
+tray-position = right
+tray-maxsize = 100
 
 [module/fs]
 type = internal/fs
@@ -46,6 +50,13 @@ type = internal/xwindow
 label = " %title%"
 label-maxlen = 40
 label-foreground = ${colors.yellow}
+
+[module/kdeconnect]
+type = custom/script
+exec = ~/.config/polybar/kdeconnect.sh
+exec-if = pgrep -x kdeconnectd
+interval = 5
+format-foreground = ${colors.yellow}
 
 [module/workspaces]
 type = internal/xworkspaces

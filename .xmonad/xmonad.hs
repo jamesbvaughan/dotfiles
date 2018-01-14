@@ -9,25 +9,36 @@ import XMonad.Util.EZConfig
 import XMonad.Util.Run
 
 
+myManageHook = composeAll . concat $
+  [ [className =? c --> doFloat | c <- myFloats]
+  , [title =? t --> doFloat | t <- myOtherFloats]
+  ]
+  where
+    myFloats = ["mpv"]
+    myOtherFloats = []
+
+
 myLayoutHook = tall ||| wide ||| full
   where
-    tall = smartSpacingWithEdge 10 $ smartBorders $ Tall 1 0.03 0.5
+    tall = smartSpacingWithEdge 15 $ smartBorders $ Tall 1 0.03 0.5
     wide = Mirror tall
     full = noBorders Full
 
 
 main = do
   spawn "~/.config/polybar/launch.sh"
-  xmonad $ fullscreenSupport desktopConfig
+  xmonad $ fullscreenSupport $ desktopConfig
     { terminal = "urxvtc"
 
     , workspaces = ["web", "term", "music", "3", "4"]
 
-    , layoutHook = desktopLayoutModifiers myLayoutHook
+    , layoutHook = lessBorders OnlyFloat $ avoidStruts $ myLayoutHook
+
+    , manageHook = myManageHook <+> fullscreenManageHook <+> manageHook desktopConfig
 
     , modMask = mod4Mask
 
-    , borderWidth = 5
+    , borderWidth = 7
 
     , normalBorderColor = "#586e75"
 

@@ -4,12 +4,11 @@
 "amixer -q set Master 5%- unmute"
   XF86AudioLowerVolume
 
-# "amixer -q set Master toggle"
-"notify-send mute"
+"amixer -q set Master toggle"
   XF86AudioMute
 
-"playerctl play-pause"
-  Alt + p
+# "playerctl play-pause"
+#   Alt + p
 
 "xbacklight -inc 10"
   XF86MonBrightnessUp

@@ -4,6 +4,10 @@
 # export GDK_SCALE=2
 export GDK_DPI_SCALE=1.5
 
+# Start GNOME Keyring
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
+
 # Start KDE Connect
 /usr/lib/kdeconnectd &
 
@@ -36,6 +40,9 @@ compton --daemon --no-fading-openclose
 
 # Start the rxvt-unicode terminal daemon
 urxvtd --quiet --opendisplay --fork
+
+# Start the network manager applet
+nm-applet &
 
 # Enable natural scrolling
 xinput --set-prop 'SynPS/2 Synaptics TouchPad' \
