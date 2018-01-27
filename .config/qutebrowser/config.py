@@ -14,6 +14,7 @@ config.bind('B', 'set-cmd-text -s :bookmark-load -t')
 config.bind('<Ctrl-m>', 'view_in_mpv')
 config.bind('<Alt-p>', 'pass', mode='insert')
 config.bind('sp', 'pocket')
+config.bind(';p', 'hint links run :open -p {hint-url}')
 
 c.aliases = {
     'q': 'quit',
