@@ -8,8 +8,14 @@ export GDK_DPI_SCALE=1.5
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 
+# Start the network manager applet
+nm-applet &
+
 # Start KDE Connect
 /usr/lib/kdeconnectd &
+
+# Start blueman
+blueman-applet &
 
 # Load up some keybindings
 xbindkeys --file ~/.xbindkeysrc
@@ -40,9 +46,6 @@ compton --daemon --no-fading-openclose
 
 # Start the rxvt-unicode terminal daemon
 urxvtd --quiet --opendisplay --fork
-
-# Start the network manager applet
-nm-applet &
 
 # Enable natural scrolling
 xinput --set-prop 'SynPS/2 Synaptics TouchPad' \

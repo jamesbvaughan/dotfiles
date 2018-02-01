@@ -22,6 +22,12 @@
 "rofi-pass"
   Mod4 + p
 
+"="
+  Mod4 + u
+
+"="
+  Mod4 + =
+
 "screenshot.sh"
   Mod4 + Print
 
