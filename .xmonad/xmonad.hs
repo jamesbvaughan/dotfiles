@@ -9,18 +9,9 @@ import XMonad.Util.EZConfig
 import XMonad.Util.Run
 
 
-myManageHook = composeAll . concat $
-  [ [className =? c --> doFloat | c <- myFloats]
-  , [title =? t --> doFloat | t <- myOtherFloats]
-  ]
-  where
-    myFloats = ["mpv"]
-    myOtherFloats = []
-
-
 myLayoutHook = tall ||| wide ||| full
   where
-    tall = smartSpacingWithEdge 15 $ smartBorders $ Tall 1 0.03 0.5
+    tall = smartBorders $ smartSpacingWithEdge 0 $ Tall 1 0.03 0.5
     wide = Mirror tall
     full = noBorders Full
 
@@ -34,11 +25,9 @@ main = do
 
     , layoutHook = lessBorders OnlyFloat $ avoidStruts $ myLayoutHook
 
-    , manageHook = myManageHook <+> fullscreenManageHook <+> manageHook desktopConfig
-
     , modMask = mod4Mask
 
-    , borderWidth = 7
+    , borderWidth = 3
 
     , normalBorderColor = "#586e75"
 
