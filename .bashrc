@@ -1,4 +1,4 @@
-export PATH="$HOME/.bin:$HOME/.npm-global/bin:$PATH:$HOME/.gem/ruby/2.4.0/bin"
+export PATH="$HOME/.bin:$HOME/.npm-global/bin:$PATH:$HOME/.gem/ruby/2.5.0/bin"
 export EDITOR=vim
 export HISTCONTROL=erasedups
 export HISTFILESIZE=20000
