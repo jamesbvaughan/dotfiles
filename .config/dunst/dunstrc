@@ -27,7 +27,7 @@
     shrink = no
 
 [urgency_low]
-    background = "#586e75"
+    background = "#073642"
     foreground = "#eee8d5"
     timeout = 30
 
