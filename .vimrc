@@ -35,7 +35,7 @@ call plug#end()
 color solarized           " set colorscheme
 set autoread              " auto read files changed outside vim
 set background=dark       " use a dark background
-set clipboard^=unnamed,unnamedplus " use the system clipboard
+set clipboard=unnamedplus " use the system clipboard
 set colorcolumn=80        " highlight max length column
 set encoding=utf-8        " set encoding
 set expandtab             " tabs to spaces
@@ -96,8 +96,10 @@ let g:gitgutter_sign_removed = '•'
 " My Keybindings ===============================================================
 let mapleader=" "
 map <leader>a :sort<cr>|                            " sort lines
+map <leader>d :bprevious\|bdelete #<CR>|            " close the current buffer
 map <leader>g :GitGutterSignsToggle<cr>|            " toggle gitgutter signs
 map <leader>o :nohlsearch<cr>|                      " clear search highlights
+map <leader>p :set paste!<cr>|                      " toggle paste mode
 map <leader>r :source ~/.vimrc<cr>|                 " reload vimrc
 map <leader>s :setlocal spell! spelllang=en_us<cr>| " toggle spell checking
 map <leader>w :set wrap!<cr>|                       " toggle word wrap
