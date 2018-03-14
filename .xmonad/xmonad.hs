@@ -11,7 +11,7 @@ main = do
   xmonad $ fullscreenSupport $ desktopConfig
     { terminal = "urxvtc"
 
-    , workspaces = ["web", "term", "music", "3", "4"]
+    , workspaces = ["1", "2", "3", "4", "5"]
 
     , modMask = mod4Mask
 

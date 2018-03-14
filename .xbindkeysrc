@@ -16,7 +16,7 @@
 "xbacklight -dec 10"
   XF86MonBrightnessDown
 
-"rofi -show drun"
+"rofi -show combi"
   Control + space
 
 "rofi-pass"

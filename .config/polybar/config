@@ -50,7 +50,7 @@ type = internal/mpd
 format-online-underline = ${colors.violet}
 format-paused = 
 label-song = " %title%"
-label-song-maxlen = 22
+label-song-maxlen = 21
 label-song-ellipsis = true
 
 [module/cpu]

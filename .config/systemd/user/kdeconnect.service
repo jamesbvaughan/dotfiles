@@ -1,0 +1,11 @@
+[Unit]
+Description=KDE Connect service
+
+[Service]
+ExecStart=/usr/lib/kdeconnectd
+Restart=always
+RestartSec=5
+BusName=org.kde.kdeconnect
+
+[Install]
+WantedBy=default.target

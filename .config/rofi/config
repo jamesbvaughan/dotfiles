@@ -1,0 +1,21 @@
+rofi.auto-select: false
+rofi.bw: 0
+rofi.color-enabled: true
+rofi.color-normal: #073642, #839496, #073642, #073642, #fdf6e3
+rofi.color-window: #073642, #839496
+rofi.display-combi: 
+rofi.font: DejaVu Sans Mono Nerd Font Mono 36
+rofi.lines: 3
+rofi.matching: fuzzy
+rofi.modi: window,run,ssh,combi
+rofi.combi-modi: window,run,ssh
+rofi.opacity: 80
+rofi.padding: 10
+rofi.parse-known-hosts: false
+rofi.ssh-client: mosh
+rofi.terminal: urxvtc
+rofi.theme: ~/.config/rofi/themes/solarized.rasi
+rofi.width: 50
+rofi.yoffset: -150
+
+! vim: ft=xdefaults:

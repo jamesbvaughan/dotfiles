@@ -11,9 +11,6 @@ export SSH_AUTH_SOCK
 # Start the network manager applet
 nm-applet &
 
-# Start KDE Connect
-/usr/lib/kdeconnectd &
-
 # Start blueman
 blueman-applet &
 
@@ -26,14 +23,8 @@ xset -b
 # Set the delay before and the speed of keypress repetition
 xset r rate 250 25
 
-# Start the notification service dunst
-dunst &
-
 # Set the desktop wallpaper
 ~/.fehbg &
-
-# Start redshift
-pgrep redshift &> /dev/null || redshift &> /dev/null &
 
 # Load the Xresource settings
 xrdb ~/.Xresources

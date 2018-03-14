@@ -19,6 +19,7 @@
     line_height = 0
     padding = 8
     horizontal_padding = 8
+    close = ctrl+grave
 
     # The geometry of the window:
     #   [{width(pixels}]x{height(# of notifications)}[+/-{x}+/-{y}]
