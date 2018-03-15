@@ -7,8 +7,9 @@
     # Markup is allowed
     markup = yes
     format = "<b>%s</b>\n%b"
+    follow = mouse
 
-    font = Noto 20
+    font = DejaVu Sans Mono Nerd Font Mono 12
     frame_width = 6
     frame_color = "#93a1a1"
     alignment = left
@@ -18,15 +19,16 @@
     line_height = 0
     padding = 8
     horizontal_padding = 8
+    close = ctrl+grave
 
     # The geometry of the window:
     #   [{width(pixels}]x{height(# of notifications)}[+/-{x}+/-{y}]
     # Omitted width fills the whole screen width, 0 expands to longest message.
-    geometry = "600x5-10+50"
+    geometry = "600x5-10-10"
     shrink = no
 
 [urgency_low]
-    background = "#586e75"
+    background = "#073642"
     foreground = "#eee8d5"
     timeout = 30
 

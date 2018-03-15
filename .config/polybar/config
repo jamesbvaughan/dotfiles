@@ -1,7 +1,4 @@
 [colors]
-background = ${xrdb:color8:#222}
-foreground = ${xrdb:color7:#ddd}
-foreground-alt = ${xrdb:color10:#aaa}
 red = ${xrdb:color1:#f00}
 green = ${xrdb:color2:#0f0}
 yellow = ${xrdb:color3:#ffa}
@@ -12,138 +9,123 @@ orange= ${xrdb:color9:#ffa}
 violet = ${xrdb:color13:#faf}
 
 [bar/jamesbar]
-monitor = ${env:MONITOR:eDP-1}
-height = 30
-fixed-center = true
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 0
-
-padding-left = 1
-padding-right = 1
-
-module-margin-left = 1
-module-margin-right = 1
-
-font-0 = DejaVu Sans:size=18:weight=bold;4
-font-1 = DejaVuSansMono Nerd Font:size=18;4
-
-modules-left = fs xwindow
-modules-center = workspaces
-modules-right = music network network-wired volume volume-usb battery time
-
-; tray-position = right
-; tray-maxsize = 128
-; tray-padding = 00
-; tray-detached = false
-
-[module/fs]
-type = internal/fs
-mount-0 = /
-label-mounted = "  %percentage_used%%"
-label-mounted-foreground = ${colors.red}
-label-mounted-underline = ${colors.red}
-
-[module/xwindow]
-type = internal/xwindow
-label = "  %title%"
-label-maxlen = 50
-label-foreground = ${colors.yellow}
+monitor = ${env:MONITOR:DP-2}
+monitor-fallback = eDP-1
+height = 40
+background = ${xrdb:color8:#222}
+foreground = ${xrdb:color7:#ddd}
+line-size = 5
+padding = 1
+font-0 = DejaVuSansMono:pixelsize=20;3
+font-1 = DejaVuSansMono Nerd Font Mono:pixelsize=26;3
+modules-left = workspaces xwindow
+modules-center = time
+modules-right = music cpu ram fs card volume backlight battery kdeconnect
+separator = " "
+tray-position = right
+tray-maxsize = 100
 
 [module/workspaces]
 type = internal/xworkspaces
-format = <label-state>
-pin-workspaces = false
-label-active-foreground = ${colors.foreground}
-; label-active-foreground = ${colors.violet}
-; label-empty-foreground = ${colors.foreground-alt}
-label-empty-foreground = ${colors.violet}
-label-active = "  %icon%  "
-label-empty = "  %icon%  "
-label-occupied = "OCCUPIED"
-label-urgent = "URGENT"
-icon-0 = web;
-icon-1 = term;
-icon-2 = music;
-icon-default = 
+format-underline = ${colors.magenta}
+label-active = "  "
+label-empty = "  "
+label-occupied = "  "
+label-urgent = "  "
 
-[module/music]
-type = internal/mpd
-format-online = <toggle> <label-song>
-label-song = "  %artist% - %title%"
-label-song-maxlen = 40
-label-song-ellipsis = true
-label-song-foreground = ${colors.cyan}
-
-icon-play = "  "
-icon-pause = "  "
-icon-prev = "  "
-icon-next = "  "
-
-[module/network]
-type = internal/network
-interface = wlp4s0
-label-connected = "  %essid%"
-label-connected-foreground = ${colors.magenta}
-
-[module/network-wired]
-inherit = module/network
-interface = enp0s31f6
-label-connected = "  connected"
-
-[module/volume]
-type = internal/volume
-format-volume = <ramp-volume> <label-volume>
-label-muted = "  muted"
-ramp-volume-0 = " "
-ramp-volume-1 = " "
-ramp-volume-2 = " "
-ramp-volume-3 = " "
-ramp-volume-4 = " "
-ramp-volume-5 = " "
-format-volume-foreground = ${colors.green}
-
-[module/volume-usb]
-inherit = module/volume
-master-soundcard = "hw:1"
-master-mixer = "UMC204HD 192k Output"
-
-[module/battery]
-type = internal/battery
-battery = BAT0
-adapter = AC
-full-at = 98
-label-full = "  %percentage%%"
-format-charging = <animation-charging> <label-charging>
-format-discharging = <ramp-capacity> <label-discharging>
-format-charging-foreground = ${colors.orange}
-format-full-foreground = ${self.format-charging-foreground}
-format-discharging-foreground = ${self.format-charging-foreground}
-animation-charging-0 = " "
-animation-charging-1 = " "
-animation-charging-2 = " "
-animation-charging-3 = " "
-animation-charging-4 = " "
-ramp-capacity-0 = " "
-ramp-capacity-1 = " "
-ramp-capacity-2 = " "
-ramp-capacity-3 = " "
-ramp-capacity-4 = " "
+[module/xwindow]
+type = internal/xwindow
+format-underline = ${colors.yellow}
+label-maxlen = 55
 
 [module/time]
 type = internal/date
 interval = 5
+format-underline = ${colors.blue}
 time = %H:%M
-format-foreground = ${colors.blue}
-label = "  %time%"
+label = "%time%"
 
-[settings]
-screenchange-reload = true
+[module/music]
+type = internal/mpd
+format-online-underline = ${colors.violet}
+format-paused = 
+label-song = " %title%"
+label-song-maxlen = 21
+label-song-ellipsis = true
 
-[global/wm]
-margin-bottom = 0
-;margin-top = 50
+[module/cpu]
+type = internal/cpu
+interval = 3
+format-underline = ${colors.red}
+format = <ramp-load> <label>
+label = "%percentage:2%%"
+ramp-load-0 = 
+ramp-load-1 = 
+ramp-load-2 = 
+ramp-load-3 = 
+ramp-load-4 = 
+
+[module/ram]
+type = internal/memory
+interval = 3
+format-underline = ${colors.green}
+label = " %percentage_used%%"
+
+[module/fs]
+type = internal/fs
+mount-0 = /
+format-mounted-underline = ${colors.yellow}
+label-mounted = " %percentage_used:2%%"
+
+[module/card]
+inherit = module/fs
+mount-0 = /media/james/card
+format-mounted-underline = ${colors.blue}
+
+[module/volume]
+type = internal/volume
+format-volume-underline = ${colors.magenta}
+format-muted-underline = ${self.format-volume-underline}
+format-volume = <ramp-volume> <label-volume>
+label-volume = "%percentage:2%%"
+label-muted = " %percentage:2%%"
+ramp-volume-0 = ""
+ramp-volume-1 = ""
+ramp-volume-2 = ""
+ramp-volume-3 = ""
+ramp-volume-4 = ""
+ramp-volume-5 = ""
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+format-underline = ${colors.cyan}
+label = " %percentage:2%%"
+
+[module/battery]
+type = internal/battery
+format-discharging-underline = ${colors.orange}
+format-charging-underline = ${self.format-discharging-underline}
+format-discharging = <ramp-capacity> <label-discharging>
+format-charging = <animation-charging> <label-charging>
+label-discharging = "%percentage:2%%"
+label-charging = ${self.label-discharging}
+label-full = " %percentage:2%%"
+ramp-capacity-0 = ""
+ramp-capacity-1 = ""
+ramp-capacity-2 = ""
+ramp-capacity-3 = ""
+ramp-capacity-4 = ""
+animation-charging-0 = ${self.ramp-capacity-0}
+animation-charging-1 = ${self.ramp-capacity-1}
+animation-charging-2 = ${self.ramp-capacity-2}
+animation-charging-3 = ${self.ramp-capacity-3}
+animation-charging-4 = ${self.ramp-capacity-4}
+
+[module/kdeconnect]
+type = custom/script
+exec = ~/.config/polybar/kdeconnect.sh
+exec-if = pgrep -x kdeconnectd
+interval = 5
 
 ; vim:ft=dosini

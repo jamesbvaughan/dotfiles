@@ -1,6 +1,6 @@
 [input]
 # Just comment this out if not using jack
-source = jack_out.monitor
+# source = jack_out.monitor
 
 [output]
 # Visual styles. Can be 'stereo' or 'mono'.
