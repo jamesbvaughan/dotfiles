@@ -1,0 +1,5 @@
+.weechat/buflist.conf
+.weechat/fifo.conf
+.weechat/logs
+.weechat/sec.conf
+.weechat/weechat.log
