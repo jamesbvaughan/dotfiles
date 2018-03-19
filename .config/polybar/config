@@ -11,6 +11,7 @@ violet = ${xrdb:color13:#faf}
 [bar/jamesbar]
 monitor = ${env:MONITOR:DP-2}
 monitor-fallback = eDP-1
+enable-ipc = true
 height = 40
 background = ${xrdb:color8:#222}
 foreground = ${xrdb:color7:#ddd}
@@ -19,8 +20,7 @@ padding = 1
 font-0 = DejaVuSansMono:pixelsize=20;3
 font-1 = DejaVuSansMono Nerd Font Mono:pixelsize=26;3
 modules-left = workspaces xwindow
-modules-center = time
-modules-right = music cpu ram fs card volume backlight battery kdeconnect
+modules-right = music cpu ram fs card volume backlight battery time
 separator = " "
 tray-position = right
 tray-maxsize = 100
@@ -28,30 +28,23 @@ tray-maxsize = 100
 [module/workspaces]
 type = internal/xworkspaces
 format-underline = ${colors.magenta}
-label-active = "  "
+label-active = "  "
 label-empty = "  "
-label-occupied = "  "
+label-occupied = "  "
 label-urgent = "  "
 
 [module/xwindow]
 type = internal/xwindow
 format-underline = ${colors.yellow}
-label-maxlen = 55
-
-[module/time]
-type = internal/date
-interval = 5
-format-underline = ${colors.blue}
-time = %H:%M
-label = "%time%"
+label = %title:0:25:…%
 
 [module/music]
-type = internal/mpd
-format-online-underline = ${colors.violet}
-format-paused = 
-label-song = " %title%"
-label-song-maxlen = 21
-label-song-ellipsis = true
+type = custom/script
+format-underline = ${colors.violet}
+exec = ~/.config/polybar/player-mpris-tail.py
+tail = true
+click-left = ~/.config/polybar/player-ctrl.sh play-pause
+label = %output:0:37:…%
 
 [module/cpu]
 type = internal/cpu
@@ -83,18 +76,14 @@ mount-0 = /media/james/card
 format-mounted-underline = ${colors.blue}
 
 [module/volume]
-type = internal/volume
-format-volume-underline = ${colors.magenta}
-format-muted-underline = ${self.format-volume-underline}
-format-volume = <ramp-volume> <label-volume>
-label-volume = "%percentage:2%%"
-label-muted = " %percentage:2%%"
-ramp-volume-0 = ""
-ramp-volume-1 = ""
-ramp-volume-2 = ""
-ramp-volume-3 = ""
-ramp-volume-4 = ""
-ramp-volume-5 = ""
+type = custom/script
+format-underline = ${colors.magenta}
+exec = ~/.config/polybar/pulseaudio-tail.sh
+tail = true
+click-right = exec pavucontrol &
+click-left = ~/.config/polybar/pulseaudio-tail.sh --mute
+scroll-up = ~/.config/polybar/pulseaudio-tail.sh --down
+scroll-down = ~/.config/polybar/pulseaudio-tail.sh --up
 
 [module/backlight]
 type = internal/backlight
@@ -121,6 +110,13 @@ animation-charging-1 = ${self.ramp-capacity-1}
 animation-charging-2 = ${self.ramp-capacity-2}
 animation-charging-3 = ${self.ramp-capacity-3}
 animation-charging-4 = ${self.ramp-capacity-4}
+
+[module/time]
+type = internal/date
+interval = 5
+format-underline = ${colors.blue}
+time = %H:%M
+label = "%time%"
 
 [module/kdeconnect]
 type = custom/script

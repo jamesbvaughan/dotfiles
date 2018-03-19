@@ -92,12 +92,12 @@ set updatetime=250
 let g:gitgutter_sign_added = '•'
 let g:gitgutter_sign_modified = '•'
 let g:gitgutter_sign_removed = '•'
+map <leader>g :GitGutterSignsToggle<cr>
 
 " My Keybindings ===============================================================
 let mapleader=" "
 map <leader>a :sort<cr>|                            " sort lines
 map <leader>d :bprevious\|bdelete #<CR>|            " close the current buffer
-map <leader>g :GitGutterSignsToggle<cr>|            " toggle gitgutter signs
 map <leader>o :nohlsearch<cr>|                      " clear search highlights
 map <leader>p :set paste!<cr>|                      " toggle paste mode
 map <leader>r :source ~/.vimrc<cr>|                 " reload vimrc

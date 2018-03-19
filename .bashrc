@@ -1,4 +1,3 @@
-export PATH="$HOME/.bin:$HOME/.yarn/bin:$HOME/.npm-global/bin:$PATH:$HOME/.gem/ruby/2.5.0/bin"
 export EDITOR=vim
 export HISTCONTROL=erasedups
 export HISTFILESIZE=20000

@@ -24,5 +24,6 @@ main = do
     ]
     `removeKeysP`
     [ "M-p"
+    , "M-S-p"
     ]
 
