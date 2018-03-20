@@ -4,7 +4,7 @@ case $- in
       *) return;;
 esac
 
-export PATH="$HOME/.bin:$HOME/.yarn/bin:$HOME/.npm-global/bin:$PATH:$HOME/.gem/ruby/2.5.0/bin"
+export PATH="$HOME/.bin:$HOME/.yarn/bin:$HOME/.npm-global/bin:$HOME/.gem/ruby/2.5.0/bin:$PATH"
 export EDITOR=vim
 export HISTCONTROL=erasedups
 export HISTFILESIZE=20000
@@ -23,5 +23,6 @@ source $BASH_DIR/prompt.bash
 source $BASH_DIR/colored-man-pages.bash
 source /usr/share/doc/pkgfile/command-not-found.bash
 source /usr/share/bash-completion/bash_completion
+source $HOME/.cargo/env
 
 trap 'echo -en "\e]0;$BASH_COMMAND\007"' DEBUG
