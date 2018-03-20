@@ -20,6 +20,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf.vim'
   Plug 'mxw/vim-jsx'
   Plug 'ryanoasis/vim-devicons'
+  Plug 'rust-lang/rust.vim'
   Plug 'pangloss/vim-javascript'
   Plug 'slashmili/alchemist.vim'
   Plug 'ternjs/tern_for_vim'
@@ -93,6 +94,9 @@ let g:gitgutter_sign_added = '•'
 let g:gitgutter_sign_modified = '•'
 let g:gitgutter_sign_removed = '•'
 map <leader>g :GitGutterSignsToggle<cr>
+
+" Rust
+let g:rustfmt_autosave = 1
 
 " My Keybindings ===============================================================
 let mapleader=" "
