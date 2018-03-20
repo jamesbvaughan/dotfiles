@@ -19,8 +19,9 @@ line-size = 5
 padding = 1
 font-0 = DejaVuSansMono:pixelsize=20;3
 font-1 = DejaVuSansMono Nerd Font Mono:pixelsize=26;3
-modules-left = workspaces xwindow
-modules-right = music cpu ram fs card volume backlight battery time
+modules-left = cpu ram fs card volume backlight battery xwindow
+modules-center = workspaces
+modules-right = music time
 separator = " "
 tray-position = right
 tray-maxsize = 100
@@ -35,8 +36,8 @@ label-urgent = "  "
 
 [module/xwindow]
 type = internal/xwindow
-format-underline = ${colors.yellow}
-label = %title:0:25:…%
+format-underline = ${colors.violet}
+label = %title:0:23:…%
 
 [module/music]
 type = custom/script
@@ -44,7 +45,7 @@ format-underline = ${colors.violet}
 exec = ~/.config/polybar/player-mpris-tail.py
 tail = true
 click-left = ~/.config/polybar/player-ctrl.sh play-pause
-label = %output:0:37:…%
+label = %output:0:50:…%
 
 [module/cpu]
 type = internal/cpu
