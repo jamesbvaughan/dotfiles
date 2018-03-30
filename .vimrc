@@ -28,6 +28,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
+  Plug 'vimwiki/vimwiki'
   Plug 'w0rp/ale'
   Plug 'Valloric/YouCompleteMe'
 call plug#end()
@@ -97,6 +98,11 @@ map <leader>g :GitGutterSignsToggle<cr>
 
 " Rust
 let g:rustfmt_autosave = 1
+
+" Vimwiki
+let g:vimwiki_list = [{'path': '~/Documents/vimwiki',
+                     \ 'syntax': 'markdown',
+                     \ 'ext': '.md'}]
 
 " My Keybindings ===============================================================
 let mapleader=" "
