@@ -9,18 +9,15 @@ config.bind("<Ctrl-H>", 'fake-key <Backspace>', mode='insert')
 config.bind("<Ctrl-B>", 'fake-key <Left>', mode='insert')
 config.bind("<Ctrl-N>", 'fake-key <Down>', mode='insert')
 config.bind("<Ctrl-P>", 'fake-key <Up>', mode='insert')
-config.bind('b', 'set-cmd-text -s :bookmark-load')
-config.bind('B', 'set-cmd-text -s :bookmark-load -t')
-config.bind('<Ctrl-m>', 'view_in_mpv')
-config.bind('<Alt-p>', 'pass', mode='insert')
-config.bind('sp', 'pocket')
+config.bind('m', 'spawn umpv {url}')
+config.bind('M', 'hint links spawn umpv {hint-url}')
+config.bind(';m', 'hint --rapid links spawn umpv {hint-url}')
+config.bind('<Alt-p>', 'spawn --userscript qute-pass')
+config.bind('sp', 'open -t https://getpocket.com/edit?url={url}')
 config.bind(';p', 'hint links run :open -p {hint-url}')
 
 c.aliases = {
     'q': 'quit',
-    'pocket': 'open -t https://getpocket.com/edit?url={url}',
-    'pass': 'spawn --userscript qute-pass',
-    'mpv': 'spawn --userscript view_in_mpv',
 }
 
 c.auto_save.session = True

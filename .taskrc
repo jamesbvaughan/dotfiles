@@ -9,7 +9,6 @@ taskd.server=jamesbvaughan.com:53589
 taskd.credentials=Public\/James Vaughan\/28ec1286-e337-4b39-9908-ff14e2985f22
 
 # Custom colors
-color.uda.priority.H=blue
-color.uda.priority.M=yellow
-color.uda.priority.L=green
+color.alternate=on black
 color.tagged=
+color.due=

@@ -37,7 +37,7 @@ label-urgent = "  "
 [module/xwindow]
 type = internal/xwindow
 format-underline = ${colors.violet}
-label = %title:0:23:…%
+label = %title:0:24:…%
 
 [module/music]
 type = custom/script

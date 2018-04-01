@@ -1,0 +1,30 @@
+urls-source "ttrss"
+ttrss-url "https://ttrss.jamesbvaughan.com"
+ttrss-login "james"
+ttrss-passwordeval "pass ttrss.jamesbvaughan.com/james"
+
+articlelist-format " %D  %?T?%-17T | ?%t"
+articlelist-title-format "%T (%u unread, %t total)"
+auto-reload yes
+browser qutebrowser
+feedlist-format "%3U %t"
+feedlist-title-format "Your Feeds (%u unread, %t total)%?T? - tag '%T'&?"
+itemview-title-format " %T - %F"
+notify-always yes
+notify-program notify-send
+reload-threads 4
+show-keymap-hint no
+
+color info color11 color0 bold
+color listfocus color12 color0
+color listfocus_unread white color0 bold
+color listnormal_unread white color8 bold
+
+bind-key h quit
+bind-key j down
+bind-key k up
+bind-key l open
+bind-key g home
+bind-key G end
+bind-key r reload-all
+bind-key q hard-quit
