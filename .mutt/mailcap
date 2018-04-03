@@ -1,1 +1,1 @@
-text/html: elinks -dump ; copiousoutput;
+text/html; w3m -I %{charset} -T text/html; copiousoutput;

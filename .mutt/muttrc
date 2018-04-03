@@ -1,11 +1,12 @@
-source ~/.mutt/mutt-colors-solarized-dark-16.muttrc
-source "gpg -dq ~/.mutt/vars.gpg |"
+# Colors
+source ~/.mutt/james-solarized.muttrc
 
+# Gmail stuff
+source "gpg -dq ~/.mutt/vars.gpg |"
 set imap_user = $my_user
 set imap_pass = $my_pass
 set smtp_pass = $my_pass
 set smtp_url = $my_smtp_url
-
 set folder = imaps://imap.gmail.com/
 set spoolfile = +INBOX
 set postponed = "+[Gmail]/Drafts"
@@ -13,23 +14,45 @@ set mbox = "+[Gmail]/All Mail"
 set record = ""
 
 set header_cache = ~/.cache/mutt
-set message_cachedir = ~/.cache/mutt
+set message_cachedir = ~/.cache/mutt/messages
 
+# Mailcap stuff
 set implicit_autoview
-auto_view text/html
 set mailcap_path = ~/.mutt/mailcap
+auto_view text/html
+alternative_order text/plain text/html
 
-set index_format = "%2C %Z %{%b %d} %-15.15L %s"
-set pager_index_lines = 10
-set pager_stop = yes
+# Pager settings
+set pager_format = "%n: %s"
+set pager_stop
 set pager_context = 5
+unset markers
 
-set fast_reply = yes
-set include = yes
-
+# General Interface Settings
+set delete
+set fast_reply
+set include
+set index_format = " %{%b %d}  %-15.15L %s"
+set quit
 set sort = threads
-set strict_threads = yes
-
+set status_format = "Your Inbox (%u unread, %m total)"
+set status_on_top
+set strict_threads
 unset collapse_unread
+unset help
+
+# Keybindings
 bind index - collapse-thread
 bind index _ collapse-all
+bind generic l select-entry
+bind browser h change-dir
+bind index r imap-fetch-mail
+bind index s sync-mailbox
+bind pager h exit
+bind pager j next-line
+bind pager k previous-line
+bind index l display-message
+bind pager g top
+bind pager G bottom
+bind attach,index g first-entry
+bind attach,index G last-entry

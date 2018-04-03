@@ -9,7 +9,7 @@
     format = "<b>%s</b>\n%b"
     follow = mouse
 
-    font = DejaVu Sans Mono Nerd Font Mono 6
+    font = DejaVu Sans Mono Nerd Font Mono 10
     frame_width = 6
     frame_color = "#93a1a1"
     alignment = left

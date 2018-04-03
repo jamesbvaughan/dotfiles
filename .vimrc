@@ -16,6 +16,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'easymotion/vim-easymotion'
   Plug 'digitaltoad/vim-pug'
   Plug 'elixir-lang/vim-elixir'
+  Plug 'jamessan/vim-gnupg'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   Plug 'mxw/vim-jsx'

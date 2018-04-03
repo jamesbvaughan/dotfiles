@@ -9,10 +9,12 @@ auto-reload yes
 browser qutebrowser
 feedlist-format "%3U %t"
 feedlist-title-format "Your Feeds (%u unread, %t total)%?T? - tag '%T'&?"
-itemview-title-format " %T - %F"
+itemview-title-format "%T - %F"
 notify-always yes
-notify-program notify-send
+notify-program "/home/james/.newsboat/notify.sh"
+notify-format "%n"
 reload-threads 4
+reload-time 20
 show-keymap-hint no
 
 color info color11 color0 bold
