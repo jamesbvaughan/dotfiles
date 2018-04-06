@@ -32,7 +32,7 @@ unset markers
 set delete
 set fast_reply
 set include
-set index_format = " %{%b %d}  %-15.15L %s"
+set index_format = " %{%b %d} %Z %-15.15L %s"
 set quit
 set sort = threads
 set status_format = "Your Inbox (%u unread, %m total)"
@@ -42,17 +42,21 @@ unset collapse_unread
 unset help
 
 # Keybindings
+bind attach l view-attach
+bind attach,index G last-entry
+bind attach,index g first-entry
+bind index k previous-entry
+bind index j next-entry
+bind browser h change-dir
+bind generic l select-entry
 bind index - collapse-thread
 bind index _ collapse-all
-bind generic l select-entry
-bind browser h change-dir
+bind index h change-folder
+bind index l display-message
 bind index r imap-fetch-mail
 bind index s sync-mailbox
+bind pager G bottom
+bind pager g top
 bind pager h exit
 bind pager j next-line
 bind pager k previous-line
-bind index l display-message
-bind pager g top
-bind pager G bottom
-bind attach,index g first-entry
-bind attach,index G last-entry

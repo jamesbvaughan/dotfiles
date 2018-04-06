@@ -1,1 +1,3 @@
 text/html; w3m -I %{charset} -T text/html; copiousoutput;
+image/*; feh '%s'; test=test -n "$DISPLAY"
+application/pdf; zathura '%s'; test=test -n "$DISPLAY"

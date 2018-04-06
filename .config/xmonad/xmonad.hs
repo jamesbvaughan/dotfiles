@@ -7,7 +7,7 @@ import XMonad.Util.Run
 
 
 main = do
-  spawn "~/.config/polybar/launch.sh"
+  spawn "launch-polybar"
   xmonad $ fullscreenSupport $ desktopConfig
     { terminal = "urxvtc"
 
@@ -15,7 +15,11 @@ main = do
 
     , modMask = mod4Mask
 
-    , borderWidth = 0
+    , borderWidth = 4
+
+    , normalBorderColor = "#002b36"
+
+    , focusedBorderColor = "#839496"
 
     }
     `additionalKeysP`
