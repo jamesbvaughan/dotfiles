@@ -2,8 +2,16 @@ import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Config.Desktop
 import XMonad.Layout.Fullscreen
+import XMonad.Layout.NoBorders
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
+
+
+myLayout = tall ||| wide ||| full
+  where
+    tall = smartBorders $ Tall 1 0.03 0.5
+    wide = Mirror tall
+    full = noBorders Full
 
 
 main = do
@@ -15,11 +23,13 @@ main = do
 
     , modMask = mod4Mask
 
-    , borderWidth = 4
+    , borderWidth = 0
 
     , normalBorderColor = "#002b36"
 
     , focusedBorderColor = "#839496"
+
+    , layoutHook = desktopLayoutModifiers $ fullscreenFull $ myLayout
 
     }
     `additionalKeysP`

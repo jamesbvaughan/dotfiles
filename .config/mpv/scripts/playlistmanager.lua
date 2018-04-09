@@ -70,7 +70,7 @@ local settings = {
   --2 shows playlist, 1 shows current file(filename strip applied) as osd text, 0 shows nothing
   --instead of using this you can also call script-message playlistmanager show playlist/filename
   --ex. KEY playlist-next ; script-message playlistmanager show playlist
-  show_playlist_on_fileload = 0,
+  show_playlist_on_fileload = 2,
 
   --sync cursor when file is loaded from outside reasons(file-ending, playlist-next shortcut etc.)
   --has the sideeffect of moving cursor if file happens to change when navigating
@@ -106,7 +106,7 @@ local settings = {
   --read http://docs.aegisub.org/3.2/ASS_Tags/ for reference of tags
   --undeclared tags will use default osd settings
   --these styles will be used for the whole playlist. More specific styling will need to be hacked in
-  style_ass_tags = "",
+  style_ass_tags = "{\\fnDejaVu Sans Mono\\fs12\\b0\\bord1}",
   --paddings from top left corner
   text_padding_x = 10,
   text_padding_y = 30,

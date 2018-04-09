@@ -3,3 +3,4 @@
 .weechat/logs
 .weechat/sec.conf
 .weechat/weechat.log
+.config/polybar/gmail/client_secrets.json

@@ -12,19 +12,61 @@ violet = ${xrdb:color13:#faf}
 monitor = ${env:MONITOR:DP-2}
 monitor-fallback = eDP-1
 enable-ipc = true
-height = 40
+; height = 40
+height = 30
 background = ${xrdb:color8:#222}
+; foreground = ${xrdb:color7:#ddd}
 foreground = ${xrdb:color7:#ddd}
-line-size = 5
+; line-size = 5
+line-size = 0
 padding = 1
-font-0 = DejaVuSansMono:pixelsize=20;3
-font-1 = DejaVuSansMono Nerd Font Mono:pixelsize=26;3
-modules-left = cpu ram fs card volume backlight battery xwindow
-modules-center = workspaces
-modules-right = music time
+; font-0 = DejaVuSansMono:pixelsize=20;3
+; font-1 = DejaVuSansMono Nerd Font Mono:pixelsize=26;3
+font-0 = DejaVuSansMono:pixelsize=19;4
+font-1 = DejaVuSansMono Nerd Font Mono:pixelsize=24;5
+modules-left = workspaces xwindow
+modules-center = time
+modules-right = rss email volume backlight battery
 separator = " "
 tray-position = right
-tray-maxsize = 100
+tray-maxsize = 32
+
+[bar/bottombar]
+monitor = ${env:MONITOR:DP-2}
+monitor-fallback = eDP-1
+enable-ipc = true
+height = 30
+background = ${xrdb:color8:#222}
+foreground = ${xrdb:color14:#ddd}
+line-size = 0
+padding = 1
+font-0 = DejaVuSansMono:pixelsize=19;4
+font-1 = DejaVuSansMono Nerd Font Mono:pixelsize=24;5
+modules-left = cpu ram fs card
+modules-center = music
+modules-right = taskwarrior
+bottom = true
+separator = " "
+
+[module/rss]
+type = custom/script
+interval = 900
+exec = newsboat -x print-unread | cut -d' ' -f1
+format-prefix = " "
+click-left = urxvt -e newsboat
+
+[module/taskwarrior]
+type = custom/script
+interval = 30
+exec = ~/.config/polybar/task_polybar.sh
+format-prefix = " "
+
+[module/email]
+type = custom/script
+format-underline = ${colors.yellow}
+exec = ~/.config/polybar/gmail/launch.py --nosound
+tail = true
+click-left = urxvt -e mutt
 
 [module/workspaces]
 type = internal/xworkspaces
@@ -45,7 +87,7 @@ format-underline = ${colors.violet}
 exec = ~/.config/polybar/player-mpris-tail.py
 tail = true
 click-left = ~/.config/polybar/player-ctrl.sh play-pause
-label = %output:0:50:…%
+click-right = urxvt -e ncmpcpp
 
 [module/cpu]
 type = internal/cpu
@@ -63,7 +105,7 @@ ramp-load-4 = 
 type = internal/memory
 interval = 3
 format-underline = ${colors.green}
-label = " %percentage_used%%"
+label = " %percentage_used:2%%"
 
 [module/fs]
 type = internal/fs
