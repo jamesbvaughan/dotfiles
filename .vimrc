@@ -42,11 +42,13 @@ set clipboard=unnamedplus " use the system clipboard
 set colorcolumn=80        " highlight max length column
 set encoding=utf-8        " set encoding
 set expandtab             " tabs to spaces
+set foldmethod=syntax     " fold based on syntax
 set formatoptions+=j
 set hidden                " allow background buffers
 set hlsearch              " highlight the search query
 set ignorecase            " case insensitive searching
 set laststatus=2          " always show airline
+set lazyredraw            " don't redraw during macro execution
 set list
 set listchars=tab:>-,trail:·
 set mouse=a               " enable the mouse
@@ -107,17 +109,19 @@ let g:vimwiki_list = [{'path': '~/Documents/vimwiki',
 
 " My Keybindings ===============================================================
 let mapleader=" "
-map <leader>a :sort<cr>|                            " sort lines
-map <leader>d :bprevious\|bdelete #<CR>|            " close the current buffer
-map <leader>o :nohlsearch<cr>|                      " clear search highlights
-map <leader>p :set paste!<cr>|                      " toggle paste mode
-map <leader>r :source ~/.vimrc<cr>|                 " reload vimrc
-map <leader>s :setlocal spell! spelllang=en_us<cr>| " toggle spell checking
-map <leader>w :set wrap!<cr>|                       " toggle word wrap
-map <S-h>     :bprevious<cr>|                       " previous buffer
-map <S-l>     :bnext<cr>|                           " next buffer
-map <C-h>     :wincmd h<cr>|                        " window left
-map <C-j>     :wincmd j<cr>|                        " window below
-map <C-k>     :wincmd k<cr>|                        " window above
-map <C-l>     :wincmd l<cr>|                        " window right
-map <C-w>     :bprevious\|bdelete #<CR>|            " close the current buffer
+nnoremap - za
+nnoremap Q @@
+nnoremap <C-h>     :wincmd h<cr>|                        " window left
+nnoremap <C-j>     :wincmd j<cr>|                        " window below
+nnoremap <C-k>     :wincmd k<cr>|                        " window above
+nnoremap <C-l>     :wincmd l<cr>|                        " window right
+nnoremap <C-w>     :bprevious\|bdelete #<CR>|            " close the current buffer
+nnoremap <S-h>     :bprevious<cr>|                       " previous buffer
+nnoremap <S-l>     :bnext<cr>|                           " next buffer
+nnoremap <leader>d :bprevious\|bdelete #<CR>|            " close the current buffer
+nnoremap <leader>o :nohlsearch<cr>|                      " clear search highlights
+nnoremap <leader>p :set paste!<cr>|                      " toggle paste mode
+nnoremap <leader>r :source ~/.vimrc<cr>|                 " reload vimrc
+nnoremap <leader>s :setlocal spell! spelllang=en_us<cr>| " toggle spell checking
+nnoremap <leader>w :set wrap!<cr>|                       " toggle word wrap
+vnoremap <leader>a :sort<cr>|                            " sort lines

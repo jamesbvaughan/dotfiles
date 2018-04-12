@@ -1,11 +1,11 @@
 urls-source "ttrss"
 ttrss-url "https://ttrss.jamesbvaughan.com"
 ttrss-login "james"
+ttrss-flag-star "s"
 ttrss-passwordeval "pass ttrss.jamesbvaughan.com/james"
 
-articlelist-format " %D  %?T?%-17T | ?%t"
+articlelist-format " %D %f %?T?%-17T | ?%t"
 articlelist-title-format "%T (%u unread, %t total)"
-auto-reload yes
 browser qutebrowser
 feedlist-format "%3U %t"
 feedlist-title-format "Your Feeds (%u unread, %t total)%?T? - tag '%T'&?"
@@ -13,7 +13,7 @@ itemview-title-format "%T - %F"
 notify-always yes
 notify-program "/home/james/.newsboat/notify.sh"
 notify-format "%n"
-reload-threads 4
+reload-threads 5
 reload-time 20
 show-keymap-hint no
 

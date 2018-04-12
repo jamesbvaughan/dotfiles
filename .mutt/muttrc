@@ -45,13 +45,14 @@ unset help
 bind attach l view-attach
 bind attach,index G last-entry
 bind attach,index g first-entry
-bind index k previous-entry
-bind index j next-entry
 bind browser h change-dir
 bind generic l select-entry
 bind index - collapse-thread
 bind index _ collapse-all
+bind index c mail
 bind index h change-folder
+bind index j next-entry
+bind index k previous-entry
 bind index l display-message
 bind index r imap-fetch-mail
 bind index s sync-mailbox

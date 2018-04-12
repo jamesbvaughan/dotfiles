@@ -1,1 +1,1 @@
-"query:All Unread:unread = \"yes\""
+"query:Starred Articles:flags # \"s\""

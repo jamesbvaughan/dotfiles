@@ -12,16 +12,11 @@ violet = ${xrdb:color13:#faf}
 monitor = ${env:MONITOR:DP-2}
 monitor-fallback = eDP-1
 enable-ipc = true
-; height = 40
 height = 30
 background = ${xrdb:color8:#222}
-; foreground = ${xrdb:color7:#ddd}
 foreground = ${xrdb:color7:#ddd}
-; line-size = 5
 line-size = 0
 padding = 1
-; font-0 = DejaVuSansMono:pixelsize=20;3
-; font-1 = DejaVuSansMono Nerd Font Mono:pixelsize=26;3
 font-0 = DejaVuSansMono:pixelsize=19;4
 font-1 = DejaVuSansMono Nerd Font Mono:pixelsize=24;5
 modules-left = workspaces xwindow
@@ -50,7 +45,7 @@ separator = " "
 
 [module/rss]
 type = custom/script
-interval = 900
+interval = 300
 exec = newsboat -x print-unread | cut -d' ' -f1
 format-prefix = " "
 click-left = urxvt -e newsboat
@@ -64,6 +59,7 @@ format-prefix = " "
 [module/email]
 type = custom/script
 format-underline = ${colors.yellow}
+format-prefix = " "
 exec = ~/.config/polybar/gmail/launch.py --nosound
 tail = true
 click-left = urxvt -e mutt
@@ -79,7 +75,7 @@ label-urgent = "  "
 [module/xwindow]
 type = internal/xwindow
 format-underline = ${colors.violet}
-label = %title:0:24:…%
+label = %title:0:62:…%
 
 [module/music]
 type = custom/script
@@ -159,7 +155,8 @@ type = internal/date
 interval = 5
 format-underline = ${colors.blue}
 time = %H:%M
-label = "%time%"
+date = %Y-%m-%d%
+label = %date% %time%
 
 [module/kdeconnect]
 type = custom/script

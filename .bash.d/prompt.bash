@@ -3,9 +3,9 @@ source $BASH_DIR/git-prompt.sh
 PROMPT_COMMAND=_prompt_command
 
 _prompt_command() {
-  echo -en "\033]0;$(dirs)\007" # sets the window title to current directory
-
   local EXIT="$?"
+
+  echo -en "\033]0;$(dirs)\007" # sets the window title to current directory
 
   local ResetStyle='\[\e[0m\]'
   local Bold='\[\e[1m\]'
