@@ -1,4 +1,6 @@
 [colors]
+background = ${xrdb:color0:#222}
+foreground = ${xrdb:color7:#222}
 red = ${xrdb:color1:#f00}
 green = ${xrdb:color2:#0f0}
 yellow = ${xrdb:color3:#ffa}
@@ -13,8 +15,8 @@ monitor = ${env:MONITOR:DP-2}
 monitor-fallback = eDP-1
 enable-ipc = true
 height = 30
-background = ${xrdb:color8:#222}
-foreground = ${xrdb:color7:#ddd}
+background = ${colors.background}
+foreground = ${colors.foreground}
 line-size = 0
 padding = 1
 font-0 = DejaVuSansMono:pixelsize=19;4
@@ -31,8 +33,8 @@ monitor = ${env:MONITOR:DP-2}
 monitor-fallback = eDP-1
 enable-ipc = true
 height = 30
-background = ${xrdb:color8:#222}
-foreground = ${xrdb:color14:#ddd}
+background = ${colors.background}
+foreground = ${colors.foreground}
 line-size = 0
 padding = 1
 font-0 = DejaVuSansMono:pixelsize=19;4

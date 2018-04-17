@@ -14,7 +14,7 @@ rofi.padding: 10
 rofi.parse-known-hosts: false
 rofi.ssh-client: mosh
 rofi.terminal: urxvtc
-rofi.theme: ~/.config/rofi/themes/solarized.rasi
+rofi.theme: ~/.cache/wal/colors-rofi-dark.rasi
 rofi.width: 50
 rofi.yoffset: -150
 

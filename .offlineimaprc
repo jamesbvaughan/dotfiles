@@ -1,0 +1,28 @@
+[general]
+accounts = main
+pythonfile = ~/.offlineimap.py
+synclabels = yes
+
+[Account main]
+localrepository = main-local
+remoterepository = main-remote
+
+[Repository main-local]
+type = GmailMaildir
+localfolders = ~/Mail
+nametrans = translate_folder
+
+[Repository main-remote]
+type = Gmail
+remoteuser = yoyovaughan@gmail.com
+remotepasseval = get_pass()
+nametrans = untranslate_folder
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[mbnames]
+enabled = yes
+filename = ~/.mutt/mailboxes
+header = "mailboxes "
+peritem = "+%(foldername)s"
+sep = " "
+footer = "\n"

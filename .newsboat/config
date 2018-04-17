@@ -8,7 +8,7 @@ articlelist-format " %D %f %?T?%-17T | ?%t"
 articlelist-title-format "%T (%u unread, %t total)"
 browser qutebrowser
 feedlist-format "%3U %t"
-feedlist-title-format "Your Feeds (%u unread, %t total)%?T? - tag '%T'&?"
+feedlist-title-format "Your Feeds %?T? - tag '%T'&?"
 itemview-title-format "%T - %F"
 notify-always yes
 notify-program "/home/james/.newsboat/notify.sh"
@@ -16,11 +16,11 @@ notify-format "%n"
 reload-threads 5
 reload-time 20
 show-keymap-hint no
+show-read-feeds no
 
-color info color11 color0 bold
-color listfocus color12 color0
+color info color12 color0 bold
 color listfocus_unread white color0 bold
-color listnormal_unread white color8 bold
+color listfocus white color0
 
 bind-key h quit
 bind-key j down

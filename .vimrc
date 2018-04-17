@@ -15,6 +15,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'airblade/vim-gitgutter'
   Plug 'easymotion/vim-easymotion'
   Plug 'digitaltoad/vim-pug'
+  Plug 'dylanaraps/wal.vim'
   Plug 'elixir-lang/vim-elixir'
   Plug 'jamessan/vim-gnupg'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -35,14 +36,12 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 " My Settings ==================================================================
-color solarized           " set colorscheme
+colorscheme wal                 " set colorscheme
 set autoread              " auto read files changed outside vim
-set background=dark       " use a dark background
 set clipboard=unnamedplus " use the system clipboard
 set colorcolumn=80        " highlight max length column
 set encoding=utf-8        " set encoding
 set expandtab             " tabs to spaces
-set foldmethod=syntax     " fold based on syntax
 set formatoptions+=j
 set hidden                " allow background buffers
 set hlsearch              " highlight the search query
@@ -79,6 +78,7 @@ let g:airline_right_alt_sep = ''
 let g:airline_powerline_fonts = 1
 let g:airline_section_y = ''
 let g:airline_skip_empty_sections = 1
+let g:airline_theme = 'solarized'
 
 " YCM
 let g:ycm_autoclose_preview_window_after_completion = 1

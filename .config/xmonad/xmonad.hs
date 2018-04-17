@@ -23,7 +23,7 @@ main = do
 
     , modMask = mod4Mask
 
-    , borderWidth = 0
+    , borderWidth = 4
 
     , normalBorderColor = "#002b36"
 
