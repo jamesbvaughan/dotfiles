@@ -20,7 +20,7 @@ nametrans = untranslate_folder
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
 [mbnames]
-enabled = yes
+enabled = no
 filename = ~/.mutt/mailboxes
 header = "mailboxes "
 peritem = "+%(foldername)s"

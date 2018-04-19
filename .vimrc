@@ -1,27 +1,42 @@
-" James Vaughan's vimrc ========================================================
+" James' vim config
 set nocompatible
-filetype plugin on
 
 " Download vim-plug if missing
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall
+if has('nvim')
+  if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall
+  endif
+else
+  if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall
+  endif
 endif
 
-" Plugins ======================================================================
 call plug#begin('~/.vim/plugged')
+  if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+  endif
   Plug 'altercation/vim-colors-solarized'
   Plug 'airblade/vim-gitgutter'
-  Plug 'easymotion/vim-easymotion'
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
   Plug 'digitaltoad/vim-pug'
   Plug 'dylanaraps/wal.vim'
+  Plug 'easymotion/vim-easymotion'
   Plug 'elixir-lang/vim-elixir'
+  Plug 'fatih/vim-go'
   Plug 'jamessan/vim-gnupg'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
+  Plug 'mhinz/vim-startify'
   Plug 'mxw/vim-jsx'
-  Plug 'ryanoasis/vim-devicons'
   Plug 'rust-lang/rust.vim'
   Plug 'pangloss/vim-javascript'
   Plug 'slashmili/alchemist.vim'
@@ -32,11 +47,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-airline/vim-airline-themes'
   Plug 'vimwiki/vimwiki'
   Plug 'w0rp/ale'
-  Plug 'Valloric/YouCompleteMe'
+  Plug 'zchee/deoplete-go', { 'do': 'make' }
 call plug#end()
 
 " My Settings ==================================================================
-colorscheme wal                 " set colorscheme
+colorscheme wal           " set colorscheme
 set autoread              " auto read files changed outside vim
 set clipboard=unnamedplus " use the system clipboard
 set colorcolumn=80        " highlight max length column
@@ -48,11 +63,8 @@ set hlsearch              " highlight the search query
 set ignorecase            " case insensitive searching
 set laststatus=2          " always show airline
 set lazyredraw            " don't redraw during macro execution
-set list
-set listchars=tab:>-,trail:·
 set mouse=a               " enable the mouse
 set nobackup              " no backup files
-set noesckeys             " removes some delays in insert mode
 set noshowmode            " doesn't show the current mode in the command bar
 set noswapfile            " no swap files
 set number                " show line numbers
@@ -62,15 +74,23 @@ set scrolloff=5           " start scrolling 5 lines before bottom of pane
 set shiftwidth=2          " shift lines by 2 characters
 set smartcase             " only use case sensitive search when uppercase
 set tabstop=2             " change default tab length
+let mapleader=" "         " change the map leader
+
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+set completeopt-=preview " disable the preview window
+inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
 
 " Airline
 let g:airline#extensions#tabline#buffer_min_count = 2
-let g:airline#extensions#tabline#buffers_label = ''
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = '┃'
+let g:airline#extensions#tabline#left_sep = '▌'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#overflow_marker = '…'
 let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline_section_z = '%p%% %v:%l/%L'
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
@@ -80,17 +100,15 @@ let g:airline_section_y = ''
 let g:airline_skip_empty_sections = 1
 let g:airline_theme = 'solarized'
 
-" YCM
-let g:ycm_autoclose_preview_window_after_completion = 1
-
 " FZF
 map <C-p> :Files<cr>
 
 " Ale
-let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_on_text_changed = 'never'
 
 " EasyMotion
-map <leader>f <Plug>(easymotion-prefix)s
+" map <leader>f <Plug>(easymotion-s)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
 
 " GitGutter
 set updatetime=250
@@ -107,8 +125,25 @@ let g:vimwiki_list = [{'path': '~/Documents/vimwiki',
                      \ 'syntax': 'markdown',
                      \ 'ext': '.md'}]
 
+" Startify
+function! s:filter_header(lines) abort
+    let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
+    let centered_lines = map(copy(a:lines),
+        \ 'repeat(" ", (system("tput cols") / 2) - (longest_line / 2)) . v:val')
+    return centered_lines
+endfunction
+let g:startify_custom_header = s:filter_header(startify#fortune#boxed())
+let g:startify_bookmarks = [ {'v': '~/.vimrc'},
+                           \ {'w': '~/Documents/vimwiki/index.md'},
+                           \ {'p': '~/.config/polybar/config'},
+                           \ {'x': '~/.xmonad/xmonad.hs'},
+                           \ {'b': '~/.bashrc'}]
+let g:startify_change_to_vcs_root = 1
+let g:startify_fortune_use_unicode = 1
+let g:startify_enable_special = 0
+
+
 " My Keybindings ===============================================================
-let mapleader=" "
 nnoremap - za
 nnoremap Q @@
 nnoremap <C-h>     :wincmd h<cr>|                        " window left
@@ -125,3 +160,9 @@ nnoremap <leader>r :source ~/.vimrc<cr>|                 " reload vimrc
 nnoremap <leader>s :setlocal spell! spelllang=en_us<cr>| " toggle spell checking
 nnoremap <leader>w :set wrap!<cr>|                       " toggle word wrap
 vnoremap <leader>a :sort<cr>|                            " sort lines
+
+" vim/neovim specific configuration
+if has('nvim')
+else
+  set noesckeys                                          " removes some delays in insert mode
+endif

@@ -48,7 +48,7 @@ separator = " "
 [module/rss]
 type = custom/script
 interval = 300
-exec = newsboat -x print-unread | cut -d' ' -f1
+exec = newsboat -x print-unread 2>/dev/null | cut -d' ' -f1
 format-prefix = " "
 click-left = urxvt -e newsboat
 
@@ -60,11 +60,10 @@ format-prefix = " "
 
 [module/email]
 type = custom/script
-format-underline = ${colors.yellow}
+interval = 300
 format-prefix = " "
-exec = ~/.config/polybar/gmail/launch.py --nosound
-tail = true
-click-left = urxvt -e mutt
+exec = ~/.config/polybar/gmail/launch.py
+click-left = urxvt -e neomutt
 
 [module/workspaces]
 type = internal/xworkspaces
@@ -91,13 +90,7 @@ click-right = urxvt -e ncmpcpp
 type = internal/cpu
 interval = 3
 format-underline = ${colors.red}
-format = <ramp-load> <label>
-label = "%percentage:2%%"
-ramp-load-0 = 
-ramp-load-1 = 
-ramp-load-2 = 
-ramp-load-3 = 
-ramp-load-4 = 
+label = " %percentage:2%%"
 
 [module/ram]
 type = internal/memory
@@ -108,13 +101,12 @@ label = " %percentage_used:2%%"
 [module/fs]
 type = internal/fs
 mount-0 = /
-format-mounted-underline = ${colors.yellow}
-label-mounted = " %percentage_used:2%%"
+label-mounted = " %percentage_used:2%%"
 
 [module/card]
-inherit = module/fs
+type = internal/fs
 mount-0 = /media/james/card
-format-mounted-underline = ${colors.blue}
+label-mounted = " %percentage_used:2%%"
 
 [module/volume]
 type = custom/script

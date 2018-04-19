@@ -68,5 +68,5 @@ bind index,pager y save-message
 
 # Macros
 macro index h '<change-folder>?'
-# macro index,pager y '<save-message>=archive<enter><enter><sync-mailbox>'
+macro index,pager y '<save-message><enter><enter>'
 macro index,pager i '<change-folder>=INBOX<enter>'

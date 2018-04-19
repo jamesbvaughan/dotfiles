@@ -52,6 +52,9 @@ urxvtd --quiet --opendisplay --fork
 xinput --set-prop 'SynPS/2 Synaptics TouchPad' \
                   'libinput Natural Scrolling Enabled' 1
 
+# Set the colors
+wal -R
+
 # Finally, start the window manager!
 exec xmonad
 
