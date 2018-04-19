@@ -12,7 +12,7 @@ endif
 " Plugins ======================================================================
 call plug#begin('~/.vim/plugged')
   Plug 'altercation/vim-colors-solarized'
-  Plug 'airblade/vim-gitgutter'
+  " Plug 'airblade/vim-gitgutter'
   Plug 'easymotion/vim-easymotion'
   Plug 'digitaltoad/vim-pug'
   Plug 'elixir-lang/vim-elixir'
