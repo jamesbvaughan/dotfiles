@@ -7,8 +7,11 @@
 "amixer -q set Master toggle"
   XF86AudioMute
 
-# "playerctl play-pause"
-#   Alt + p
+"playerctl play-pause"
+  Mod4 + Shift + p
+
+"playerctl next"
+  Mod4 + Shift + period
 
 "xbacklight -inc 10"
   XF86MonBrightnessUp
@@ -25,8 +28,8 @@
 "="
   Mod4 + u
 
-"="
-  Mod4 + =
+"pdf-opener.sh"
+  Mod4 + f
 
 "screenshot.sh"
   Mod4 + Print

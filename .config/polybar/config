@@ -1,4 +1,6 @@
 [colors]
+background = ${xrdb:color0:#222}
+foreground = ${xrdb:color7:#222}
 red = ${xrdb:color1:#f00}
 green = ${xrdb:color2:#0f0}
 yellow = ${xrdb:color3:#ffa}
@@ -11,90 +13,110 @@ violet = ${xrdb:color13:#faf}
 [bar/jamesbar]
 monitor = ${env:MONITOR:DP-2}
 monitor-fallback = eDP-1
-height = 40
-background = ${xrdb:color8:#222}
-foreground = ${xrdb:color7:#ddd}
-line-size = 5
+enable-ipc = true
+height = 30
+background = ${colors.background}
+foreground = ${colors.foreground}
+line-size = 0
 padding = 1
-font-0 = DejaVuSansMono:pixelsize=20;3
-font-1 = DejaVuSansMono Nerd Font Mono:pixelsize=26;3
+font-0 = DejaVuSansMono:pixelsize=19;4
+font-1 = DejaVuSansMono Nerd Font Mono:pixelsize=24;5
 modules-left = workspaces xwindow
 modules-center = time
-modules-right = music cpu ram fs card volume backlight battery kdeconnect
+modules-right = rss email volume backlight battery
 separator = " "
 tray-position = right
-tray-maxsize = 100
+tray-maxsize = 32
+
+[bar/bottombar]
+monitor = ${env:MONITOR:DP-2}
+monitor-fallback = eDP-1
+enable-ipc = true
+height = 30
+background = ${colors.background}
+foreground = ${colors.foreground}
+line-size = 0
+padding = 1
+font-0 = DejaVuSansMono:pixelsize=19;4
+font-1 = DejaVuSansMono Nerd Font Mono:pixelsize=24;5
+modules-left = cpu ram fs card
+modules-center = music
+modules-right = taskwarrior
+bottom = true
+separator = " "
+
+[module/rss]
+type = custom/script
+interval = 300
+exec = newsboat -x print-unread 2>/dev/null | cut -d' ' -f1
+format-prefix = " "
+click-left = urxvt -e newsboat
+
+[module/taskwarrior]
+type = custom/script
+interval = 30
+exec = ~/.config/polybar/task_polybar.sh
+format-prefix = " "
+
+[module/email]
+type = custom/script
+interval = 300
+format-prefix = " "
+exec = ~/.config/polybar/gmail/launch.py
+click-left = urxvt -e neomutt
 
 [module/workspaces]
 type = internal/xworkspaces
 format-underline = ${colors.magenta}
-label-active = "  "
+label-active = "  "
 label-empty = "  "
-label-occupied = "  "
+label-occupied = "  "
 label-urgent = "  "
 
 [module/xwindow]
 type = internal/xwindow
-format-underline = ${colors.yellow}
-label-maxlen = 55
-
-[module/time]
-type = internal/date
-interval = 5
-format-underline = ${colors.blue}
-time = %H:%M
-label = "%time%"
+format-underline = ${colors.violet}
+label = %title:0:62:…%
 
 [module/music]
-type = internal/mpd
-format-online-underline = ${colors.violet}
-format-paused = 
-label-song = " %title%"
-label-song-maxlen = 21
-label-song-ellipsis = true
+type = custom/script
+format-underline = ${colors.violet}
+exec = ~/.config/polybar/player-mpris-tail.py
+tail = true
+click-left = ~/.config/polybar/player-ctrl.sh play-pause
+click-right = urxvt -e ncmpcpp
 
 [module/cpu]
 type = internal/cpu
 interval = 3
 format-underline = ${colors.red}
-format = <ramp-load> <label>
-label = "%percentage:2%%"
-ramp-load-0 = 
-ramp-load-1 = 
-ramp-load-2 = 
-ramp-load-3 = 
-ramp-load-4 = 
+label = " %percentage:2%%"
 
 [module/ram]
 type = internal/memory
 interval = 3
 format-underline = ${colors.green}
-label = " %percentage_used%%"
+label = " %percentage_used:2%%"
 
 [module/fs]
 type = internal/fs
 mount-0 = /
-format-mounted-underline = ${colors.yellow}
-label-mounted = " %percentage_used:2%%"
+label-mounted = " %percentage_used:2%%"
 
 [module/card]
-inherit = module/fs
+type = internal/fs
 mount-0 = /media/james/card
-format-mounted-underline = ${colors.blue}
+label-mounted = " %percentage_used:2%%"
 
 [module/volume]
-type = internal/volume
-format-volume-underline = ${colors.magenta}
-format-muted-underline = ${self.format-volume-underline}
-format-volume = <ramp-volume> <label-volume>
-label-volume = "%percentage:2%%"
-label-muted = " %percentage:2%%"
-ramp-volume-0 = ""
-ramp-volume-1 = ""
-ramp-volume-2 = ""
-ramp-volume-3 = ""
-ramp-volume-4 = ""
-ramp-volume-5 = ""
+type = custom/script
+format-underline = ${colors.magenta}
+exec = ~/.config/polybar/pulseaudio-tail.sh
+tail = true
+click-right = exec pavucontrol &
+click-left = ~/.config/polybar/pulseaudio-tail.sh --mute
+scroll-up = ~/.config/polybar/pulseaudio-tail.sh --down
+scroll-down = ~/.config/polybar/pulseaudio-tail.sh --up
 
 [module/backlight]
 type = internal/backlight
@@ -121,6 +143,14 @@ animation-charging-1 = ${self.ramp-capacity-1}
 animation-charging-2 = ${self.ramp-capacity-2}
 animation-charging-3 = ${self.ramp-capacity-3}
 animation-charging-4 = ${self.ramp-capacity-4}
+
+[module/time]
+type = internal/date
+interval = 5
+format-underline = ${colors.blue}
+time = %H:%M
+date = %Y-%m-%d%
+label = %date% %time%
 
 [module/kdeconnect]
 type = custom/script

@@ -1,15 +1,15 @@
 # My personal settings
 # ---------
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!node_modules/*"'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!**/.git/*" --glob "!**/node_modules/*"'
 export FZF_DEFAULT_OPTS='
   --color dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254
   --color info:254,prompt:37,spinner:108,pointer:235,marker:235
   --no-bold
-  --preview '"'"'[[ $(file --mime {}) =~ binary ]] &&
-               echo {} is a binary file ||
-               (highlight -O ansi {} ||
-               cat {}) 2> /dev/null | head -100'"'"'
 '
+  # --preview '"'"'[[ $(file --mime {}) =~ binary ]] &&
+  #              echo {} is a binary file ||
+  #              (highlight -O ansi {} ||
+  #              cat {}) 2> /dev/null | head -100'"'"'
 
 # Setup fzf
 # ---------

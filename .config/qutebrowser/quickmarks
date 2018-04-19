@@ -1,52 +1,49 @@
-fb https://www.facebook.com/
-keep https://keep.google.com/u/0/
-maps https://www.google.com/maps
-devdocs http://devdocs.io/
-messenger https://www.messenger.com/
-yt https://www.youtube.com/
-amazon https://smile.amazon.com/
-prez drive https://drive.google.com/drive/u/1/my-drive
-drive https://drive.google.com/drive/u/0/my-drive
-piazza https://piazza.com/class/j74sdkdd3fq6py
-prez email https://inbox.google.com/u/1/
-twitter https://twitter.com/
-trello https://trello.com/
-meh https://meh.com/
-photos https://photos.google.com/
-inbox https://inbox.google.com/u/0/
-calendar https://calendar.google.com/calendar/r/week
-google https://www.google.com/
-reddit https://www.reddit.com/
-jamesbvaughan https://jamesbvaughan.com/
-ccle https://ccle.ucla.edu/login/index.php
-myucla https://be.my.ucla.edu/
-pdfjs https://mozilla.github.io/pdf.js/web/viewer.html
-glowingbear http://latest.glowing-bear.org/#
-pocket https://getpocket.com/a/queue/
-sepslack https://uclasep.slack.com/messages
-reddit coding https://www.reddit.com/me/m/coding/
-reddit synths https://www.reddit.com/me/m/synths/
-bank https://www.bankofamerica.com/
-masterclass https://www.masterclass.com/
-reddit qutebrowser https://www.reddit.com/r/qutebrowser/
-github qutebrowser https://github.com/qutebrowser/qutebrowser
-letterboxd https://letterboxd.com/
-transmission http://localhost:9091/transmission/web/
-pushbullet https://www.pushbullet.com/#sms
-mint https://mint.intuit.com/overview.event
-linkedin https://www.linkedin.com/feed/
-reddit money https://www.reddit.com/me/m/money/
-reddit linux https://www.reddit.com/me/m/linux/
-hacker news https://news.ycombinator.com/
-reddit moviepass https://www.reddit.com/r/MoviePassClub/
-venmo https://venmo.com/jamesbvaughan
-domains https://domains.google.com/registrar
-personal capital https://home.personalcapital.com/page/login/app#/dashboard
-chase https://secure01c.chase.com/web/auth/dashboard#dashboard
-yoavz http://yoavz.com/
-github https://github.com/
-weather https://encrypted.google.com/search?hl=en&q=weather
 amazon affiliate program https://affiliate-program.amazon.com/home/productlinks/search
-localhost 4000 http://localhost:4000/
-qutebrowser https://qutebrowser.org/
+amazon https://smile.amazon.com/
+bank https://www.bankofamerica.com/
 barclaycard https://cards.barclaycardus.com/?p=uber
+calendar https://calendar.google.com/calendar/r/week
+ccle https://ccle.ucla.edu/login/index.php
+chase https://secure01c.chase.com/web/auth/dashboard#dashboard
+coupons https://couponsforamanda.com/
+devdocs http://devdocs.io/
+domains https://domains.google.com/registrar
+drive https://drive.google.com/drive/u/0/my-drive
+facebook https://www.facebook.com/
+github https://github.com/
+github qutebrowser https://github.com/qutebrowser/qutebrowser
+google https://www.google.com/
+hacker news https://news.ycombinator.com/
+inbox https://inbox.google.com/u/0/
+jamesbvaughan https://jamesbvaughan.com/
+keep https://keep.google.com/u/0/
+letterboxd https://letterboxd.com/
+linkedin https://www.linkedin.com/feed/
+localhost 4000 http://localhost:4000/
+maps https://www.google.com/maps
+masterclass https://www.masterclass.com/
+meh https://meh.com/
+messenger https://www.messenger.com/
+mint https://mint.intuit.com/overview.event
+myucla https://be.my.ucla.edu/
+personal capital https://home.personalcapital.com/page/login/app#/dashboard
+photos https://photos.google.com/
+piazza https://piazza.com/class/jernhgmpc8g1yo
+pocket https://getpocket.com/a/queue/
+prez drive https://drive.google.com/drive/u/1/my-drive
+prez email https://inbox.google.com/u/1/
+pushbullet https://www.pushbullet.com/#sms
+qutebrowser https://qutebrowser.org/
+reddit https://www.reddit.com/
+sepslack https://uclasep.slack.com/messages
+syncthing http://127.0.0.1:8384/
+transmission http://localhost:9091/transmission/web/
+trello https://trello.com/
+ttrss https://ttrss.jamesbvaughan.com/index.php#
+twitter https://twitter.com/
+venmo https://venmo.com/jamesbvaughan
+weather https://encrypted.google.com/search?hl=en&q=weather
+yoavz http://yoavz.com/
+youtube https://www.youtube.com/
+syllabus 130
+analytics https://analytics.jamesbvaughan.com/index.php?module=CoreHome&action=index&idSite=1&period=day&date=yesterday#?idSite=1&period=week&date=2018-04-06&category=Dashboard_Dashboard&subcategory=1

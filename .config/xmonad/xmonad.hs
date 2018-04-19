@@ -2,12 +2,20 @@ import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Config.Desktop
 import XMonad.Layout.Fullscreen
+import XMonad.Layout.NoBorders
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
 
 
+myLayout = tall ||| wide ||| full
+  where
+    tall = smartBorders $ Tall 1 0.03 0.5
+    wide = Mirror tall
+    full = noBorders Full
+
+
 main = do
-  spawn "~/.config/polybar/launch.sh"
+  spawn "launch-polybar"
   xmonad $ fullscreenSupport $ desktopConfig
     { terminal = "urxvtc"
 
@@ -15,7 +23,13 @@ main = do
 
     , modMask = mod4Mask
 
-    , borderWidth = 0
+    , borderWidth = 4
+
+    , normalBorderColor = "#002b36"
+
+    , focusedBorderColor = "#839496"
+
+    , layoutHook = desktopLayoutModifiers $ fullscreenFull $ myLayout
 
     }
     `additionalKeysP`
@@ -24,5 +38,6 @@ main = do
     ]
     `removeKeysP`
     [ "M-p"
+    , "M-S-p"
     ]
 

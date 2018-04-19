@@ -1,35 +1,72 @@
-source ~/.mutt/mutt-colors-solarized-dark-16.muttrc
-source "gpg -dq ~/.mutt/vars.gpg |"
+# vim: ft=neomuttrc
+source ~/.mutt/james-solarized.muttrc
+source ~/.mutt/mailboxes
 
-set imap_user = $my_user
-set imap_pass = $my_pass
-set smtp_pass = $my_pass
-set smtp_url = $my_smtp_url
+# Gmail stuff
+set mbox_type = Maildir
+set spoolfile = "+INBOX"
+set postponed = "+drafts"
+unset record
+alternates yoyovaughan@gmail.com james@jamesbvaughan.com
 
-set folder = imaps://imap.gmail.com/
-set spoolfile = +INBOX
-set postponed = "+[Gmail]/Drafts"
-set mbox = "+[Gmail]/All Mail"
-set record = ""
-
+# Cache
 set header_cache = ~/.cache/mutt
-set message_cachedir = ~/.cache/mutt
+set message_cachedir = ~/.cache/mutt/messages
 
+# Mailcap stuff
 set implicit_autoview
+set mailcap_path = ~/.mailcap
 auto_view text/html
-set mailcap_path = ~/.mutt/mailcap
+alternative_order text/plain text/html
 
-set index_format = "%2C %Z %{%b %d} %-15.15L %s"
-set pager_index_lines = 10
-set pager_stop = yes
+# Pager settings
+set pager_format = "%n: %s"
+set pager_stop
 set pager_context = 5
+unset markers
 
-set fast_reply = yes
-set include = yes
-
+# General Interface Settingsse
+set abort_noattach = ask-yes
+set arrow_cursor
+set date_format = "%a, %b %d, %Y at %H:%M"
+set delete
+set fast_reply
+set folder_format = "%2C %N %f"
+set include
+set index_format = "%S %-17.17F %s %?M?(%M)? %* %<[y?%<[m?%<[d?%[%H:%M ]&%[%a %d]>&%[%b %d]>&%[%m/%y ]>"
+set quit
 set sort = threads
-set strict_threads = yes
-
+set sort_aux = last-date-received
+set sleep_time = 0
+set status_format = "Your Inbox (%u unread, %m total)"
+set status_on_top
+set strict_threads
 unset collapse_unread
+unset help
+folder-hook . "exec collapse-all"
+save-hook . +archive
+
+# Keybindings
+bind attach l view-attach
+bind attach,index G last-entry
+bind attach,index g first-entry
+bind browser h change-dir
+bind generic l select-entry
 bind index - collapse-thread
 bind index _ collapse-all
+bind index c mail
+bind index j next-entry
+bind index k previous-entry
+bind index l display-message
+bind index r sync-mailbox
+bind pager G bottom
+bind pager g top
+bind pager h exit
+bind pager j next-line
+bind pager k previous-line
+bind index,pager y save-message
+
+# Macros
+macro index h '<change-folder>?'
+macro index,pager y '<save-message><enter><enter>'
+macro index,pager i '<change-folder>=INBOX<enter>'

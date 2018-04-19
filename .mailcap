@@ -1,0 +1,13 @@
+#                              Mailcap 101
+# - The first entry with a matching MIME type will be executed, * is a wildcard
+# - %s will be replaced with the image or video url
+# - Add ``test=test -n "$DISPLAY"`` if your command opens a new window
+# - Add ``needsterminal`` for commands that use the terminal
+# - Add ``copiousoutput`` for commands that dump text to stdout
+
+application/pdf; zathura '%s'; test=test -n "$DISPLAY"
+image/x-imgur-album; feh %s; test=test -n "$DISPLAY"
+image/gif; mpv '%s' --autofit 640x480 --loop=inf; test=test -n "$DISPLAY"
+image/*; feh '%s'; test=test -n "$DISPLAY"
+text/html; w3m -I %{charset} -T text/html; copiousoutput;
+video/*; umpv '%s'; test=test -n "$DISPLAY"
