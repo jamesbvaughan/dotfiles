@@ -2,6 +2,8 @@
 accounts = main
 pythonfile = ~/.offlineimap.py
 synclabels = yes
+ui = basic
+socktimeout = 45
 
 [Account main]
 localrepository = main-local
@@ -26,3 +28,5 @@ header = "mailboxes "
 peritem = "+%(foldername)s"
 sep = " "
 footer = "\n"
+
+# vim: ft=dosini

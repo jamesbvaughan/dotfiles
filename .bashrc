@@ -4,7 +4,8 @@ case $- in
       *) return;;
 esac
 
-export PATH="$HOME/.bin:$HOME/go/bin:$HOME/.yarn/bin:$HOME/.npm-global/bin:$HOME/.gem/ruby/2.5.0/bin:$PATH"
+export GOPATH=$HOME/go
+export PATH="$HOME/.bin:$GOPATH/bin:$HOME/.yarn/bin:$HOME/.npm-global/bin:$HOME/.gem/ruby/2.5.0/bin:$HOME/.local/bin:$PATH"
 export EDITOR=vim
 export HISTCONTROL=erasedups
 export HISTFILESIZE=20000
@@ -24,6 +25,8 @@ source $BASH_DIR/colored-man-pages.bash
 source /usr/share/doc/pkgfile/command-not-found.bash
 source /usr/share/bash-completion/bash_completion
 source $HOME/.cargo/env
+
+eval "$(pandoc --bash-completion)"
 
 trap 'echo -en "\e]0;$BASH_COMMAND\007"' DEBUG
 
