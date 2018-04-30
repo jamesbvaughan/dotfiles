@@ -83,7 +83,7 @@ class PlayerStatus:
                 break
 
             except:
-                self._print_flush(PLAYER_CLOSED_ICON)
+                self._print_flush('Nothing Playing')
                 time.sleep(2)
 
     def _on_metadata(self, player, e):

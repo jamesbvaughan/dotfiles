@@ -1,8 +1,9 @@
 # etc
 alias ls="ls --color=auto --file-type --human-readable"
 alias grep="grep --color"
-alias vim="vim -X"
+alias vim="nvim"
 alias mutt="neomutt"
+alias cdbark='cd $GOPATH/src/github.com/jamesbvaughan/bark'
 
 # Git
 alias gc="git commit"

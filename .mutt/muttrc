@@ -30,15 +30,16 @@ set abort_noattach = ask-yes
 set arrow_cursor
 set date_format = "%a, %b %d, %Y at %H:%M"
 set delete
+set editor = "nvim"
 set fast_reply
 set folder_format = "%2C %N %f"
 set include
-set index_format = "%S %-17.17F %s %?M?(%M)? %* %<[y?%<[m?%<[d?%[%H:%M ]&%[%a %d]>&%[%b %d]>&%[%m/%y ]>"
+set index_format = "%S %-17.17F %?M?(%M)? %s %* %<[y?%<[m?%<[d?%[%H:%M ]&%[%a %d]>&%[%b %d]>&%[%m/%y ]>"
 set quit
 set sort = threads
 set sort_aux = last-date-received
 set sleep_time = 0
-set status_format = "Your Inbox (%u unread, %m total)"
+set status_format = "%f (%u unread, %m total)"
 set status_on_top
 set strict_threads
 unset collapse_unread

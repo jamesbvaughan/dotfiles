@@ -35,10 +35,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'jamessan/vim-gnupg'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
+  Plug 'ledger/vim-ledger'
   Plug 'mhinz/vim-startify'
   Plug 'mxw/vim-jsx'
   Plug 'rust-lang/rust.vim'
   Plug 'pangloss/vim-javascript'
+  Plug 'sheerun/vim-polyglot'
   Plug 'slashmili/alchemist.vim'
   Plug 'ternjs/tern_for_vim'
   Plug 'tpope/vim-commentary'
@@ -57,6 +59,7 @@ set clipboard=unnamedplus " use the system clipboard
 set colorcolumn=80        " highlight max length column
 set encoding=utf-8        " set encoding
 set expandtab             " tabs to spaces
+set fillchars+=vert:│
 set formatoptions+=j
 set hidden                " allow background buffers
 set hlsearch              " highlight the search query
@@ -101,13 +104,18 @@ let g:airline_skip_empty_sections = 1
 let g:airline_theme = 'solarized'
 
 " FZF
-map <C-p> :Files<cr>
+nmap <C-p> :Files<cr>
 
 " Ale
 " let g:ale_lint_on_text_changed = 'never'
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '➜'
+let g:ale_linter_aliases = {'vimwiki': 'markdown'}
+" nmap <silent> <C-S-p> <Plug>(ale_previous_wrap)
+nmap <silent> <C-S-n> <Plug>(ale_next_wrap)
 
 " EasyMotion
-" map <leader>f <Plug>(easymotion-s)
 nmap <Leader>f <Plug>(easymotion-overwin-f)
 
 " GitGutter
@@ -116,6 +124,9 @@ let g:gitgutter_sign_added = '•'
 let g:gitgutter_sign_modified = '•'
 let g:gitgutter_sign_removed = '•'
 map <leader>g :GitGutterSignsToggle<cr>
+hi GitGutterAddDefault ctermbg=NONE ctermfg=2
+hi GitGutterChangeDefault ctermbg=NONE ctermfg=3
+hi GitGutterDeleteDefault ctermbg=NONE ctermfg=1
 
 " Rust
 let g:rustfmt_autosave = 1
@@ -146,23 +157,30 @@ let g:startify_enable_special = 0
 " My Keybindings ===============================================================
 nnoremap - za
 nnoremap Q @@
-nnoremap <C-h>     :wincmd h<cr>|                        " window left
-nnoremap <C-j>     :wincmd j<cr>|                        " window below
-nnoremap <C-k>     :wincmd k<cr>|                        " window above
-nnoremap <C-l>     :wincmd l<cr>|                        " window right
-nnoremap <C-w>     :bprevious\|bdelete #<CR>|            " close the current buffer
-nnoremap <S-h>     :bprevious<cr>|                       " previous buffer
-nnoremap <S-l>     :bnext<cr>|                           " next buffer
-nnoremap <leader>d :bprevious\|bdelete #<CR>|            " close the current buffer
-nnoremap <leader>o :nohlsearch<cr>|                      " clear search highlights
-nnoremap <leader>p :set paste!<cr>|                      " toggle paste mode
-nnoremap <leader>r :source ~/.vimrc<cr>|                 " reload vimrc
-nnoremap <leader>s :setlocal spell! spelllang=en_us<cr>| " toggle spell checking
-nnoremap <leader>w :set wrap!<cr>|                       " toggle word wrap
-vnoremap <leader>a :sort<cr>|                            " sort lines
+nnoremap <C-h>     :wincmd h<cr>|                            " window left
+nnoremap <C-j>     :wincmd j<cr>|                            " window below
+nnoremap <C-k>     :wincmd k<cr>|                            " window above
+nnoremap <C-l>     :wincmd l<cr>|                            " window right
+nnoremap <C-w>     :bprevious\|bdelete #<CR>|                " close the current buffer
+nnoremap <S-h>     :bprevious<cr>|                           " previous buffer
+nnoremap <S-l>     :bnext<cr>|                               " next buffer
+nnoremap <leader>d :bprevious\|bdelete #<CR>|                " close the current buffer
+nnoremap <leader>o :nohlsearch<cr>|                          " clear search highlights
+nnoremap <leader>p :set paste!<cr>|                          " toggle paste mode
+nnoremap <leader>r :source ~/.vimrc<cr>|                     " reload vimrc
+nnoremap <leader>s :setlocal spell! spelllang=en_us<cr>|     " toggle spell checking
+nnoremap <leader>w :set wrap!<cr>|                           " toggle word wrap
+nnoremap <leader>n :set number!<cr>:set relativenumber!<cr>| " toggle line numbers
+vnoremap <leader>a :sort<cr>|                                " sort lines
 
 " vim/neovim specific configuration
 if has('nvim')
 else
-  set noesckeys                                          " removes some delays in insert mode
+  set noesckeys " removes some delays in insert mode
 endif
+
+" my colors (expanding from wal)
+hi VertSplit ctermbg=8 ctermfg=0
+hi ColorColumn ctermbg=0 ctermfg=NONE
+hi LineNr ctermbg=0 ctermfg=8
+hi CursorLineNr ctermbg=0 ctermfg=8

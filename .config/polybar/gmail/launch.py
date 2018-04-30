@@ -19,6 +19,7 @@ try:
     else:
         print('credentials not found')
 except (errors.HttpError, ServerNotFoundError, OSError):
-    print('network error')
+    # print('network error')
+    pass
 except client.AccessTokenRefreshError:
     print('revoked/expired credentials')
