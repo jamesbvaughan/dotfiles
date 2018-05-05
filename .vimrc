@@ -132,7 +132,7 @@ hi GitGutterDeleteDefault ctermbg=NONE ctermfg=1
 let g:rustfmt_autosave = 1
 
 " Vimwiki
-let g:vimwiki_list = [{'path': '~/Documents/vimwiki',
+let g:vimwiki_list = [{'path': '~/Documents/notes',
                      \ 'syntax': 'markdown',
                      \ 'ext': '.md'}]
 
@@ -145,7 +145,7 @@ function! s:filter_header(lines) abort
 endfunction
 let g:startify_custom_header = s:filter_header(startify#fortune#boxed())
 let g:startify_bookmarks = [ {'v': '~/.vimrc'},
-                           \ {'w': '~/Documents/vimwiki/index.md'},
+                           \ {'w': '~/Documents/notes/index.md'},
                            \ {'p': '~/.config/polybar/config'},
                            \ {'x': '~/.xmonad/xmonad.hs'},
                            \ {'b': '~/.bashrc'}]

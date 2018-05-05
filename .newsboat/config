@@ -16,7 +16,6 @@ notify-format "%n"
 reload-threads 5
 reload-time 20
 show-keymap-hint no
-show-read-feeds no
 
 color info color12 color0 bold
 color listfocus_unread white color0 bold
