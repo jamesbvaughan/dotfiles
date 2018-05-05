@@ -23,7 +23,7 @@ font-0 = DejaVuSansMono:pixelsize=19;4
 font-1 = DejaVuSansMono Nerd Font Mono:pixelsize=24;5
 modules-left = workspaces xwindow
 modules-center = time
-modules-right = updates rss email bark volume backlight battery
+modules-right = updates email rss bark volume backlight battery
 separator = " "
 tray-position = right
 tray-maxsize = 32
@@ -48,7 +48,7 @@ separator = " "
 [module/updates]
 type = custom/script
 interval = 1800
-exec = yay -Sy 2>&1 > /dev/null && yay -Pn | head -c 5
+exec = checkupdates | wc -l
 format-prefix = " "
 
 [module/bark]
