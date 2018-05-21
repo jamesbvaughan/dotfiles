@@ -24,6 +24,7 @@ source $BASH_DIR/prompt.bash
 source $BASH_DIR/colored-man-pages.bash
 source /usr/share/doc/pkgfile/command-not-found.bash
 source /usr/share/bash-completion/bash_completion
+source /usr/share/nvm/init-nvm.sh
 source $HOME/.cargo/env
 
 eval "$(pandoc --bash-completion)"
