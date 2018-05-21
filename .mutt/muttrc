@@ -45,7 +45,6 @@ set strict_threads
 unset collapse_unread
 unset help
 folder-hook . "exec collapse-all"
-save-hook . +archive
 
 # Keybindings
 bind attach l view-attach
@@ -69,5 +68,4 @@ bind index,pager y save-message
 
 # Macros
 macro index h '<change-folder>?'
-macro index,pager y '<save-message><enter><enter>'
 macro index,pager i '<change-folder>=INBOX<enter>'
