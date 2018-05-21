@@ -7,7 +7,7 @@ rofi.display-combi: 
 rofi.font: DejaVu Sans Mono Nerd Font Mono 36
 rofi.lines: 3
 rofi.matching: fuzzy
-rofi.modi: window,run,ssh,combi
+rofi.modi: window,drun,ssh,combi
 rofi.combi-modi: window,run,ssh
 rofi.opacity: 80
 rofi.padding: 10

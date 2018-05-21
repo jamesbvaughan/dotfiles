@@ -26,6 +26,7 @@ config.bind('m', 'spawn vlc {url}')
 config.bind('M', 'hint links spawn vlc {hint-url}')
 config.bind(';m', 'hint --rapid links spawn vlc {hint-url}')
 config.bind('<Alt-p>', 'spawn --userscript qute-pass')
+config.bind('<Alt-Shift-p>', 'spawn --userscript qute-pass --password-only')
 config.bind('sp', 'open -t https://getpocket.com/edit?url={url}')
 config.bind(';p', 'hint links run :open -p {hint-url}')
 
