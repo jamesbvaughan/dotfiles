@@ -11,7 +11,7 @@ def read_xresources(prefix):
 
 xresources = read_xresources('*')
 
-uiFont = "24px DejaVu Sans Mono"
+uiFont = "16px DejaVu Sans Mono"
 uiFontBold = "bold {}".format(uiFont)
 
 config.bind("<Ctrl-W>", 'fake-key <Ctrl-Backspace>', mode='insert')
@@ -75,7 +75,7 @@ c.url.searchengines = {
     'r': 'https://reddit.com/r/{}',
 }
 
-c.zoom.default = '150%'
+# c.zoom.default = '150%'
 
 c.colors.completion.category.bg = xresources['*background']
 c.colors.completion.category.border.bottom = xresources['*background']

@@ -20,7 +20,6 @@ call plug#begin('~/.vim/plugged')
   " These just make things pretty
   Plug 'altercation/vim-colors-solarized'
   Plug 'dylanaraps/wal.vim'
-  " Plug 'ryanoasis/vim-devicons'
   Plug 'sheerun/vim-polyglot'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -53,6 +52,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'scrooloose/nerdtree'
   Plug 'ternjs/tern_for_vim'
   Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
   Plug 'vimwiki/vimwiki'
   Plug 'w0rp/ale'
@@ -158,7 +158,8 @@ let g:startify_fortune_use_unicode = 1
 let g:startify_enable_special = 0
 
 " NERDTree
-nnoremap <leader>t :NERDTreeToggle<cr>
+nnoremap <leader>l :NERDTreeToggle<cr>
+let NERDTreeMinimalUI=1
 
 
 " vim/neovim specific configuration ============================================
@@ -169,7 +170,6 @@ endif
 
 
 " My Keybindings ===============================================================
-nnoremap - za
 nnoremap Q @@
 nnoremap <C-h>     :wincmd h<cr>|                            " window left
 nnoremap <C-j>     :wincmd j<cr>|                            " window below
