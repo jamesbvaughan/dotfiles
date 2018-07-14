@@ -1,6 +1,7 @@
 # James' config files and scripts
 
-I use [GNU Stow] to manage these.
+I use [GNU Stow](http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html)
+to manage these.
 If you want to start using any of my configurations,
 
 1. install stow:
