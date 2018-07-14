@@ -1,17 +1,23 @@
 import subprocess
 
+# pylint: disable=C0111
+c = c  # noqa: F821 pylint: disable=E0602,C0103
+config = config  # noqa: F821 pylint: disable=E0602,C0103
+
+
 def read_xresources(prefix):
     props = {}
     x = subprocess.run(['xrdb', '-query'], stdout=subprocess.PIPE)
     lines = x.stdout.decode().split('\n')
-    for line in filter(lambda l : l.startswith(prefix), lines):
+    for line in filter(lambda l: l.startswith(prefix), lines):
         prop, _, value = line.partition(':\t')
         props[prop] = value
     return props
 
+
 xresources = read_xresources('*')
 
-uiFont = "24px DejaVu Sans Mono"
+uiFont = "16px DejaVu Sans Mono"
 uiFontBold = "bold {}".format(uiFont)
 
 config.bind("<Ctrl-W>", 'fake-key <Ctrl-Backspace>', mode='insert')
@@ -22,7 +28,6 @@ config.bind("<Ctrl-H>", 'fake-key <Backspace>', mode='insert')
 config.bind("<Ctrl-B>", 'fake-key <Left>', mode='insert')
 config.bind("<Ctrl-N>", 'fake-key <Down>', mode='insert')
 config.bind("<Ctrl-P>", 'fake-key <Up>', mode='insert')
-config.bind('m', 'spawn vlc {url}')
 config.bind('M', 'hint links spawn vlc {hint-url}')
 config.bind(';m', 'hint --rapid links spawn vlc {hint-url}')
 config.bind('<Alt-p>', 'spawn --userscript qute-pass')
@@ -54,12 +59,12 @@ c.fonts.statusbar = uiFont
 c.fonts.hints = uiFont
 c.fonts.keyhint = uiFont
 
-c.tabs.indicator.width = 0
+c.tabs.indicator.width = 1
 c.tabs.padding = {
     'top': 1,
     'bottom': 1,
     'left': 5,
-    'right': 5,
+    'right': 1,
 }
 c.tabs.show = "multiple"
 c.tabs.title.format_pinned = ""
@@ -75,7 +80,7 @@ c.url.searchengines = {
     'r': 'https://reddit.com/r/{}',
 }
 
-c.zoom.default = '150%'
+# c.zoom.default = '150%'
 
 c.colors.completion.category.bg = xresources['*background']
 c.colors.completion.category.border.bottom = xresources['*background']

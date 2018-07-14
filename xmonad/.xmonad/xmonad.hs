@@ -1,7 +1,7 @@
 import System.Process
 import XMonad
 import XMonad.Actions.CycleWS
-import XMonad.Config.Desktop
+import XMonad.Config.Kde
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.Gaps
 import XMonad.Layout.NoBorders
@@ -16,6 +16,12 @@ myLayout = tall ||| wide ||| full ||| reading
     full = noBorders $ Full
     reading = gaps [(L,500), (R,500), (U,30), (D,30)] full
 
+myManageHook = composeAll . concat $
+    [ [ className =? c --> doIgnore | c <- classesToIgnore ]
+    ]
+  where
+    classesToIgnore = ["plasmashell", "krunner"]
+
 incSideGaps amount = do
   sendMessage $ IncGap amount R
   sendMessage $ IncGap amount L
@@ -24,9 +30,9 @@ decSideGaps amount = incSideGaps (-amount)
 
 main = do
   -- myNormalBorderColor <- readProcess "get_color.sh" [] []
-  spawn "launch-polybar"
-  xmonad $ fullscreenSupport $ desktopConfig
-    { terminal = "urxvtc"
+  -- spawn "launch-polybar"
+  xmonad $ fullscreenSupport $ kde4Config
+    { terminal = "urxvt"
 
     , workspaces = ["1", "2", "3", "4", "5"]
 
@@ -34,15 +40,15 @@ main = do
 
     , borderWidth = 4
 
-    -- , normalBorderColor = myNormalBorderColor
-
-    , normalBorderColor = "#000000"
+    , normalBorderColor = "#002b36"
 
     , focusedBorderColor = "#839496"
 
     , layoutHook = desktopLayoutModifiers
                     $ fullscreenFull
                     $ myLayout
+
+    , manageHook = manageHook kde4Config <+> myManageHook
 
     }
     `additionalKeysP`

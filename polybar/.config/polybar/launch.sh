@@ -7,7 +7,7 @@ killall --quiet polybar
 while pgrep --exact polybar >/dev/null; do sleep 1; done
 
 # Launch the bar
-polybar -r jamesbar &
+# polybar -r jamesbar &
 polybar -r bottombar &
 
 

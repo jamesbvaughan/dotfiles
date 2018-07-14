@@ -3,9 +3,7 @@ amazon https://smile.amazon.com/
 bank https://www.bankofamerica.com/
 barclaycard https://cards.barclaycardus.com/?p=uber
 calendar https://calendar.google.com/calendar/r/week
-ccle https://ccle.ucla.edu/login/index.php
-chase https://secure01c.chase.com/web/auth/dashboard#dashboard
-coupons https://couponsforamanda.com/
+chase https://secure01c.chase.com/web/auth/dashboard
 devdocs http://devdocs.io/
 domains https://domains.google.com/registrar
 drive https://drive.google.com/drive/u/0/my-drive
@@ -25,18 +23,12 @@ masterclass https://www.masterclass.com/
 meh https://meh.com/
 messenger https://www.messenger.com/
 mint https://mint.intuit.com/overview.event
-myucla https://be.my.ucla.edu/
 personal capital https://home.personalcapital.com/page/login/app#/dashboard
 photos https://photos.google.com/
-piazza https://piazza.com/class/jernhgmpc8g1yo
 pocket https://getpocket.com/a/queue/
-prez drive https://drive.google.com/drive/u/1/my-drive
-prez email https://inbox.google.com/u/1/
 pushbullet https://www.pushbullet.com/#sms
 qutebrowser https://qutebrowser.org/
 reddit https://www.reddit.com/
-sepslack https://uclasep.slack.com/messages
-syncthing http://127.0.0.1:8384/
 transmission http://localhost:9091/transmission/web/
 trello https://trello.com/
 ttrss https://ttrss.jamesbvaughan.com/index.php#
@@ -45,5 +37,9 @@ venmo https://venmo.com/jamesbvaughan
 weather https://encrypted.google.com/search?hl=en&q=weather
 yoavz http://yoavz.com/
 youtube https://www.youtube.com/
-syllabus 130
-analytics https://analytics.jamesbvaughan.com/index.php?module=CoreHome&action=index&idSite=1&period=day&date=yesterday#?idSite=1&period=week&date=2018-04-06&category=Dashboard_Dashboard&subcategory=1
+analytics https://analytics.jamesbvaughan.com/index.php
+goodreads https://www.goodreads.com/
+tildes https://tildes.net/
+fathom https://fathom.jamesbvaughan.com/#!week
+passwords http://passwords.google.com/
+mountain project https://www.mountainproject.com/
