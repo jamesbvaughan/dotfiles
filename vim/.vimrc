@@ -61,6 +61,7 @@ call plug#end()
 
 " My Settings ==================================================================
 colorscheme wal           " set colorscheme
+set autoindent
 set autoread              " auto read files changed outside vim
 set clipboard=unnamedplus " use the system clipboard
 set colorcolumn=80        " highlight max length column

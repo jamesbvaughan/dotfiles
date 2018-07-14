@@ -32,7 +32,7 @@ main = do
   -- myNormalBorderColor <- readProcess "get_color.sh" [] []
   -- spawn "launch-polybar"
   xmonad $ fullscreenSupport $ kde4Config
-    { terminal = "urxvtc"
+    { terminal = "urxvt"
 
     , workspaces = ["1", "2", "3", "4", "5"]
 
