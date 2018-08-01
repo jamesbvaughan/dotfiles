@@ -33,7 +33,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'pangloss/vim-javascript'
   Plug 'slashmili/alchemist.vim'
   Plug 'tpope/vim-rails'
-
   " These provide actual functionality
   if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -42,13 +41,12 @@ call plug#begin('~/.vim/plugged')
     Plug 'roxma/nvim-yarp'
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
-  Plug 'airblade/vim-gitgutter'
   Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  Plug 'christoomey/vim-tmux-navigator'
   Plug 'easymotion/vim-easymotion'
   Plug 'jamessan/vim-gnupg'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-  Plug 'mhinz/vim-startify'
   Plug 'scrooloose/nerdtree'
   Plug 'ternjs/tern_for_vim'
   Plug 'tpope/vim-commentary'
@@ -123,16 +121,6 @@ nmap <silent> <C-S-n> <Plug>(ale_next_wrap)
 " EasyMotion
 nmap <Leader>f <Plug>(easymotion-overwin-f)
 
-" GitGutter
-set updatetime=250
-let g:gitgutter_sign_added = '•'
-let g:gitgutter_sign_modified = '•'
-let g:gitgutter_sign_removed = '•'
-nnoremap <leader>g :GitGutterSignsToggle<cr>
-hi GitGutterAddDefault ctermbg=0 ctermfg=2
-hi GitGutterChangeDefault ctermbg=0 ctermfg=3
-hi GitGutterDeleteDefault ctermbg=0 ctermfg=1
-
 " Rust
 let g:rustfmt_autosave = 1
 
@@ -140,23 +128,6 @@ let g:rustfmt_autosave = 1
 let g:vimwiki_list = [{'path': '~/Documents/notes',
                      \ 'syntax': 'markdown',
                      \ 'ext': '.md'}]
-
-" Startify
-function! s:filter_header(lines) abort
-    let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
-    let centered_lines = map(copy(a:lines),
-        \ 'repeat(" ", (system("tput cols") / 2) - (longest_line / 2)) . v:val')
-    return centered_lines
-endfunction
-let g:startify_custom_header = s:filter_header(startify#fortune#boxed())
-let g:startify_bookmarks = [ {'v': '~/.vimrc'},
-                           \ {'w': '~/Documents/notes/index.md'},
-                           \ {'p': '~/.config/polybar/config'},
-                           \ {'x': '~/.xmonad/xmonad.hs'},
-                           \ {'b': '~/.bashrc'}]
-let g:startify_change_to_vcs_root = 1
-let g:startify_fortune_use_unicode = 1
-let g:startify_enable_special = 0
 
 " NERDTree
 nnoremap <leader>l :NERDTreeToggle<cr>
@@ -167,6 +138,7 @@ let NERDTreeMinimalUI=1
 if has('nvim')
 else
   set noesckeys " removes some delays in insert mode
+  set inccommand=nosplit
 endif
 
 
@@ -194,3 +166,6 @@ hi VertSplit ctermbg=NONE ctermfg=0
 hi ColorColumn ctermbg=0 ctermfg=NONE
 hi LineNr ctermbg=0 ctermfg=8
 hi CursorLineNr ctermbg=0 ctermfg=8
+hi SignColumn ctermbg=0 ctermfg=NONE
+hi ALEErrorSign ctermbg=0
+hi ALEWarningSign ctermbg=0
