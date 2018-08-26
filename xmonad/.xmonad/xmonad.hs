@@ -29,8 +29,6 @@ incSideGaps amount = do
 decSideGaps amount = incSideGaps (-amount)
 
 main = do
-  -- myNormalBorderColor <- readProcess "get_color.sh" [] []
-  -- spawn "launch-polybar"
   xmonad $ fullscreenSupport $ kde4Config
     { terminal = "urxvt"
 

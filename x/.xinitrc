@@ -16,10 +16,10 @@ export XDG_CONFIG_HOME=$HOME/.config
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 
 # Start the network manager applet
-nm-applet &
+# nm-applet &
 
 # Start blueman
-blueman-applet &
+# blueman-applet &
 
 # Load up some keybindings
 xbindkeys --file ~/.xbindkeysrc
@@ -34,16 +34,16 @@ xset r rate 250 25
 ~/.fehbg &
 
 # Start the kde connect applet
-kdeconnect-indicator &
+# kdeconnect-indicator &
 
 # Start the Syncthing applet
-syncthing-gtk --minimized &
+# syncthing-gtk --minimized &
 
 # Start the screen locker
-xautolock -detectsleep -locker lock.sh &
+# xautolock -detectsleep -locker lock.sh &
 
 # Start the compositor
-compton --daemon --no-fading-openclose
+# compton --daemon --no-fading-openclose
 
 # Start the rxvt-unicode terminal daemon
 urxvtd --quiet --opendisplay --fork
@@ -59,3 +59,4 @@ wal -R
 exec xmonad
 
 # vim: ft=sh:
+# exec startkde
