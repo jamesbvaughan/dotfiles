@@ -136,9 +136,9 @@ let NERDTreeMinimalUI=1
 
 " vim/neovim specific configuration ============================================
 if has('nvim')
+  set inccommand=nosplit
 else
   set noesckeys " removes some delays in insert mode
-  set inccommand=nosplit
 endif
 
 
