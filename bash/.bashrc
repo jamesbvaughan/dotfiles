@@ -23,10 +23,14 @@ source $BASH_DIR/fzf.bash
 source $BASH_DIR/prompt.bash
 source $BASH_DIR/colored-man-pages.bash
 source $BASH_DIR/tmuxinator.bash
-source /usr/share/doc/pkgfile/command-not-found.bash
-source /usr/share/bash-completion/bash_completion
-source /usr/share/nvm/init-nvm.sh
-source ~/.cargo/env
+[ -f /usr/share/doc/pkgfile/command-not-found.bash ] && \
+  source /usr/share/doc/pkgfile/command-not-found.bash
+[ -f /usr/share/bash-completion/bash_completion ] && \
+  source /usr/share/bash-completion/bash_completion
+[ -f /usr/share/nvm/init-nvm.sh ] && \
+  source /usr/share/nvm/init-nvm.sh
+[ -f ~/.cargo/env ] && \
+  source ~/.cargo/env
 
 eval "$(pandoc --bash-completion)"
 
