@@ -1,0 +1,8 @@
+# open terminal
+cmd - return : open -na /Applications/iTerm.app
+
+# focus window
+cmd - h : chunkc tiling::window --focus west
+cmd - j : chunkc tiling::window --focus south
+cmd - k : chunkc tiling::window --focus north
+cmd - l : chunkc tiling::window --focus east
