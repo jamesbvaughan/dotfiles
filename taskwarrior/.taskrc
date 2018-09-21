@@ -1,0 +1,12 @@
+include ~/.task/solarized-dark-256.theme
+include ~/.task/taskdrc
+
+data.location=~/.task
+
+recurrence=off
+
+report.next.labels=ID,P,Project,Tags,Due,Description
+report.next.columns=id,priority,project,tags,due.relative,description.count
+
+context.work=+work
+context=work

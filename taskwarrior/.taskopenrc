@@ -1,0 +1,3 @@
+TASKBIN='task'
+NOTES_FOLDER="$HOME/.tasknotes/"
+NOTES_EXT=".md"
