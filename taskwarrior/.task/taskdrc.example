@@ -1,0 +1,5 @@
+taskd.certificate=~/.task/james.cert.pem
+taskd.key=~/.task/james.key.pem
+taskd.ca=~/.task/ca.cert.pem
+taskd.server=
+taskd.credentials=
