@@ -1,0 +1,56 @@
+#!/bin/bash
+
+chunkc core::log_file stdout
+chunkc core::log_level warn
+chunkc core::plugin_dir ~/.chunkwm_plugins
+
+#
+# NOTE: the following are config variables for the chunkwm-tiling plugin.
+#
+
+chunkc set global_desktop_offset_top     0
+chunkc set global_desktop_offset_bottom  0
+chunkc set global_desktop_offset_left    0
+chunkc set global_desktop_offset_right   0
+chunkc set global_desktop_offset_gap     0
+
+chunkc set bsp_spawn_left                1
+chunkc set bsp_optimal_ratio             1.618
+chunkc set bsp_split_mode                optimal
+chunkc set bsp_split_ratio               0.5
+
+chunkc set monitor_focus_cycle           1
+chunkc set window_focus_cycle            monitor
+
+chunkc set mouse_follows_focus           intrinsic
+chunkc set window_float_next             0
+chunkc set window_region_locked          1
+
+chunkc set mouse_move_window             \"fn 1\"
+chunkc set mouse_resize_window           \"fn 2\"
+chunkc set mouse_motion_interval         35
+
+#
+# NOTE: the following are config variables for the chunkwm-border plugin.
+#
+
+chunkc set focused_border_color          0xfffdf6e3
+chunkc set focused_border_width          5
+chunkc set focused_border_radius         0
+chunkc set focused_border_skip_floating  0
+chunkc set focused_border_skip_monocle   0
+
+#
+# NOTE: the following are config variables for the chunkwm-ffm plugin.
+#
+
+chunkc set ffm_bypass_modifier           fn
+chunkc set ffm_standby_on_float          1
+
+#
+# NOTE: specify plugins to load when chunkwm starts.
+#
+
+chunkc core::load border.so
+chunkc core::load tiling.so
+chunkc core::load ffm.so
