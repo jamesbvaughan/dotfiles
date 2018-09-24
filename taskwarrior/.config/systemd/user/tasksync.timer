@@ -3,7 +3,7 @@ Description=Taskwarrior Sync timer
 
 [Timer]
 OnBootSec=2m
-OnUnitActiveSec=5m
+OnUnitActiveSec=15m
 Unit=tasksync.service
 
 [Install]
