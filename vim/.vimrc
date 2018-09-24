@@ -17,22 +17,17 @@ else
 endif
 
 call plug#begin('~/.vim/plugged')
-  " These just make things pretty
-  Plug 'altercation/vim-colors-solarized'
-  Plug 'dylanaraps/wal.vim'
-  Plug 'sheerun/vim-polyglot'
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-
   " These are plugins for specific languages
   Plug 'digitaltoad/vim-pug'
   Plug 'elixir-lang/vim-elixir'
+  Plug 'elmcast/elm-vim'
   Plug 'fatih/vim-go'
   Plug 'mxw/vim-jsx'
   Plug 'rust-lang/rust.vim'
   Plug 'pangloss/vim-javascript'
   Plug 'slashmili/alchemist.vim'
   Plug 'tpope/vim-rails'
+
   " These provide actual functionality
   if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -55,6 +50,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'vimwiki/vimwiki'
   Plug 'w0rp/ale'
   Plug 'zchee/deoplete-go', { 'do': 'make' }
+
+  " These just make things pretty
+  Plug 'altercation/vim-colors-solarized'
+  Plug 'dylanaraps/wal.vim'
+  Plug 'sheerun/vim-polyglot'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+
 call plug#end()
 
 " My Settings ==================================================================
@@ -133,6 +136,8 @@ let g:vimwiki_list = [{'path': '~/Documents/notes',
 nnoremap <leader>l :NERDTreeToggle<cr>
 let NERDTreeMinimalUI=1
 
+" polyglot
+let g:polyglot_disabled = ['elm']
 
 " vim/neovim specific configuration ============================================
 if has('nvim')

@@ -35,3 +35,5 @@ source $BASH_DIR/tmuxinator.bash
 eval "$(pandoc --bash-completion)"
 
 trap 'echo -en "\e]0;$BASH_COMMAND\007"' DEBUG
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
