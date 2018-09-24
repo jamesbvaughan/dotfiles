@@ -3,3 +3,8 @@ taskd.key=~/.task/james.key.pem
 taskd.ca=~/.task/ca.cert.pem
 taskd.server=
 taskd.credentials=
+
+# have this set for all but one client
+recurrence=off
+
+# vim: ft=taskrc
