@@ -46,3 +46,6 @@ venmo https://venmo.com/jamesbvaughan
 weather https://encrypted.google.com/search?hl=en&q=weather
 yoavz http://yoavz.com/
 youtube https://www.youtube.com/
+unifi https://192.168.1.197:8443/manage/site/default/dashboard
+router https://192.168.1.1/#Dashboard
+pi-hole http://pi.hole/admin/

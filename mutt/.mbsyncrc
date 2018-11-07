@@ -12,5 +12,5 @@ Inbox ~/.mail/Inbox
 Channel fastmail
 Master :fastmail-remote:
 Slave :fastmail-local:
-Patterns "INBOX" "Sent" "Drafts" "Apartment Hunting"
+Patterns "INBOX" "Archive" "Sent" "Drafts" "Apartment Hunting" "Work"
 Create Both

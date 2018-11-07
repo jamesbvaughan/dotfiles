@@ -1,5 +1,6 @@
 # vim: ft=neomuttrc
 source ~/.mutt/james-solarized.muttrc
+source ~/.mutt/gpgrc
 
 # mail stuff
 set from=james@jamesbvaughan.com
@@ -10,7 +11,7 @@ set record=+Sent
 set postponed=+Drafts
 set reverse_name
 alternates @jamesbvaughan\.com
-mailboxes "+Inbox" "+Sent" "+Drafts" "+Apartment Hunting"
+mailboxes "+Inbox" "+Archive" "+Sent" "+Drafts" "+Apartment Hunting" "+Work"
 
 # Cache
 set header_cache=~/.cache/mutt
@@ -39,7 +40,7 @@ set folder_format="%2C %N %f"
 set include
 set index_format="%S %-17.17F %?M?(%M)? %s %* %<[y?%<[m?%<[d?%[%H:%M ]&%[%a %d]>&%[%b %d]>&%[%m/%y ]>"
 set quit
-set sort=reverse-threads
+set sort=threads
 set sort_aux=last-date-received
 set sleep_time=0
 set status_format="%f (%u unread, %m total)"

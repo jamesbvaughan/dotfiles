@@ -78,6 +78,7 @@ c.url.searchengines = {
     'y': 'https://youtube.com/results?search_query={}',
     'a': 'https://smile.amazon.com/s?field-keywords={}',
     'r': 'https://reddit.com/r/{}',
+    'm': 'https://www.reddit.com/me/m/{}'
 }
 
 # c.zoom.default = '150%'
