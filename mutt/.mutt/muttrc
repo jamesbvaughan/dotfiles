@@ -1,45 +1,49 @@
 # vim: ft=neomuttrc
 source ~/.mutt/james-solarized.muttrc
-source ~/.mutt/mailboxes
+source ~/.mutt/gpgrc
 
-# Gmail stuff
-set mbox_type = Maildir
-set spoolfile = "+INBOX"
-set postponed = "+drafts"
-unset record
-alternates yoyovaughan@gmail.com james@jamesbvaughan.com
+# mail stuff
+set from=james@jamesbvaughan.com
+set mbox_type=Maildir
+set folder=~/.mail
+set spoolfile=+Inbox
+set record=+Sent
+set postponed=+Drafts
+set reverse_name
+alternates @jamesbvaughan\.com
+mailboxes "+Inbox" "+Archive" "+Sent" "+Drafts" "+Apartment Hunting" "+Work"
 
 # Cache
-set header_cache = ~/.cache/mutt
-set message_cachedir = ~/.cache/mutt/messages
+set header_cache=~/.cache/mutt
+set message_cachedir=~/.cache/mutt/messages
 
 # Mailcap stuff
 set implicit_autoview
-set mailcap_path = ~/.mailcap
+set mailcap_path=~/.mailcap
 auto_view text/html
 alternative_order text/plain text/html
 
 # Pager settings
-set pager_format = "%n: %s"
+set pager_format="%n: %s"
 set pager_stop
-set pager_context = 5
+set pager_context=5
 unset markers
 
 # General Interface Settingsse
-set abort_noattach = ask-yes
+set abort_noattach=ask-yes
 set arrow_cursor
-set date_format = "%a, %b %d, %Y at %H:%M"
+set date_format="%a, %b %d, %Y at %H:%M"
 set delete
-set editor = "nvim"
+set editor="nvim"
 set fast_reply
-set folder_format = "%2C %N %f"
+set folder_format="%2C %N %f"
 set include
-set index_format = "%S %-17.17F %?M?(%M)? %s %* %<[y?%<[m?%<[d?%[%H:%M ]&%[%a %d]>&%[%b %d]>&%[%m/%y ]>"
+set index_format="%S %-17.17F %?M?(%M)? %s %* %<[y?%<[m?%<[d?%[%H:%M ]&%[%a %d]>&%[%b %d]>&%[%m/%y ]>"
 set quit
-set sort = threads
-set sort_aux = last-date-received
-set sleep_time = 0
-set status_format = "%f (%u unread, %m total)"
+set sort=threads
+set sort_aux=last-date-received
+set sleep_time=0
+set status_format="%f (%u unread, %m total)"
 set status_on_top
 set strict_threads
 unset collapse_unread
@@ -68,4 +72,5 @@ bind index,pager y save-message
 
 # Macros
 macro index h '<change-folder>?'
-macro index,pager i '<change-folder>=INBOX<enter>'
+macro index,pager i '<change-folder>=Inbox<enter>'
+macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'

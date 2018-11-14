@@ -1,0 +1,7 @@
+[Unit]
+Description=Taskwarrior Sync service
+After=network.target network-online.target dbus.socket
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/task sync
