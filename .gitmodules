@@ -1,0 +1,3 @@
+[submodule "sway/.config/i3blocks"]
+	path = sway/.config/i3blocks
+	url = git@github.com:vivien/i3blocks-contrib.git
