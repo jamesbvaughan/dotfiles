@@ -1,9 +1,9 @@
 # open terminal
-cmd - return : open -na /Applications/iTerm.app
+cmd + shift - return : open -na /Applications/iTerm.app
 
 # focus window
 cmd - j : chunkc tiling::window --focus next
-cmd - k : chunkc tiling::window --focus prev
+# cmd - k : chunkc tiling::window --focus prev
 
 # toggle fullscreen
 cmd + shift - space : chunkc tiling::window --toggle fullscreen
@@ -18,7 +18,7 @@ cmd + shift - l : chunkc tiling::window --warp east
 cmd + shift - 1 : chunkc tiling::window --send-to-desktop 1
 cmd + shift - 2 : chunkc tiling::window --send-to-desktop 2
 cmd + shift - 3 : chunkc tiling::window --send-to-desktop 3
-cmd + shift - 4 : chunkc tiling::window --send-to-desktop 4
+# cmd + shift - 4 : chunkc tiling::window --send-to-desktop 4
 cmd + shift - 5 : chunkc tiling::window --send-to-desktop 5
 
 # close window

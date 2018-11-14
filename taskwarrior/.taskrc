@@ -5,8 +5,12 @@ data.location=~/.task
 
 recurrence=off
 
-report.next.labels=ID,P,Project,Tags,Due,Description
-report.next.columns=id,priority,project,tags,due.relative,description.count
+urgency.user.project.lunches.coefficient=-8.0
+
+report.next.labels=ID,Active,Age,Deps,P,Project,Tags,Due,Description,Urg
+report.next.columns=id,start.age,entry.age,depends,priority,project,tags,due.relative,description.count,urgency
 
 context.work=+work
 context=work
+
+# vim: ft=dosini
