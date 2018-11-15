@@ -1,13 +1,19 @@
 include ~/.task/solarized-dark-256.theme
 include ~/.task/taskdrc
+include ~/.task/context
 
-report.next.columns=id,start.age,depends,priority,project,tags,scheduled.countdown,due.relative,until.remaining,description.count,urgency
-report.next.labels=ID,Active,Deps,P,Project,Tags,S,Due,Until,Description,Urg
+report.next.labels=ID,Active,Age,Deps,P,Project,Tags,S,Due,Until,Description,Urg
+report.next.columns=id,start.age,entry.age,depends,priority,project,tags,scheduled.countdown,due.relative,until.remaining,description.count,urgency
+
+recurrence=off
+
+urgency.user.project.lunches.coefficient=-8.0
+
+context.work=+work
+context.home=-work
 
 color.alternate=on black
 color.tagged=
 color.due=
 
-context.work=+work
-context.home=-work
-context=home
+# vim: ft=dosini

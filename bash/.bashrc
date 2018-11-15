@@ -6,7 +6,7 @@ esac
 
 export GOPATH=~/go
 export PATH="$HOME/.bin:$GOPATH/bin:$HOME/.yarn/bin:$HOME/.npm-global/bin:$HOME/.gem/ruby/2.5.0/bin:$HOME/.local/bin:$PATH"
-export EDITOR=vim
+export EDITOR=nvim
 export HISTCONTROL=erasedups
 export HISTFILESIZE=20000
 export HISTSIZE=10000
