@@ -1,0 +1,171 @@
+### Startup Applications
+
+exec xrdb ~/.Xresources
+exec urxvtd -q -f -o
+exec wal -R
+
+
+### Variables
+
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+
+set $term urxvtc
+set $menu rofi -show combi
+
+
+### Window configuration
+
+default_border none
+smart_gaps on
+gaps inner 10
+
+
+### Output configuration
+
+output * bg ~/Downloads/pics/mountain-trees.jpg fill
+output eDP-1 scale 1
+
+
+### Font
+
+font pango:DejaVu Sans Mono 24px
+
+
+### Input configuration (man sway-input)
+
+input "1739:0:Synaptics_TM3289-002" {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+}
+
+input "1:1:AT_Translated_Set_2_keyboard" {
+  repeat_delay 200
+  repeat_rate 40
+}
+
+
+### Key bindings
+
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+c kill
+bindsym $mod+space exec $menu
+bindsym $mod+p exec rofi-pass
+bindsym $mod+q reload
+bindsym $mod+Shift+q exit
+
+floating_modifier $mod normal
+
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+bindsym $mod+tab workspace next
+bindsym $mod+Shift+tab workspace prev
+
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# bindsym $mod+| splith
+# bindsym $mod+- splitv
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+f fullscreen
+
+bindsym $mod+Shift+space floating toggle
+
+# bindsym $mod+space focus mode_toggle
+
+bindsym $mod+a focus parent
+
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks 
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
+
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10 px or 10 ppt
+    bindsym $down resize grow height 10 px or 10 ppt
+    bindsym $up resize shrink height 10 px or 10 ppt
+    bindsym $right resize grow width 10 px or 10 ppt
+
+    # return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+  status_command SCRIPT_DIR=~/.config/i3blocks i3blocks
+  position top
+  colors {
+    background #002b36
+    statusline #839496
+    separator  #586e75
+    focused_workspace  #b58900 #b58900 #002b36
+    active_workspace   #586e75 #586e75 #002b36
+    inactive_workspace #073642 #002b36 #839496
+    urgent_workspace   #dc322f #dc322f #fdf6e3
+  }
+  font pango:DejaVu Sans Mono 24px
+}
+
+client.focused          #002b36 #586e75 #fdf6e3 #268bd2 #586e75
+client.focused_inactive #002b36 #073642 #839496 #073642 #073642
+client.unfocused        #002b36 #073642 #839496 #073642 #073642
+client.urgent           #002b36 #dc322f #fdf6e3 #002b36 #dc322f
