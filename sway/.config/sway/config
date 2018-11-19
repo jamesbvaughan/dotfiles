@@ -1,3 +1,5 @@
+include "$HOME/.cache/wal/colors-sway"
+
 ### Startup Applications
 
 exec xrdb ~/.Xresources
@@ -17,17 +19,36 @@ set $term urxvtc
 set $menu rofi -show combi
 
 
+### Xresources colors
+
+set $fg      $foreground
+set $bg      $background
+set $black   $color0
+set $red     $color1
+set $green   $color2
+set $yellow  $color3
+set $blue    $color4
+set $pink    $color5
+set $cyan    $color6
+
+#                       border  bg       text     indicator child_border
+client.focused          $bg     $bg      $bg      $bg       $fg 
+client.focused_inactive $bg     $bg      $bg      $bg       $color8   
+client.unfocused        $bg     $bg      $bg      $bg       $black   
+client.urgent           $bg     $bg      $bg      $bg       $red   
+
+
 ### Window configuration
 
-default_border none
-smart_gaps on
-gaps inner 10
+default_border pixel 5
+hide_edge_borders both
+# smart_gaps on
+# gaps inner 10
 
 
 ### Output configuration
 
 output * bg ~/Downloads/pics/mountain-trees.jpg fill
-output eDP-1 scale 1
 
 
 ### Font
@@ -96,8 +117,8 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-# bindsym $mod+| splith
-# bindsym $mod+- splitv
+bindsym $mod+bar splith
+bindsym $mod+minus splitv
 
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
@@ -105,28 +126,18 @@ bindsym $mod+e layout toggle split
 
 bindsym $mod+f fullscreen
 
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+space layout toggle splitv splith
 
 # bindsym $mod+space focus mode_toggle
 
 bindsym $mod+a focus parent
+bindsym $mod+z focus child
 
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks 
 bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
 
-#
-# Scratchpad:
-#
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
 
-    # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
-
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
 #
 # Resizing containers:
 #
@@ -154,18 +165,13 @@ bar {
   status_command SCRIPT_DIR=~/.config/i3blocks i3blocks
   position top
   colors {
-    background #002b36
-    statusline #839496
-    separator  #586e75
-    focused_workspace  #b58900 #b58900 #002b36
-    active_workspace   #586e75 #586e75 #002b36
-    inactive_workspace #073642 #002b36 #839496
-    urgent_workspace   #dc322f #dc322f #fdf6e3
+    background $bg    
+    statusline $color12
+    separator  $color10 
+    focused_workspace  $yellow  $yellow  $bg    
+    active_workspace   $color10 $color10 $bg    
+    inactive_workspace $red     $bg      $color12
+    urgent_workspace   $red     $red     $color15
   }
   font pango:DejaVu Sans Mono 24px
 }
-
-client.focused          #002b36 #586e75 #fdf6e3 #268bd2 #586e75
-client.focused_inactive #002b36 #073642 #839496 #073642 #073642
-client.unfocused        #002b36 #073642 #839496 #073642 #073642
-client.urgent           #002b36 #dc322f #fdf6e3 #002b36 #dc322f
