@@ -1,0 +1,177 @@
+include "$HOME/.cache/wal/colors-sway"
+
+### Startup Applications
+
+exec xrdb ~/.Xresources
+exec urxvtd -q -f -o
+exec wal -R
+
+
+### Variables
+
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+
+set $term urxvtc
+set $menu rofi -show combi
+
+
+### Xresources colors
+
+set $fg      $foreground
+set $bg      $background
+set $black   $color0
+set $red     $color1
+set $green   $color2
+set $yellow  $color3
+set $blue    $color4
+set $pink    $color5
+set $cyan    $color6
+
+#                       border  bg       text     indicator child_border
+client.focused          $bg     $bg      $bg      $bg       $fg 
+client.focused_inactive $bg     $bg      $bg      $bg       $color8   
+client.unfocused        $bg     $bg      $bg      $bg       $black   
+client.urgent           $bg     $bg      $bg      $bg       $red   
+
+
+### Window configuration
+
+default_border pixel 5
+hide_edge_borders both
+# smart_gaps on
+# gaps inner 10
+
+
+### Output configuration
+
+output * bg ~/Downloads/pics/mountain-trees.jpg fill
+
+
+### Font
+
+font pango:DejaVu Sans Mono 24px
+
+
+### Input configuration (man sway-input)
+
+input "1739:0:Synaptics_TM3289-002" {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+}
+
+input "1:1:AT_Translated_Set_2_keyboard" {
+  repeat_delay 200
+  repeat_rate 40
+}
+
+
+### Key bindings
+
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+c kill
+bindsym $mod+space exec $menu
+bindsym $mod+p exec rofi-pass
+bindsym $mod+q reload
+bindsym $mod+Shift+q exit
+
+floating_modifier $mod normal
+
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+bindsym $mod+tab workspace next
+bindsym $mod+Shift+tab workspace prev
+
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+bindsym $mod+bar splith
+bindsym $mod+minus splitv
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+f fullscreen
+
+bindsym $mod+Shift+space layout toggle splitv splith
+
+# bindsym $mod+space focus mode_toggle
+
+bindsym $mod+a focus parent
+bindsym $mod+z focus child
+
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks 
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
+
+
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10 px or 10 ppt
+    bindsym $down resize grow height 10 px or 10 ppt
+    bindsym $up resize shrink height 10 px or 10 ppt
+    bindsym $right resize grow width 10 px or 10 ppt
+
+    # return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+  status_command SCRIPT_DIR=~/.config/i3blocks i3blocks
+  position top
+  colors {
+    background $bg    
+    statusline $color12
+    separator  $color10 
+    focused_workspace  $yellow  $yellow  $bg    
+    active_workspace   $color10 $color10 $bg    
+    inactive_workspace $red     $bg      $color12
+    urgent_workspace   $red     $red     $color15
+  }
+  font pango:DejaVu Sans Mono 24px
+}

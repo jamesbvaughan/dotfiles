@@ -53,6 +53,7 @@ call plug#begin('~/.vim/plugged')
 
   " These just make things pretty
   Plug 'altercation/vim-colors-solarized'
+  Plug 'dracula/vim', {'as':'dracula'}
   Plug 'dylanaraps/wal.vim'
   Plug 'sheerun/vim-polyglot'
   Plug 'vim-airline/vim-airline'
@@ -62,6 +63,7 @@ call plug#end()
 
 " My Settings ==================================================================
 colorscheme wal           " set colorscheme
+set background=dark
 set autoindent
 set autoread              " auto read files changed outside vim
 set clipboard=unnamedplus " use the system clipboard
@@ -80,7 +82,7 @@ set nobackup              " no backup files
 set noshowmode            " doesn't show the current mode in the command bar
 set noswapfile            " no swap files
 set number                " show line numbers
-set relativenumber        " show relative line numbers
+" set relativenumber        " show relative line numbers
 set scrolljump=1          " scroll 1 line at a time
 set scrolloff=5           " start scrolling 5 lines before bottom of pane
 set shiftwidth=2          " shift lines by 2 characters
@@ -109,7 +111,7 @@ let g:airline_right_alt_sep = ''
 let g:airline_powerline_fonts = 1
 let g:airline_section_y = ''
 let g:airline_skip_empty_sections = 1
-let g:airline_theme = 'solarized'
+" let g:airline_theme = 'dracula'
 
 " FZF
 nmap <C-p> :Files<cr>
@@ -162,15 +164,16 @@ nnoremap <leader>p :set paste!<cr>|                          " toggle paste mode
 nnoremap <leader>r :source ~/.vimrc<cr>|                     " reload vimrc
 nnoremap <leader>s :setlocal spell! spelllang=en_us<cr>|     " toggle spell checking
 nnoremap <leader>w :set wrap!<cr>|                           " toggle word wrap
-nnoremap <leader>n :set number!<cr>:set relativenumber!<cr>| " toggle line numbers
+" nnoremap <leader>n :set number!<cr>:set relativenumber!<cr>| " toggle line numbers
+nnoremap <leader>n :set number!<cr>|                         " toggle line numbers
 nnoremap <leader>v :e ~/.vimrc<cr>|                          " open vimrc
 vnoremap <leader>a :sort<cr>|                                " sort lines
 
 " my colors (expanding from wal)
-hi VertSplit ctermbg=NONE ctermfg=0
-hi ColorColumn ctermbg=0 ctermfg=NONE
-hi LineNr ctermbg=0 ctermfg=8
-hi CursorLineNr ctermbg=0 ctermfg=8
-hi SignColumn ctermbg=0 ctermfg=NONE
-hi ALEErrorSign ctermbg=0
-hi ALEWarningSign ctermbg=0
+" hi VertSplit ctermbg=NONE ctermfg=8
+" hi ColorColumn ctermbg=0 ctermfg=NONE
+" hi LineNr ctermbg=8 ctermfg=7
+" hi CursorLineNr ctermbg=8 ctermfg=2
+" hi SignColumn ctermbg=8 ctermfg=0
+" hi ALEErrorSign ctermbg=0
+" hi ALEWarningSign ctermbg=0
