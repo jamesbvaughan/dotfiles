@@ -1,18 +1,21 @@
 # open terminal
-cmd + shift - return : open -na /Applications/iTerm.app
+cmd + shift - return : open -na /Applications/Alacritty.app
 
 # focus window
 cmd - j : chunkc tiling::window --focus next
-# cmd - k : chunkc tiling::window --focus prev
 
 # toggle fullscreen
 cmd + shift - space : chunkc tiling::window --toggle fullscreen
 
+# switch layout
+cmd - b : chunkc tiling::desktop --layout bsp
+cmd - m : chunkc tiling::desktop --layout monocle
+
 # move window
-cmd + shift - h : chunkc tiling::window --warp west
-cmd + shift - j : chunkc tiling::window --warp south
-cmd + shift - k : chunkc tiling::window --warp north
-cmd + shift - l : chunkc tiling::window --warp east
+# cmd + shift - h : chunkc tiling::window --warp west
+cmd + shift - j : chunkc tiling::window --warp next
+# cmd + shift - k : chunkc tiling::window --warp north
+# cmd + shift - l : chunkc tiling::window --warp east
 
 # send window to desktop
 cmd + shift - 1 : chunkc tiling::window --send-to-desktop 1
@@ -22,7 +25,7 @@ cmd + shift - 3 : chunkc tiling::window --send-to-desktop 3
 cmd + shift - 5 : chunkc tiling::window --send-to-desktop 5
 
 # close window
-# cmd + shift - b : chunkc tiling::window --close
+cmd + shift - c : chunkc tiling::window --close
 
 # switch desktop
 # cmd - tab : chunkc tiling::desktop --focus next

@@ -8,6 +8,8 @@ chunkc core::plugin_dir ~/.chunkwm_plugins
 # NOTE: the following are config variables for the chunkwm-tiling plugin.
 #
 
+chunkc set global_desktop_mode monocle
+
 chunkc set global_desktop_offset_top     0
 chunkc set global_desktop_offset_bottom  0
 chunkc set global_desktop_offset_left    0
@@ -38,7 +40,7 @@ chunkc set focused_border_color          0xfffdf6e3
 chunkc set focused_border_width          5
 chunkc set focused_border_radius         0
 chunkc set focused_border_skip_floating  0
-chunkc set focused_border_skip_monocle   0
+chunkc set focused_border_skip_monocle   1
 
 #
 # NOTE: the following are config variables for the chunkwm-ffm plugin.
