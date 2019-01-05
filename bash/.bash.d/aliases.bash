@@ -5,6 +5,7 @@ alias vim="nvim"
 alias mutt="neomutt"
 alias cdbark='cd $GOPATH/src/github.com/jamesbvaughan/bark'
 alias tmux='tmux -u'
+alias wifi='nmtui-connect'
 
 # Git
 alias gc="git commit"
