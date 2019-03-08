@@ -48,7 +48,7 @@ hide_edge_borders both
 
 ### Output configuration
 
-output * bg ~/Downloads/pics/mountain-trees.jpg fill
+# output * bg ~/Downloads/pics/mountain-trees.jpg fill
 
 
 ### Font
