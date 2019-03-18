@@ -47,7 +47,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
-  Plug 'vimwiki/vimwiki'
   Plug 'w0rp/ale'
   Plug 'zchee/deoplete-go', { 'do': 'make' }
 
@@ -63,7 +62,6 @@ call plug#end()
 
 " My Settings ==================================================================
 colorscheme wal           " set colorscheme
-set background=dark
 set autoindent
 set autoread              " auto read files changed outside vim
 set clipboard=unnamedplus " use the system clipboard
@@ -82,7 +80,6 @@ set nobackup              " no backup files
 set noshowmode            " doesn't show the current mode in the command bar
 set noswapfile            " no swap files
 set number                " show line numbers
-" set relativenumber        " show relative line numbers
 set scrolljump=1          " scroll 1 line at a time
 set scrolloff=5           " start scrolling 5 lines before bottom of pane
 set shiftwidth=2          " shift lines by 2 characters
@@ -128,11 +125,6 @@ nmap <Leader>f <Plug>(easymotion-overwin-f)
 
 " Rust
 let g:rustfmt_autosave = 1
-
-" Vimwiki
-let g:vimwiki_list = [{'path': '~/Documents/notes',
-                     \ 'syntax': 'markdown',
-                     \ 'ext': '.md'}]
 
 " NERDTree
 nnoremap <leader>l :NERDTreeToggle<cr>
