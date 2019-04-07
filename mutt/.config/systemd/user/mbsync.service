@@ -1,7 +1,0 @@
-[Unit]
-Description=Mailbox synchronization service
-After=network.target network-online.target dbus.socket
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/mbsync -Va

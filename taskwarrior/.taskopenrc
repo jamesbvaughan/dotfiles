@@ -1,5 +1,0 @@
-EDITOR='vim'
-TASKBIN='task'
-NOTES_FOLDER="$HOME/.tasknotes/"
-NOTES_EXT=".md"
-PATH_EXT=/usr/share/taskopen/scripts
