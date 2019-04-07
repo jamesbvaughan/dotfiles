@@ -6,8 +6,8 @@ export PATH="$HOME/.bin:$HOME/.yarn/bin:$HOME/.npm-global/bin:$PATH:$HOME/.gem/r
 # export GDK_DPI_SCALE=1.5
 
 # Start GNOME Keyring
-eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-export SSH_AUTH_SOCK
+# eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+# export SSH_AUTH_SOCK
 
 # XDG Directories
 export XDG_CONFIG_HOME=$HOME/.config
@@ -22,7 +22,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 # blueman-applet &
 
 # Load up some keybindings
-xbindkeys --file ~/.xbindkeysrc
+# xbindkeys --file ~/.xbindkeysrc
 
 # Disable the system beep
 xset -b
@@ -31,7 +31,7 @@ xset -b
 xset r rate 250 25
 
 # Set the desktop wallpaper
-~/.fehbg &
+# ~/.fehbg &
 
 # Start the kde connect applet
 # kdeconnect-indicator &
@@ -53,10 +53,10 @@ xinput --set-prop 'SynPS/2 Synaptics TouchPad' \
                   'libinput Natural Scrolling Enabled' 1
 
 # Set the colors
-wal -R
+# wal -R
 
 # Finally, start the window manager!
-exec xmonad
+exec i3
 
 # vim: ft=sh:
 # exec startkde

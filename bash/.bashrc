@@ -11,6 +11,8 @@ export HISTCONTROL=erasedups
 export HISTFILESIZE=20000
 export HISTSIZE=10000
 export BASH_DIR=~/.bash.d
+export PG_OF_PATH=/home/james/Downloads/of_v0.10.1_linux64gcc6_release
+export OF_ROOT=/home/james/Downloads/of_v0.10.1_linux64gcc6_release
 
 shopt -s autocd
 shopt -s checkwinsize
