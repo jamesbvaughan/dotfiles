@@ -6,7 +6,7 @@ FILES=$(fd -e pdf '' $HOME)
 # Filter out the beginning of the paths and the file extension
 # and pass those files to rofi for the user to select from.
 FILE_INDEX=$(echo "$FILES" \
-  | sed -e "s#$HOME/\(.*\)\.pdf#\1#g" \
+  | sed -e "s#$HOME/\(.*\)\.pdf#\1#gi" \
   | rofi -dmenu -i -p " PDF" -format d)
 
 # If the user selected a file, open it up!

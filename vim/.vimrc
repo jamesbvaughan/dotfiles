@@ -27,6 +27,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'pangloss/vim-javascript'
   Plug 'slashmili/alchemist.vim'
   Plug 'tpope/vim-rails'
+  Plug 'sophacles/vim-processing'
 
   " These provide actual functionality
   if has('nvim')
@@ -143,6 +144,7 @@ endif
 
 " My Keybindings ===============================================================
 nnoremap Q @@
+nnoremap <C-m> :make<cr>
 nnoremap <C-h>     :wincmd h<cr>|                            " window left
 nnoremap <C-j>     :wincmd j<cr>|                            " window below
 nnoremap <C-k>     :wincmd k<cr>|                            " window above
