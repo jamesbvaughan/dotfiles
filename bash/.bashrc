@@ -5,7 +5,7 @@ case $- in
 esac
 
 export GOPATH=~/go
-export PATH="$HOME/.bin:$GOPATH/bin:$HOME/.yarn/bin:$HOME/.npm-global/bin:$HOME/.gem/ruby/2.5.0/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.bin:$GOPATH/bin:$HOME/.yarn/bin:$HOME/.npm-global/bin:$HOME/.rbenv/shims:$HOME/.local/bin:/usr/local/opt/coreutils/libexec/gnubin:$HOME/Library/Python/3.7/bin:$PATH"
 export EDITOR=nvim
 export HISTCONTROL=erasedups
 export HISTFILESIZE=20000
@@ -32,8 +32,9 @@ source $BASH_DIR/tmuxinator.bash
 [ -f ~/.cargo/env ] && \
   source ~/.cargo/env
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# heroku autocomplete setup
+HEROKU_AC_BASH_SETUP_PATH=/Users/james/Library/Caches/heroku/autocomplete/bash_setup && test -f $HEROKU_AC_BASH_SETUP_PATH && source $HEROKU_AC_BASH_SETUP_PATH;

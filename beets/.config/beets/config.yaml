@@ -1,24 +1,17 @@
-directory: ~/Music
+directory: ~/Music/Music/Media.localized
 
-library: ~/Music/library.db
+library: ~/Music/Music/beets-library.db
 
 import:
   move: yes
 
+duplicates:
+  delete: yes
+
+match:
+  strong_rec_thresh: 0.10
+
 ui:
   color: yes
 
-plugins: fetchart lyrics smartplaylist mpdupdate
-
-smartplaylist:
-  relative_to: ~/Music
-  playlist_dir: ~/.config/mpd/playlists
-  playlists:
-    - name: Recently Added.m3u
-      query: added:-6m.. added-
-
-    - name: Long Songs.m3u
-      query: length:8:00.. length-
-
-    - name: Vulfy Stuff.m3u
-      query: 'vulfpeck , joey\ dosik , woody\ goss , theo\ katzman , fearless\ flyers year+'
+plugins: fetchart lyrics

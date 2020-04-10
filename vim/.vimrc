@@ -22,9 +22,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'elixir-lang/vim-elixir'
   Plug 'elmcast/elm-vim'
   Plug 'fatih/vim-go'
-  Plug 'mxw/vim-jsx'
+  " Plug 'mxw/vim-jsx'
   Plug 'rust-lang/rust.vim'
-  Plug 'pangloss/vim-javascript'
+  " Plug 'pangloss/vim-javascript'
   Plug 'slashmili/alchemist.vim'
   Plug 'tpope/vim-rails'
   Plug 'sophacles/vim-processing'
@@ -62,7 +62,7 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 " My Settings ==================================================================
-colorscheme wal           " set colorscheme
+" colorscheme wal           " set colorscheme
 set autoindent
 set autoread              " auto read files changed outside vim
 set clipboard=unnamedplus " use the system clipboard
