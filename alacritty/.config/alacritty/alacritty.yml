@@ -11,9 +11,6 @@ scrolling:
   # scrollback is enabled (history > 0).
   multiplier: 3
 
-  # Scrolling in things like `man`
-  faux_multiplier: 3
-
 # Font configuration (changes require restart)
 font:
   normal:
@@ -67,7 +64,7 @@ visual_bell:
   animation: EaseOutExpo
   duration: 50
 
-background_opacity: 0.8
+# background_opacity: 0.8
 
 live_config_reload: true
 

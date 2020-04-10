@@ -1,19 +1,65 @@
 # etc
-alias ls="ls --color=auto --file-type --human-readable"
+alias ls="ls -G --color"
 alias grep="grep --color"
 alias vim="nvim"
 alias mutt="neomutt"
 alias cdbark='cd $GOPATH/src/github.com/jamesbvaughan/bark'
 alias tmux='tmux -u'
-alias wifi='nmtui-connect'
+alias ber='bundle exec ruby'
 
 # Git
+alias gb="git branch"
 alias gc="git commit"
-alias gcm="git commit -m"
+alias gcl="git clone"
+alias gcm="git checkout master"
+alias gco="git checkout"
+alias gd="git diff"
+alias gf="git fetch"
 alias gi="git init"
-alias gp="git push"
+alias gl="git log --pretty --oneline --abbrev-commit --graph --color"
+alias gp="git push origin \$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)"
+alias gpl="git pull"
 alias gs="git status"
 alias gx="git add . && git commit -m"
+alias gamp="git commit . --amend --no-edit && git push --force origin \$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)"
+alias prune="git branch --merged master | grep -v master | xargs -n 1 git branch -d"
+alias stash="git stash"
+alias pop="git stash pop"
+alias pr="hub pull-request"
+
+function gsha() {
+  local sha=`git rev-parse HEAD`
+  echo $sha | tr -d "\n" | pbcopy
+  echo $sha
+}
+
+function ship2() {
+  local branch="jamesbvaughan/DND-$1"
+  echo $branch
+  # git checkout -b $branch \
+  #   && git add . \
+  #   && git commit \
+  #   && git push origin $branch \
+  #   && hub pull-request
+}
+
+function hack() {
+  local branch=$(git branch | grep -v '*' | fzf --no-preview)
+  git checkout $branch
+}
+function bdel() {
+  local branch=$(git branch | grep -v '*' | fzf --no-preview)
+  git branch -D $branch
+}
+function merge() {
+  local branch=$(git branch | grep -v '*' | fzf --no-preview)
+  git stash \
+    && git pull \
+    && git merge --no-edit $branch \
+    && git push \
+    && prune \
+    && git stash pop
+}
 
 # NPM
 alias ni="npm install"
@@ -21,6 +67,12 @@ alias nig="npm install --global"
 alias nis="npm install --save"
 alias nisd="npm install --save-dev"
 alias ns="npm start"
+
+# TaskWarrior
+alias taw="task add +work"
+alias t="task"
+alias ta="task add"
+alias to="taskopen"
 
 # Systemd
 alias sdr="sudo systemctl daemon-reload"
