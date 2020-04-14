@@ -1,6 +1,12 @@
 " James' vim config
 set nocompatible
 
+" Load extra config
+let $extra_config = '~/.vimrc.extra'
+if filereadable($extra_config)
+  source $extra_config
+endif
+
 " Download vim-plug if missing
 if has('nvim')
   if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
@@ -22,9 +28,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'elixir-lang/vim-elixir'
   Plug 'elmcast/elm-vim'
   Plug 'fatih/vim-go'
-  " Plug 'mxw/vim-jsx'
+  Plug 'mxw/vim-jsx'
   Plug 'rust-lang/rust.vim'
-  " Plug 'pangloss/vim-javascript'
+  Plug 'pangloss/vim-javascript'
   Plug 'slashmili/alchemist.vim'
   Plug 'tpope/vim-rails'
   Plug 'sophacles/vim-processing'
@@ -32,24 +38,26 @@ call plug#begin('~/.vim/plugged')
   " These provide actual functionality
   if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'sbdchd/neoformat'
   else
     Plug 'Shougo/deoplete.nvim'
     Plug 'roxma/nvim-yarp'
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
+  Plug 'airblade/vim-gitgutter'
   Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'easymotion/vim-easymotion'
   Plug 'jamessan/vim-gnupg'
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim'
   Plug 'prettier/vim-prettier', {
     \ 'do': 'yarn install',
     \ 'for': ['ruby', 'javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
   Plug 'scrooloose/nerdtree'
   Plug 'ternjs/tern_for_vim'
   Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-rhubarb'
   Plug 'tpope/vim-surround'
   Plug 'w0rp/ale'
   Plug 'zchee/deoplete-go', { 'do': 'make' }
@@ -57,17 +65,16 @@ call plug#begin('~/.vim/plugged')
   " These just make things pretty
   Plug 'altercation/vim-colors-solarized'
   Plug 'dracula/vim', {'as':'dracula'}
-  Plug 'dylanaraps/wal.vim'
   Plug 'sheerun/vim-polyglot'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-
 call plug#end()
 
 " My Settings ==================================================================
-" colorscheme wal           " set colorscheme
+colorscheme dracula       " set colorscheme
 set autoindent
 set autoread              " auto read files changed outside vim
+set breakindent           " indent line wraps
 set clipboard=unnamedplus " use the system clipboard
 set colorcolumn=80        " highlight max length column
 set encoding=utf-8        " set encoding
@@ -79,6 +86,7 @@ set hlsearch              " highlight the search query
 set ignorecase            " case insensitive searching
 set laststatus=2          " always show airline
 set lazyredraw            " don't redraw during macro execution
+set linebreak             " break on word boundaries
 set mouse=a               " enable the mouse
 set nobackup              " no backup files
 set noshowmode            " doesn't show the current mode in the command bar
@@ -119,13 +127,29 @@ let g:airline_skip_empty_sections = 1
 " let g:airline_theme = 'dracula'
 
 " FZF
-nmap <C-p> :Files<cr>
+set runtimepath+=/usr/local/opt/fzf
+nmap <C-p> :FZF<cr>
+let g:fzf_layout = { 'down': '~30%' }
+let g:fzf_colors = {
+  \ 'bg+':     ['bg', 'Normal'],
+  \ 'info':    ['bg', 'Normal'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment']
+  \ }
+
+" hide the statusbar for fzf
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " Ale
 let g:ale_sign_column_always = 1
-let g:ale_sign_error = '✗'
+let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '➜'
-let g:ale_linter_aliases = {'vimwiki': 'markdown'}
 nmap <silent> <C-S-n> <Plug>(ale_next_wrap)
 
 " EasyMotion
@@ -138,8 +162,14 @@ let g:rustfmt_autosave = 1
 nnoremap <leader>l :NERDTreeToggle<cr>
 let NERDTreeMinimalUI=1
 
+" fugitive
+noremap gh :Gbrowse<cr>
+
 " polyglot
 let g:polyglot_disabled = ['elm']
+
+" help mode settings ===========================================================
+autocmd FileType help noremap <buffer> q :q<cr>
 
 " vim/neovim specific configuration ============================================
 if has('nvim')
@@ -159,7 +189,7 @@ nnoremap <C-l>     :wincmd l<cr>|                            " window right
 nnoremap <C-w>     :bprevious\|bdelete #<CR>|                " close the current buffer
 nnoremap <S-h>     :bprevious<cr>|                           " previous buffer
 nnoremap <S-l>     :bnext<cr>|                               " next buffer
-nnoremap <leader>d :bprevious\|bdelete #<CR>|                " close the current buffer
+nnoremap <leader>d :bnext\|bdelete #<CR>|                " close the current buffer
 nnoremap <leader>o :nohlsearch<cr>|                          " clear search highlights
 nnoremap <leader>p :set paste!<cr>|                          " toggle paste mode
 nnoremap <leader>r :source ~/.vimrc<cr>|                     " reload vimrc
@@ -170,11 +200,12 @@ nnoremap <leader>n :set number!<cr>|                         " toggle line numbe
 nnoremap <leader>v :e ~/.vimrc<cr>|                          " open vimrc
 vnoremap <leader>a :sort<cr>|                                " sort lines
 
-" my colors (expanding from wal)
-hi VertSplit ctermbg=darkgray ctermfg=8
+" my colors
+" hi VertSplit ctermbg=darkgray ctermfg=8
 " hi ColorColumn ctermbg=0 ctermfg=NONE
-hi LineNr ctermbg=8 ctermfg=7
+" hi LineNr ctermbg=8 ctermfg=7
 " hi CursorLineNr ctermbg=8 ctermfg=2
-hi SignColumn ctermbg=8 ctermfg=0
-hi ALEErrorSign ctermbg=8 ctermfg=red
-hi ALEWarningSign ctermbg=8 ctermfg=yellow
+" hi SignColumn ctermbg=8 ctermfg=0
+" hi ALEErrorSign ctermbg=8 ctermfg=red
+" hi ALEWarningSign ctermbg=8 ctermfg=yellow
+hi Normal ctermbg=NONE
