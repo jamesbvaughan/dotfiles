@@ -43,6 +43,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'jamessan/vim-gnupg'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
+  Plug 'prettier/vim-prettier', {
+    \ 'do': 'yarn install',
+    \ 'for': ['ruby', 'javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
   Plug 'scrooloose/nerdtree'
   Plug 'ternjs/tern_for_vim'
   Plug 'tpope/vim-commentary'
@@ -69,7 +72,7 @@ set clipboard=unnamedplus " use the system clipboard
 set colorcolumn=80        " highlight max length column
 set encoding=utf-8        " set encoding
 set expandtab             " tabs to spaces
-set fillchars+=vert:▒
+set fillchars+=vert:┃
 set formatoptions+=j
 set hidden                " allow background buffers
 set hlsearch              " highlight the search query
@@ -94,10 +97,14 @@ set completeopt-=preview " disable the preview window
 inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
 
+" Prettier
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0
+
 " Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_alt_sep = '┃'
-let g:airline#extensions#tabline#left_sep = '▌'
+let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#overflow_marker = '…'
 let g:airline#extensions#ale#enabled = 1
@@ -164,10 +171,10 @@ nnoremap <leader>v :e ~/.vimrc<cr>|                          " open vimrc
 vnoremap <leader>a :sort<cr>|                                " sort lines
 
 " my colors (expanding from wal)
-" hi VertSplit ctermbg=NONE ctermfg=8
+hi VertSplit ctermbg=darkgray ctermfg=8
 " hi ColorColumn ctermbg=0 ctermfg=NONE
-" hi LineNr ctermbg=8 ctermfg=7
+hi LineNr ctermbg=8 ctermfg=7
 " hi CursorLineNr ctermbg=8 ctermfg=2
-" hi SignColumn ctermbg=8 ctermfg=0
-" hi ALEErrorSign ctermbg=0
-" hi ALEWarningSign ctermbg=0
+hi SignColumn ctermbg=8 ctermfg=0
+hi ALEErrorSign ctermbg=8 ctermfg=red
+hi ALEWarningSign ctermbg=8 ctermfg=yellow

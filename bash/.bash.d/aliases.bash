@@ -25,7 +25,7 @@ alias gamp="git commit . --amend --no-edit && git push --force origin \$(git rev
 alias prune="git branch --merged master | grep -v master | xargs -n 1 git branch -d"
 alias stash="git stash"
 alias pop="git stash pop"
-alias pr="hub pull-request"
+alias pr="gh pr create"
 
 function gsha() {
   local sha=`git rev-parse HEAD`
