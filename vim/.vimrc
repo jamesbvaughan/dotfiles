@@ -45,6 +45,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
   Plug 'airblade/vim-gitgutter'
+  Plug 'AndrewRadev/splitjoin.vim'
+  Plug 'AndrewRadev/switch.vim'
   Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'easymotion/vim-easymotion'
@@ -52,7 +54,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'prettier/vim-prettier', {
     \ 'do': 'yarn install',
     \ 'for': ['ruby', 'javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-  Plug 'scrooloose/nerdtree'
+  Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
   Plug 'ternjs/tern_for_vim'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
@@ -76,7 +78,7 @@ set autoindent
 set autoread              " auto read files changed outside vim
 set breakindent           " indent line wraps
 set clipboard=unnamedplus " use the system clipboard
-set colorcolumn=80        " highlight max length column
+" set colorcolumn=80        " highlight max length column
 set encoding=utf-8        " set encoding
 set expandtab             " tabs to spaces
 set fillchars+=vert:┃
@@ -106,8 +108,8 @@ inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
 
 " Prettier
-let g:prettier#autoformat = 1
-let g:prettier#autoformat_require_pragma = 0
+" let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 1
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
@@ -189,7 +191,7 @@ nnoremap <C-l>     :wincmd l<cr>|                            " window right
 nnoremap <C-w>     :bprevious\|bdelete #<CR>|                " close the current buffer
 nnoremap <S-h>     :bprevious<cr>|                           " previous buffer
 nnoremap <S-l>     :bnext<cr>|                               " next buffer
-nnoremap <leader>d :bnext\|bdelete #<CR>|                " close the current buffer
+nnoremap <leader>d :bnext\|bdelete #<CR>|                    " close the current buffer
 nnoremap <leader>o :nohlsearch<cr>|                          " clear search highlights
 nnoremap <leader>p :set paste!<cr>|                          " toggle paste mode
 nnoremap <leader>r :source ~/.vimrc<cr>|                     " reload vimrc
@@ -201,7 +203,7 @@ nnoremap <leader>v :e ~/.vimrc<cr>|                          " open vimrc
 vnoremap <leader>a :sort<cr>|                                " sort lines
 
 " my colors
-" hi VertSplit ctermbg=darkgray ctermfg=8
+hi VertSplit ctermbg=darkgray ctermfg=8
 " hi ColorColumn ctermbg=0 ctermfg=NONE
 " hi LineNr ctermbg=8 ctermfg=7
 " hi CursorLineNr ctermbg=8 ctermfg=2
