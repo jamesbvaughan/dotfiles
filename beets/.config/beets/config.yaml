@@ -14,4 +14,4 @@ match:
 ui:
   color: yes
 
-plugins: fetchart lyrics
+plugins: fetchart lyrics duplicates
