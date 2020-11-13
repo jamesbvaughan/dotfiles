@@ -18,7 +18,7 @@ prompt pure
 PROMPT=" $PROMPT"
 zstyle :prompt:pure:git:stash show yes
 
-source $HOME/.zshrc.extra
+EXTRA_CONFIG=$HOME/.zshrc.extra ; [ -f $EXTRA_CONFIG ] && source $EXTRA_CONFIG
 source $HOME/.bash.d/aliases.bash
 source $HOME/.fzf.zsh
 
