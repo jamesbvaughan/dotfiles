@@ -2,9 +2,8 @@
 set nocompatible
 
 " Load extra config
-let $extra_config = '~/.vimrc.extra'
-if filereadable($extra_config)
-  source $extra_config
+if filereadable(expand('~/.vimrc.extra'))
+  source ~/.vimrc.extra
 endif
 
 " Download vim-plug if missing
@@ -22,49 +21,30 @@ else
   endif
 endif
 
-call plug#begin('~/.vim/plugged')
-  " These are plugins for specific languages
-  Plug 'digitaltoad/vim-pug'
-  Plug 'elixir-lang/vim-elixir'
-  Plug 'elmcast/elm-vim'
-  Plug 'fatih/vim-go'
-  Plug 'rust-lang/rust.vim'
-  Plug 'pangloss/vim-javascript'
-  Plug 'slashmili/alchemist.vim'
-  Plug 'tpope/vim-rails'
-  Plug 'sophacles/vim-processing'
+" vim-polyglot
+let g:polyglot_disabled = ['pascal']
 
-  " These provide actual functionality
-  if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'sbdchd/neoformat'
-  else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-  endif
+" ALE
+let g:ale_disable_lsp = 1
+
+call plug#begin('~/.vim/plugged')
   Plug 'airblade/vim-gitgutter'
   Plug 'AndrewRadev/splitjoin.vim'
   Plug 'AndrewRadev/switch.vim'
-  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'easymotion/vim-easymotion'
   Plug 'jamessan/vim-gnupg'
-  Plug 'prettier/vim-prettier', {
-    \ 'do': 'yarn install',
-    \ 'for': ['ruby', 'javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-  Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-  Plug 'ternjs/tern_for_vim'
+  Plug 'neoclide/coc.nvim',     { 'branch': 'release' }
+  Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+  Plug 'scrooloose/nerdtree',   { 'on': 'NERDTreeToggle' }
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-rhubarb'
   Plug 'tpope/vim-surround'
   Plug 'w0rp/ale'
-  Plug 'zchee/deoplete-go', { 'do': 'make' }
 
   " These just make things pretty
-  Plug 'altercation/vim-colors-solarized'
   Plug 'dracula/vim', {'as':'dracula'}
   " Plug 'sheerun/vim-polyglot'
   Plug 'vim-airline/vim-airline'
@@ -98,18 +78,8 @@ set scrolloff=5           " start scrolling 5 lines before bottom of pane
 set shiftwidth=2          " shift lines by 2 characters
 set smartcase             " only use case sensitive search when uppercase
 set tabstop=2             " change default tab length
+set updatetime=300        " lower the updatetime for shorter delays
 let mapleader=" "         " change the map leader
-
-" Deoplete
-call deoplete#custom#option('num_processes', 4)
-let g:deoplete#enable_at_startup = 1
-set completeopt-=preview " disable the preview window
-inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
-
-" Prettier
-" let g:prettier#autoformat = 1
-let g:prettier#autoformat_require_pragma = 1
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
@@ -127,6 +97,26 @@ let g:airline_powerline_fonts = 1
 let g:airline_section_y = ''
 let g:airline_skip_empty_sections = 1
 " let g:airline_theme = 'dracula'
+
+" coc.nvim
+let g:coc_global_extensions = [
+  \ 'coc-css',
+  \ 'coc-eslint',
+  \ 'coc-html',
+  \ 'coc-json',
+  \ 'coc-python',
+  \ 'coc-solargraph',
+  \ 'coc-tsserver',
+  \ 'coc-yaml'
+  \ ]
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
 
 " FZF
 set runtimepath+=/usr/local/opt/fzf
@@ -157,18 +147,12 @@ nmap <silent> <C-S-n> <Plug>(ale_next_wrap)
 " EasyMotion
 nmap <Leader>f <Plug>(easymotion-overwin-f)
 
-" Rust
-let g:rustfmt_autosave = 1
-
 " NERDTree
 nnoremap <leader>l :NERDTreeToggle<cr>
 let NERDTreeMinimalUI=1
 
 " fugitive
 noremap gh :Gbrowse<cr>
-
-" polyglot
-let g:polyglot_disabled = ['elm']
 
 " help mode settings ===========================================================
 autocmd FileType help noremap <buffer> q :q<cr>
@@ -183,7 +167,7 @@ endif
 
 " My Keybindings ===============================================================
 nnoremap Q @@
-nnoremap <C-m> :make<cr>
+nnoremap <C-m>     :make<cr>
 nnoremap <C-h>     :wincmd h<cr>|                            " window left
 nnoremap <C-j>     :wincmd j<cr>|                            " window below
 nnoremap <C-k>     :wincmd k<cr>|                            " window above
