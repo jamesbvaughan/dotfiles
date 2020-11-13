@@ -2,7 +2,7 @@ local hyper = {"ctrl", "alt", "cmd"}
 
 hs.loadSpoon("MiroWindowsManager")
 
-hs.window.animationDuration = 0
+hs.window.animationDuration = 0.02
 spoon.MiroWindowsManager:bindHotkeys({
   up = {hyper, "k"},
   right = {hyper, "l"},
@@ -37,6 +37,17 @@ immediateKeyStroke = function(modifiers, character)
     return true
 end
 
+hs.eventtap.new({hs.eventtap.event.types.NSSystemDefined},
+  function(evt)
+    keyName = evt:systemKey().key
+    if keyName == 'MUTE' then 
+      local event = require("hs.eventtap").event
+      event.newKeyEvent({"cmd"}, "F10", true):post()
+      event.newKeyEvent({"cmd"}, "F10", false):post()
+      return true
+    end
+  end
+):start()
 
 hs.eventtap.new({hs.eventtap.event.types.otherMouseDown},
   function(evt)
@@ -47,8 +58,6 @@ hs.eventtap.new({hs.eventtap.event.types.otherMouseDown},
 function handleButtonPressed(evt)
   button_prop = hs.eventtap.event.properties["mouseEventButtonNumber"]
   button_pressed = evt:getProperty(button_prop)
-
-  print(hs.inspect(button_pressed))
 
   -- if cmd held, then use tab navigation with thumb buttons
   if evt:getFlags()["cmd"] then
@@ -66,13 +75,9 @@ function handleButtonPressed(evt)
   end
 end
 
-xTouch = hs.midi.new("X-Touch One")
-xTouch:callback(function(object, deviceName, commandType, description, metadata)
-  print("object: " .. tostring(object))
-  print("deviceName: " .. deviceName)
-  print("commandType: " .. commandType)
-  print("description: " .. description)
-  print("metadata: " .. hs.inspect(metadata))
-  print("number: " .. hs.inspect(metadata.controllerNumber))
-  print("value: " .. hs.inspect(metadata.controllerValue))
-end)
+hs.console.darkMode(true)
+if hs.console.darkMode() then
+    hs.console.outputBackgroundColor{ white = 0 }
+    hs.console.consoleCommandColor{ white = 1 }
+    hs.console.alpha(.9)
+end

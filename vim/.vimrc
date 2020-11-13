@@ -28,7 +28,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'elixir-lang/vim-elixir'
   Plug 'elmcast/elm-vim'
   Plug 'fatih/vim-go'
-  Plug 'mxw/vim-jsx'
   Plug 'rust-lang/rust.vim'
   Plug 'pangloss/vim-javascript'
   Plug 'slashmili/alchemist.vim'
@@ -67,7 +66,7 @@ call plug#begin('~/.vim/plugged')
   " These just make things pretty
   Plug 'altercation/vim-colors-solarized'
   Plug 'dracula/vim', {'as':'dracula'}
-  Plug 'sheerun/vim-polyglot'
+  " Plug 'sheerun/vim-polyglot'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
 call plug#end()
@@ -102,6 +101,7 @@ set tabstop=2             " change default tab length
 let mapleader=" "         " change the map leader
 
 " Deoplete
+call deoplete#custom#option('num_processes', 4)
 let g:deoplete#enable_at_startup = 1
 set completeopt-=preview " disable the preview window
 inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
