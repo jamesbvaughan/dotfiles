@@ -22,12 +22,15 @@ else
 endif
 
 " vim-polyglot
-let g:polyglot_disabled = ['pascal']
+let g:polyglot_disabled = ['pascal', 'javascript', 'jsx']
 
 " ALE
 let g:ale_disable_lsp = 1
 
 call plug#begin('~/.vim/plugged')
+  Plug 'yuezk/vim-js'
+  Plug 'maxmellon/vim-jsx-pretty'
+
   Plug 'airblade/vim-gitgutter'
   Plug 'AndrewRadev/splitjoin.vim'
   Plug 'AndrewRadev/switch.vim'

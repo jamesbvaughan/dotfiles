@@ -1,11 +1,13 @@
 # etc
-alias ls="ls -G --color"
+# alias ls="ls -G --color"
 alias grep="grep --color"
 alias vim="nvim"
 alias mutt="neomutt"
 alias cdbark='cd $GOPATH/src/github.com/jamesbvaughan/bark'
 alias tmux='tmux -u'
 alias ber='bundle exec ruby'
+alias cat='bat'
+alias ls='exa --long --header --git'
 
 # Git
 alias gb="git branch"

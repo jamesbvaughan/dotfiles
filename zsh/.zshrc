@@ -22,6 +22,9 @@ EXTRA_CONFIG=$HOME/.zshrc.extra ; [ -f $EXTRA_CONFIG ] && source $EXTRA_CONFIG
 source $HOME/.bash.d/aliases.bash
 source $HOME/.fzf.zsh
 
+export BASH_DIR=~/.bash.d
+source $BASH_DIR/fzf.zsh
+
 typeset -aU path
 
 export EDITOR='nvim'
