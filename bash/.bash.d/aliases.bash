@@ -7,7 +7,7 @@ alias cdbark='cd $GOPATH/src/github.com/jamesbvaughan/bark'
 alias tmux='tmux -u'
 alias ber='bundle exec ruby'
 alias cat='bat'
-alias ls='exa --long --header --git'
+# alias ls='exa --long --header --git'
 
 # Git
 alias gb="git branch"

@@ -1,5 +1,11 @@
 export ZSH="$HOME/.oh-my-zsh"
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completio
+
+fpath+=('/Users/james/.nvm/versions/node/v15.5.1/lib/node_modules/pure-prompt/functions')
+
 ENABLE_CORRECTION="true"
 
 plugins=(
@@ -25,4 +31,6 @@ typeset -aU path
 
 export EDITOR='nvim'
 export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$PATH
+export PATH="$(yarn global bin):$GOPATH/bin:$PATH"
+
+eval "$(rbenv init -)"

@@ -39,6 +39,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'easymotion/vim-easymotion'
   Plug 'jamessan/vim-gnupg'
   Plug 'neoclide/coc.nvim',     { 'branch': 'release' }
+  Plug 'iamcco/coc-tailwindcss',  {'do': 'yarn install --frozen-lockfile && yarn run build'}
   Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
   Plug 'scrooloose/nerdtree',   { 'on': 'NERDTreeToggle' }
   Plug 'tpope/vim-commentary'
@@ -133,7 +134,7 @@ nmap <silent> gr <Plug>(coc-references)
 
 
 " FZF
-set runtimepath+=/usr/local/opt/fzf
+set runtimepath+=/opt/homebrew/opt/fzf
 nmap <C-p> :FZF<cr>
 let g:fzf_layout = { 'down': '~30%' }
 let g:fzf_colors = {
