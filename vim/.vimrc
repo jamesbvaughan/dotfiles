@@ -30,6 +30,7 @@ let g:ale_disable_lsp = 1
 call plug#begin('~/.vim/plugged')
   Plug 'yuezk/vim-js'
   Plug 'maxmellon/vim-jsx-pretty'
+  Plug 'fatih/vim-go'
 
   Plug 'airblade/vim-gitgutter'
   Plug 'AndrewRadev/splitjoin.vim'
@@ -49,7 +50,7 @@ call plug#begin('~/.vim/plugged')
 
   " These just make things pretty
   Plug 'dracula/vim', {'as':'dracula'}
-  " Plug 'sheerun/vim-polyglot'
+  Plug 'sheerun/vim-polyglot'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
 call plug#end()
@@ -105,11 +106,13 @@ let g:airline_skip_empty_sections = 1
 let g:coc_global_extensions = [
   \ 'coc-css',
   \ 'coc-eslint',
+  \ 'coc-flow',
+  \ 'coc-github-users',
+  \ 'coc-go',
   \ 'coc-html',
   \ 'coc-json',
   \ 'coc-python',
   \ 'coc-solargraph',
-  \ 'coc-tsserver',
   \ 'coc-yaml'
   \ ]
 " Use tab for trigger completion with characters ahead and navigate.
@@ -120,6 +123,14 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+" Add missing imports on save
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
 
 " FZF
 set runtimepath+=/usr/local/opt/fzf
@@ -156,6 +167,9 @@ let NERDTreeMinimalUI=1
 
 " fugitive
 noremap gh :Gbrowse<cr>
+
+" vim-go
+let g:go_fmt_command = "goimports"
 
 " help mode settings ===========================================================
 autocmd FileType help noremap <buffer> q :q<cr>
@@ -198,3 +212,6 @@ hi VertSplit ctermbg=darkgray ctermfg=8
 " hi ALEErrorSign ctermbg=8 ctermfg=red
 " hi ALEWarningSign ctermbg=8 ctermfg=yellow
 hi Normal ctermbg=NONE
+
+" Make switching to tmux with vim-tmux-navigator faster
+set shell=/bin/bash\ --norc\ -i 

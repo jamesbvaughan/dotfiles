@@ -24,3 +24,5 @@ source $BASH_DIR/fzf.zsh
 typeset -aU path
 
 export EDITOR='nvim'
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH

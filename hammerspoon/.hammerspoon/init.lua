@@ -1,34 +1,57 @@
-local hyper = {"ctrl", "alt", "cmd"}
+hs.loadSpoon("ReloadConfiguration")
+spoon.ReloadConfiguration:start()
 
-hs.loadSpoon("MiroWindowsManager")
+-- Hotkeys to quickly change spaces
+spaces = require("hs._asm.undocumented.spaces")
 
-hs.window.animationDuration = 0.02
-spoon.MiroWindowsManager:bindHotkeys({
-  up = {hyper, "k"},
-  right = {hyper, "l"},
-  down = {hyper, "j"},
-  left = {hyper, "h"},
-  fullscreen = {hyper, "f"}
-})
+function moveToNextSpace(direction)
+  local activeSpaceId = spaces.activeSpace()
+  local activeScreenId = spaces.spaceScreenUUID(activeSpaceId)
+  local screenSpaces = spaces.layout()[activeScreenId]
+  
+  local index = {}
+  local numberOfSpaces = 0
+  for k, v in pairs(screenSpaces) do
+    index[v] = k
+    numberOfSpaces = numberOfSpaces + 1
+  end
 
-local moveHyper = {"ctrl", "cmd"}
+  local activeSpaceIndex = index[activeSpaceId]
 
-hs.hotkey.bind(moveHyper, "h", function()
-  hs.window.focusWindowWest()
+  if (direction == "left") then
+    if (activeSpaceIndex > 1) then
+      targetSpaceIndex = activeSpaceIndex - 1
+    else
+      targetSpaceIndex = numberOfSpaces
+    end
+  elseif (direction == "right") then
+    if (activeSpaceIndex < numberOfSpaces) then
+      targetSpaceIndex = activeSpaceIndex + 1
+    else
+      targetSpaceIndex = 1
+    end
+  end
+
+  targetSpaceId = screenSpaces[targetSpaceIndex]
+  spaces.changeToSpace(targetSpaceId)
+end
+
+-- Next Space
+hs.hotkey.bind({"option"}, "tab", function()
+  moveToNextSpace("right")
 end)
 
-hs.hotkey.bind(moveHyper, "j", function()
-  hs.window.focusWindowSouth()
+-- Previous Space
+hs.hotkey.bind({"option", "shift"}, "tab", function()
+  moveToNextSpace("left")
 end)
 
-hs.hotkey.bind(moveHyper, "k", function()
-  hs.window.focusWindowNorth()
-end)
 
-hs.hotkey.bind(moveHyper, "l", function()
-  hs.window.focusWindowEast()
-end)
-
+hs.eventtap.new({hs.eventtap.event.types.otherMouseDown},
+  function(evt)
+    return handleButtonPressed(evt)
+  end
+):start()
 
 immediateKeyStroke = function(modifiers, character)
     local event = require("hs.eventtap").event
@@ -36,24 +59,6 @@ immediateKeyStroke = function(modifiers, character)
     event.newKeyEvent(modifiers, string.lower(character), false):post()
     return true
 end
-
-hs.eventtap.new({hs.eventtap.event.types.NSSystemDefined},
-  function(evt)
-    keyName = evt:systemKey().key
-    if keyName == 'MUTE' then 
-      local event = require("hs.eventtap").event
-      event.newKeyEvent({"cmd"}, "F10", true):post()
-      event.newKeyEvent({"cmd"}, "F10", false):post()
-      return true
-    end
-  end
-):start()
-
-hs.eventtap.new({hs.eventtap.event.types.otherMouseDown},
-  function(evt)
-    return handleButtonPressed(evt)
-  end
-):start()
 
 function handleButtonPressed(evt)
   button_prop = hs.eventtap.event.properties["mouseEventButtonNumber"]
@@ -81,3 +86,5 @@ if hs.console.darkMode() then
     hs.console.consoleCommandColor{ white = 1 }
     hs.console.alpha(.9)
 end
+
+hs.alert("Hammerspoon config reloaded")

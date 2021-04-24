@@ -1,35 +1,39 @@
-# open terminal
-cmd + shift - return : open -na /Applications/Alacritty.app
+# # open terminal
+# cmd + shift - return : open -na /Applications/Alacritty.app
+# 
+# # focus window
+# cmd - j : chunkc tiling::window --focus next
+# 
+# # toggle fullscreen
+# cmd + shift - space : chunkc tiling::window --toggle fullscreen
+# 
+# # switch layout
+# cmd - b : chunkc tiling::desktop --layout bsp
+# cmd - m : chunkc tiling::desktop --layout monocle
+# 
+# # move window
+# # cmd + shift - h : chunkc tiling::window --warp west
+# cmd + shift - j : chunkc tiling::window --warp next
+# # cmd + shift - k : chunkc tiling::window --warp north
+# # cmd + shift - l : chunkc tiling::window --warp east
+# 
+# # send window to desktop
+# cmd + shift - 1 : chunkc tiling::window --send-to-desktop 1
+# cmd + shift - 2 : chunkc tiling::window --send-to-desktop 2
+# cmd + shift - 3 : chunkc tiling::window --send-to-desktop 3
+# # cmd + shift - 4 : chunkc tiling::window --send-to-desktop 4
+# cmd + shift - 5 : chunkc tiling::window --send-to-desktop 5
+# 
+# # close window
+# cmd + shift - c : chunkc tiling::window --close
+# 
+# # switch desktop
+# # cmd - tab : chunkc tiling::desktop --focus next
+# # cmd + shift - tab : chunkc tiling::desktop --focus prev
+# 
+# # switch monitor
+# cmd - e : chunkc tiling::monitor -f next
 
-# focus window
-cmd - j : chunkc tiling::window --focus next
-
-# toggle fullscreen
-cmd + shift - space : chunkc tiling::window --toggle fullscreen
-
-# switch layout
-cmd - b : chunkc tiling::desktop --layout bsp
-cmd - m : chunkc tiling::desktop --layout monocle
-
-# move window
-# cmd + shift - h : chunkc tiling::window --warp west
-cmd + shift - j : chunkc tiling::window --warp next
-# cmd + shift - k : chunkc tiling::window --warp north
-# cmd + shift - l : chunkc tiling::window --warp east
-
-# send window to desktop
-cmd + shift - 1 : chunkc tiling::window --send-to-desktop 1
-cmd + shift - 2 : chunkc tiling::window --send-to-desktop 2
-cmd + shift - 3 : chunkc tiling::window --send-to-desktop 3
-# cmd + shift - 4 : chunkc tiling::window --send-to-desktop 4
-cmd + shift - 5 : chunkc tiling::window --send-to-desktop 5
-
-# close window
-cmd + shift - c : chunkc tiling::window --close
-
-# switch desktop
-# cmd - tab : chunkc tiling::desktop --focus next
-# cmd + shift - tab : chunkc tiling::desktop --focus prev
-
-# switch monitor
-cmd - e : chunkc tiling::monitor -f next
+alt - space : yabai -m window --toggle zoom-fullscreen
+alt - j     : yabai -m window --focus next
+alt - k     : yabai -m window --focus prev

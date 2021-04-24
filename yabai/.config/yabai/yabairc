@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+set -eu
+
+yabai -m config layout              bsp
+yabai -m config window_shadow       float
+yabai -m config focus_follows_mouse autoraise
+
+
+
+
+echo "yabai configuration loaded.."
