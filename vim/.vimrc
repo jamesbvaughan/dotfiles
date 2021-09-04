@@ -112,6 +112,7 @@ let g:coc_global_extensions = [
   \ 'coc-go',
   \ 'coc-html',
   \ 'coc-json',
+  \ 'coc-prettier',
   \ 'coc-python',
   \ 'coc-solargraph',
   \ 'coc-yaml'
