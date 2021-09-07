@@ -80,6 +80,16 @@ function handleButtonPressed(evt)
   end
 end
 
+-- toggle alacritty
+hs.hotkey.bind({"ctrl"}, "space", function()
+  local alacritty = hs.application.find('alacritty')
+  if alacritty:isFrontmost() then
+    alacritty:hide()
+  else
+    hs.application.launchOrFocus("/Applications/Alacritty.app")
+  end
+end)
+
 hs.console.darkMode(true)
 if hs.console.darkMode() then
     hs.console.outputBackgroundColor{ white = 0 }
