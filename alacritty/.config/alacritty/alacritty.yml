@@ -23,6 +23,7 @@ font:
 
   offset:
     y: 2
+    x: 1
 
 # draw_bold_text_with_bright_colors: true
 
@@ -60,7 +61,7 @@ colors:
     cyan:    '0x9aedfe'
     white:   '0xe6e6e6'
 
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 50
 
