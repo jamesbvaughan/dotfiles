@@ -73,7 +73,7 @@ end)
 
 require('lualine').setup {
   options = {
-    theme = 'dracula-nvim',
+    theme = 'dracula',
     section_separators = '',
     extensions = {
       'quickfix',
