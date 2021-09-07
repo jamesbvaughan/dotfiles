@@ -54,6 +54,7 @@ map('n', '<leader>s', ':setlocal spell! spelllang=en_us<cr>')
 map('n', 'ff', ':Telescope find_files<cr>')
 map('n', 'fg', ':Telescope live_grep<cr>')
 map('n', 'fb', ':Telescope buffers<cr>')
+map('n', 'fa', ':Telescope git_files<cr>')
 
 
 -- Plugins
