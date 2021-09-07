@@ -34,12 +34,21 @@ vim.opt.clipboard = 'unnamedplus'
 
 -- Keybindings
 
+-- split navigation
 map('n', '<c-h>', ':wincmd h<cr>')
 map('n', '<c-j>', ':wincmd j<cr>')
 map('n', '<c-k>', ':wincmd k<cr>')
 map('n', '<c-l>', ':wincmd l<cr>')
+
+-- buffer navigation
 map('n', '<s-h>', ':bprev<cr>')
 map('n', '<s-l>', ':bnext<cr>')
+
+-- open up this file
+map('n', '<leader>v', ':e ~/.config/nvim/init.lua<cr>')
+
+-- toggle spell checking
+map('n', '<leader>s', ':setlocal spell! spelllang=en_us<cr>')
 
 -- telescope Keybindings
 map('n', 'ff', ':Telescope find_files<cr>')
