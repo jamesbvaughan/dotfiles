@@ -31,6 +31,9 @@ vim.opt.mouse = 'a'
 -- use the system clipboard
 vim.opt.clipboard = 'unnamedplus'
 
+-- start scrolling before hitting the bottom
+vim.opt.scrolloff=5
+
 
 -- Keybindings
 
@@ -40,9 +43,10 @@ map('n', '<c-j>', ':wincmd j<cr>')
 map('n', '<c-k>', ':wincmd k<cr>')
 map('n', '<c-l>', ':wincmd l<cr>')
 
--- buffer navigation
+-- buffer navigation and management
 map('n', '<s-h>', ':bprev<cr>')
 map('n', '<s-l>', ':bnext<cr>')
+map('n', '<leader>d', ':bdel<cr>')
 
 -- open up this file
 map('n', '<leader>v', ':e ~/.config/nvim/init.lua<cr>')
@@ -50,11 +54,14 @@ map('n', '<leader>v', ':e ~/.config/nvim/init.lua<cr>')
 -- toggle spell checking
 map('n', '<leader>s', ':setlocal spell! spelllang=en_us<cr>')
 
--- telescope Keybindings
+-- telescope keybindings
 map('n', 'ff', ':Telescope find_files<cr>')
 map('n', 'fg', ':Telescope live_grep<cr>')
 map('n', 'fb', ':Telescope buffers<cr>')
 map('n', 'fa', ':Telescope git_files<cr>')
+
+-- fugitive keybindings
+map('n', 'gb', ':GBrowse<cr>')
 
 
 -- Plugins

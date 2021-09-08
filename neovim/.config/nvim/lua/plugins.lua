@@ -64,13 +64,24 @@ require('packer').startup(function(use)
 
   -- nice bindings for working with comments
   use 'tpope/vim-commentary'
+
+  -- nice commands for working with git
+  use 'tpope/vim-fugitive'
+
+  -- nice commands for working with git
+  use 'tpope/vim-rhubarb'
+
+  -- buffer line
+  use {
+    'akinsho/bufferline.nvim',
+    requires = 'kyazdani42/nvim-web-devicons'
+  }
 end)
 
 
 -- Plugin settings
 
 --- lualine.nvim
-
 require('lualine').setup {
   options = {
     theme = 'dracula',
@@ -79,9 +90,19 @@ require('lualine').setup {
       'quickfix',
     },
   },
----  tabline = {
----    lualine_a = {'filename'},
----  },
+  sections = {
+    lualine_x = {'filetype'},
+  },
+}
+
+-- bufferline.nvim
+require("bufferline").setup{
+  options = {
+    show_buffer_close_icons = false,
+    show_close_icon = false,
+    always_show_bufferline = false,
+    diagnostics = 'nvim_lsp',
+  }
 }
 
 --- nvim-treesitter
