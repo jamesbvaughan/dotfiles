@@ -1,3 +1,4 @@
+-- Simplify keybinding creation
 function _G.map(mode, combo, mapping, opts)
   local options = {noremap = true}
   if opts then

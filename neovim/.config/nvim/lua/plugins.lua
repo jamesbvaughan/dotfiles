@@ -53,6 +53,12 @@ require('packer').startup(function(use)
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
+  -- a c port of fzf for telescope
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'make'
+  }
+
   -- common lisp stuff
   use {
     'vlime/vlime',
@@ -86,17 +92,31 @@ require('lualine').setup {
   options = {
     theme = 'dracula',
     section_separators = '',
+    component_separators = '',
     extensions = {
       'quickfix',
     },
   },
   sections = {
-    lualine_x = {'filetype'},
+    lualine_c = {
+      {
+        'filename',
+        path = 1,
+      },
+      'diff',
+    },
+    lualine_x = {
+      {
+        'diagnostics',
+        sources = {'nvim_lsp'}
+      },
+      'filetype',
+    },
   },
 }
 
 -- bufferline.nvim
-require("bufferline").setup{
+require('bufferline').setup{
   options = {
     show_buffer_close_icons = false,
     show_close_icon = false,
@@ -107,7 +127,7 @@ require("bufferline").setup{
 
 --- nvim-treesitter
 require('nvim-treesitter.configs').setup {
-  ensure_installed = "maintained",
+  ensure_installed = 'maintained',
   highlight = {
     enable = true,
   },
@@ -119,22 +139,27 @@ require('nvim-treesitter.configs').setup {
 --- nvim-lspconfig
 require('lspconfig').pyright.setup{}
 require('lspconfig').solargraph.setup{}
-
+require('lspconfig').tsserver.setup{}
+require('lspconfig').sorbet.setup{}
+require('lspconfig').gopls.setup{}
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
 -- luasnip setup
-local luasnip = require 'luasnip'
+local luasnip = require('luasnip')
 
 -- nvim-cmp setup
-local cmp = require 'cmp'
+local cmp = require('cmp')
 cmp.setup {
   snippet = {
     expand = function(args)
       require('luasnip').lsp_expand(args.body)
     end,
   },
+  documentation = {
+		border = 'rounded',
+	},
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -167,3 +192,7 @@ cmp.setup {
     { name = 'buffer' },
   },
 }
+
+-- telescope setup
+require('telescope').setup {}
+require('telescope').load_extension('fzf')

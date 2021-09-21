@@ -1,3 +1,4 @@
 */**/.DS_Store
 neovim/.config/nvim/plugin/packer_compiled.lua
 tmux/.config/tmux/plugins/
+neovim/.config/nvim/lua/extra.lua
