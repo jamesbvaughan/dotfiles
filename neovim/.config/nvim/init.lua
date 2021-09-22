@@ -34,10 +34,8 @@ vim.opt.clipboard = 'unnamedplus'
 ---- start scrolling before hitting the bottom
 vim.opt.scrolloff = 5
 
-
 ---- ignore these when autocompleting paths
 vim.opt.wildignore = vim.opt.wildignore + 'node_modules/*,vendor/bundle/*,tmp/*'
-
 
 
 -- General Keybindings

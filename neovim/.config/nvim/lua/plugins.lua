@@ -35,14 +35,11 @@ require('packer').startup(function(use)
   use {
     "hrsh7th/nvim-cmp",
     requires = {
-      "hrsh7th/vim-vsnip",
       "hrsh7th/cmp-buffer",
     }
   }
 
   use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
-  use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
-  use 'L3MON4D3/LuaSnip' -- Snippets plugin
 
   -- dracula theme
   use 'Mofiqul/dracula.nvim'
@@ -137,26 +134,48 @@ require('nvim-treesitter.configs').setup {
 }
 
 --- nvim-lspconfig
+
+---- python - pyright
 require('lspconfig').pyright.setup{}
-require('lspconfig').solargraph.setup{}
+
+---- javascript - tsserver
 require('lspconfig').tsserver.setup{}
-require('lspconfig').sorbet.setup{}
+
+---- ruby - sorbet
+local sorbet_opts = {}
+if vim.fn.glob("scripts/bin/typecheck") ~= "" then
+  -- use 'pay exec' when in pay-server
+  sorbet_opts.cmd = { "pay", "exec", "scripts/bin/typecheck", "--lsp" }
+end
+require('lspconfig').sorbet.setup(sorbet_opts)
+
+---- go - gopls
 require('lspconfig').gopls.setup{}
+
+---- general linters
+require('lspconfig').efm.setup{
+  filetypes = {
+    'ruby',
+  },
+  settings = {
+    rootMarkers = {".git/"},
+    languages = {
+      ruby = {
+        {
+          lintCommand = 'bundle exec rubocop',
+          lintStdin = true,
+        },
+      },
+    },
+  },
+}
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
--- luasnip setup
-local luasnip = require('luasnip')
-
 -- nvim-cmp setup
 local cmp = require('cmp')
 cmp.setup {
-  snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body)
-    end,
-  },
   documentation = {
 		border = 'rounded',
 	},
@@ -170,8 +189,6 @@ cmp.setup {
     ['<Tab>'] = function(fallback)
       if vim.fn.pumvisible() == 1 then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
-      elseif luasnip.expand_or_jumpable() then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
       else
         fallback()
       end
@@ -179,8 +196,6 @@ cmp.setup {
     ['<S-Tab>'] = function(fallback)
       if vim.fn.pumvisible() == 1 then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
-      elseif luasnip.jumpable(-1) then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
       else
         fallback()
       end
@@ -188,7 +203,6 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'luasnip' },
     { name = 'buffer' },
   },
 }
