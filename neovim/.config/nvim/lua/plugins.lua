@@ -138,6 +138,9 @@ require('nvim-treesitter.configs').setup {
 ---- python - pyright
 require('lspconfig').pyright.setup{}
 
+---- swift - sourcekit
+require('lspconfig').sourcekit.setup{}
+
 ---- javascript - tsserver
 require('lspconfig').tsserver.setup{}
 
