@@ -142,7 +142,15 @@ require('lspconfig').pyright.setup{}
 require('lspconfig').sourcekit.setup{}
 
 ---- javascript - tsserver
-require('lspconfig').tsserver.setup{}
+-- require('lspconfig').tsserver.setup{}
+
+---- javascript - flow
+local flow_opts = {}
+-- local local_flow = 'node_modules/.bin/flow'
+-- if vim.fn.glob(local_flow) ~= "" then
+--   flow_opts.cmd = { local_flow, "lsp" }
+-- end
+require('lspconfig').flow.setup(flow_opts)
 
 ---- ruby - sorbet
 local sorbet_opts = {}
@@ -159,6 +167,7 @@ require('lspconfig').gopls.setup{}
 require('lspconfig').efm.setup{
   filetypes = {
     'ruby',
+    'go'
   },
   settings = {
     rootMarkers = {".git/"},
@@ -169,9 +178,18 @@ require('lspconfig').efm.setup{
           lintStdin = true,
         },
       },
+      go = {
+        {
+          formatCommand = 'goimports',
+          formatStdin = true,
+        }
+      },
     },
   },
 }
+
+-- Format on save
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'

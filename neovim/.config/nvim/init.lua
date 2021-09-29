@@ -37,6 +37,9 @@ vim.opt.scrolloff = 5
 ---- ignore these when autocompleting paths
 vim.opt.wildignore = vim.opt.wildignore + 'node_modules/*,vendor/bundle/*,tmp/*'
 
+---- only use case sensitive search when uppercase
+vim.opt.smartcase = true
+
 
 -- General Keybindings
 
