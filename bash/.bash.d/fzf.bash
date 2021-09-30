@@ -55,4 +55,4 @@ fi
 
 # Key bindings
 # ------------
-source "$HOME/.fzf/shell/key-bindings.bash"
+# source "/home/james/.fzf/shell/key-bindings.bash"

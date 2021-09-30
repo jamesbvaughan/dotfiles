@@ -26,12 +26,33 @@ _gen_fzf_default_opts() {
     --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
   "
   local other_options='
-    --preview "bat --color=always --style=snip --line-range :100 {}"
+    --preview "[[ $(file --mime {}) =~ binary ]] &&
+                 echo {} is a binary file ||
+                 (highlight -O ansi {} ||
+                 cat {}) 2> /dev/null | head -$LINES"
     --inline-info
   '
   export FZF_DEFAULT_OPTS="$colors $other_options"
+
+  ## Solarized Light color scheme for fzf
+  #export FZF_DEFAULT_OPTS="
+  #  --color fg:-1,bg:-1,hl:$blue,fg+:$base02,bg+:$base2,hl+:$blue
+  #  --color info:$yellow,prompt:$yellow,pointer:$base03,marker:$base03,spinner:$yellow
+  #"
 }
 _gen_fzf_default_opts
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!**/.git/*" --glob "!**/node_modules/*"'
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Setup fzf
+# ---------
+if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
+  export PATH="${PATH:+${PATH}:}/usr/local/opt/fzf/bin"
+fi
+
+# Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
+
+# Key bindings
+# ------------
+source "/usr/local/opt/fzf/shell/key-bindings.zsh"

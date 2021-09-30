@@ -64,7 +64,9 @@ function prompt_command() {
     RETURN_INDICATOR="${RED}✗"
   fi
 
-  export PS1="$BOLD$RETURN_INDICATOR $BLUE\W$RESETSTYLE $CYAN\`parse_git_branch\`$RESETSTYLE\\$ "
+  CREDS="$SC_AWS_ADMIN,$SC_AWS_DOMAIN,$SC_AWS_ROLE_NAME"
+
+  export PS1="$BOLD$RETURN_INDICATOR$YELLOW ($CREDS) $BLUE\W$RESETSTYLE $CYAN\`parse_git_branch\`$RESETSTYLE\\$ "
 }
 
 export PROMPT_COMMAND=prompt_command
