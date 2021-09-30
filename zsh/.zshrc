@@ -31,6 +31,8 @@ typeset -aU path
 
 export EDITOR='nvim'
 export GOPATH=$HOME/go
-export PATH="$HOME/.bin:$(yarn global bin):$GOPATH/bin:$PATH"
+export PATH="$HOME/.bin:$(yarn global bin):$GOPATH/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
 
 eval "$(rbenv init -)"
