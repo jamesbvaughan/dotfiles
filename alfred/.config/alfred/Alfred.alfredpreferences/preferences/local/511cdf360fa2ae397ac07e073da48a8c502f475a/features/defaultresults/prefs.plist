@@ -4,6 +4,7 @@
 <dict>
 	<key>scope</key>
 	<array>
+		<string>/Applications</string>
 		<string>/Applications/Xcode.app/Contents/Applications</string>
 		<string>/Developer/Applications</string>
 		<string>/Library/PreferencePanes</string>
