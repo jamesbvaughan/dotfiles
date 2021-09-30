@@ -1,0 +1,31 @@
+{
+  "excludedUrls": "beta.fastmail.com, mail.google.com, calendar.google.com, figma.com",
+  "linkHintCharacters": "asdfjklqwerzxc",
+  "detectByCursorStyle": false,
+  "scrollSize": 150,
+  "openTabUrl": "https://duckduckgo.com/",
+  "modifier": "",
+  "smoothScroll": true,
+  "scrollDuration": 25,
+  "transparentBindings": true,
+  "bindings": {
+      "hintToggle": "f",
+      "newTabHintToggle": "shift+f",
+      "scrollUp": "k",
+      "scrollDown": "j",
+      "scrollLeft": "h",
+      "scrollRight": "l",
+      "scrollUpHalfPage": "u",
+      "scrollDownHalfPage": "d",
+      "goToPageTop": "g g",
+      "goToPageBottom": "shift+g",
+      "goToFirstInput": "g i",
+      "goBack": "shift+h",
+      "goForward": "shift+l",
+      "reload": "r",
+      "tabForward": "w",
+      "tabBack": "q",
+      "closeTab": "x",
+      "openTab": "t"
+  }
+}
