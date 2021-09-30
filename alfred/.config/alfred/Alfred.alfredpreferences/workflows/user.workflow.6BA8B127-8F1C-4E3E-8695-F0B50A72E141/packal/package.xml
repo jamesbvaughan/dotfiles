@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<workflow>
-  <name>pass</name>
-  <version>0.3.3</version>
-  <bundle>pl.intrepidus.pass</bundle>
-  <updated>1529299215</updated>
-  <file>pass.alfredworkflow</file>
-</workflow>
