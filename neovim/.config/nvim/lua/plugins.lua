@@ -1,20 +1,22 @@
+require('utils')
+
 -- Bootstrap packer
 
+local packer_bootstrap
 local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-  vim.cmd 'packadd packer.nvim'
+  packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
 
 -- Load plugins with packer
 
-require('packer').startup(function(use)
-  -- Better integration between nvim and tmux
-  use 'christoomey/vim-tmux-navigator'
-
+require('packer').startup({function(use)
   -- Use packer to manage itself
   use 'wbthomason/packer.nvim'
+
+  -- Better integration between nvim and tmux
+  use 'christoomey/vim-tmux-navigator'
 
   -- A fancy statusline
   use {
@@ -31,6 +33,26 @@ require('packer').startup(function(use)
   -- Collection of configurations for built-in LSP client
   use 'neovim/nvim-lspconfig'
 
+  -- Quickfix list for lsp diagnostics
+  use {
+    'folke/trouble.nvim',
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        auto_open = true,
+        auto_close = true,
+        mode = 'lsp_document_diagnostics',
+        use_lsp_diagnostic_signs = false,
+      }
+    end
+  }
+  
+  -- stabilize the trouble window
+  use {
+    "luukvbaal/stabilize.nvim",
+    config = function() require("stabilize").setup() end
+  }
+
   -- Install nvim-cmp, and buffer source as a dependency
   use {
     "hrsh7th/nvim-cmp",
@@ -41,8 +63,16 @@ require('packer').startup(function(use)
 
   use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
 
-  -- dracula theme
+  use 'ray-x/lsp_signature.nvim'
+
+  use 'nvim-lua/lsp-status.nvim'
+
+  -- themes
   use 'Mofiqul/dracula.nvim'
+  use 'joshdick/onedark.vim'
+
+  -- colors for lsp for older colorschemes
+  use 'folke/lsp-colors.nvim'
 
   -- navigating files and other things
   use {
@@ -56,7 +86,7 @@ require('packer').startup(function(use)
     run = 'make'
   }
 
-  -- common lisp stuff
+  -- common lisp environment
   use {
     'vlime/vlime',
     rtp = 'vim/'
@@ -64,14 +94,13 @@ require('packer').startup(function(use)
 
   -- nice bindings for working with surrounds
   use 'tpope/vim-surround'
+  use 'tpope/vim-repeat'
 
   -- nice bindings for working with comments
   use 'tpope/vim-commentary'
 
   -- nice commands for working with git
   use 'tpope/vim-fugitive'
-
-  -- nice commands for working with git
   use 'tpope/vim-rhubarb'
 
   -- buffer line
@@ -79,7 +108,19 @@ require('packer').startup(function(use)
     'akinsho/bufferline.nvim',
     requires = 'kyazdani42/nvim-web-devicons'
   }
-end)
+
+  require('extra_packages')(use)
+
+  -- Automatically set up configuration after cloning packer.nvim
+  if packer_bootstrap then
+    require('packer').sync()
+  end
+end,
+config = {
+  display = {
+    open_fn = require('packer.util').float,
+  }
+}})
 
 
 -- Plugin settings
@@ -101,6 +142,7 @@ require('lualine').setup {
         path = 1,
       },
       'diff',
+      -- require('lsp-status').status,
     },
     lualine_x = {
       {
@@ -133,101 +175,18 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
---- nvim-lspconfig
-
----- python - pyright
-require('lspconfig').pyright.setup{}
-
----- swift - sourcekit
-require('lspconfig').sourcekit.setup{}
-
----- javascript - tsserver
--- require('lspconfig').tsserver.setup{}
-
----- javascript - flow
-local flow_opts = {}
--- local local_flow = 'node_modules/.bin/flow'
--- if vim.fn.glob(local_flow) ~= "" then
---   flow_opts.cmd = { local_flow, "lsp" }
--- end
-require('lspconfig').flow.setup(flow_opts)
-
----- ruby - sorbet
-local sorbet_opts = {}
-if vim.fn.glob("scripts/bin/typecheck") ~= "" then
-  -- use 'pay exec' when in pay-server
-  sorbet_opts.cmd = { "pay", "exec", "scripts/bin/typecheck", "--lsp" }
-end
-require('lspconfig').sorbet.setup(sorbet_opts)
-
----- go - gopls
-require('lspconfig').gopls.setup{}
-
----- general linters
-require('lspconfig').efm.setup{
-  filetypes = {
-    'ruby',
-    'go'
-  },
-  settings = {
-    rootMarkers = {".git/"},
-    languages = {
-      ruby = {
-        {
-          lintCommand = 'bundle exec rubocop',
-          lintStdin = true,
-        },
-      },
-      go = {
-        {
-          formatCommand = 'goimports',
-          formatStdin = true,
-        }
-      },
-    },
-  },
-}
-
--- Format on save
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
-
--- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
-
--- nvim-cmp setup
-local cmp = require('cmp')
-cmp.setup {
-  documentation = {
-		border = 'rounded',
-	},
-  mapping = {
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<Tab>'] = function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
-      else
-        fallback()
-      end
-    end,
-    ['<S-Tab>'] = function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
-      else
-        fallback()
-      end
-    end,
-  },
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'buffer' },
-  },
-}
-
--- telescope setup
+-- telescope
 require('telescope').setup {}
 require('telescope').load_extension('fzf')
+
+map('n', 'ff', ':Telescope find_files<cr>')
+map('n', 'fg', ':Telescope live_grep<cr>')
+map('n', 'fb', ':Telescope buffers<cr>')
+map('n', 'fa', ':Telescope git_files<cr>')
+
+-- fugitive
+map('', 'gh', ':GBrowse<cr>')
+
+
+require('lsp')
+require('completion')

@@ -1,5 +1,5 @@
-require('utils')
-
+local utils = require('utils')
+local map = utils.map
 
 -- Options
 
@@ -38,10 +38,11 @@ vim.opt.scrolloff = 5
 vim.opt.wildignore = vim.opt.wildignore + 'node_modules/*,vendor/bundle/*,tmp/*'
 
 ---- only use case sensitive search when uppercase
+vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 
--- General Keybindings
+-- Keybindings
 
 ---- split navigation
 map('n', '<c-h>', ':wincmd h<cr>')
@@ -57,6 +58,9 @@ map('n', '<leader>d', ':bdel<cr>')
 ---- open up this file
 map('n', '<leader>v', ':e ~/.config/nvim/init.lua<cr>')
 
+---- open up plugin config
+map('n', '<leader>p', ':e ~/.config/nvim/lua/plugins.lua<cr>')
+
 ---- toggle spell checking
 map('n', '<leader>s', ':setlocal spell! spelllang=en_us<cr>')
 
@@ -67,21 +71,6 @@ map('n', 'g/', ':nohlsearch<cr>')
 -- Plugins
 
 require('plugins')
-
-
--- Plugin Keybindings
-
----- telescope keybindings
-map('n', 'ff', ':Telescope find_files<cr>')
-map('n', 'fg', ':Telescope live_grep<cr>')
-map('n', 'fb', ':Telescope buffers<cr>')
-map('n', 'fa', ':Telescope git_files<cr>')
-
----- rhubarb bindings
-map('', 'gh', ':GBrowse<cr>')
-
----- fugitive keybindings
-map('n', 'gb', ':GBrowse<cr>')
 
 
 -- Theme
