@@ -36,3 +36,4 @@ export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 
 eval "$(rbenv init -)"
+eval "$(nodenv init -)"
