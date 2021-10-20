@@ -109,7 +109,7 @@ require('packer').startup({function(use)
     requires = 'kyazdani42/nvim-web-devicons'
   }
 
-  require('extra_packages')(use)
+  pcall(function() require('extra_packages')(use) end)
 
   -- Automatically set up configuration after cloning packer.nvim
   if packer_bootstrap then

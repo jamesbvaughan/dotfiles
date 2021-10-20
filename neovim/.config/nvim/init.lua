@@ -80,4 +80,4 @@ vim.cmd('colorscheme dracula')
 
 
 -- Load any extra machine-specific config
-require('extra')
+pcall(require, 'extra')
