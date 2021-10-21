@@ -73,7 +73,6 @@ lspconfig.util.default_config = vim.tbl_extend(
 -- Enable the following language servers
 lspconfig.pyright.setup({})
 lspconfig.sourcekit.setup({})
--- lspconfig.eslint.setup({})
 lspconfig.flow.setup({})
 lspconfig.gopls.setup({})
 
@@ -92,7 +91,7 @@ lspconfig.efm.setup({
   },
   settings = {
     rootMarkers = {".git/"},
-    logLevel = 1,
+    -- logLevel = 1,
     languages = {
       ruby = {
         {
