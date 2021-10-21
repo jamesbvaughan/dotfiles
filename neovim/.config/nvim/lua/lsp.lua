@@ -3,6 +3,8 @@ local lsp_status = require('lsp-status')
 local lsp_signature = require('lsp_signature')
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
+-- vim.lsp.set_log_level('debug')
+
 vim.lsp.handlers['textDocument/publishDiagnostics'] =
   vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = {
@@ -74,7 +76,23 @@ lspconfig.util.default_config = vim.tbl_extend(
 lspconfig.pyright.setup({})
 lspconfig.sourcekit.setup({})
 lspconfig.flow.setup({})
-lspconfig.gopls.setup({})
+lspconfig.gopls.setup({
+  settings = {
+    gopls = {
+      env = {
+        GOPACKAGESDRIVER = './bin/gopackagesdriver.sh',
+        CGO_ENABLED = 0,
+      },
+      ['build.directoryFilters'] = {
+        '-bazel-bin',
+        '-bazel-gocode',
+        '-bazel-mypkg',
+        '-bazel-out',
+        '-bazel-testlogs',
+      },
+    },
+  },
+})
 
 ---- general linters
 lspconfig.efm.setup({
@@ -102,6 +120,7 @@ lspconfig.efm.setup({
           lintIgnoreExitCode = true,
           lintFormats = {
             '%t: %l:  %c: %m',
+            '%t: %l: %c: %m',
           },
         },
       },
@@ -113,17 +132,13 @@ lspconfig.efm.setup({
       },
       javascript = {
         {
-          formatCommand = 'npx --no-install prettier',
-          formatStdin = true,
-          lintCommand =
-            'npx --no-install eslint -f visualstudio --stdin '..
-            '--stdin-filename ${INPUT}',
-          lintIgnoreExitCode = true,
+          lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
           lintStdin = true,
-          lintFormats = {
-            '%f(%l,%c): %tarning %m',
-            '%f(%l,%c): %rror %m',
-          },
+          lintFormats = {"%f:%l:%c: %m"},
+          lintIgnoreExitCode = true,
+          formatCommand =
+            "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
+          formatStdin = true
         },
       },
       lua = {
