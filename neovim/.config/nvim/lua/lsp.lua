@@ -88,6 +88,7 @@ lspconfig.efm.setup({
     'lua',
     'puppet',
     'yaml',
+    'markdown',
   },
   settings = {
     rootMarkers = {".git/"},
@@ -157,6 +158,17 @@ lspconfig.efm.setup({
           lintFormats = {
             '%f:%l:%c: [%trror] %m',
             '%f:%l:%c: [%tarning] %m',
+          },
+        },
+      },
+      markdown = {
+        {
+          lintCommand = 'markdownlint -s',
+          lintStdin = true,
+          lintIgnoreExitCode = true,
+          lintFormats = {
+            '%f:%l:%c %m',
+            '%f:%l %m',
           },
         },
       },

@@ -63,11 +63,17 @@ require('packer').startup({function(use)
   use {
     "hrsh7th/nvim-cmp",
     requires = {
-      "hrsh7th/cmp-buffer",
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lua',
+      'hrsh7th/cmp-path',
+      'onsails/lspkind-nvim',
+      'honza/vim-snippets',
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
+
     }
   }
-
-  use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
 
   use 'ray-x/lsp_signature.nvim'
 
