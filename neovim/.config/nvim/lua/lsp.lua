@@ -3,21 +3,22 @@ local lsp_status = require('lsp-status')
 local lsp_signature = require('lsp_signature')
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = {
-    prefix = '●',
-  },
-  signs = true,
-  underline = true,
-  update_in_insert = false,
-})
-
+vim.lsp.handlers['textDocument/publishDiagnostics'] =
+  vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = {
+      prefix = '●',
+    },
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+  })
 lsp_status.register_progress()
 
 local on_attach = function(client, bufnr)
   -- floating function signatures
   lsp_signature.on_attach({
-    bind = true, -- This is mandatory, otherwise border config won't get registered.
+    -- This (bind) is mandatory, otherwise border config won't get registered.
+    bind = true,
     handler_opts = {
       border = 'single'
     }
@@ -27,25 +28,25 @@ local on_attach = function(client, bufnr)
 
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  local opts = { noremap = true, silent = true }
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', ':TroubleToggle<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
+  local function bufmap(combo, mapping)
+    local opts = { noremap = true, silent = true }
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', combo, mapping, opts)
+  end
+
+  bufmap('gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
+  bufmap('gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
+  bufmap('K', '<cmd>lua vim.lsp.buf.hover()<CR>')
+  bufmap('gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
+  -- bufmap('<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
+  bufmap('<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
+  bufmap('<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
+  bufmap('gr', '<cmd>lua vim.lsp.buf.references()<CR>')
+  bufmap('<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+  -- bufmap('<leader>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>')
+  bufmap('<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
+  bufmap('[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
+  bufmap(']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
+  bufmap('<leader>q', ':TroubleToggle<CR>')
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 
   -- Format on save
@@ -64,7 +65,7 @@ lspconfig.util.default_config = vim.tbl_extend(
   "force",
   lspconfig.util.default_config,
   {
-    capabilities = lsp_status.capabilities,
+    capabilities = capabilities,
     on_attach = on_attach,
   }
 )
@@ -72,6 +73,7 @@ lspconfig.util.default_config = vim.tbl_extend(
 -- Enable the following language servers
 lspconfig.pyright.setup({})
 lspconfig.sourcekit.setup({})
+-- lspconfig.eslint.setup({})
 lspconfig.flow.setup({})
 lspconfig.gopls.setup({})
 
@@ -85,14 +87,17 @@ lspconfig.efm.setup({
     'go',
     'javascript',
     'lua',
+    'puppet',
+    'yaml',
   },
   settings = {
     rootMarkers = {".git/"},
-    -- logLevel = 1,
+    logLevel = 1,
     languages = {
       ruby = {
         {
-          lintCommand = 'bundle exec rubocop -s ${INPUT} -f simple --cache true',
+          lintCommand =
+            'bundle exec rubocop -s ${INPUT} -f simple --cache true',
           lintStdin = true,
           lintIgnoreExitCode = true,
           lintFormats = {
@@ -110,15 +115,49 @@ lspconfig.efm.setup({
         {
           formatCommand = 'npx --no-install prettier',
           formatStdin = true,
+          lintCommand =
+            'npx --no-install eslint -f visualstudio --stdin '..
+            '--stdin-filename ${INPUT}',
+          lintIgnoreExitCode = true,
+          lintStdin = true,
+          lintFormats = {
+            '%f(%l,%c): %tarning %m',
+            '%f(%l,%c): %rror %m',
+          },
         },
       },
       lua = {
         {
-          lintCommand = 'luacheck - --formatter plain --globals vim --max-line-length 80',
+          lintCommand =
+            'luacheck - --formatter plain --globals vim --max-line-length 80',
           lintStdin = true,
           lintIgnoreExitCode = true,
           lintFormats = {
             '%f:%l:%c: %m',
+          },
+        },
+      },
+      puppet = {
+        {
+          lintCommand =
+            "puppet-lint --log-format="..
+            "'%{filename}:%{line}:%{column}:%{kind}: %{message} (%{check})'",
+          lintStdin = false,
+          lintIgnoreExitCode = true,
+          lintFormats = {
+            '%f:%l:%c:%trror: %m',
+            '%f:%l:%c:%tarning: %m',
+          },
+        },
+      },
+      yaml = {
+        {
+          lintCommand = 'yamllint -f parsable -',
+          lintStdin = true,
+          lintIgnoreExitCode = true,
+          lintFormats = {
+            '%f:%l:%c: [%trror] %m',
+            '%f:%l:%c: [%tarning] %m',
           },
         },
       },

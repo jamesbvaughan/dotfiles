@@ -1,5 +1,5 @@
 -- Simplify keybinding creation
-function map(mode, combo, mapping, opts)
+local function map(mode, combo, mapping, opts)
   local options = {noremap = true}
   if opts then
     options = vim.tbl_extend('force', options, opts)

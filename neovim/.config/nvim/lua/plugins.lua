@@ -1,11 +1,17 @@
-require('utils')
+local utils = require('utils')
+local map = utils.map
 
 -- Bootstrap packer
 
 local packer_bootstrap
-local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path =
+  vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+  packer_bootstrap = vim.fn.system({
+    'git', 'clone', '--depth', '1',
+    'https://github.com/wbthomason/packer.nvim',
+    install_path,
+  })
 end
 
 
@@ -46,7 +52,7 @@ require('packer').startup({function(use)
       }
     end
   }
-  
+
   -- stabilize the trouble window
   use {
     "luukvbaal/stabilize.nvim",
@@ -109,6 +115,9 @@ require('packer').startup({function(use)
     requires = 'kyazdani42/nvim-web-devicons'
   }
 
+  -- puppet language niceties
+  use 'rodjek/vim-puppet'
+
   pcall(function() require('extra_packages')(use) end)
 
   -- Automatically set up configuration after cloning packer.nvim
@@ -124,35 +133,6 @@ config = {
 
 
 -- Plugin settings
-
---- lualine.nvim
-require('lualine').setup {
-  options = {
-    theme = 'dracula',
-    section_separators = '',
-    component_separators = '',
-    extensions = {
-      'quickfix',
-    },
-  },
-  sections = {
-    lualine_c = {
-      {
-        'filename',
-        path = 1,
-      },
-      'diff',
-      -- require('lsp-status').status,
-    },
-    lualine_x = {
-      {
-        'diagnostics',
-        sources = {'nvim_lsp'}
-      },
-      'filetype',
-    },
-  },
-}
 
 -- bufferline.nvim
 require('bufferline').setup{
@@ -190,3 +170,4 @@ map('', 'gh', ':GBrowse<cr>')
 
 require('lsp')
 require('completion')
+require('statusline')
