@@ -15,5 +15,4 @@ If you want to start using any of my configurations,
    - `stow xmonad`
    - etc.
 
-
 Let me know if you have any questions or issues and I'll be happy to help!
