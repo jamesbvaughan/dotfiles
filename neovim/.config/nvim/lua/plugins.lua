@@ -172,7 +172,7 @@ map('n', 'fa', ':Telescope git_files<cr>')
 
 -- fugitive
 map('', 'gh', ':GBrowse<cr>')
-map('', 'gs', ':Git<cr>')
+map('n', 'gs', ':Git<cr>')
 
 
 require('lsp')
