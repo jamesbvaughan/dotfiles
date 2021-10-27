@@ -107,6 +107,7 @@ lspconfig.efm.setup({
     'puppet',
     'yaml',
     'markdown',
+    'sh',
   },
   settings = {
     rootMarkers = {".git/"},
@@ -185,6 +186,22 @@ lspconfig.efm.setup({
             '%f:%l:%c %m',
             '%f:%l %m',
           },
+        },
+      },
+      sh = {
+        {
+          lintCommand = 'shellcheck -f gcc -x',
+          lintSource = 'shellcheck',
+          lintIgnoreExitCode = true,
+          lintFormats = {
+            '%f:%l:%c: %trror: %m',
+            '%f:%l:%c: %tarning: %m',
+            '%f:%l:%c: %tote: %m',
+          },
+        },
+        {
+          formatCommand = 'shfmt -ci -s -bn -i 2',
+          formatStdin = true,
         },
       },
     },
