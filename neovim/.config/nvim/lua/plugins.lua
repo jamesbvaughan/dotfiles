@@ -173,6 +173,7 @@ map('n', 'fa', ':Telescope git_files<cr>')
 -- fugitive
 map('', 'gh', ':GBrowse<cr>')
 map('n', 'gs', ':Git<cr>')
+map('n', 'gl', ':Git log --pretty --oneline --abbrev-commit --graph -20 <cr>')
 
 
 require('lsp')
