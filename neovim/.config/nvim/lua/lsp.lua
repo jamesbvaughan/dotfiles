@@ -77,6 +77,7 @@ lspconfig.pyright.setup({})
 lspconfig.sourcekit.setup({})
 lspconfig.flow.setup({})
 lspconfig.bashls.setup({})
+lspconfig.terraformls.setup({})
 lspconfig.gopls.setup({
   settings = {
     gopls = {
