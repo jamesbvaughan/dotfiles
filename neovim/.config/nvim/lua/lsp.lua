@@ -108,6 +108,7 @@ lspconfig.efm.setup({
     'yaml',
     'markdown',
     'sh',
+    'python',
   },
   settings = {
     rootMarkers = {".git/"},
@@ -201,6 +202,12 @@ lspconfig.efm.setup({
         },
         {
           formatCommand = 'shfmt -ci -s -bn -i 2',
+          formatStdin = true,
+        },
+      },
+      python = {
+        {
+          formatCommand = 'autopep8 -',
           formatStdin = true,
         },
       },
