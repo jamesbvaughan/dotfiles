@@ -7,6 +7,7 @@ If you want to start using any of my configurations,
 1. install stow:
    - Ubuntu/Debian: `sudo apt install stow`
    - Arch: `sudo pacman -S stow`
+   - MacOS: `brew install stow`
 2. clone the repo:
    - `git clone git@github.com:jamesbvaughan/dotfiles ~/.dotfiles`
    - `cd ~/.dotfiles`
