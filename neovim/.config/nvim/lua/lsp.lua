@@ -76,6 +76,7 @@ lspconfig.util.default_config = vim.tbl_extend(
 lspconfig.pyright.setup({})
 lspconfig.sourcekit.setup({})
 lspconfig.flow.setup({})
+lspconfig.bashls.setup({})
 lspconfig.gopls.setup({
   settings = {
     gopls = {
