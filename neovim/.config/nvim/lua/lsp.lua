@@ -74,14 +74,15 @@ lspconfig.util.default_config = vim.tbl_extend(
 )
 
 -- Enable the following language servers
+lspconfig.bashls.setup({})
+lspconfig.dartls.setup({})
+lspconfig.denols.setup({})
+lspconfig.eslint.setup({})
+lspconfig.flow.setup({})
+lspconfig.gopls.setup({})
 lspconfig.pyright.setup({})
 lspconfig.sourcekit.setup({})
-lspconfig.flow.setup({})
-lspconfig.bashls.setup({})
 lspconfig.terraformls.setup({})
-lspconfig.gopls.setup({})
-lspconfig.eslint.setup({})
-lspconfig.denols.setup({})
 lspconfig.jsonls.setup({
   settings = {
     json = {
