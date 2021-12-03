@@ -1,12 +1,14 @@
 local lsp_status = require('lsp-status')
+local lualine = require('lualine')
+local dracula = require('dracula')
 
 lsp_status.config {
   show_filename = true,
 }
 
-require('lualine').setup {
+lualine.setup {
   options = {
-    theme = 'dracula',
+    theme = 'dracula-nvim',
     section_separators = '',
     component_separators = '|',
     extensions = {
@@ -17,7 +19,7 @@ require('lualine').setup {
     lualine_b = {
       'branch',
       'diff',
-      },
+    },
     lualine_c = {
       {
         'filename',
@@ -39,3 +41,5 @@ require('lualine').setup {
     },
   },
 }
+
+vim.g.dracula_lualine_bg_color = dracula.colors().selection
