@@ -127,6 +127,9 @@ require('packer').startup({function(use)
   -- puppet language niceties
   use 'rodjek/vim-puppet'
 
+  -- undo tree
+  use 'mbbill/undotree'
+
   pcall(function() require('extra_packages')(use) end)
 
   -- Automatically set up configuration after cloning packer.nvim
@@ -192,6 +195,9 @@ map('n', 'fa', ':Telescope git_files<cr>')
 map('', 'gh', ':GBrowse<cr>')
 map('n', 'gs', ':Git<cr>')
 map('n', 'gl', ':Git log --pretty --oneline --abbrev-commit --graph -20 <cr>')
+
+-- undotree
+map('n', 'U', ':UndotreeToggle<cr>')
 
 
 require('lsp')
