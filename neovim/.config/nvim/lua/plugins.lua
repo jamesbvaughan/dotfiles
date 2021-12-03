@@ -36,6 +36,9 @@ require('packer').startup({function(use)
     run = ':TSUpdate'
   }
 
+  -- New textobjects provided by treesitter
+  use 'nvim-treesitter/nvim-treesitter-textobjects'
+
   -- Collection of configurations for built-in LSP client
   use 'neovim/nvim-lspconfig'
 
@@ -150,7 +153,7 @@ require('bufferline').setup{
   }
 }
 
---- nvim-treesitter
+--- nvim-treesitter and nvim-treesitter-textobjects
 require('nvim-treesitter.configs').setup {
   ensure_installed = 'maintained',
   highlight = {
@@ -158,6 +161,21 @@ require('nvim-treesitter.configs').setup {
   },
   indent = {
     enable = true,
+  },
+}
+
+require('nvim-treesitter.configs').setup {
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = {
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+      },
+    },
   },
 }
 
