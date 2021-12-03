@@ -78,23 +78,7 @@ lspconfig.sourcekit.setup({})
 lspconfig.flow.setup({})
 lspconfig.bashls.setup({})
 lspconfig.terraformls.setup({})
-lspconfig.gopls.setup({
-  settings = {
-    gopls = {
-      env = {
-        GOPACKAGESDRIVER = './bin/gopackagesdriver.sh',
-        CGO_ENABLED = 0,
-      },
-      ['build.directoryFilters'] = {
-        '-bazel-bin',
-        '-bazel-gocode',
-        '-bazel-mypkg',
-        '-bazel-out',
-        '-bazel-testlogs',
-      },
-    },
-  },
-})
+lspconfig.gopls.setup({})
 
 ---- general linters
 lspconfig.efm.setup({
@@ -103,7 +87,6 @@ lspconfig.efm.setup({
   },
   filetypes = {
     'ruby',
-    'go',
     'javascript',
     'lua',
     'puppet',
@@ -127,12 +110,6 @@ lspconfig.efm.setup({
             '%t: %l: %c: %m',
           },
         },
-      },
-      go = {
-        {
-          formatCommand = 'goimports',
-          formatStdin = true,
-        }
       },
       javascript = {
         {
