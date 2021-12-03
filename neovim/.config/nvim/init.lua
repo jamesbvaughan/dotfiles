@@ -42,6 +42,10 @@ vim.opt.wildignore = vim.opt.wildignore + 'node_modules/*,vendor/bundle/*,tmp/*'
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+---- persistent undo files
+vim.opt.undodir = '~/.local/nvim/undofiles'
+vim.opt.undofile = true
+
 
 -- Keybindings
 
