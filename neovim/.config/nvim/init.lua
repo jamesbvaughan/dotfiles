@@ -43,7 +43,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 ---- persistent undo files
-vim.opt.undodir = '~/.local/nvim/undofiles'
+vim.opt.undodir = vim.fn.getenv('HOME')..'/.local/nvim/undofiles'
 vim.opt.undofile = true
 
 
