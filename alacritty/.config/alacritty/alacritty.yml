@@ -1,6 +1,6 @@
 window:
   dynamic_padding: true
-  startup_mode: Maximized
+  # startup_mode: Maximized
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -14,22 +14,18 @@ scrolling:
 # Font configuration (changes require restart)
 font:
   normal:
-    family: SF Mono
+    family: "JetBrains Mono Nerd Font"
 
   bold:
-    style: Medium
+    style: Extra Bold
 
-  size: 16.0
-
-  offset:
-    y: 2
-    x: 1
+  size: 9
 
 # draw_bold_text_with_bright_colors: true
 
-mouse:
-  url:
-    modifiers: Command
+# mouse:
+#   url:
+    # modifiers: Command
   # https://google.com
 
 # Colors (Dracula)
