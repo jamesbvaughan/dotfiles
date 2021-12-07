@@ -1,5 +1,9 @@
 xwayland disable
 
+exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
+exec --no-startup-id gammastep
+
+
 ### Variables
 
 set $mod Mod4
@@ -9,17 +13,13 @@ set $up k
 set $right l
 
 set $term alacritty
-# set $menu rofi -show combi
+set $menu bemenu-run
 
 
 ### Window configuration
 
 default_border pixel 2
 hide_edge_borders both
-# border pixel 2
-# smart_gaps on
-# gaps inner 10
-
 
 
 ### Font
@@ -104,13 +104,8 @@ bindsym $mod+Shift+space layout toggle splitv splith
 bindsym $mod+a focus parent
 bindsym $mod+z focus child
 
-bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks 
-bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
-
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%
-
 
 
 #
