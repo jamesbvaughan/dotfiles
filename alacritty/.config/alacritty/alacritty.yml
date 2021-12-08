@@ -1,3 +1,4 @@
+---
 window:
   dynamic_padding: true
   # startup_mode: Maximized
@@ -19,14 +20,14 @@ font:
   bold:
     style: Extra Bold
 
-  size: 9
+  size: 8
 
 # draw_bold_text_with_bright_colors: true
 
 # mouse:
 #   url:
-    # modifiers: Command
-  # https://google.com
+#     modifiers: Command
+# https://google.com
 
 # Colors (Dracula)
 colors:
