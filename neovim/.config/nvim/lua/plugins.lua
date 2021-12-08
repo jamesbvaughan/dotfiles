@@ -33,40 +33,11 @@ require('packer').startup(function(use)
   -- AST parsing backend
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
-    config = function()
-      require('nvim-treesitter.configs').setup {
-        ensure_installed = 'maintained',
-        highlight = {
-          enable = true,
-        },
-        indent = {
-          enable = true,
-        },
-      }
-    end
+    run = ':TSUpdate'
   }
 
   -- Additional text objects from treesitter
-  use {
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    config = function()
-      require('nvim-treesitter.configs').setup {
-        textobjects = {
-          select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
-              ["ac"] = "@class.outer",
-              ["ic"] = "@class.inner",
-            },
-          },
-        },
-      }
-    end
-  }
+  use 'nvim-treesitter/nvim-treesitter-textobjects'
 
   -- Collection of configurations for built-in LSP client
   use 'neovim/nvim-lspconfig'
@@ -84,21 +55,10 @@ require('packer').startup(function(use)
   use {
     'folke/trouble.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
-    config = function()
-      require('trouble').setup {
-        auto_open = true,
-        auto_close = true,
-        mode = 'lsp_document_diagnostics',
-        use_lsp_diagnostic_signs = false,
-      }
-    end
   }
 
   -- stabilize the trouble window
-  use {
-    'luukvbaal/stabilize.nvim',
-    config = function() require('stabilize').setup() end
-  }
+  use 'luukvbaal/stabilize.nvim'
 
   -- Install nvim-cmp, and buffer source as a dependency
   use {
@@ -112,7 +72,6 @@ require('packer').startup(function(use)
       'honza/vim-snippets',
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
-
     }
   }
 
@@ -131,22 +90,11 @@ require('packer').startup(function(use)
   use {
     'nvim-telescope/telescope.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      require('telescope').setup {}
-
-      map('n', 'ff', ':Telescope find_files<cr>')
-      map('n', 'fg', ':Telescope live_grep<cr>')
-      map('n', 'fb', ':Telescope buffers<cr>')
-      map('n', 'fa', ':Telescope git_files<cr>')
-    end
   }
   -- a c port of fzf for telescope
   use {
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make',
-    config = function()
-      require('telescope').load_extension('fzf')
-    end
   }
 
   -- common lisp environment
@@ -163,42 +111,20 @@ require('packer').startup(function(use)
   use 'tpope/vim-commentary'
 
   -- nice commands for working with git
-  use {
-    'tpope/vim-fugitive',
-    config = function()
-      map('', 'gh', ':GBrowse<cr>')
-      map('n', 'gs', ':Git<cr>')
-      map('n', 'gl', ':Git log --pretty --oneline --abbrev-commit --graph -20 <cr>')
-    end 
-  }
+  use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
 
   -- buffer line
   use {
     'akinsho/bufferline.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
-    config = function()
-      require('bufferline').setup{
-        options = {
-          show_buffer_close_icons = false,
-          show_close_icon = false,
-          always_show_bufferline = false,
-          diagnostics = 'nvim_lsp',
-        }
-      }
-    end
   }
 
   -- puppet language niceties
   use 'rodjek/vim-puppet'
 
   -- undo tree
-  use {
-    'mbbill/undotree',
-    config = function()
-      map('n', 'U', ':UndotreeToggle<cr>')
-    end 
-  }
+  use 'mbbill/undotree'
 
 
   pcall(function() require('extra_packages')(use) end)
@@ -208,6 +134,75 @@ require('packer').startup(function(use)
     require('packer').sync()
   end
 end)
+
+
+-- telescope
+require('telescope').setup {}
+require('telescope').load_extension('fzf')
+
+map('n', 'ff', ':Telescope find_files<cr>')
+map('n', 'fg', ':Telescope live_grep<cr>')
+map('n', 'fb', ':Telescope buffers<cr>')
+map('n', 'fa', ':Telescope git_files<cr>')
+
+
+-- fugitive and rhubarb
+map('', 'gh', ':GBrowse<cr>')
+map('n', 'gs', ':Git<cr>')
+map('n', 'gl', ':Git log --pretty --oneline --abbrev-commit --graph -20 <cr>')
+
+
+-- undotree
+map('n', 'U', ':UndotreeToggle<cr>')
+
+
+-- treesitter
+require('nvim-treesitter.configs').setup {
+  ensure_installed = 'maintained',
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = true,
+  },
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = {
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+      },
+    },
+  },
+}
+
+
+-- trouble
+require('trouble').setup {
+  auto_open = true,
+  auto_close = true,
+  mode = 'lsp_document_diagnostics',
+  use_lsp_diagnostic_signs = false,
+}
+
+
+-- stabilize
+require('stabilize').setup()
+
+
+-- bufferline
+require('bufferline').setup {
+  options = {
+    show_buffer_close_icons = false,
+    show_close_icon = false,
+    always_show_bufferline = false,
+    diagnostics = 'nvim_lsp',
+  }
+}
+
 
 require('lsp')
 require('completion')
