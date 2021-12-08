@@ -17,7 +17,7 @@ end
 
 -- Load plugins with packer
 
-require('packer').startup({function(use)
+require('packer').startup(function(use)
   -- Use packer to manage itself
   use 'wbthomason/packer.nvim'
 
@@ -33,21 +33,59 @@ require('packer').startup({function(use)
   -- AST parsing backend
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
+    run = ':TSUpdate',
+    config = function()
+      require('nvim-treesitter.configs').setup {
+        ensure_installed = 'maintained',
+        highlight = {
+          enable = true,
+        },
+        indent = {
+          enable = true,
+        },
+      }
+    end
   }
 
-  -- New textobjects provided by treesitter
-  use 'nvim-treesitter/nvim-treesitter-textobjects'
+  -- Additional text objects from treesitter
+  use {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    config = function()
+      require('nvim-treesitter.configs').setup {
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+              ["af"] = "@function.outer",
+              ["if"] = "@function.inner",
+              ["ac"] = "@class.outer",
+              ["ic"] = "@class.inner",
+            },
+          },
+        },
+      }
+    end
+  }
 
   -- Collection of configurations for built-in LSP client
   use 'neovim/nvim-lspconfig'
 
+  -- LSP plugin for non-LSP sources, like linters
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'neovim/nvim-lspconfig',
+    },
+  }
+
   -- Quickfix list for lsp diagnostics
   use {
     'folke/trouble.nvim',
-    requires = "kyazdani42/nvim-web-devicons",
+    requires = 'kyazdani42/nvim-web-devicons',
     config = function()
-      require("trouble").setup {
+      require('trouble').setup {
         auto_open = true,
         auto_close = true,
         mode = 'lsp_document_diagnostics',
@@ -58,8 +96,8 @@ require('packer').startup({function(use)
 
   -- stabilize the trouble window
   use {
-    "luukvbaal/stabilize.nvim",
-    config = function() require("stabilize").setup() end
+    'luukvbaal/stabilize.nvim',
+    config = function() require('stabilize').setup() end
   }
 
   -- Install nvim-cmp, and buffer source as a dependency
@@ -92,13 +130,23 @@ require('packer').startup({function(use)
   -- navigating files and other things
   use {
     'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require('telescope').setup {}
 
+      map('n', 'ff', ':Telescope find_files<cr>')
+      map('n', 'fg', ':Telescope live_grep<cr>')
+      map('n', 'fb', ':Telescope buffers<cr>')
+      map('n', 'fa', ':Telescope git_files<cr>')
+    end
+  }
   -- a c port of fzf for telescope
   use {
     'nvim-telescope/telescope-fzf-native.nvim',
-    run = 'make'
+    run = 'make',
+    config = function()
+      require('telescope').load_extension('fzf')
+    end
   }
 
   -- common lisp environment
@@ -115,20 +163,43 @@ require('packer').startup({function(use)
   use 'tpope/vim-commentary'
 
   -- nice commands for working with git
-  use 'tpope/vim-fugitive'
+  use {
+    'tpope/vim-fugitive',
+    config = function()
+      map('', 'gh', ':GBrowse<cr>')
+      map('n', 'gs', ':Git<cr>')
+      map('n', 'gl', ':Git log --pretty --oneline --abbrev-commit --graph -20 <cr>')
+    end 
+  }
   use 'tpope/vim-rhubarb'
 
   -- buffer line
   use {
     'akinsho/bufferline.nvim',
-    requires = 'kyazdani42/nvim-web-devicons'
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function()
+      require('bufferline').setup{
+        options = {
+          show_buffer_close_icons = false,
+          show_close_icon = false,
+          always_show_bufferline = false,
+          diagnostics = 'nvim_lsp',
+        }
+      }
+    end
   }
 
   -- puppet language niceties
   use 'rodjek/vim-puppet'
 
   -- undo tree
-  use 'mbbill/undotree'
+  use {
+    'mbbill/undotree',
+    config = function()
+      map('n', 'U', ':UndotreeToggle<cr>')
+    end 
+  }
+
 
   pcall(function() require('extra_packages')(use) end)
 
@@ -136,69 +207,7 @@ require('packer').startup({function(use)
   if packer_bootstrap then
     require('packer').sync()
   end
-end,
-config = {
-  display = {
-    open_fn = require('packer.util').float,
-  }
-}})
-
-
--- Plugin settings
-
--- bufferline.nvim
-require('bufferline').setup{
-  options = {
-    show_buffer_close_icons = false,
-    show_close_icon = false,
-    always_show_bufferline = false,
-    diagnostics = 'nvim_lsp',
-  }
-}
-
---- nvim-treesitter and nvim-treesitter-textobjects
-require('nvim-treesitter.configs').setup {
-  ensure_installed = 'maintained',
-  highlight = {
-    enable = true,
-  },
-  indent = {
-    enable = true,
-  },
-}
-
-require('nvim-treesitter.configs').setup {
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = true,
-      keymaps = {
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
-      },
-    },
-  },
-}
-
--- telescope
-require('telescope').setup {}
-require('telescope').load_extension('fzf')
-
-map('n', 'ff', ':Telescope find_files<cr>')
-map('n', 'fg', ':Telescope live_grep<cr>')
-map('n', 'fb', ':Telescope buffers<cr>')
-map('n', 'fa', ':Telescope git_files<cr>')
-
--- fugitive
-map('', 'gh', ':GBrowse<cr>')
-map('n', 'gs', ':Git<cr>')
-map('n', 'gl', ':Git log --pretty --oneline --abbrev-commit --graph -20 <cr>')
-
--- undotree
-map('n', 'U', ':UndotreeToggle<cr>')
-
+end)
 
 require('lsp')
 require('completion')
