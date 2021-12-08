@@ -2,6 +2,7 @@ local lspconfig = require('lspconfig')
 local lsp_status = require('lsp-status')
 local lsp_signature = require('lsp_signature')
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
+local null_ls = require('null-ls')
 
 -- vim.lsp.set_log_level('debug')
 
@@ -79,124 +80,51 @@ lspconfig.flow.setup({})
 lspconfig.bashls.setup({})
 lspconfig.terraformls.setup({})
 lspconfig.gopls.setup({})
-
----- general linters
-lspconfig.efm.setup({
-  init_options = {
-    documentFormatting = true,
-  },
-  filetypes = {
-    'ruby',
-    'javascript',
-    'lua',
-    'puppet',
-    'yaml',
-    'markdown',
-    'sh',
-    'python',
-  },
+lspconfig.eslint.setup({})
+lspconfig.jsonls.setup({
   settings = {
-    rootMarkers = {".git/"},
-    -- logLevel = 1,
-    languages = {
-      ruby = {
+    json = {
+      schemas = {
         {
-          lintCommand =
-            'bundle exec rubocop -s ${INPUT} -f simple --cache true',
-          lintStdin = true,
-          lintIgnoreExitCode = true,
-          lintFormats = {
-            '%t: %l:  %c: %m',
-            '%t: %l: %c: %m',
-          },
-        },
-      },
-      javascript = {
-        {
-          lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
-          lintStdin = true,
-          lintFormats = {"%f:%l:%c: %m"},
-          lintIgnoreExitCode = true,
-          formatCommand =
-            "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
-          formatStdin = true
-        },
-      },
-      lua = {
-        {
-          lintCommand =
-            'luacheck - --formatter plain --globals vim --max-line-length 80',
-          lintStdin = true,
-          lintIgnoreExitCode = true,
-          lintFormats = {
-            '%f:%l:%c: %m',
-          },
-        },
-      },
-      puppet = {
-        {
-          lintCommand =
-            "puppet-lint --log-format="..
-            "'%{filename}:%{line}:%{column}:%{kind}: %{message} (%{check})'",
-          lintStdin = false,
-          lintIgnoreExitCode = true,
-          lintFormats = {
-            '%f:%l:%c:%trror: %m',
-            '%f:%l:%c:%tarning: %m',
-          },
-        },
-      },
-      yaml = {
-        {
-          lintCommand = 'yamllint -f parsable -',
-          lintStdin = true,
-          lintIgnoreExitCode = true,
-          lintFormats = {
-            '%f:%l:%c: [%trror] %m',
-            '%f:%l:%c: [%tarning] %m',
-          },
-        },
-      },
-      markdown = {
-        {
-          lintCommand = 'markdownlint -s',
-          lintStdin = true,
-          lintIgnoreExitCode = true,
-          lintFormats = {
-            '%f:%l:%c %m',
-            '%f:%l %m',
-          },
-        },
-      },
-      sh = {
-        {
-          lintCommand = 'shellcheck -f gcc -x',
-          lintSource = 'shellcheck',
-          lintIgnoreExitCode = true,
-          lintFormats = {
-            '%f:%l:%c: %trror: %m',
-            '%f:%l:%c: %tarning: %m',
-            '%f:%l:%c: %tote: %m',
-          },
+          fileMatch = { 'package.json' },
+          url = 'https://json.schemastore.org/package.json',
         },
         {
-          formatCommand = 'shfmt -ci -s -bn -i 2',
-          formatStdin = true,
+          fileMatch = { 'tsconfig*.json' },
+          url = 'https://json.schemastore.org/tsconfig.json',
         },
-      },
-      python = {
         {
-          formatCommand = 'autopep8 -',
-          formatStdin = true,
+          fileMatch = { '.prettierrc', '.prettierrc.json', 'prettier.config.json' },
+          url = 'https://json.schemastore.org/prettierrc.json',
+        },
+        {
+          fileMatch = { '.eslintrc', '.eslintrc.json' },
+          url = 'https://json.schemastore.org/eslintrc.json',
         },
       },
     },
   },
 })
 
+-- Use null-ls for linters
+null_ls.config({
+  sources = {
+    null_ls.builtins.diagnostics.luacheck,
+    null_ls.builtins.diagnostics.markdownlint,
+    null_ls.builtins.diagnostics.rubocop,
+    null_ls.builtins.diagnostics.shellcheck,
+    null_ls.builtins.diagnostics.yamllint,
+    null_ls.builtins.formatting.autopep8,
+    null_ls.builtins.formatting.rubocop,
+    null_ls.builtins.formatting.shfmt,
+  },
+})
+lspconfig['null-ls'].setup({})
+
+
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 
 for type, icon in pairs(signs) do
-  local hl = "LspDiagnosticsSign" .. type
+  local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
