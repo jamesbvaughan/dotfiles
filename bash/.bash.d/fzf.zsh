@@ -43,16 +43,34 @@ _gen_fzf_default_opts() {
 _gen_fzf_default_opts
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!**/.git/*" --glob "!**/node_modules/*"'
 
+export FZF_CTRL_R_OPTS="--preview '' --no-info"
+
+
 # Setup fzf
 # ---------
-if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}/usr/local/opt/fzf/bin"
+if [ -d '/usr/local/opt/fzf' ]; then
+  if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
+    export PATH="${PATH:+${PATH}:}/usr/local/opt/fzf/bin"
+  fi
+
+  # Auto-completion
+  # ---------------
+  [[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
+
+  # Key bindings
+  # ------------
+  source "/usr/local/opt/fzf/shell/key-bindings.zsh"
+
+elif [ -d '/usr/share/fzf' ]; then
+  # Auto-completion
+  # ---------------
+  [[ $- == *i* ]] && source "/usr/share/fzf/completion.zsh" 2> /dev/null
+
+  # Key bindings
+  # ------------
+  source "/usr/share/fzf/key-bindings.zsh"
+
+else
+  echo "Seems like fzf isn't installed!"
+
 fi
-
-# Auto-completion
-# ---------------
-[[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
-
-# Key bindings
-# ------------
-source "/usr/local/opt/fzf/shell/key-bindings.zsh"
