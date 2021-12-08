@@ -1,5 +1,5 @@
 {
-    "height": 24,
+    "height": 16,
     "modules-left": [
       "sway/workspaces",
       "sway/mode",
@@ -7,15 +7,14 @@
     ],
     "modules-center": ["sway/window"],
     "modules-right": [
-      "idle_inhibitor",
-      "pulseaudio",
+      // "idle_inhibitor",
+      // "pulseaudio",
       "network",
       "cpu",
       "memory",
-      "temperature",
+      // "temperature",
       "backlight",
       "battery",
-      "battery#bat2",
       "clock",
       "tray",
     ],
@@ -35,17 +34,6 @@
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
-    "tray": {
-        // "icon-size": 21,
-        "spacing": 10
-    },
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
@@ -58,16 +46,7 @@
     "memory": {
         "format": "{}% "
     },
-    "temperature": {
-        // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 80,
-        // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
-    },
     "backlight": {
-        // "device": "acpi_video1",
         "format": "{percent}% {icon}",
         "format-icons": ["", ""]
     },
@@ -83,13 +62,9 @@
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
-    },
-    "battery#bat2": {
-        "bat": "BAT2"
+        "format-icons": [" ", " ", " ", " ", " "]
     },
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
         "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
         "format-linked": "{ifname} (No IP) ",
@@ -128,4 +103,4 @@
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     }
 }
-
+// vim: ft=jsonc
