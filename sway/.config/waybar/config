@@ -8,7 +8,7 @@
     "modules-center": ["sway/window"],
     "modules-right": [
       // "idle_inhibitor",
-      // "pulseaudio",
+      "pulseaudio",
       "network",
       "cpu",
       "memory",
