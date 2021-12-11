@@ -13,7 +13,18 @@ set $up k
 set $right l
 
 set $term alacritty
-set $menu bemenu-run
+set $menu bemenu-run \
+  --prompt '>' \
+  --line-height 16 \
+  --nb '#21222C' \
+  --nf '#F8F8F2' \
+  --tb '#21222C' \
+  --tf '#F8F8F2' \
+  --fb '#21222C' \
+  --ff '#F8F8F2' \
+  --hb '#F8F8F2' \
+  --hf '#21222C' \
+  --fn 'JetBrains Mono Nerd Font 10px'
 
 
 ### Window configuration
