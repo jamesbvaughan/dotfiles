@@ -81,6 +81,7 @@ lspconfig.bashls.setup({})
 lspconfig.terraformls.setup({})
 lspconfig.gopls.setup({})
 lspconfig.eslint.setup({})
+lspconfig.denols.setup({})
 lspconfig.jsonls.setup({
   settings = {
     json = {
@@ -92,6 +93,10 @@ lspconfig.jsonls.setup({
         {
           fileMatch = { 'tsconfig*.json' },
           url = 'https://json.schemastore.org/tsconfig.json',
+        },
+        {
+          fileMatch = { 'deno.json', 'deno.jsonc' },
+          url = 'https://deno.land/x/deno/cli/schemas/config-file.v1.json',
         },
         {
           fileMatch = { '.prettierrc', '.prettierrc.json', 'prettier.config.json' },
