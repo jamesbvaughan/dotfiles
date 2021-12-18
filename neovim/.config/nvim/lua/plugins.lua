@@ -181,12 +181,12 @@ require('nvim-treesitter.configs').setup {
 
 
 -- trouble
-require('trouble').setup {
-  auto_open = true,
-  auto_close = true,
-  mode = 'lsp_document_diagnostics',
-  use_lsp_diagnostic_signs = false,
-}
+-- require('trouble').setup {
+--   auto_open = true,
+--   auto_close = true,
+--   mode = 'document_diagnostics',
+--   use_lsp_diagnostic_signs = false,
+-- }
 
 
 -- stabilize

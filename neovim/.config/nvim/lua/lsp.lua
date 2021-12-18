@@ -112,7 +112,7 @@ lspconfig.jsonls.setup({
 })
 
 -- Use null-ls for linters
-null_ls.config({
+null_ls.setup({
   sources = {
     null_ls.builtins.diagnostics.luacheck,
     null_ls.builtins.diagnostics.markdownlint,
@@ -124,7 +124,6 @@ null_ls.config({
     null_ls.builtins.formatting.shfmt,
   },
 })
-lspconfig['null-ls'].setup({})
 
 
 local signs = {
