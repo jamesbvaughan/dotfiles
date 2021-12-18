@@ -126,6 +126,9 @@ require('packer').startup(function(use)
   -- undo tree
   use 'mbbill/undotree'
 
+  -- handlebars support
+  use 'mustache/vim-mustache-handlebars'
+
 
   pcall(function() require('extra_packages')(use) end)
 
