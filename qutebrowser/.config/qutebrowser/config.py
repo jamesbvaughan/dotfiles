@@ -49,7 +49,7 @@ c.statusbar.padding = {
     'right': 0,
 }
 
-c.tabs.indicator.width = 0
+# c.tabs.indicator.width = 0
 c.tabs.padding = {
     'top': 1,
     'bottom': 1,
@@ -58,7 +58,7 @@ c.tabs.padding = {
 }
 c.tabs.show = "multiple"
 # c.tabs.title.format_pinned = ""
-c.tabs.title.format = "{current_title}"
+# c.tabs.title.format = "{current_title}"
 
 c.spellcheck.languages = ['en-US']
 
