@@ -113,6 +113,7 @@ lspconfig.jsonls.setup({
 
 -- Use null-ls for linters
 null_ls.setup({
+  on_attach = on_attach,
   sources = {
     null_ls.builtins.diagnostics.luacheck,
     null_ls.builtins.diagnostics.markdownlint,
