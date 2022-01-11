@@ -83,6 +83,11 @@ lspconfig.gopls.setup({})
 lspconfig.pyright.setup({})
 lspconfig.sourcekit.setup({})
 lspconfig.terraformls.setup({})
+-- lspconfig.flow.setup({})
+lspconfig.bashls.setup({})
+lspconfig.terraformls.setup({})
+lspconfig.dartls.setup({})
+lspconfig.tsserver.setup({})
 lspconfig.jsonls.setup({
   settings = {
     json = {
@@ -112,7 +117,8 @@ lspconfig.jsonls.setup({
   },
 })
 
--- Use null-ls for linters
+-- Use null-ls for general linters
+local null_ls = require('null-ls')
 null_ls.setup({
   on_attach = on_attach,
   sources = {
@@ -124,6 +130,7 @@ null_ls.setup({
     null_ls.builtins.formatting.autopep8,
     null_ls.builtins.formatting.rubocop,
     null_ls.builtins.formatting.shfmt,
+    null_ls.builtins.formatting.stylua,
   },
 })
 

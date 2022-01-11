@@ -30,10 +30,20 @@ source $BASH_DIR/fzf.zsh
 typeset -aU path
 
 export EDITOR='nvim'
+
 export GOPATH=$HOME/go
+
+export PATH="$HOME/.bin:$PATH"
+export PATH="$(yarn global bin):$PATH"
+export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.bin:$(yarn global bin):$GOPATH/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="$HOME/code/flutter/bin:$PATH"
+
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 
 eval "$(rbenv init -)"
 eval "$(nodenv init -)"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
