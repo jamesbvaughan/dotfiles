@@ -1,32 +1,27 @@
+# oh-my-zsh
+
 export ZSH="$HOME/.oh-my-zsh"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completio
-
-fpath+=('/Users/james/.nvm/versions/node/v15.5.1/lib/node_modules/pure-prompt/functions')
-
-ENABLE_CORRECTION="true"
-
-plugins=(
-  git
-  safe-paste
-)
-
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
 
+# theme
+
+fpath+=/opt/homebrew/share/zsh/site-functions
 autoload -U promptinit; promptinit
 prompt pure
 zstyle :prompt:pure:git:stash show yes
 
+
+# machine-specific config
+
 EXTRA_CONFIG=$HOME/.zshrc.extra ; [ -f $EXTRA_CONFIG ] && source $EXTRA_CONFIG
+
 
 export BASH_DIR=~/.bash.d
 source $BASH_DIR/aliases.bash
-# source $BASH_DIR/fzf.zsh
-source ~/.fzf.zsh
+
+eval "$(rbenv init -)"
+eval "$(nodenv init -)"
 
 typeset -aU path
 
@@ -35,16 +30,12 @@ export EDITOR='nvim'
 export GOPATH=$HOME/go
 
 export PATH="$HOME/.bin:$PATH"
-export PATH="$(yarn global bin):$PATH"
 export PATH="$GOPATH/bin:$PATH"
-export PATH="$HOME/.bin:$(yarn global bin):$GOPATH/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="$HOME/code/flutter/bin:$PATH"
+export PATH="$(yarn global bin):$PATH"
 
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 
-eval "$(rbenv init -)"
-eval "$(nodenv init -)"
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
