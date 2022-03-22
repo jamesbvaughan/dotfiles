@@ -2,49 +2,50 @@ hs.loadSpoon("ReloadConfiguration")
 spoon.ReloadConfiguration:start()
 
 -- Hotkeys to quickly change spaces
-spaces = require("hs._asm.undocumented.spaces")
+-- This is not currently working
+-- spaces = require("hs.spaces")
 
-function moveToNextSpace(direction)
-  local activeSpaceId = spaces.activeSpace()
-  local activeScreenId = spaces.spaceScreenUUID(activeSpaceId)
-  local screenSpaces = spaces.layout()[activeScreenId]
+-- function moveToNextSpace(direction)
+--   local activeSpaceId = spaces.focusedSpace()
+--   local activeScreenId = spaces.spaceDisplay(activeSpaceId)
+--   local screenSpaces = spaces.spacesForScreen(activeScreenId)
   
-  local index = {}
-  local numberOfSpaces = 0
-  for k, v in pairs(screenSpaces) do
-    index[v] = k
-    numberOfSpaces = numberOfSpaces + 1
-  end
+--   local index = {}
+--   local numberOfSpaces = 0
+--   for k, v in pairs(screenSpaces) do
+--     index[v] = k
+--     numberOfSpaces = numberOfSpaces + 1
+--   end
 
-  local activeSpaceIndex = index[activeSpaceId]
+--   local activeSpaceIndex = index[activeSpaceId]
 
-  if (direction == "left") then
-    if (activeSpaceIndex > 1) then
-      targetSpaceIndex = activeSpaceIndex - 1
-    else
-      targetSpaceIndex = numberOfSpaces
-    end
-  elseif (direction == "right") then
-    if (activeSpaceIndex < numberOfSpaces) then
-      targetSpaceIndex = activeSpaceIndex + 1
-    else
-      targetSpaceIndex = 1
-    end
-  end
+--   if (direction == "left") then
+--     if (activeSpaceIndex > 1) then
+--       targetSpaceIndex = activeSpaceIndex - 1
+--     else
+--       targetSpaceIndex = numberOfSpaces
+--     end
+--   elseif (direction == "right") then
+--     if (activeSpaceIndex < numberOfSpaces) then
+--       targetSpaceIndex = activeSpaceIndex + 1
+--     else
+--       targetSpaceIndex = 1
+--     end
+--   end
 
-  targetSpaceId = screenSpaces[targetSpaceIndex]
-  spaces.changeToSpace(targetSpaceId)
-end
+--   targetSpaceId = screenSpaces[targetSpaceIndex]
+--   spaces.goToSpace(targetSpaceId)
+-- end
 
--- Next Space
-hs.hotkey.bind({"option"}, "tab", function()
-  moveToNextSpace("right")
-end)
+-- -- Next Space
+-- hs.hotkey.bind({"option"}, "tab", function()
+--   moveToNextSpace("right")
+-- end)
 
--- Previous Space
-hs.hotkey.bind({"option", "shift"}, "tab", function()
-  moveToNextSpace("left")
-end)
+-- -- Previous Space
+-- hs.hotkey.bind({"option", "shift"}, "tab", function()
+--   moveToNextSpace("left")
+-- end)
 
 
 hs.eventtap.new({hs.eventtap.event.types.otherMouseDown},
