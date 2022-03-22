@@ -75,8 +75,6 @@ require('packer').startup(function(use)
     }
   }
 
-  use 'jose-elias-alvarez/null-ls.nvim'
-
   use 'ray-x/lsp_signature.nvim'
 
   use 'nvim-lua/lsp-status.nvim'
