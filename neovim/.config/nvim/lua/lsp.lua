@@ -53,7 +53,7 @@ local on_attach = function(client, bufnr)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 
   -- Format on save
-  -- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
+  vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
 end
 
 -- nvim-cmp supports additional completion capabilities
@@ -75,13 +75,23 @@ lspconfig.util.default_config = vim.tbl_extend(
 
 -- Enable the following language servers
 lspconfig.bashls.setup({})
+lspconfig.cssls.setup({
+  settings = {
+    scss = {
+      lint = {
+        unknownAtRules = 'ignore',
+      },
+    },
+  }
+})
 lspconfig.dartls.setup({})
-lspconfig.denols.setup({})
+-- lspconfig.denols.setup({})
 lspconfig.eslint.setup({})
 lspconfig.flow.setup({})
 lspconfig.gopls.setup({})
 lspconfig.pyright.setup({})
 lspconfig.sourcekit.setup({})
+lspconfig.tailwindcss.setup({})
 lspconfig.terraformls.setup({})
 -- lspconfig.flow.setup({})
 lspconfig.bashls.setup({})
@@ -128,6 +138,7 @@ null_ls.setup({
     null_ls.builtins.diagnostics.shellcheck,
     null_ls.builtins.diagnostics.yamllint,
     null_ls.builtins.formatting.autopep8,
+    null_ls.builtins.formatting.prettier,
     null_ls.builtins.formatting.rubocop,
     null_ls.builtins.formatting.shfmt,
     null_ls.builtins.formatting.stylua,
