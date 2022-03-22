@@ -25,7 +25,8 @@ EXTRA_CONFIG=$HOME/.zshrc.extra ; [ -f $EXTRA_CONFIG ] && source $EXTRA_CONFIG
 
 export BASH_DIR=~/.bash.d
 source $BASH_DIR/aliases.bash
-source $BASH_DIR/fzf.zsh
+# source $BASH_DIR/fzf.zsh
+source ~/.fzf.zsh
 
 typeset -aU path
 
