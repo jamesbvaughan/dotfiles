@@ -10,6 +10,7 @@ which -s brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/H
 export HOMEBREW_NO_ENV_HINTS=true
 brew install --quiet \
 	bat \
+	coreutils \
 	fd \
 	fzf \
 	neovim \
