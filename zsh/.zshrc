@@ -1,41 +1,70 @@
-# oh-my-zsh
+# My ZSH config
 
-export ZSH="$HOME/.oh-my-zsh"
-source $ZSH/oh-my-zsh.sh
+## Configure zsh options
+## See `man zshoptions` for more info on these.
+
+### Allow changing directories without `cd`
+setopt auto_cd
+
+### Beep less when autocompleting
+setopt no_list_beep
+
+### Set the completion result immediately rather than after the second "tab"
+# setopt menu_complete
+
+### Have all sessions append to the same history file
+setopt append_history
 
 
-# theme
+## Use common emacs/readline keybindings
+bindkey -e
 
+
+## Include completions from homebrew packages
 fpath+=/opt/homebrew/share/zsh/site-functions
-autoload -U promptinit; promptinit
-prompt pure
-zstyle :prompt:pure:git:stash show yes
 
 
-# machine-specific config
-
+## Machine-specific config
 EXTRA_CONFIG=$HOME/.zshrc.extra ; [ -f $EXTRA_CONFIG ] && source $EXTRA_CONFIG
 
 
-export BASH_DIR=~/.bash.d
-source $BASH_DIR/aliases.bash
+## Setup aliases
+source ~/.aliases.zsh
 
-eval "$(rbenv init -)"
-eval "$(nodenv init -)"
 
+## Ignore duplicate entries in $PATH
 typeset -aU path
 
-export EDITOR='nvim'
 
-export GOPATH=$HOME/go
+## Tool-specific config
 
-export PATH="$HOME/.bin:$PATH"
-export PATH="$GOPATH/bin:$PATH"
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export PATH="$HOME/code/flutter/bin:$PATH"
+### Ruby
+eval "$(rbenv init -)"
+
+### JavaScript
+eval "$(nodenv init -)"
 export PATH="$(yarn global bin):$PATH"
 
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+### Go
+export GOPATH=$HOME/go
+export PATH="$GOPATH/bin:$PATH"
+
+### Flutter
+export PATH="$HOME/code/flutter/bin:$PATH"
+
+### GNU coreutils
+export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+export MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:$MANPATH"
+
+### Neovim
+export EDITOR='nvim'
+
+### Personal scripts
+export PATH="$HOME/.bin:$PATH"
+
+### FZF
+source ~/.fzf.zsh
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+## Configure prompt
+eval "$(starship init zsh)"
