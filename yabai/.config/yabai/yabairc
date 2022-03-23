@@ -6,8 +6,8 @@ set -eu
 # sudo yabai --load-sa
 # yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
-yabai -m config layout              bsp
-yabai -m config window_shadow       float
+yabai -m config layout bsp
+yabai -m config window_shadow float
 yabai -m config focus_follows_mouse autoraise
 
 # Set all padding and gaps to 20pt (default: 0)
