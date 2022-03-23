@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -euxo pipefail
+
+type -p brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+
+brew install \
+	bat \
+	fd \
+	fzf \
+	neovim \
+	rg \
+	zsh \
+	exa \
+	htop \
+	hub \
+	koekeishiya/formulae/yabai \
+	markdownlint-cli \
+	nodenv \
+	rbenv \
+	shellcheck \
+	skhd \
+	stow \
+	stylua \
+	tmux \
+	tree \
+	yamllint
+
+echo 'Finished.'
