@@ -1,70 +1,56 @@
-# My ZSH config
-
-## Configure zsh options
-## See `man zshoptions` for more info on these.
-
-### Allow changing directories without `cd`
-setopt auto_cd
-
-### Beep less when autocompleting
-setopt no_list_beep
-
-### Set the completion result immediately rather than after the second "tab"
-# setopt menu_complete
-
-### Have all sessions append to the same history file
-setopt append_history
+# Oh My Zsh things
+export ZSH="$HOME/.oh-my-zsh"
+plugins=(fzf)
+source $ZSH/oh-my-zsh.sh
 
 
-## Use common emacs/readline keybindings
-bindkey -e
+# Source config in other files
 
+## FZF config
+source ~/.config/zsh/fzf.zsh
 
-## Include completions from homebrew packages
-fpath+=/opt/homebrew/share/zsh/site-functions
+## Setup aliases
+source ~/.config/zsh/aliases.zsh
 
-
-## Machine-specific config
+## Machine-specific config, if present
 EXTRA_CONFIG=$HOME/.zshrc.extra ; [ -f $EXTRA_CONFIG ] && source $EXTRA_CONFIG
 
 
-## Setup aliases
-source ~/.aliases.zsh
+# Include completions from homebrew packages
+HOMEBREW_PREFIX=$(brew --prefix)
+fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
 
 
-## Ignore duplicate entries in $PATH
-typeset -aU path
+# Tool-specific config
 
-
-## Tool-specific config
-
-### Ruby
+## Ruby
 eval "$(rbenv init -)"
 
-### JavaScript
+## JavaScript
 eval "$(nodenv init -)"
 export PATH="$(yarn global bin):$PATH"
 
-### Go
+## Go
 export GOPATH=$HOME/go
 export PATH="$GOPATH/bin:$PATH"
 
-### Flutter
+## Flutter
 export PATH="$HOME/code/flutter/bin:$PATH"
 
-### GNU coreutils
-export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-export MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:$MANPATH"
+## GNU coreutils
+export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
+export MANPATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman:$MANPATH"
 
-### Neovim
+## Neovim
 export EDITOR='nvim'
 
-### Personal scripts
+## Personal scripts
 export PATH="$HOME/.bin:$PATH"
 
-### FZF
-source ~/.fzf.zsh
+
+# Remove duplicate entries in $PATH
+typeset -aU path
 
 
-## Configure prompt
+# Configure prompt
 eval "$(starship init zsh)"
