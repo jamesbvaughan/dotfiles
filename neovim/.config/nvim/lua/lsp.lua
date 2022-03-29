@@ -50,6 +50,8 @@ local on_attach = function(client, bufnr)
 	bufmap("]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
 	bufmap("<leader>q", ":TroubleToggle<CR>")
 	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
+	vim.cmd([[ command! FormatSync execute 'lua vim.lsp.buf.formatting_seq_sync()' ]])
+	bufmap("<leader>f", ":FormatSync<CR>")
 
 	-- Format on save
 	-- vim.cmd([[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]])
