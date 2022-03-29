@@ -5,6 +5,8 @@
 
 set -euo pipefail
 
+pushd ~/.dotfiles
+
 which -s brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
 
 export HOMEBREW_NO_ENV_HINTS=true
@@ -43,5 +45,7 @@ stow \
 	tmux \
 	yabai \
 	zsh
+
+popd
 
 echo 'Finished.'
