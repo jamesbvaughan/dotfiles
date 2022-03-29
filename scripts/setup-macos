@@ -30,6 +30,7 @@ brew install --quiet \
 	starship \
 	stow \
 	stylua \
+  tldr \
 	tmux \
 	tree \
 	yamllint
