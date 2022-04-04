@@ -16,15 +16,20 @@ brew install --quiet \
 	fd \
 	fzf \
 	neovim \
+  docker-compose \
 	rg \
 	zsh \
 	exa \
   highlight \
 	htop \
 	hub \
+  git \
 	koekeishiya/formulae/yabai \
+  lua-language-server \
+  luarocks \
 	markdownlint-cli \
 	nodenv \
+  prettier \
 	rbenv \
 	shellcheck \
 	skhd \
