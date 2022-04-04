@@ -41,6 +41,12 @@ brew install --quiet \
 	tree \
 	yamllint
 
+brew install --quiet --cask \
+  alfred \
+  docker
+#   # Add this back once the cask is > v3.5
+#   # iterm2
+
 stow \
 	alfred \
 	git \
