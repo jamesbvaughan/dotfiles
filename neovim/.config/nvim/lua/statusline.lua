@@ -1,7 +1,6 @@
 -- luacheck: globals vim
 local lsp_status = require('lsp-status')
 local lualine = require('lualine')
-local dracula = require('dracula')
 
 lsp_status.config {
   show_filename = true,
@@ -42,5 +41,3 @@ lualine.setup {
     },
   },
 }
-
-vim.g.dracula_lualine_bg_color = dracula.colors().selection
