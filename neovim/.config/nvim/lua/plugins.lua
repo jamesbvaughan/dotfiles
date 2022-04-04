@@ -194,7 +194,11 @@ require('trouble').setup {
 
 
 -- stabilize
-require('stabilize').setup()
+require('stabilize').setup({
+  -- This is necessary to get stabilize to work in some cases.
+  -- See https://github.com/luukvbaal/stabilize.nvim#note
+  nested = "QuickFixCmdPost,DiagnosticChanged *",
+})
 
 
 -- bufferline
