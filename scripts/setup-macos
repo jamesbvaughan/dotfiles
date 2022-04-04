@@ -7,8 +7,10 @@ set -euo pipefail
 
 pushd ~/.dotfiles
 
+# Install Homebrew
 which -s brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
 
+# Install things distributed as Homebrew packages
 export HOMEBREW_NO_ENV_HINTS=true
 brew install --quiet \
 	bat \
@@ -41,12 +43,14 @@ brew install --quiet \
 	tree \
 	yamllint
 
+# Install some casks
 brew install --quiet --cask \
   alfred \
   docker
 #   # Add this back once the cask is > v3.5
 #   # iterm2
 
+# Place config files where they belong
 stow \
 	alfred \
 	git \
@@ -59,10 +63,12 @@ stow \
 	yabai \
 	zsh
 
+# Install some things that are distributed as npm packages
 npm install --global \
   @prisma/language-server \
   bash-language-server
 
+# Install Oh My ZSH
 test -d ~/.oh-my-zsh || sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Enable global key-repeat
