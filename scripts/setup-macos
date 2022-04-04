@@ -65,6 +65,9 @@ npm install --global \
 
 test -d ~/.oh-my-zsh || sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+# Enable global key-repeat
+defaults write -g ApplePressAndHoldEnabled -bool false
+
 popd
 
 echo 'Finished.'
