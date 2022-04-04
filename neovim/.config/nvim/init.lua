@@ -83,6 +83,7 @@ require('plugins')
 vim.opt.termguicolors = true
 vim.cmd('colorscheme dracula')
 vim.g.dracula_transparent_bg = true
+vim.g.dracula_italic_comment = true
 
 
 -- Load any extra machine-specific config
