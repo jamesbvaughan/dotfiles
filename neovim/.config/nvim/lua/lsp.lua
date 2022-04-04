@@ -26,7 +26,7 @@ local on_attach = function(client, bufnr)
 		},
 	}, bufnr)
 
-	lsp_status.on_attach(client, bufnr)
+	lsp_status.on_attach(client)
 
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
