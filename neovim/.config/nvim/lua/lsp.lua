@@ -95,6 +95,7 @@ lspconfig.bashls.setup({})
 lspconfig.terraformls.setup({})
 lspconfig.dartls.setup({})
 lspconfig.tsserver.setup({})
+lspconfig.prismals.setup({})
 lspconfig.jsonls.setup({
 	settings = {
 		json = {
