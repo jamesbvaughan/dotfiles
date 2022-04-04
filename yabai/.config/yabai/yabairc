@@ -9,7 +9,9 @@ set -eu
 # yabai -m config layout bsp
 yabai -m config layout float
 yabai -m config window_shadow float
-yabai -m config focus_follows_mouse autoraise
+
+# set focus follows mouse mode (default: off, options: off, autoraise, autofocus)
+# yabai -m config focus_follows_mouse autoraise
 
 # Set all padding and gaps to 20pt (default: 0)
 # yabai -m config top_padding    20
