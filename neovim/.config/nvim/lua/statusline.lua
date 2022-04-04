@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local lsp_status = require('lsp-status')
 local lualine = require('lualine')
 local dracula = require('dracula')

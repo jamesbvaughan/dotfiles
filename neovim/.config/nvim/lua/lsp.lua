@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local lspconfig = require("lspconfig")
 local lsp_status = require("lsp-status")
 local lsp_signature = require("lsp_signature")

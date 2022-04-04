@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local utils = require('utils')
 local map = utils.map
 
