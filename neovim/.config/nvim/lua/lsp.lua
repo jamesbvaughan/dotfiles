@@ -3,7 +3,6 @@ local lspconfig = require("lspconfig")
 local lsp_status = require("lsp-status")
 local lsp_signature = require("lsp_signature")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
-local null_ls = require("null-ls")
 
 -- vim.lsp.set_log_level('debug')
 
