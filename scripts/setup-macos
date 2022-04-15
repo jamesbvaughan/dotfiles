@@ -46,7 +46,8 @@ brew install --quiet \
 # Install some casks
 brew install --quiet --cask \
   alfred \
-  docker
+  docker \
+  keepingyouawake
 #   # Add this back once the cask is > v3.5
 #   # iterm2
 
