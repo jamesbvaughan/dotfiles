@@ -124,10 +124,20 @@ require("packer").startup(function(use)
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-path",
 			"onsails/lspkind-nvim",
+		},
+	})
+
+	-- Snippets
+	use({
+		"L3MON4D3/LuaSnip",
+		requires = {
 			"honza/vim-snippets",
-			"L3MON4D3/LuaSnip",
 			"saadparwaiz1/cmp_luasnip",
 		},
+		config = function()
+			require("luasnip.loaders.from_vscode").lazy_load()
+			require("luasnip.loaders.from_snipmate").lazy_load()
+		end,
 	})
 
 	use("ray-x/lsp_signature.nvim")
