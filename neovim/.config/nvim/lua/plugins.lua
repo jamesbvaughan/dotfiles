@@ -27,7 +27,13 @@ require("packer").startup(function(use)
 	-- A fancy statusline
 	use({
 		"hoob3rt/lualine.nvim",
-		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+		requires = {
+			{
+				"kyazdani42/nvim-web-devicons",
+				opt = true,
+			},
+			"nvim-lua/lsp-status.nvim",
+		},
 	})
 
 	-- AST parsing backend
@@ -140,8 +146,6 @@ require("packer").startup(function(use)
 	})
 
 	use("ray-x/lsp_signature.nvim")
-
-	use("nvim-lua/lsp-status.nvim")
 
 	-- themes
 	use("Mofiqul/dracula.nvim")
