@@ -1,6 +1,4 @@
 -- luacheck: globals vim
-local utils = require('utils')
-local map = utils.map
 
 -- Bootstrap packer
 
@@ -144,20 +142,20 @@ end)
 require('telescope').setup {}
 require('telescope').load_extension('fzf')
 
-map('n', 'ff', ':Telescope find_files<cr>')
-map('n', 'fg', ':Telescope live_grep<cr>')
-map('n', 'fb', ':Telescope buffers<cr>')
-map('n', 'fa', ':Telescope git_files<cr>')
+vim.keymap.set('n', 'ff', ':Telescope find_files<cr>')
+vim.keymap.set('n', 'fg', ':Telescope live_grep<cr>')
+vim.keymap.set('n', 'fb', ':Telescope buffers<cr>')
+vim.keymap.set('n', 'fa', ':Telescope git_files<cr>')
 
 
 -- fugitive and rhubarb
-map('', 'gh', ':GBrowse<cr>')
-map('n', 'gs', ':Git<cr>')
-map('n', 'gl', ':Git log --pretty --oneline --abbrev-commit --graph -20 <cr>')
+vim.keymap.set('', 'gh', ':GBrowse<cr>')
+vim.keymap.set('n', 'gs', ':Git<cr>')
+vim.keymap.set('n', 'gl', ':Git log --pretty --oneline --abbrev-commit --graph -20 <cr>')
 
 
 -- undotree
-map('n', 'U', ':UndotreeToggle<cr>')
+vim.keymap.set('n', 'U', ':UndotreeToggle<cr>')
 
 
 -- treesitter

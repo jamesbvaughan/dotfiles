@@ -1,6 +1,4 @@
 -- luacheck: globals vim
-local utils = require('utils')
-local map = utils.map
 
 
 -- Options
@@ -51,27 +49,27 @@ vim.opt.undofile = true
 -- Keybindings
 
 ---- split navigation
-map('n', '<c-h>', ':wincmd h<cr>')
-map('n', '<c-j>', ':wincmd j<cr>')
-map('n', '<c-k>', ':wincmd k<cr>')
-map('n', '<c-l>', ':wincmd l<cr>')
+vim.keymap.set('n', '<c-h>', ':wincmd h<cr>')
+vim.keymap.set('n', '<c-j>', ':wincmd j<cr>')
+vim.keymap.set('n', '<c-k>', ':wincmd k<cr>')
+vim.keymap.set('n', '<c-l>', ':wincmd l<cr>')
 
 ---- buffer navigation and management
-map('n', '<s-h>', ':bprev<cr>')
-map('n', '<s-l>', ':bnext<cr>')
-map('n', '<leader>d', ':bdel<cr>')
+vim.keymap.set('n', '<s-h>', ':bprev<cr>')
+vim.keymap.set('n', '<s-l>', ':bnext<cr>')
+vim.keymap.set('n', '<leader>d', ':bdel<cr>')
 
 ---- open up this file
-map('n', '<leader>v', ':e ~/.config/nvim/init.lua<cr>')
+vim.keymap.set('n', '<leader>v', ':e ~/.config/nvim/init.lua<cr>')
 
 ---- open up plugin config
-map('n', '<leader>p', ':e ~/.config/nvim/lua/plugins.lua<cr>')
+vim.keymap.set('n', '<leader>p', ':e ~/.config/nvim/lua/plugins.lua<cr>')
 
 ---- toggle spell checking
-map('n', '<leader>s', ':setlocal spell! spelllang=en_us<cr>')
+vim.keymap.set('n', '<leader>s', ':setlocal spell! spelllang=en_us<cr>')
 
 ---- unhighlight the current search
-map('n', 'g/', ':nohlsearch<cr>')
+vim.keymap.set('n', 'g/', ':nohlsearch<cr>')
 
 
 -- Filetype matching
