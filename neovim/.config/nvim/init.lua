@@ -74,6 +74,14 @@ map('n', '<leader>s', ':setlocal spell! spelllang=en_us<cr>')
 map('n', 'g/', ':nohlsearch<cr>')
 
 
+-- Filetype matching
+
+--- This enables the currently opt-in new and faster filetype master
+--- You can remove this after it's made default
+vim.g.do_filetype_lua = 1
+vim.g.did_load_filetypes = 0
+
+
 -- Plugins
 
 require('plugins')
