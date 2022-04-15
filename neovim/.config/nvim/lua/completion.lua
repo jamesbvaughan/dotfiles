@@ -13,9 +13,9 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- nvim-cmp setup
 cmp.setup {
-  documentation = {
-		border = 'rounded',
-	},
+  window = {
+    documentation = cmp.config.window.bordered(),
+  },
   formatting = {
     format = lspkind.cmp_format({with_text = true, menu = ({
       buffer = "[Buffer]",
