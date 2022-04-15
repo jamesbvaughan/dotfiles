@@ -162,7 +162,10 @@ map('n', 'U', ':UndotreeToggle<cr>')
 
 -- treesitter
 require('nvim-treesitter.configs').setup {
-  ensure_installed = 'maintained',
+  ensure_installed = 'all',
+  ignore_install = {
+    'phpdoc', -- This was throwing errors during installation
+  },
   highlight = {
     enable = true,
   },
