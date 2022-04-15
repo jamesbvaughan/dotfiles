@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local cmp = require('cmp')
 local lspkind = require('lspkind')
 local luasnip = require('luasnip')
