@@ -251,6 +251,9 @@ require("packer").startup(function(use)
 		end,
 	})
 
+	-- quick navigation within a file
+	use("ggandor/lightspeed.nvim")
+
 	pcall(function()
 		require("extra_packages")(use)
 	end)
