@@ -33,11 +33,38 @@ require("packer").startup(function(use)
 	-- AST parsing backend
 	use({
 		"nvim-treesitter/nvim-treesitter",
+		requires = {
+			-- Additional text objects
+			"nvim-treesitter/nvim-treesitter-textobjects",
+		},
 		run = ":TSUpdate",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = "all",
+				ignore_install = {
+					"phpdoc", -- This was throwing errors during installation
+				},
+				highlight = {
+					enable = true,
+				},
+				indent = {
+					enable = true,
+				},
+				textobjects = {
+					select = {
+						enable = true,
+						lookahead = true,
+						keymaps = {
+							["af"] = "@function.outer",
+							["if"] = "@function.inner",
+							["ac"] = "@class.outer",
+							["ic"] = "@class.inner",
+						},
+					},
+				},
+			})
+		end,
 	})
-
-	-- Additional text objects from treesitter
-	use("nvim-treesitter/nvim-treesitter-textobjects")
 
 	-- Collection of configurations for built-in LSP client
 	use("neovim/nvim-lspconfig")
@@ -54,11 +81,30 @@ require("packer").startup(function(use)
 	-- Quickfix list for lsp diagnostics
 	use({
 		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
+		requires = {
+			"kyazdani42/nvim-web-devicons",
+		},
+		config = function()
+			require("trouble").setup({
+				auto_open = true,
+				auto_close = true,
+				mode = "document_diagnostics",
+				use_lsp_diagnostic_signs = false,
+			})
+		end,
 	})
 
-	-- stabilize the trouble window
-	use("luukvbaal/stabilize.nvim")
+	-- Stabilize the trouble window
+	use({
+		"luukvbaal/stabilize.nvim",
+		config = function()
+			require("stabilize").setup({
+				-- This is necessary to get stabilize to work in some cases.
+				-- See https://github.com/luukvbaal/stabilize.nvim#note
+				nested = "QuickFixCmdPost,DiagnosticChanged *",
+			})
+		end,
+	})
 
 	-- Install nvim-cmp, and buffer source as a dependency
 	use({
@@ -81,20 +127,19 @@ require("packer").startup(function(use)
 
 	-- themes
 	use("Mofiqul/dracula.nvim")
-	use("joshdick/onedark.vim")
-
-	-- colors for lsp for older colorschemes
-	use("folke/lsp-colors.nvim")
 
 	-- navigating files and other things
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = { "nvim-lua/plenary.nvim" },
-	})
-	-- a c port of fzf for telescope
-	use({
-		"nvim-telescope/telescope-fzf-native.nvim",
-		run = "make",
+		config = function()
+			require("telescope").setup({})
+
+			vim.keymap.set("n", "ff", ":Telescope find_files<cr>")
+			vim.keymap.set("n", "fg", ":Telescope live_grep<cr>")
+			vim.keymap.set("n", "fb", ":Telescope buffers<cr>")
+			vim.keymap.set("n", "fa", ":Telescope git_files<cr>")
+		end,
 	})
 
 	-- common lisp environment
@@ -111,23 +156,53 @@ require("packer").startup(function(use)
 	use("tpope/vim-commentary")
 
 	-- nice commands for working with git
-	use("tpope/vim-fugitive")
-	use("tpope/vim-rhubarb")
+	use({
+		"tpope/vim-fugitive",
+		requires = "tpope/vim-rhubarb",
+		config = function()
+			vim.keymap.set("", "gh", ":GBrowse<cr>")
+			vim.keymap.set("n", "gs", ":Git<cr>")
+			vim.keymap.set("n", "gl", ":Git log --pretty --oneline --abbrev-commit --graph -20 <cr>")
+		end,
+	})
 
 	-- buffer line
 	use({
 		"akinsho/bufferline.nvim",
 		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("bufferline").setup({
+				options = {
+					show_buffer_close_icons = false,
+					show_close_icon = false,
+					always_show_bufferline = false,
+					diagnostics = "nvim_lsp",
+				},
+			})
+		end,
 	})
 
 	-- puppet language niceties
 	use("rodjek/vim-puppet")
 
 	-- undo tree
-	use("mbbill/undotree")
+	use({
+		"mbbill/undotree",
+		config = function()
+			vim.keymap.set("n", "U", ":UndotreeToggle<cr>")
+		end,
+	})
 
 	-- handlebars support
 	use("mustache/vim-mustache-handlebars")
+
+	-- which-key
+	use({
+		"folke/which-key.nvim",
+		config = function()
+			require("which-key").setup({})
+		end,
+	})
 
 	pcall(function()
 		require("extra_packages")(use)
@@ -138,74 +213,6 @@ require("packer").startup(function(use)
 		require("packer").sync()
 	end
 end)
-
--- telescope
-require("telescope").setup({})
-require("telescope").load_extension("fzf")
-
-vim.keymap.set("n", "ff", ":Telescope find_files<cr>")
-vim.keymap.set("n", "fg", ":Telescope live_grep<cr>")
-vim.keymap.set("n", "fb", ":Telescope buffers<cr>")
-vim.keymap.set("n", "fa", ":Telescope git_files<cr>")
-
--- fugitive and rhubarb
-vim.keymap.set("", "gh", ":GBrowse<cr>")
-vim.keymap.set("n", "gs", ":Git<cr>")
-vim.keymap.set("n", "gl", ":Git log --pretty --oneline --abbrev-commit --graph -20 <cr>")
-
--- undotree
-vim.keymap.set("n", "U", ":UndotreeToggle<cr>")
-
--- treesitter
-require("nvim-treesitter.configs").setup({
-	ensure_installed = "all",
-	ignore_install = {
-		"phpdoc", -- This was throwing errors during installation
-	},
-	highlight = {
-		enable = true,
-	},
-	indent = {
-		enable = true,
-	},
-	textobjects = {
-		select = {
-			enable = true,
-			lookahead = true,
-			keymaps = {
-				["af"] = "@function.outer",
-				["if"] = "@function.inner",
-				["ac"] = "@class.outer",
-				["ic"] = "@class.inner",
-			},
-		},
-	},
-})
-
--- trouble
-require("trouble").setup({
-	auto_open = true,
-	auto_close = true,
-	mode = "document_diagnostics",
-	use_lsp_diagnostic_signs = false,
-})
-
--- stabilize
-require("stabilize").setup({
-	-- This is necessary to get stabilize to work in some cases.
-	-- See https://github.com/luukvbaal/stabilize.nvim#note
-	nested = "QuickFixCmdPost,DiagnosticChanged *",
-})
-
--- bufferline
-require("bufferline").setup({
-	options = {
-		show_buffer_close_icons = false,
-		show_close_icon = false,
-		always_show_bufferline = false,
-		diagnostics = "nvim_lsp",
-	},
-})
 
 require("lsp")
 require("completion")
