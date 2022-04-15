@@ -98,7 +98,6 @@ require("packer").startup(function(use)
 			require("trouble").setup({
 				auto_close = true,
 				mode = "document_diagnostics",
-				use_lsp_diagnostic_signs = false,
 			})
 		end,
 	})
