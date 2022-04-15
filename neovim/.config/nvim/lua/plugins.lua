@@ -36,6 +36,10 @@ require("packer").startup(function(use)
 		requires = {
 			-- Additional text objects
 			"nvim-treesitter/nvim-treesitter-textobjects",
+			-- auto-complete html tags
+			"windwp/nvim-ts-autotag",
+			-- auto-add "end" in ruby and similar languages
+			"RRethy/nvim-treesitter-endwise",
 		},
 		run = ":TSUpdate",
 		config = function()
@@ -48,6 +52,12 @@ require("packer").startup(function(use)
 					enable = true,
 				},
 				indent = {
+					enable = true,
+				},
+				autotag = {
+					enable = true,
+				},
+				endwise = {
 					enable = true,
 				},
 				textobjects = {
@@ -176,6 +186,14 @@ require("packer").startup(function(use)
 					delay = 500,
 				},
 			})
+		end,
+	})
+
+	-- auto pairs
+	use({
+		"windwp/nvim-autopairs",
+		config = function()
+			require("nvim-autopairs").setup({})
 		end,
 	})
 
