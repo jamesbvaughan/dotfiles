@@ -1,4 +1,7 @@
 ---
+import:
+  - ~/.config/alacritty/dracula.yml
+
 window:
   dynamic_padding: true
   # startup_mode: Maximized
@@ -15,12 +18,12 @@ scrolling:
 # Font configuration (changes require restart)
 font:
   normal:
-    family: "JetBrains Mono Nerd Font"
+    family: "JetBrainsMono Nerd Font"
 
-  bold:
-    style: Extra Bold
+  # bold:
+  #   style: Extra Bold
 
-  size: 8
+  size: 16
 
 # draw_bold_text_with_bright_colors: true
 
@@ -28,35 +31,6 @@ font:
 #   url:
 #     modifiers: Command
 # https://google.com
-
-# Colors (Dracula)
-colors:
-  # Default colors
-  primary:
-    background: '0x282a36'
-    foreground: '0xf8f8f2'
-
-  # Normal colors
-  normal:
-    black:   '0x000000'
-    red:     '0xff5555'
-    green:   '0x50fa7b'
-    yellow:  '0xf1fa8c'
-    blue:    '0xcaa9fa'
-    magenta: '0xff79c6'
-    cyan:    '0x8be9fd'
-    white:   '0xbfbfbf'
-
-  # Bright colors
-  bright:
-    black:   '0x282a35'
-    red:     '0xff6e67'
-    green:   '0x5af78e'
-    yellow:  '0xf4f99d'
-    blue:    '0xcaa9fa'
-    magenta: '0xff92d0'
-    cyan:    '0x9aedfe'
-    white:   '0xe6e6e6'
 
 bell:
   animation: EaseOutExpo
@@ -67,19 +41,19 @@ bell:
 live_config_reload: true
 
 key_bindings:
-  - { key: V,      mods: Command, action: Paste            }
-  - { key: C,      mods: Command, action: Copy             }
-  - { key: Insert, mods: Shift,   action: PasteSelection   }
-  - { key: Paste,                 action: Paste            }
-  - { key: Copy,                  action: Copy             }
-  - { key: Q,      mods: Command, action: Quit             }
-  - { key: W,      mods: Command, action: Quit             }
-  - { key: Key0,   mods: Command, action: ResetFontSize    }
+  - { key: V, mods: Command, action: Paste }
+  - { key: C, mods: Command, action: Copy }
+  - { key: Insert, mods: Shift, action: PasteSelection }
+  - { key: Paste, action: Paste }
+  - { key: Copy, action: Copy }
+  - { key: Q, mods: Command, action: Quit }
+  - { key: W, mods: Command, action: Quit }
+  - { key: Key0, mods: Command, action: ResetFontSize }
   - { key: Equals, mods: Command, action: IncreaseFontSize }
-  - { key: Minus,  mods: Command, action: DecreaseFontSize }
-  - { key: K,      mods: Command, action: ClearHistory     }
-  - { key: N,      mods: Command, action: SpawnNewInstance }
-  - { key: F,      mods: Command, action: ToggleFullscreen }
-  - { key: H,      mods: Command, action: None             }
-  - { key: K,      mods: Command, chars:  "\x0c"           }
-  - { key: Back,                  chars:  "\x7f"           }
+  - { key: Minus, mods: Command, action: DecreaseFontSize }
+  - { key: K, mods: Command, action: ClearHistory }
+  - { key: N, mods: Command, action: SpawnNewInstance }
+  - { key: F, mods: Command, action: ToggleFullscreen }
+  - { key: H, mods: Command, action: None }
+  - { key: K, mods: Command, chars: "\x0c" }
+  - { key: Back, chars: "\x7f" }
