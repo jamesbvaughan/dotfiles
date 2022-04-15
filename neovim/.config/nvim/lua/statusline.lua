@@ -14,6 +14,7 @@ lualine.setup {
     extensions = {
       'quickfix',
     },
+    globalstatus = true,
   },
   sections = {
     lualine_b = {
