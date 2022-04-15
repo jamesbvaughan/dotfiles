@@ -48,6 +48,9 @@ vim.opt.undofile = true
 
 -- Keybindings
 
+-- use space as a the leader key
+vim.g.mapleader = ' '
+
 ---- split navigation
 vim.keymap.set('n', '<c-h>', ':wincmd h<cr>')
 vim.keymap.set('n', '<c-j>', ':wincmd j<cr>')
