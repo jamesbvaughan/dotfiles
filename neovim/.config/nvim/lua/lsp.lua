@@ -1,6 +1,5 @@
 -- luacheck: globals vim
 local lspconfig = require("lspconfig")
-local lsp_signature = require("lsp_signature")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 -- vim.lsp.set_log_level('debug')

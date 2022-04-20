@@ -62,6 +62,7 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'nvim_lua' },
     { name = 'path' },
+    { name = 'nvim_lsp_signature_help' },
   }, {
     { name = 'buffer' },
   })

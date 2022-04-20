@@ -152,6 +152,7 @@ require("packer").startup(function(use)
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"onsails/lspkind-nvim",
 		},
 	})
@@ -167,20 +168,6 @@ require("packer").startup(function(use)
 			require("luasnip.loaders.from_vscode").lazy_load()
 			require("luasnip.loaders.from_snipmate").lazy_load()
 		end,
-	})
-
-	-- Show function signatures as you type
-	use({
-		"ray-x/lsp_signature.nvim",
-    config = function()
-      require('lsp_signature').setup({
-        -- This (bind) is mandatory, otherwise border config won't get registered.
-        -- bind = true,
-        -- handler_opts = {
-        --   border = "single",
-        -- },
-      })
-    end,
 	})
 
 	-- themes
