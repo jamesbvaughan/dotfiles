@@ -149,7 +149,7 @@ require("packer").startup(function(use)
 		end,
 	})
 
-  -- Show function signatures as you type
+	-- Show function signatures as you type
 	use("ray-x/lsp_signature.nvim")
 
 	-- themes
