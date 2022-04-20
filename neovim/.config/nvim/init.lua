@@ -48,7 +48,7 @@ vim.opt.undofile = true
 
 -- Keybindings
 
--- use space as a the leader key
+--- use space as a the leader key
 vim.g.mapleader = ' '
 
 ---- split navigation
