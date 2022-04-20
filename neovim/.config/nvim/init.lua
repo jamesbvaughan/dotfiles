@@ -82,6 +82,7 @@ vim.keymap.set('n', 'g/', ':nohlsearch<cr>')
 vim.g.do_filetype_lua = 1
 vim.g.did_load_filetypes = 0
 
+
 -- Turn on spell checking in git commits
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "gitcommit",
