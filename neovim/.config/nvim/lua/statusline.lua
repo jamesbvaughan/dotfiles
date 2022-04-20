@@ -3,7 +3,6 @@ local lualine = require("lualine")
 
 lualine.setup({
 	options = {
-		theme = "dracula-nvim",
 		section_separators = "",
 		component_separators = "",
 		globalstatus = true,
