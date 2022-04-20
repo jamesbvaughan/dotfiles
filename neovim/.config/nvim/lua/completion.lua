@@ -10,7 +10,7 @@ local has_words_before = function()
 end
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = 'menu,menuone,noselect'
 
 -- nvim-cmp setup
 cmp.setup {
