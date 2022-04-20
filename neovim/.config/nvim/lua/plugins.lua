@@ -28,12 +28,31 @@ require("packer").startup(function(use)
 	use({
 		"hoob3rt/lualine.nvim",
 		requires = {
-			{
-				"kyazdani42/nvim-web-devicons",
-				opt = true,
-			},
-      'arkav/lualine-lsp-progress',
+      "kyazdani42/nvim-web-devicons",
+      "arkav/lualine-lsp-progress",
 		},
+		config = function()
+      require("lualine").setup({
+        options = {
+          section_separators = "",
+          component_separators = "",
+          globalstatus = true,
+        },
+        extensions = {
+          "quickfix",
+          "fugitive",
+        },
+        sections = {
+          lualine_c = {
+            "filename",
+            "lsp_progress"
+          },
+          lualine_x = {
+            "filetype",
+          },
+        },
+      })
+		end,
 	})
 
 	-- AST parsing backend
@@ -295,4 +314,3 @@ end)
 
 require("lsp")
 require("completion")
-require("statusline")
