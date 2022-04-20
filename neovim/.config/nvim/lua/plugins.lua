@@ -108,6 +108,9 @@ require("packer").startup(function(use)
 	-- Collection of configurations for built-in LSP client
 	use("neovim/nvim-lspconfig")
 
+	-- Pull JSON schemas from SchemsStore for use with jsonls
+	use("b0o/schemastore.nvim")
+
 	-- LSP plugin for non-LSP sources, like linters
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
