@@ -153,7 +153,15 @@ require("packer").startup(function(use)
 	use("ray-x/lsp_signature.nvim")
 
 	-- themes
-	use("Mofiqul/dracula.nvim")
+	use({
+		"Mofiqul/dracula.nvim",
+		config = function()
+			vim.g.dracula_italic_comment = true
+			-- vim.g.dracula_transparent_bg = true
+			vim.opt.termguicolors = true
+			vim.cmd("colorscheme dracula")
+		end,
+	})
 
 	-- navigating files and other things
 	use({

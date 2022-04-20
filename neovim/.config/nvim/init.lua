@@ -88,13 +88,5 @@ vim.g.did_load_filetypes = 0
 require('plugins')
 
 
--- Theme
-
-vim.opt.termguicolors = true
-vim.cmd('colorscheme dracula')
-vim.g.dracula_transparent_bg = true
-vim.g.dracula_italic_comment = true
-
-
 -- Load any extra machine-specific config
 pcall(require, 'extra')
