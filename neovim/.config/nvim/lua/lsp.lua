@@ -72,44 +72,23 @@ lspconfig.dartls.setup({})
 lspconfig.eslint.setup({})
 lspconfig.flow.setup({})
 lspconfig.gopls.setup({})
+lspconfig.graphql.setup({})
+lspconfig.html.setup({})
+lspconfig.jsonls.setup({
+  settings = {
+    json = {
+      schemas = require('schemastore').json.schemas(),
+    },
+  },
+})
+lspconfig.prismals.setup({})
+lspconfig.pylsp.setup({})
 lspconfig.pyright.setup({})
 lspconfig.sourcekit.setup({})
 lspconfig.tailwindcss.setup({})
 lspconfig.terraformls.setup({})
--- lspconfig.flow.setup({})
-lspconfig.bashls.setup({})
-lspconfig.terraformls.setup({})
-lspconfig.dartls.setup({})
 lspconfig.tsserver.setup({})
-lspconfig.prismals.setup({})
-lspconfig.jsonls.setup({
-	settings = {
-		json = {
-			schemas = {
-				{
-					fileMatch = { "package.json" },
-					url = "https://json.schemastore.org/package.json",
-				},
-				{
-					fileMatch = { "tsconfig*.json" },
-					url = "https://json.schemastore.org/tsconfig.json",
-				},
-				{
-					fileMatch = { "deno.json", "deno.jsonc" },
-					url = "https://deno.land/x/deno/cli/schemas/config-file.v1.json",
-				},
-				{
-					fileMatch = { ".prettierrc", ".prettierrc.json", "prettier.config.json" },
-					url = "https://json.schemastore.org/prettierrc.json",
-				},
-				{
-					fileMatch = { ".eslintrc", ".eslintrc.json" },
-					url = "https://json.schemastore.org/eslintrc.json",
-				},
-			},
-		},
-	},
-})
+lspconfig.yamlls.setup({})
 
 -- the lua language server requres some additional setup
 -- copied from https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
