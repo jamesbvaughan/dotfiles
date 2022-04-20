@@ -18,12 +18,16 @@ cmp.setup {
     documentation = cmp.config.window.bordered(),
   },
   formatting = {
-    format = lspkind.cmp_format({with_text = true, menu = ({
-      buffer = "[Buffer]",
-      nvim_lsp = "[LSP]",
-      luasnip = "[LuaSnip]",
-      nvim_lua = "[Lua]",
-    })}),
+    format = lspkind.cmp_format({
+      -- with_text = true,
+      -- mode = 'symbol_text',
+      menu = ({
+        buffer = "[Buffer]",
+        nvim_lsp = "[LSP]",
+        luasnip = "[LuaSnip]",
+        nvim_lua = "[Lua]",
+      }),
+    }),
   },
   snippet = {
     expand = function(args)
