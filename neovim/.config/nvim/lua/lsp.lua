@@ -5,9 +5,10 @@ local cmp_nvim_lsp = require("cmp_nvim_lsp")
 -- vim.lsp.set_log_level('debug')
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-	virtual_text = {
-		prefix = "●",
-	},
+	virtual_text = false,
+  float = {
+    source = "always",
+  },
 	signs = true,
 	underline = true,
 	update_in_insert = false,
@@ -180,3 +181,19 @@ win.default_opts = function(options)
   opts.border = 'single'
   return opts
 end
+-- Show line diagnostics in hover window
+vim.o.updatetime = 500
+vim.api.nvim_create_autocmd("CursorHold", {
+  buffer = bufnr,
+  callback = function()
+    local opts = {
+      focusable = false,
+      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+      border = 'rounded',
+      source = 'always',
+      prefix = ' ',
+      scope = 'cursor',
+    }
+    vim.diagnostic.open_float(nil, opts)
+  end
+})
