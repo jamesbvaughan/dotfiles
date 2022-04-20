@@ -17,15 +17,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 lsp_status.register_progress()
 
 local on_attach = function(client, bufnr)
-	-- floating function signatures
-	lsp_signature.on_attach({
-		-- This (bind) is mandatory, otherwise border config won't get registered.
-		bind = true,
-		handler_opts = {
-			border = "single",
-		},
-	}, bufnr)
-
 	lsp_status.on_attach(client)
 
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")

@@ -150,7 +150,18 @@ require("packer").startup(function(use)
 	})
 
 	-- Show function signatures as you type
-	use("ray-x/lsp_signature.nvim")
+	use({
+		"ray-x/lsp_signature.nvim",
+    config = function()
+      require('lsp_signature').setup({
+        -- This (bind) is mandatory, otherwise border config won't get registered.
+        -- bind = true,
+        -- handler_opts = {
+        --   border = "single",
+        -- },
+      })
+    end,
+	})
 
 	-- themes
 	use({
