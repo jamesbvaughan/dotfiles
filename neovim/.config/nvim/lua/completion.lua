@@ -68,7 +68,8 @@ cmp.setup {
   })
 }
 
--- Set configuration for specific filetype.
+-- Completions in git commits
+require("cmp_git").setup()
 cmp.setup.filetype('gitcommit', {
   sources = cmp.config.sources({
     { name = 'cmp_git' },
