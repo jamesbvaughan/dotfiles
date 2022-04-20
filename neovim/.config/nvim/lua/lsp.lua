@@ -146,16 +146,11 @@ local null_ls = require("null-ls")
 null_ls.setup({
 	on_attach = on_attach,
 	sources = {
-		null_ls.builtins.diagnostics.luacheck,
-		null_ls.builtins.diagnostics.markdownlint,
 		null_ls.builtins.diagnostics.rubocop,
 		null_ls.builtins.diagnostics.shellcheck,
-		null_ls.builtins.diagnostics.yamllint,
-		null_ls.builtins.formatting.autopep8,
 		null_ls.builtins.formatting.prettier,
 		null_ls.builtins.formatting.rubocop,
 		null_ls.builtins.formatting.shfmt,
-		null_ls.builtins.formatting.stylua,
 	},
 })
 
