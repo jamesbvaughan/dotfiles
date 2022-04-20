@@ -1,10 +1,5 @@
 -- luacheck: globals vim
-local lsp_status = require("lsp-status")
 local lualine = require("lualine")
-
-lsp_status.config({
-	show_filename = true,
-})
 
 lualine.setup({
 	options = {
@@ -32,6 +27,7 @@ lualine.setup({
 		lualine_c = {
 			"filename",
 			"diff",
+      "lsp_progress"
 		},
 		lualine_x = {
 			{
@@ -47,7 +43,6 @@ lualine.setup({
 			"location",
 		},
 		lualine_z = {
-			lsp_status.status,
 		},
 	},
 })

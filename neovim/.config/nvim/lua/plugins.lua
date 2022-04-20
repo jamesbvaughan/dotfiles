@@ -32,7 +32,7 @@ require("packer").startup(function(use)
 				"kyazdani42/nvim-web-devicons",
 				opt = true,
 			},
-			"nvim-lua/lsp-status.nvim",
+      'arkav/lualine-lsp-progress',
 		},
 	})
 

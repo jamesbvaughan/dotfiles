@@ -1,6 +1,5 @@
 -- luacheck: globals vim
 local lspconfig = require("lspconfig")
-local lsp_status = require("lsp-status")
 local lsp_signature = require("lsp_signature")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
@@ -14,11 +13,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 	underline = true,
 	update_in_insert = false,
 })
-lsp_status.register_progress()
 
 local on_attach = function(client, bufnr)
-	lsp_status.on_attach(client)
-
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
 	local function bufmap(combo, mapping)
@@ -51,9 +47,6 @@ end
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
-
--- Set default client capabilities plus window/workDoneProgress for lsp-status
-capabilities = vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
 
 -- set the on_attach callback and capabilities for all servers
 lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
