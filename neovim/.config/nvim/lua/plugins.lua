@@ -79,6 +79,10 @@ require("packer").startup(function(use)
 					},
 				},
 			})
+
+      vim.opt.foldlevel = 20
+      vim.wo.foldmethod = "expr"
+      vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 		end,
 	})
 
