@@ -130,6 +130,9 @@ require("packer").startup(function(use)
 			require("trouble").setup({
 				auto_close = true,
 				mode = "document_diagnostics",
+        group = false,
+        padding = false,
+        indent_lines = false,
 			})
 		end,
 	})
