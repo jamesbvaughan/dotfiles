@@ -25,6 +25,7 @@ brew install --quiet \
   highlight \
 	htop \
 	hub \
+  hyperfine \
   git \
 	koekeishiya/formulae/yabai \
   lua-language-server \
