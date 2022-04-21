@@ -69,10 +69,25 @@ require("packer").startup(function(use)
 		run = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = "all",
-				ignore_install = {
-					"phpdoc", -- This was throwing errors during installation
-				},
+				ensure_installed = {
+          "bash",
+          "css",
+          "go",
+          "graphql",
+          "html",
+          "javascript",
+          "json",
+          "lua",
+          "markdown",
+          "python",
+          "ruby",
+          "rust",
+          "scss",
+          "tsx",
+          "typescript",
+          "vim",
+          "yaml",
+        },
 				highlight = {
 					enable = true,
 				},
