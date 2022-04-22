@@ -65,6 +65,8 @@ require("packer").startup(function(use)
 			"windwp/nvim-ts-autotag",
 			-- auto-add "end" in ruby and similar languages
 			"RRethy/nvim-treesitter-endwise",
+      -- Handle mutliple languages per file for picking comment strings
+      'JoosepAlviste/nvim-ts-context-commentstring',
 		},
 		run = ":TSUpdate",
 		config = function()
@@ -100,6 +102,10 @@ require("packer").startup(function(use)
 				endwise = {
 					enable = true,
 				},
+        context_commentstring = {
+          enable = true,
+          enable_autocmd = false,
+        },
 				textobjects = {
 					select = {
 						enable = true,
@@ -229,7 +235,39 @@ require("packer").startup(function(use)
 	use("tpope/vim-repeat")
 
 	-- nice bindings for working with comments
-	use("tpope/vim-commentary")
+	-- use("tpope/vim-commentary")
+  use({
+    'numToStr/Comment.nvim',
+    requires = {
+      'JoosepAlviste/nvim-ts-context-commentstring',
+    },
+    config = function()
+      require('Comment').setup({
+        pre_hook = function(ctx)
+          -- Only calculate commentstring for tsx filetypes
+          if vim.bo.filetype == 'typescriptreact' then
+            local U = require('Comment.utils')
+
+            -- Determine whether to use linewise or blockwise commentstring
+            local type = ctx.ctype == U.ctype.line and '__default' or '__multiline'
+
+            -- Determine the location where to calculate commentstring from
+            local location = nil
+            if ctx.ctype == U.ctype.block then
+              location = require('ts_context_commentstring.utils').get_cursor_location()
+            elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
+              location = require('ts_context_commentstring.utils').get_visual_start_location()
+            end
+
+            return require('ts_context_commentstring.internal').calculate_commentstring({
+              key = type,
+              location = location,
+            })
+          end
+        end,
+      })
+    end,
+  })
 
 	-- nice commands for working with git
 	use({
