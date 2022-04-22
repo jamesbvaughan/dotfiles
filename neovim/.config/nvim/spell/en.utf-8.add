@@ -2,3 +2,4 @@ config
 json
 homebrew
 treesitter
+nvim
