@@ -13,37 +13,37 @@ which -s brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/H
 # Install things distributed as Homebrew packages
 export HOMEBREW_NO_ENV_HINTS=true
 brew install --quiet \
-	bat \
-	coreutils \
-	exa \
-	fd \
-	fzf \
-	htop \
-	hub \
-	koekeishiya/formulae/yabai \
-	markdownlint-cli \
-	neovim \
-	nodenv \
-	rbenv \
-	rg \
-	shellcheck \
-	skhd \
-	starship \
-	stow \
-	stylua \
-	tmux \
-	tree \
-	zsh \
+  bat \
+  coreutils \
   docker-compose \
+  exa \
+  fd \
+  fzf \
   git \
   highlight \
+  htop \
+  hub \
   hyperfine \
+  koekeishiya/formulae/yabai \
   lua-language-server \
   luarocks \
+  markdownlint-cli \
+  neovim \
+  nodenv \
   prettier \
   python \
+  rbenv \
+  rg \
+  shellcheck \
+  skhd \
+  starship \
+  stow \
+  stylua \
   tldr \
-	yamllint
+  tmux \
+  tree \
+  yamllint \
+  zsh
 
 # Install some casks
 brew install --quiet --cask \
@@ -55,16 +55,16 @@ brew install --quiet --cask \
 
 # Place config files where they belong
 stow \
-	alfred \
-	git \
-	hushlogin \
-	iterm2 \
-	luacheck \
-	neovim \
-	skhd \
-	tmux \
-	yabai \
-	zsh
+  alfred \
+  git \
+  hushlogin \
+  iterm2 \
+  luacheck \
+  neovim \
+  skhd \
+  tmux \
+  yabai \
+  zsh
 
 # Install some things that are distributed as npm packages
 npm install --global \
