@@ -41,6 +41,7 @@ brew install --quiet \
   lua-language-server \
   luarocks \
   prettier \
+  python \
   tldr \
 	yamllint
 
