@@ -37,6 +37,9 @@ export PATH="$GOPATH/bin:$PATH"
 ## Flutter
 export PATH="$HOME/code/flutter/bin:$PATH"
 
+## Python (brew symlinks)
+export PATH="$HOMEBREW_PREFIX/opt/python@3.9/libexec/bin:$PATH"
+
 ## GNU coreutils
 export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
 export MANPATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman:$MANPATH"
