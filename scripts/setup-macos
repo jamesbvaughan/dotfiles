@@ -70,7 +70,8 @@ stow \
 # Install some things that are distributed as npm packages
 npm install --global \
   @prisma/language-server \
-  bash-language-server
+  bash-language-server \
+  graphql-language-service-cli
 
 # Install Oh My ZSH
 test -d ~/.oh-my-zsh || sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
