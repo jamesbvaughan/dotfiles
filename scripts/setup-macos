@@ -49,7 +49,8 @@ brew install --quiet \
 brew install --quiet --cask \
   alfred \
   docker \
-  keepingyouawake
+  keepingyouawake \
+  monitorcontrol
 #   # Add this back once the cask is > v3.5
 #   # iterm2
 
