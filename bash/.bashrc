@@ -43,3 +43,4 @@ HEROKU_AC_BASH_SETUP_PATH=/Users/james/Library/Caches/heroku/autocomplete/bash_s
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 # export PATH="$PATH:$HOME/.rvm/bin"
+. "$HOME/.cargo/env"

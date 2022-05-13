@@ -8,3 +8,4 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+. "$HOME/.cargo/env"
