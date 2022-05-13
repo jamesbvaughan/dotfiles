@@ -90,6 +90,15 @@ lspconfig.jsonls.setup({
 lspconfig.prismals.setup({})
 lspconfig.pylsp.setup({})
 lspconfig.pyright.setup({})
+lspconfig.rls.setup({
+  settings = {
+    rust = {
+      unstable_features = true,
+      build_on_save = false,
+      all_features = true,
+    },
+  },
+})
 lspconfig.sourcekit.setup({})
 lspconfig.tailwindcss.setup({})
 lspconfig.terraformls.setup({})
