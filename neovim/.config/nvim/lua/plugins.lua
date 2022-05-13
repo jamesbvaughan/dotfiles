@@ -44,7 +44,10 @@ require("packer").startup(function(use)
         },
         sections = {
           lualine_c = {
-            "filename",
+            {
+              "filename",
+              path = 1,
+            },
             "lsp_progress"
           },
           lualine_x = {
