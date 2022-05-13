@@ -5,3 +5,5 @@ treesitter
 nvim
 Netlify
 lua
+eslint
+npm
