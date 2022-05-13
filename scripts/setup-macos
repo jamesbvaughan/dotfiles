@@ -28,6 +28,7 @@ brew install --quiet \
   lua-language-server \
   luarocks \
   markdownlint-cli \
+  meetingbar \
   neovim \
   nodenv \
   prettier \
