@@ -150,6 +150,7 @@ require("packer").startup(function(use)
     config = function()
       require("trouble").setup({
         auto_close = true,
+        auto_open = true,
         mode = "document_diagnostics",
         group = false,
         padding = false,
