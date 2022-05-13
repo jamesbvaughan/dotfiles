@@ -356,6 +356,20 @@ require("packer").startup(function(use)
   -- quick navigation within a file
   use("ggandor/lightspeed.nvim")
 
+  use({
+    'TimUntersberger/neogit',
+    requires = 'nvim-lua/plenary.nvim',
+    config = function()
+      require("neogit").setup({
+        sections = {
+          recent = {
+            folded = false,
+          },
+        },
+      })
+    end,
+  })
+
   pcall(function()
     require("extra_packages")(use)
   end)
