@@ -69,7 +69,13 @@ lspconfig.cssls.setup({
 })
 lspconfig.dartls.setup({})
 -- lspconfig.denols.setup({})
-lspconfig.eslint.setup({})
+lspconfig.eslint.setup({
+  settings = {
+    codeActionOnSave = {
+      enable = true,
+    },
+  }
+})
 lspconfig.flow.setup({})
 lspconfig.gopls.setup({})
 lspconfig.graphql.setup({})
