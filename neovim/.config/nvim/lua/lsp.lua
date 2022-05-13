@@ -94,14 +94,22 @@ lspconfig.sourcekit.setup({})
 lspconfig.tailwindcss.setup({})
 lspconfig.terraformls.setup({})
 lspconfig.tsserver.setup({})
-lspconfig.yamlls.setup({})
+lspconfig.yamlls.setup({
+  settings = {
+    yaml = {
+      schemastore = {
+        enable = true,
+      },
+    },
+  },
+})
 
 -- the lua language server requres some additional setup
 -- copied from https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-require'lspconfig'.sumneko_lua.setup {
+require 'lspconfig'.sumneko_lua.setup {
   settings = {
     Lua = {
       runtime = {
