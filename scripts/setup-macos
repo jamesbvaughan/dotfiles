@@ -81,6 +81,10 @@ test -d ~/.oh-my-zsh || sh -c "$(curl -fsSL https://raw.githubusercontent.com/oh
 # Enable global key-repeat
 defaults write -g ApplePressAndHoldEnabled -bool false
 
+# Enable window dragging by Cmd-ctrl + click'n'drag
+# Disable this via `defaults delete -g NSWindowShouldDragOnGesture`
+defaults write -g NSWindowShouldDragOnGesture -bool true   
+
 popd
 
 echo 'Finished.'
