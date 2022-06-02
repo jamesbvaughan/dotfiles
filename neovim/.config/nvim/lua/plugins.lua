@@ -154,6 +154,7 @@ require("packer").startup(function(use)
       require("trouble").setup({
         auto_close = true,
         auto_open = true,
+        height = 5,
         mode = "document_diagnostics",
         group = false,
         padding = false,
