@@ -195,7 +195,7 @@ require("packer").startup(function(use)
   use({
     "L3MON4D3/LuaSnip",
     requires = {
-      "honza/vim-snippets",
+      -- "honza/vim-snippets",
       "saadparwaiz1/cmp_luasnip",
     },
     config = function()
