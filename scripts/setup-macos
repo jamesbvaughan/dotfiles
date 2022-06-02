@@ -15,6 +15,7 @@ export HOMEBREW_NO_ENV_HINTS=true
 brew install --quiet \
   bat \
   coreutils \
+  cormacrelf/tap/dark-notify \
   docker-compose \
   exa \
   fd \

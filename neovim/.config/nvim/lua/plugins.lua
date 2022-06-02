@@ -213,6 +213,12 @@ require("packer").startup(function(use)
       vim.cmd("colorscheme dracula")
     end,
   })
+  use({
+    "cormacrelf/dark-notify",
+    config = function()
+      require('dark_notify').run()
+    end,
+  })
 
   -- navigating files and other things
   use({
