@@ -207,10 +207,18 @@ require("packer").startup(function(use)
   use({
     "Mofiqul/dracula.nvim",
     config = function()
-      vim.g.dracula_italic_comment = true
+      -- vim.g.dracula_italic_comment = true
       -- vim.g.dracula_transparent_bg = true
-      vim.opt.termguicolors = true
-      vim.cmd("colorscheme dracula")
+      -- vim.opt.termguicolors = true
+      -- vim.cmd("colorscheme dracula")
+    end,
+  })
+  use({
+    "ellisonleao/gruvbox.nvim",
+    config = function()
+      vim.g.gruvbox_italic = 1
+      vim.g.gruvbox_transparent_bg = 1
+      vim.g.gruvbox_sign_column = "bg0"
     end,
   })
   use({
