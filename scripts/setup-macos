@@ -22,10 +22,12 @@ brew install --quiet \
   exa \
   fd \
   fzf \
+  gh \
   git \
   highlight \
   htop \
   hub \
+  hugo \
   hyperfine \
   koekeishiya/formulae/yabai \
   lua-language-server \
