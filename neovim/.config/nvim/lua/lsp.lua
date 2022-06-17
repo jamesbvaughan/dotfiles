@@ -146,6 +146,7 @@ null_ls.setup({
   sources = {
     null_ls.builtins.diagnostics.rubocop,
     null_ls.builtins.diagnostics.shellcheck,
+    null_ls.builtins.diagnostics.vale,
     null_ls.builtins.formatting.prettier,
     null_ls.builtins.formatting.rubocop,
     null_ls.builtins.formatting.shfmt,
