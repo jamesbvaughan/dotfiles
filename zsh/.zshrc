@@ -23,6 +23,9 @@ fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
 
 # Tool-specific config
 
+## GPG
+export GPG_TTY=$(tty)
+
 ## Ruby
 eval "$(rbenv init -)"
 

@@ -3,11 +3,11 @@
 	email = james@jamesbvaughan.com
 [push]
 	default = simple
-[credential]
-	helper = cache --timeout=3600
 [core]
 	editor = nvim
 [pull]
 	rebase = true
 [init]
 	defaultBranch = main
+[gpg]
+	program = /opt/homebrew/bin/gpg
