@@ -51,10 +51,21 @@ brew install --quiet \
 
 # Install some casks
 brew install --quiet --cask \
+  1password \
   alfred \
+  cron \
   docker \
+  dropbox \
+  figma \
   keepingyouawake \
-  monitorcontrol
+  logseq \
+  monitorcontrol \
+  notion \
+  raycast \
+  slack \
+  spotify \
+  visual-studio-code \
+  zoom
 #   # Add this back once the cask is > v3.5
 #   # iterm2
 
