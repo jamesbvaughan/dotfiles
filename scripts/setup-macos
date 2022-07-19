@@ -10,6 +10,8 @@ pushd ~/.dotfiles
 # Install Homebrew
 which -s brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
 
+brew update
+
 # Install things distributed as Homebrew packages
 export HOMEBREW_NO_ENV_HINTS=true
 brew install --quiet \
