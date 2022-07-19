@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script configures MacOS how I like it.
+# This script configures macOS how I like it.
 # It's meant to be idempotent so that it can safely be re-run at any time.
 
 set -euo pipefail
