@@ -67,6 +67,7 @@ lspconfig.cssls.setup({
     },
   },
 })
+lspconfig.clojure_lsp.setup({})
 lspconfig.dartls.setup({})
 -- lspconfig.denols.setup({})
 lspconfig.eslint.setup({
@@ -150,6 +151,7 @@ null_ls.setup({
     null_ls.builtins.formatting.prettier,
     null_ls.builtins.formatting.rubocop,
     null_ls.builtins.formatting.shfmt,
+    null_ls.builtins.formatting.joker,
   },
 })
 
