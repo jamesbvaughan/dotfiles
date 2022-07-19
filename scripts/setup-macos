@@ -56,6 +56,8 @@ brew install --quiet \
 brew install --quiet --cask \
   1password \
   alfred \
+  bartender \
+  blender \
   cron \
   docker \
   dropbox \
@@ -65,8 +67,10 @@ brew install --quiet --cask \
   monitorcontrol \
   notion \
   raycast \
+  signal \
   slack \
   spotify \
+  tailscale \
   visual-studio-code \
   zoom
 #   # Add this back once the cask is > v3.5
