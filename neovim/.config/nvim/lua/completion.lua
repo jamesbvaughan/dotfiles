@@ -97,4 +97,4 @@ cmp.setup.cmdline(':', {
 })
 
 -- Use nvim-autopairs to insert parens after completing a function name
-cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
