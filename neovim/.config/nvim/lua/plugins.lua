@@ -372,7 +372,13 @@ require("packer").startup(function(use)
   })
 
   -- quick navigation within a file
-  use("ggandor/lightspeed.nvim")
+  -- use("ggandor/lightspeed.nvim")
+  use({
+    'ggandor/leap.nvim',
+    config = function()
+      require('leap').set_default_keymaps()
+    end,
+  })
 
   -- github copilot
   -- This is just necessary for setting up auth with `:Copilot setup`
