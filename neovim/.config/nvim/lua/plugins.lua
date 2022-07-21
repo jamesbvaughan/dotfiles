@@ -298,7 +298,7 @@ require("packer").startup(function(use)
     "tpope/vim-fugitive",
     requires = "tpope/vim-rhubarb",
     config = function()
-      -- vim.keymap.set("", "gh", ":GBrowse<cr>")
+      vim.keymap.set("", "gh", ":GBrowse<cr>")
       -- vim.keymap.set("n", "gs", ":Git<cr>")
       -- vim.keymap.set("n", "gl", ":Git log --pretty --oneline --abbrev-commit --graph -20 <cr>")
     end,
