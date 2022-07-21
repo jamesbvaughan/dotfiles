@@ -298,9 +298,9 @@ require("packer").startup(function(use)
     "tpope/vim-fugitive",
     requires = "tpope/vim-rhubarb",
     config = function()
-      vim.keymap.set("", "gh", ":GBrowse<cr>")
-      vim.keymap.set("n", "gs", ":Git<cr>")
-      vim.keymap.set("n", "gl", ":Git log --pretty --oneline --abbrev-commit --graph -20 <cr>")
+      -- vim.keymap.set("", "gh", ":GBrowse<cr>")
+      -- vim.keymap.set("n", "gs", ":Git<cr>")
+      -- vim.keymap.set("n", "gl", ":Git log --pretty --oneline --abbrev-commit --graph -20 <cr>")
     end,
   })
 
@@ -395,13 +395,21 @@ require("packer").startup(function(use)
     'TimUntersberger/neogit',
     requires = 'nvim-lua/plenary.nvim',
     config = function()
-      require("neogit").setup({
-        sections = {
-          recent = {
-            folded = false,
-          },
-        },
+      local neogit = require("neogit")
+
+      neogit.setup({
+        -- sections = {
+        --   recent = {
+        --     folded = false,
+        --   },
+        -- },
       })
+
+      vim.keymap.set("n", "gs", function()
+        -- Open the neogit status buffer for the current buffer's repository
+        neogit.open({ cwd = vim.fn.expand("%:p:h") })
+      end
+      )
     end,
   })
 
