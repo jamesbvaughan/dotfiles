@@ -238,11 +238,11 @@ require("packer").startup(function(use)
 
       local builtins = require("telescope.builtin")
 
-      vim.keymap.set("n", "ff", builtins.find_files)
-      vim.keymap.set("n", "fg", builtins.live_grep)
-      vim.keymap.set("n", "fb", builtins.buffers)
-      vim.keymap.set("n", "fa", builtins.git_files)
-      vim.keymap.set("n", "fc", function()
+      vim.keymap.set("n", "<leader>fa", builtins.find_files)
+      vim.keymap.set("n", "<leader>fg", builtins.live_grep)
+      vim.keymap.set("n", "<leader>fb", builtins.buffers)
+      vim.keymap.set("n", "<leader>fa", builtins.git_files)
+      vim.keymap.set("n", "<leader>fc", function()
         builtins.git_files({ cwd = "~/.dotfiles" })
       end)
     end,
@@ -399,7 +399,7 @@ require("packer").startup(function(use)
 
       neogit.setup()
 
-      vim.keymap.set("n", "gs", function()
+      vim.keymap.set("n", "<leader>g", function()
         -- Open the neogit status buffer for the current buffer's repository
         neogit.open({ cwd = vim.fn.expand("%:p:h") })
       end
