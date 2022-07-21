@@ -33,9 +33,9 @@ local on_attach = function(_client, bufnr)
   vim.keymap.set("n", "<leader>q", ":TroubleToggle<CR>")
 
   -- Formatting
-  vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
-  vim.cmd([[ command! FormatSync execute 'lua vim.lsp.buf.formatting_seq_sync()' ]])
-  bufmap("<leader>f", ":FormatSync<CR>")
+  vim.api.nvim_create_user_command('Format', vim.lsp.buf.formatting)
+  vim.api.nvim_create_user_command('FormatSync', vim.lsp.buf.formatting_seq_sync)
+  vim.keymap.set("n", "<leader>f", vim.lsp.buf.formatting_seq_sync)
 
   -- Format on save
   -- vim.cmd([[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]])
