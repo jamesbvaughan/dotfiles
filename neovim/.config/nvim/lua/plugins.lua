@@ -374,6 +374,23 @@ require("packer").startup(function(use)
   -- quick navigation within a file
   use("ggandor/lightspeed.nvim")
 
+  -- github copilot
+  -- This is just necessary for setting up auth with `:Copilot setup`
+  -- use("github/copilot.vim")
+  use({
+    "zbirenbaum/copilot.lua",
+    event = { "VimEnter" },
+    config = function()
+      vim.defer_fn(function()
+        require("copilot").setup({})
+      end, 100)
+    end
+  })
+  use({
+    "zbirenbaum/copilot-cmp",
+    module = "copilot_cmp",
+  })
+
   use({
     'TimUntersberger/neogit',
     requires = 'nvim-lua/plenary.nvim',
