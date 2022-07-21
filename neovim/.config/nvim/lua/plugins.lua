@@ -397,13 +397,7 @@ require("packer").startup(function(use)
     config = function()
       local neogit = require("neogit")
 
-      neogit.setup({
-        -- sections = {
-        --   recent = {
-        --     folded = false,
-        --   },
-        -- },
-      })
+      neogit.setup()
 
       vim.keymap.set("n", "gs", function()
         -- Open the neogit status buffer for the current buffer's repository
