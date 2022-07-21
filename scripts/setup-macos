@@ -70,6 +70,7 @@ brew install --quiet --cask \
   signal \
   slack \
   spotify \
+  steam \
   tailscale \
   visual-studio-code \
   zoom
