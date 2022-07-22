@@ -46,6 +46,10 @@ vim.opt.undodir = vim.fn.getenv('HOME')..'/.local/nvim/undofiles'
 vim.opt.undofile = true
 
 
+---- configure the spell file
+vim.opt.spellfile = vim.fn.getenv('HOME')..'/.config/nvim/spell/en.utf-8.add'
+
+
 -- Keybindings
 
 --- use space as the leader key
