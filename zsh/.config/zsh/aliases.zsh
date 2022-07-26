@@ -1,6 +1,6 @@
 # etc
 alias grep="grep --color"
-alias vim="nvim"
+alias vim="TERM='' nvim"
 alias tmux='tmux -u'
 alias ber='bundle exec ruby'
 alias cat='bat'
