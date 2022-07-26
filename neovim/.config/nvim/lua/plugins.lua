@@ -230,18 +230,25 @@ require("packer").startup(function(use)
   })
 
   -- navigating files and other things
+  use({'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
   use({
     "nvim-telescope/telescope.nvim",
     requires = { "nvim-lua/plenary.nvim" },
     config = function()
-      require("telescope").setup({})
-
+      local telescope = require("telescope")
       local builtins = require("telescope.builtin")
+
+      telescope.setup({})
+      telescope.load_extension("fzf")
 
       vim.keymap.set("n", "<leader>ff", builtins.find_files)
       vim.keymap.set("n", "<leader>fg", builtins.live_grep)
       vim.keymap.set("n", "<leader>fb", builtins.buffers)
-      vim.keymap.set("n", "<leader>fa", builtins.git_files)
+      vim.keymap.set("n", "<leader>fa", function()
+        builtins.git_files({ show_untracked = true })
+      end)
+      vim.keymap.set("n", "<leader>fs", builtins.grep_string)
+      vim.keymap.set("n", "<leader>ft", builtins.treesitter)
       vim.keymap.set("n", "<leader>fc", function()
         builtins.git_files({ cwd = "~/.dotfiles" })
       end)
