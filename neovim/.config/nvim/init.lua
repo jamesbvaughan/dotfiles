@@ -66,12 +66,6 @@ vim.keymap.set('n', '<s-h>', ':bprev<cr>')
 vim.keymap.set('n', '<s-l>', ':bnext<cr>')
 vim.keymap.set('n', '<leader>d', ':bdel<cr>')
 
----- open up this file
-vim.keymap.set('n', '<leader>v', ':e ~/.config/nvim/init.lua<cr>')
-
----- open up plugin config
-vim.keymap.set('n', '<leader>p', ':e ~/.config/nvim/lua/plugins.lua<cr>')
-
 ---- toggle spell checking
 vim.keymap.set('n', '<leader>s', ':setlocal spell! spelllang=en_us<cr>')
 
