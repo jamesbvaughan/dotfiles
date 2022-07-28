@@ -404,6 +404,7 @@ require("packer").startup(function(use)
     module = "copilot_cmp",
   })
 
+  -- nvim based git client
   use({
     'TimUntersberger/neogit',
     requires = 'nvim-lua/plenary.nvim',
