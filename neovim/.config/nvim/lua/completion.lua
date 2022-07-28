@@ -18,7 +18,22 @@ cmp.setup {
     documentation = cmp.config.window.bordered(),
   },
   formatting = {
-    format = lspkind.cmp_format(),
+    format = function(entry, vim_item)
+      if entry.source.name == "copilot" then
+        vim_item.kind = " Copilot"
+        -- vim_item.kind = ""
+        vim_item.kind_hl_group = "CmpItemKindCopilot"
+        return vim_item
+      end
+
+      local formatter = lspkind.cmp_format({
+        with_text = false,
+        maxwidth = 50,
+        mode = "symbol_text",
+      })
+
+      return formatter(entry, vim_item)
+    end
   },
   snippet = {
     expand = function(args)
@@ -30,7 +45,7 @@ cmp.setup {
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-Space>'] = cmp.mapping.complete({}),
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
