@@ -27,7 +27,6 @@ cmp.setup {
       end
 
       local formatter = lspkind.cmp_format({
-        with_text = false,
         maxwidth = 50,
         mode = "symbol_text",
       })
