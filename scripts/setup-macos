@@ -94,8 +94,12 @@ stow \
 # Install some things that are distributed as npm packages
 npm install --global \
   @prisma/language-server \
+  @tailwindcss/language-server \
   bash-language-server \
+  graphql \
   graphql-language-service-cli \
+  typescript \
+  typescript-language-server \
   vscode-langservers-extracted \
   yaml-language-server
 
