@@ -47,6 +47,7 @@ brew install --quiet \
   stylua \
   tldr \
   tmux \
+  tmuxinator \
   tree \
   vale \
   yamllint \
@@ -95,6 +96,7 @@ npm install --global \
   @prisma/language-server \
   bash-language-server \
   graphql-language-service-cli \
+  vscode-langservers-extracted \
   yaml-language-server
 
 # Install Oh My ZSH
