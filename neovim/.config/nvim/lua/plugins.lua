@@ -420,6 +420,11 @@ require("packer").startup(function(use)
     end,
   })
 
+  -- highlight real colors inside nvim
+  -- for example: "#123456"
+  -- TODO: make this actually work
+  use("norcalli/nvim-colorizer.lua")
+
   pcall(function()
     require("extra_packages")(use)
   end)
@@ -432,3 +437,9 @@ end)
 
 require("lsp")
 require("completion")
+
+
+-- Color things
+
+vim.cmd("colorscheme gruvbox")
+require("colorizer").setup({})

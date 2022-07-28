@@ -93,8 +93,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 require('plugins')
 
-vim.cmd("colorscheme gruvbox")
-
 
 -- Load any extra machine-specific config
 pcall(require, 'extra')
