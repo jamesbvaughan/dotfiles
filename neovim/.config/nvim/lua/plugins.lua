@@ -220,6 +220,12 @@ require("packer").startup(function(use)
       vim.g.gruvbox_italic = 1
       vim.g.gruvbox_transparent_bg = 1
       vim.g.gruvbox_sign_column = "bg0"
+      require("gruvbox").setup({
+        overrides = {
+          -- Set a color for copilot completion menu items
+          CmpItemKindCopilot = { fg = "#98971A" }
+        }
+      })
     end,
   })
   use({
