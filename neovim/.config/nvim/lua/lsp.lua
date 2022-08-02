@@ -20,24 +20,22 @@ local on_attach = function(_client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
-  -- vim.keymap.set("n", "gd", vim.lsp.buf.definition)
   vim.keymap.set("n", "gd", function()
     telescope_builtins.lsp_definitions(telescope_themes.get_cursor())
   end)
   vim.keymap.set("n", "K", vim.lsp.buf.hover)
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
   -- bufmap('<C-k>', vim.lsp.buf.signature_help)
-  -- vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition)
   vim.keymap.set("n", "<leader>D", function()
     telescope_builtins.lsp_type_definitions(telescope_themes.get_cursor())
   end)
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
   vim.keymap.set("n", "gr", vim.lsp.buf.references)
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
+  vim.keymap.set("v", "<leader>ca", vim.lsp.buf.range_code_action)
   -- vim.keymap.set("n", "<leader>ca", function ()
   --   telescope_builtins.lsp_code_actions(telescope_themes.get_cursor())
   -- end)
-  -- bufmap('<leader>ca', vim.lsp.buf.range_code_action)
   vim.keymap.set("n", "<leader>e", vim.lsp.diagnostic.show_line_diagnostics)
   vim.keymap.set("n", "[d", vim.lsp.diagnostic.goto_prev)
   vim.keymap.set("n", "]d", vim.lsp.diagnostic.goto_next)
@@ -181,9 +179,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
     local opts = {
       focusable = false,
       close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-      border = 'rounded',
       source = 'always',
-      prefix = ' ',
       scope = 'cursor',
     }
     vim.diagnostic.open_float(nil, opts)
