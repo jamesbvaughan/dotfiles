@@ -26,3 +26,4 @@ turborepo
 postgres
 prisma
 repo
+XState
