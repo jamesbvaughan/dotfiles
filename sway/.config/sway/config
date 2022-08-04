@@ -33,6 +33,11 @@ default_border pixel 2
 hide_edge_borders both
 
 
+### HiDPI
+
+output eDP-1 scale 1.5
+
+
 ### Font
 
 font pango:JetBrains Mono Nerd Font 10px
