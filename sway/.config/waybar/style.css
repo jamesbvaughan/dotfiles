@@ -36,7 +36,7 @@ colors:
     border: none;
     border-radius: 0;
     font-family: JetBrainsMonoMedium Nerd Font, sans-serif;
-    font-size: 12px;
+    font-size: 20px;
     min-height: 0;
     color: #ebdbb2;
 }
@@ -50,7 +50,7 @@ window#waybar.hidden {
 }
 
 #workspaces button {
-    padding: 0 0px;
+    padding: 0 5px;
 }
 
 #workspaces button:hover {

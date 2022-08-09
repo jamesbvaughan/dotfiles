@@ -1,7 +1,9 @@
-xwayland disable
+# xwayland disable
 
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
 exec --no-startup-id gammastep
+exec --no-startup-id dbus-update-activation-environment --all
+exec --no-startup-id gnome-keyring-daemon --start --components=secrets
 
 
 ### Variables
@@ -68,6 +70,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+q exit
 
 floating_modifier $mod normal
+bindsym $mod+t floating toggle
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
