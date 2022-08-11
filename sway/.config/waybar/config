@@ -39,6 +39,9 @@
   "sway/mode": {
       "format": "<span style=\"italic\">{}</span>"
   },
+  "sway/window": {
+    "max-length": 80
+  },
   "clock": {
       // "timezone": "America/New_York",
       "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
@@ -46,11 +49,11 @@
       "format-alt": "{:%Y-%m-%d}"
   },
   "cpu": {
-      "format": "{usage}% ",
+      "format": "{usage}% ",
       "tooltip": false
   },
   "memory": {
-      "format": "{}% "
+      "format": "{}% "
   },
   "temperature": {
   },
@@ -74,8 +77,8 @@
   },
   "network": {
       "format-wifi": "{essid} ({signalStrength}%) ",
-      "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-      "format-linked": "{ifname} (No IP) ",
+      "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+      "format-linked": "{ifname} (No IP) ",
       "format-disconnected": "Disconnected ⚠",
       "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
