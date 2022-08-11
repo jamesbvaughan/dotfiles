@@ -6,28 +6,6 @@ exec --no-startup-id dbus-update-activation-environment --all
 exec --no-startup-id gnome-keyring-daemon --start --components=secrets
 
 
-### Variables
-
-set $mod Mod4
-set $left h
-set $down j
-set $up k
-set $right l
-
-set $term alacritty
-set $menu bemenu-run \
-  --prompt '>' \
-  --line-height 30 \
-  --nb '#21222C' \
-  --nf '#F8F8F2' \
-  --tb '#21222C' \
-  --tf '#F8F8F2' \
-  --fb '#21222C' \
-  --ff '#F8F8F2' \
-  --hb '#F8F8F2' \
-  --hf '#21222C' \
-  --fn 'JetBrains Mono Nerd Font 20px'
-
 ### Colors
 
 set $green '#98971a'
@@ -38,7 +16,20 @@ client.focused   $red $red $red $red $green
 client.unfocused $red $red $red $red $black
 
 
+### Variables
+
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+
+set $term alacritty
+set $menu ~/.dotfiles/scripts/menu
+
+
 ### Wallpaper
+
 output "*" bg /home/james/code/wallpapers/gruvbox/houseonthesideofalake.jpg fill
 
 
