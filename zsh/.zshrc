@@ -17,20 +17,28 @@ EXTRA_CONFIG=$HOME/.zshrc.extra ; [ -f $EXTRA_CONFIG ] && source $EXTRA_CONFIG
 
 
 # Include completions from homebrew packages
-HOMEBREW_PREFIX=$(brew --prefix)
-fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
+if [ -x "$(command -v brew)" ]; then
+  HOMEBREW_PREFIX=$(brew --prefix)
+  fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
+fi
 
 
 # Tool-specific config
+
+## Volta
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
 
 ## GPG
 export GPG_TTY=$(tty)
 
 ## Ruby
-eval "$(rbenv init -)"
+if [ -x "$(command -v rbenv)" ]; then
+  eval "$(rbenv init -)"
+fi
 
 ## JavaScript
-eval "$(nodenv init -)"
+# eval "$(nodenv init -)" # removing this while I try out volta
 export PATH="$(yarn global bin):$PATH"
 
 ## Go
@@ -60,5 +68,3 @@ typeset -aU path
 
 # Configure prompt
 eval "$(starship init zsh)"
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
