@@ -450,3 +450,6 @@ require("completion")
 
 vim.cmd("colorscheme gruvbox")
 require("colorizer").setup({})
+
+--- Remove the background color set by gruvbox
+vim.api.nvim_set_hl(0, "Normal", {guibg = NONE, ctermbg = NONE})
