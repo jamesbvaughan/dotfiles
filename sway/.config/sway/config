@@ -28,11 +28,26 @@ set $menu bemenu-run \
   --hf '#21222C' \
   --fn 'JetBrains Mono Nerd Font 20px'
 
+### Colors
+
+set $green '#98971a'
+set $red   '#cc241d'
+set $black '#1d2021'
+
+client.focused   $red $red $red $red $green
+client.unfocused $red $red $red $red $black
+
+
+### Wallpaper
+output "*" bg /home/james/code/wallpapers/gruvbox/houseonthesideofalake.jpg fill
+
 
 ### Window configuration
 
-default_border pixel 2
-hide_edge_borders both
+default_border pixel 4
+# hide_edge_borders both
+gaps inner 16
+smart_borders on
 
 
 ### HiDPI
