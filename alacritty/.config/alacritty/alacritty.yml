@@ -5,7 +5,7 @@ import:
 
 window:
   dynamic_padding: true
-  # startup_mode: Maximized
+  opacity: 0.8
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -21,23 +21,16 @@ font:
   normal:
     family: "JetBrainsMono Nerd Font"
 
-  # bold:
-  #   style: Extra Bold
+  bold:
+    style: Extra Bold
 
   size: 12
 
 # draw_bold_text_with_bright_colors: true
 
-# mouse:
-#   url:
-#     modifiers: Command
-# https://google.com
-
 bell:
   animation: EaseOutExpo
   duration: 50
-
-# background_opacity: 0.8
 
 live_config_reload: true
 
