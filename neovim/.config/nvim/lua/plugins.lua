@@ -453,3 +453,5 @@ require("colorizer").setup({})
 
 --- Remove the background color set by gruvbox
 vim.api.nvim_set_hl(0, "Normal", {guibg = NONE, ctermbg = NONE})
+vim.api.nvim_set_hl(0, "VertSplit", {guibg = NONE, ctermbg = NONE})
+vim.api.nvim_set_hl(0, "SignColumn", {guibg = NONE, ctermbg = NONE})
