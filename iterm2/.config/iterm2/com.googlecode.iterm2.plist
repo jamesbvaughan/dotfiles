@@ -922,10 +922,21 @@
 			<key>Text</key>
 			<string></string>
 		</dict>
+		<key>0x68-0x100000-0x4</key>
+		<dict>
+			<key>Action</key>
+			<integer>18</integer>
+			<key>Escaping</key>
+			<integer>2</integer>
+			<key>Text</key>
+			<string></string>
+			<key>Version</key>
+			<integer>2</integer>
+		</dict>
 		<key>0x6a-0x100000-0x26</key>
 		<dict>
 			<key>Action</key>
-			<integer>30</integer>
+			<integer>21</integer>
 			<key>Escaping</key>
 			<integer>2</integer>
 			<key>Text</key>
@@ -936,7 +947,18 @@
 		<key>0x6b-0x100000-0x28</key>
 		<dict>
 			<key>Action</key>
-			<integer>31</integer>
+			<integer>20</integer>
+			<key>Escaping</key>
+			<integer>2</integer>
+			<key>Text</key>
+			<string></string>
+			<key>Version</key>
+			<integer>2</integer>
+		</dict>
+		<key>0x6c-0x100000-0x25</key>
+		<dict>
+			<key>Action</key>
+			<integer>19</integer>
 			<key>Escaping</key>
 			<integer>2</integer>
 			<key>Text</key>
@@ -3161,6 +3183,8 @@
 			<string>kNextWindowPointerAction</string>
 		</dict>
 	</dict>
+	<key>Print In Black And White</key>
+	<true/>
 	<key>QuitWhenAllWindowsClosed</key>
 	<true/>
 	<key>SeparateStatusBarsPerPane</key>
