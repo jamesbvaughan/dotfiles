@@ -5,6 +5,13 @@ exec --no-startup-id gammastep
 exec --no-startup-id dbus-update-activation-environment --all
 exec --no-startup-id gnome-keyring-daemon --start --components=secrets
 
+exec swayidle -w \
+  before-sleep 'playerctl pause' \
+  before-sleep 'swaylock' \
+	timeout 1800 'swaylock -f' \
+	timeout 1805 'swaymsg "output * dpms off"' \
+	resume 'swaymsg "output * dpms on"'
+
 
 ### Colors
 
