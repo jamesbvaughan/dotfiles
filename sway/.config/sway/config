@@ -124,7 +124,7 @@ bindsym $mod+e layout toggle split
 
 bindsym $mod+f fullscreen
 
-bindsym $mod+Shift+space layout toggle splitv splith
+# bindsym $mod+Shift+space layout toggle splitv splith
 
 # bindsym $mod+space focus mode_toggle
 
