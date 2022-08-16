@@ -56,6 +56,7 @@
       "format": "{}% "
   },
   "temperature": {
+    "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input"
   },
   "backlight": {
       "format": "{percent}% {icon}",
