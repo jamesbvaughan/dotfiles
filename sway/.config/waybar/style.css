@@ -39,6 +39,13 @@ window#waybar.hidden {
   opacity: 0.2;
 }
 
+tooltip {
+  background: @bg;
+}
+tooltip label {
+  color: @fg;
+}
+
 #workspaces button {
   padding: 0 8px;
 }
@@ -115,6 +122,7 @@ window#waybar.hidden {
 
 #custom-spotify { background: @green;   }
 #pulseaudio     { background: @cyan;    }
+#backlight      { background: @blue;    }
 #network        { background: @magenta; }
 #cpu            { background: @yellow;  }
 #memory         { background: @green;   }

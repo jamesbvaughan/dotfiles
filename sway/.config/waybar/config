@@ -11,11 +11,11 @@
     // "idle_inhibitor",
     "custom/spotify",
     "pulseaudio",
+    "backlight",
     "network",
     "cpu",
     "memory",
     "temperature",
-    "backlight",
     "battery",
     "tray"
   ],
@@ -44,24 +44,25 @@
     "max-length": 80
   },
   "clock": {
-      // "timezone": "America/New_York",
-      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-      "format": "{:%H:%M   %a, %b %d}",
-      "format-alt": "{:%Y-%m-%d}"
+    // "timezone": "America/New_York",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format": "{:%H:%M   %a, %b %d}",
+    "format-alt": "{:%Y-%m-%d}"
   },
   "cpu": {
-      "format": "{usage}% ",
-      "tooltip": false
+    "format": "{usage}% "
   },
   "memory": {
-      "format": "{}% "
+    "format": "{}% "
   },
   "temperature": {
     "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input"
   },
   "backlight": {
     "format": "{percent}% {icon}",
-    "format-icons": ["", ""]
+    "format-icons": ["", ""],
+    "on-scroll-up": "brightnessctl set +10%",
+    "on-scroll-down": "brightnessctl set 10%-"
   },
   "battery": {
     "states": {
@@ -103,24 +104,13 @@
     },
     "on-click": "pavucontrol"
   },
-  "custom/media": {
-    "format": "{icon} {}",
-    "return-type": "json",
-    "max-length": 40,
-    "format-icons": {
-      "spotify": "",
-      "default": "🎜"
-    },
-    "escape": true,
-    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-    // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-  },
   "custom/spotify": {
-    "format": " {}",
+    "format": "{} ",
     "escape": true,
     "max-length": 40,
     "interval": 5,
     "on-click": "spt playback --toggle",
+    "on-click-right": "alacritty -e spt",
     "exec": "spt playback",
     "exec-if": "pgrep spotify"
   },
