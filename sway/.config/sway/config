@@ -42,6 +42,8 @@ default_border pixel 4
 gaps inner 16
 smart_borders on
 
+for_window [app_id="zoom"] floating enable
+
 
 ### HiDPI
 
