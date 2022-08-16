@@ -65,10 +65,6 @@ tooltip label {
   /* background-color: #eb4d4b; */
 }
 
-#mode {
-  background-color: @red;
-}
-
 #window {
   /* margin-left: 10px; */
 }
@@ -78,6 +74,7 @@ tooltip label {
 #battery,
 #cpu,
 #memory,
+#mode,
 #disk,
 #temperature,
 #backlight,
@@ -105,17 +102,19 @@ tooltip label {
 
 /* connect the center pills */
 #clock {
-	border-radius: 26px 0 0 26px;
-  margin-right: 0;
+	/* border-radius: 26px 0 0 26px; */
+  /* margin-right: 0; */
 }
+#custom-events,
 #custom-weather {
-	border-radius: 0 26px 26px 0;
+	/* border-radius: 0 26px 26px 0; */
   margin-left: 24px;
 }
 
 
 /* pill colors */
 #workspaces     { background: @blue;    }
+#mode           { background: @red;     }
 #window         { background: @green;   }
 
 .modules-center { background: @blue;    }

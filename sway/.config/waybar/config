@@ -6,7 +6,11 @@
     "sway/window",
     "custom/media"
   ],
-  "modules-center": ["clock", "custom/weather"],
+  "modules-center": [
+    "clock",
+    "custom/events",
+    "custom/weather"
+  ],
   "modules-right": [
     // "idle_inhibitor",
     "custom/spotify",
@@ -48,6 +52,16 @@
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format": "{:%H:%M   %a, %b %d}",
     "format-alt": "{:%Y-%m-%d}"
+  },
+  "custom/events": {
+    "format": "{}",
+    "tooltip": true,
+    "interval": 300,
+    "format-icons": {
+      "default": ""
+    },
+    "exec": "$HOME/.config/waybar/scripts/khal.py",
+    "return-type": "json"
   },
   "cpu": {
     "format": "{usage}% "
