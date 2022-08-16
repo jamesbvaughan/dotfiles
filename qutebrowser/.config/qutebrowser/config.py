@@ -53,7 +53,7 @@ c.spellcheck.languages = ['en-US']
 
 c.colors.webpage.preferred_color_scheme = 'dark'
 
-config.load_autoconfig(False)
+config.load_autoconfig()
 
 # Gruvbox theme
 
