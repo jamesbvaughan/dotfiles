@@ -9,6 +9,7 @@
   "modules-center": ["clock", "custom/weather"],
   "modules-right": [
     // "idle_inhibitor",
+    "custom/spotify",
     "pulseaudio",
     "network",
     "cpu",
@@ -59,60 +60,69 @@
     "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input"
   },
   "backlight": {
-      "format": "{percent}% {icon}",
-      "format-icons": ["", ""]
+    "format": "{percent}% {icon}",
+    "format-icons": ["", ""]
   },
   "battery": {
-      "states": {
-          // "good": 95,
-          "warning": 30,
-          "critical": 15
-      },
-      "format": "{capacity}% {icon}",
-      "format-charging": "{capacity}% ",
-      "format-plugged": "{capacity}% ",
-      "format-alt": "{time} {icon}",
-      // "format-good": "", // An empty format will hide the module
-      // "format-full": "",
-      "format-icons": [" ", " ", " ", " ", " "]
+    "states": {
+      // "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    // "format-good": "", // An empty format will hide the module
+    // "format-full": "",
+    "format-icons": [" ", " ", " ", " ", " "]
   },
   "network": {
-      "format-wifi": "{essid} ({signalStrength}%) ",
-      "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-      "format-linked": "{ifname} (No IP) ",
-      "format-disconnected": "Disconnected ⚠",
-      "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "Disconnected ⚠",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
   "pulseaudio": {
-      // "scroll-step": 1, // %, can be a float
-      "format": "{volume}% {icon} {format_source}",
-      "format-bluetooth": "{volume}% {icon} {format_source}",
-      "format-bluetooth-muted": " {icon} {format_source}",
-      "format-muted": " {format_source}",
-      "format-source": "{volume}% ",
-      "format-source-muted": "",
-      "format-icons": {
-          "headphone": "",
-          "hands-free": "",
-          "headset": "",
-          "phone": "",
-          "portable": "",
-          "car": "",
-          "default": ["", "", ""]
-      },
-      "on-click": "pavucontrol"
+    // "scroll-step": 1, // %, can be a float
+    "format": "{volume}% {icon} {format_source}",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol"
   },
   "custom/media": {
-      "format": "{icon} {}",
-      "return-type": "json",
-      "max-length": 40,
-      "format-icons": {
-          "spotify": "",
-          "default": "🎜"
-      },
-      "escape": true,
-      "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-      // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    "format": "{icon} {}",
+    "return-type": "json",
+    "max-length": 40,
+    "format-icons": {
+      "spotify": "",
+      "default": "🎜"
+    },
+    "escape": true,
+    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+    // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+  },
+  "custom/spotify": {
+    "format": " {}",
+    "escape": true,
+    "max-length": 40,
+    "interval": 5,
+    "on-click": "spt playback --toggle",
+    "exec": "spt playback",
+    "exec-if": "pgrep spotify"
   },
   "tray": {
     "icon-size": 24,

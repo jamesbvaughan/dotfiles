@@ -36,11 +36,11 @@ window#waybar {
 }
 
 window#waybar.hidden {
-    opacity: 0.2;
+  opacity: 0.2;
 }
 
 #workspaces button {
-    padding: 0 8px;
+  padding: 0 8px;
 }
 
 #workspaces button:hover {
@@ -51,15 +51,15 @@ window#waybar.hidden {
 }
 
 #workspaces button.focused {
-    /* background: #21222C; */
+  /* background: #21222C; */
 }
 
 #workspaces button.urgent {
-    /* background-color: #eb4d4b; */
+  /* background-color: #eb4d4b; */
 }
 
 #mode {
-    background-color: @red;
+  background-color: @red;
 }
 
 #window {
@@ -68,7 +68,6 @@ window#waybar.hidden {
 
 
 /* pills */
-#clock,
 #battery,
 #cpu,
 #memory,
@@ -80,8 +79,9 @@ window#waybar.hidden {
 #window,
 #workspaces,
 #tray,
-#custom-weather,
-#custom-media {
+#custom-spotify,
+#custom-media,
+.modules-center {
   margin: 0 8px;
 	border-radius: 26px;
   padding: 6px 16px;
@@ -103,62 +103,65 @@ window#waybar.hidden {
 }
 #custom-weather {
 	border-radius: 0 26px 26px 0;
-  margin-left: 0;
+  margin-left: 24px;
 }
 
 
 /* pill colors */
-#workspaces { background: @blue;  }
-#window                 { background: @green; }
-#clock, #custom-weather { background: @blue; }
-#temperature { background: @blue; }
-#cpu { background: @yellow; }
-#memory { background: @green; }
-#network { background: @magenta; }
-#pulseaudio { background: @cyan; }
+#workspaces     { background: @blue;    }
+#window         { background: @green;   }
+
+.modules-center { background: @blue;    }
+
+#custom-spotify { background: @green;   }
+#pulseaudio     { background: @cyan;    }
+#network        { background: @magenta; }
+#cpu            { background: @yellow;  }
+#memory         { background: @green;   }
+#temperature    { background: @blue;    }
 
 
 #battery.charging, #battery.plugged {
-    background-color: @green;
+  background-color: @green;
 }
 
 @keyframes blink {
-    to {
-        background-color: #F8F8F2;
-        color: #21222C;
-    }
+  to {
+    background-color: #F8F8F2;
+    color: #21222C;
+  }
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #F8F8F2;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  background-color: #f53c3c;
+  color: #F8F8F2;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 label:focus {
-    background-color: #F8F8F2;
+  background-color: #F8F8F2;
 }
 
 #network.disconnected {
-    color: @red;
+  color: @red;
 }
 
 #pulseaudio.muted {
-    color: @red;
+  color: @red;
 }
 
 #custom-media {
-    min-width: 100px;
+  min-width: 100px;
 }
 
 #custom-media.custom-spotify {
-    background-color: #66cc99;
+  background-color: #66cc99;
 }
 
 #custom-media.custom-vlc {
-    background-color: #ffa000;
+  background-color: #ffa000;
 }
