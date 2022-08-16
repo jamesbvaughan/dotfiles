@@ -11,9 +11,11 @@ exec --no-startup-id gnome-keyring-daemon --start --components=secrets
 set $green '#98971a'
 set $red   '#cc241d'
 set $black '#1d2021'
+set $blue  '#458588'
 
-client.focused   $red $red $red $red $green
-client.unfocused $red $red $red $red $black
+# class          border backgr. text indicator child_border
+client.focused   $red   $red    $red $blue     $green
+client.unfocused $red   $red    $red $red      $black
 
 
 ### Variables
