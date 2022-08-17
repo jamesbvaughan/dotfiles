@@ -28,20 +28,20 @@ c.downloads.remove_finished = 2000
 
 c.editor.command = ["alacritty", "-e", "nvim", "{}"]
 
-c.fonts.default_family = "JetBrains Mono Nerd Font"
-c.fonts.default_size = "14px"
+c.fonts.default_family = "JetBrainsMonoMedium Nerd Font"
+c.fonts.default_size = "16px"
 
 c.statusbar.padding = {
-    'top': 0,
-    'bottom': 0,
+    'top': 4,
+    'bottom': 4,
     'left': 0,
     'right': 0,
 }
 
 # c.tabs.indicator.width = 0
 c.tabs.padding = {
-    'top': 1,
-    'bottom': 1,
+    'top': 4,
+    'bottom': 4,
     'left': 5,
     'right': 1,
 }
@@ -52,6 +52,7 @@ c.tabs.title.format = "{current_title}"
 c.spellcheck.languages = ['en-US']
 
 c.colors.webpage.preferred_color_scheme = 'dark'
+c.colors.webpage.darkmode.enabled = True
 
 config.load_autoconfig()
 
@@ -330,29 +331,32 @@ c.colors.tabs.pinned.odd.bg = base0B
 # Foreground color of pinned unselected odd tabs.
 c.colors.tabs.pinned.odd.fg = base07
 
+selected_tab_bg = base0B
+selected_tab_fg = base00
+
 # Background color of pinned selected even tabs.
-c.colors.tabs.pinned.selected.even.bg = base02
+c.colors.tabs.pinned.selected.even.bg = selected_tab_bg
 
 # Foreground color of pinned selected even tabs.
-c.colors.tabs.pinned.selected.even.fg = base05
+c.colors.tabs.pinned.selected.even.fg = selected_tab_fg
 
 # Background color of pinned selected odd tabs.
-c.colors.tabs.pinned.selected.odd.bg = base02
+c.colors.tabs.pinned.selected.odd.bg = selected_tab_bg
 
 # Foreground color of pinned selected odd tabs.
-c.colors.tabs.pinned.selected.odd.fg = base05
+c.colors.tabs.pinned.selected.odd.fg = selected_tab_fg
 
 # Foreground color of selected odd tabs.
-c.colors.tabs.selected.odd.fg = base05
+c.colors.tabs.selected.odd.fg = selected_tab_fg
 
 # Background color of selected odd tabs.
-c.colors.tabs.selected.odd.bg = base02
+c.colors.tabs.selected.odd.bg = selected_tab_bg
 
 # Foreground color of selected even tabs.
-c.colors.tabs.selected.even.fg = base05
+c.colors.tabs.selected.even.fg = selected_tab_fg
 
 # Background color of selected even tabs.
-c.colors.tabs.selected.even.bg = base02
+c.colors.tabs.selected.even.bg = selected_tab_bg
 
 # Background color for webpages if unset (or empty to use the theme's
 # color).

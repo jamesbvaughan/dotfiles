@@ -6,8 +6,21 @@
 
 config_version: 2
 settings:
+  content.blocking.method:
+    global: both
+  content.media.audio_capture:
+    https://zoom.us: true
+  content.media.audio_video_capture:
+    https://zoom.us: true
+  content.media.video_capture:
+    https://zoom.us: true
   content.notifications.enabled:
+    https://app.slack.com: true
     https://www.facebook.com: false
+    https://zoom.us: true
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: false
     https://outlook.office.com?mailtouri=%25s: false
+  spellcheck.languages:
+    global:
+    - en-US
