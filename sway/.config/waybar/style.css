@@ -126,6 +126,7 @@ tooltip label {
 #cpu            { background: @yellow;  }
 #memory         { background: @green;   }
 #temperature    { background: @blue;    }
+#battery        { background: @magenta; }
 
 
 #battery.charging, #battery.plugged {
