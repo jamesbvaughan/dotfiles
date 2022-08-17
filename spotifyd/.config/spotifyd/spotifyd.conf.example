@@ -1,4 +1,5 @@
 [global]
 username = "USER"
 password = "PASS"
-device_name = "spotifyd"
+device_name = "amazing-auger"
+device_type = "computer"
