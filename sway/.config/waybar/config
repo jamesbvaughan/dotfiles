@@ -55,6 +55,7 @@
   },
   "custom/events": {
     "format": "{}",
+    "max-length": 30,
     "tooltip": true,
     "interval": 300,
     "format-icons": {
