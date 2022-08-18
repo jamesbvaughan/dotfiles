@@ -61,7 +61,7 @@ for_window [app_id="zoom"] floating enable
 
 ### HiDPI
 
-output eDP-1 scale 1.5
+output eDP-1 scale 1.2
 
 
 ### Font
