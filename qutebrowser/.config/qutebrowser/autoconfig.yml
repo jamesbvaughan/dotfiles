@@ -17,6 +17,7 @@ settings:
   content.notifications.enabled:
     https://app.slack.com: true
     https://www.facebook.com: false
+    https://www.messenger.com: true
     https://zoom.us: true
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: false

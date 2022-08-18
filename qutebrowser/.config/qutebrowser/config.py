@@ -52,7 +52,6 @@ c.tabs.title.format = "{current_title}"
 c.spellcheck.languages = ['en-US']
 
 c.colors.webpage.preferred_color_scheme = 'dark'
-c.colors.webpage.darkmode.enabled = True
 
 config.load_autoconfig()
 
