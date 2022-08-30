@@ -1,11 +1,26 @@
 [user]
 	name = James Vaughan
+  username = jamesbvaughan
 	email = james@jamesbvaughan.com
-[push]
-	default = simple
+	signingkey = ~/.ssh/id_rsa
+
 [core]
 	editor = nvim
-[pull]
-	rebase = false
+
 [init]
 	defaultBranch = main
+
+[push]
+	default = simple
+
+[pull]
+	rebase = true
+
+[fetch]
+  prune = true
+
+[commit]
+  gpgsign = true
+
+[gpg]
+	format = ssh
