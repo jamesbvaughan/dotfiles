@@ -25,7 +25,8 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: JetBrainsMonoMedium Nerd Font, sans-serif;
+  font-family: JetBrainsMono Nerd Font, sans-serif;
+  font-weight: bold;
   font-size: 18px;
   min-height: 0;
   color: @bg;

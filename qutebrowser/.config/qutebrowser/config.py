@@ -28,7 +28,7 @@ c.downloads.remove_finished = 2000
 
 c.editor.command = ["alacritty", "-e", "nvim", "{}"]
 
-c.fonts.default_family = "JetBrainsMonoMedium Nerd Font"
+c.fonts.default_family = "JetBrainsMono Nerd Font"
 c.fonts.default_size = "16px"
 
 c.statusbar.padding = {
