@@ -9,9 +9,19 @@ exec --no-startup-id dbus-update-activation-environment --all
 exec --no-startup-id gnome-keyring-daemon --start --components=secrets
 
 # use wob as an indicator bar
+set $wob_fg  '#EBDBB2FF'
+set $wob_bg  '#282828FF'
+set $wob_red '#CC241DFF'
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
-exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
+exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob \
+  --border-color $wob_fg \
+  --background-color $wob_bg \
+  --bar-color $wob_fg \
+  --overflow-border-color $wob_fg \
+  --overflow-background-color $wob_bg \
+  --overflow-bar-color $wob_red
 
+# set up a lock screen
 exec swayidle -w \
   before-sleep 'playerctl pause' \
   before-sleep 'swaylock' \
