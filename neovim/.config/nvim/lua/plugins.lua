@@ -129,6 +129,9 @@ require("packer").startup(function(use)
     end,
   })
 
+  -- Show context at the top of the butter
+  use("nvim-treesitter/nvim-treesitter-context")
+
   -- Collection of configurations for built-in LSP client
   use("neovim/nvim-lspconfig")
 
