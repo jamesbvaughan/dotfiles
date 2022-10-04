@@ -8,6 +8,9 @@ exec --no-startup-id gammastep
 exec --no-startup-id dbus-update-activation-environment --all
 exec --no-startup-id gnome-keyring-daemon --start --components=secrets
 
+# syncthing
+exec --no-startup-id synthingtray
+
 # use wob as an indicator bar
 set $wob_fg  '#EBDBB2FF'
 set $wob_bg  '#282828FF'
