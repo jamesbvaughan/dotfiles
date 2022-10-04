@@ -113,11 +113,24 @@ require("packer").startup(function(use)
           select = {
             enable = true,
             lookahead = true,
+            include_surrounding_whitespace = true,
             keymaps = {
               ["af"] = "@function.outer",
               ["if"] = "@function.inner",
               ["ac"] = "@class.outer",
               ["ic"] = "@class.inner",
+              -- Commenting these out so they don't conflict with "paragraph"
+              -- ["ap"] = "@parameter.outer",
+              -- ["ip"] = "@parameter.inner",
+            },
+          },
+          swap = {
+            enable = true,
+            swap_next = {
+              ["<leader>a"] = "@parameter.inner",
+            },
+            swap_previous = {
+              ["<leader>A"] = "@parameter.inner",
             },
           },
         },
