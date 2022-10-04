@@ -222,11 +222,17 @@ require("packer").startup(function(use)
     config = function()
       vim.g.gruvbox_italic = 1
       vim.g.gruvbox_transparent_bg = 1
-      vim.g.gruvbox_sign_column = "bg0"
+      -- vim.g.gruvbox_sign_column = "bg0"
       require("gruvbox").setup({
         overrides = {
           -- Set a color for copilot completion menu items
-          CmpItemKindCopilot = { fg = "#98971A" }
+          CmpItemKindCopilot = { fg = "#98971A" },
+
+          -- Fix some issues with gitsigns colors
+          SignColumn     = { bg = "NONE" },
+          GitSignsAdd    = { bg = "NONE", fg = "#b8bb26" },
+          GitSignsChange = { bg = "NONE", fg = "#fabd2f" },
+          GitSignsDelete = { bg = "NONE", fg = "#cc241d" },
         }
       })
     end,
