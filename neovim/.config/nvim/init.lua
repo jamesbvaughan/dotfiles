@@ -73,15 +73,6 @@ vim.keymap.set('n', '<leader>s', ':setlocal spell! spelllang=en_us<cr>')
 ---- unhighlight the current search
 vim.keymap.set('n', 'g/', ':nohlsearch<cr>')
 
-
--- Filetype matching
-
---- This enables the currently opt-in new and faster filetype master
---- You can remove this after it's made default
-vim.g.do_filetype_lua = 1
-vim.g.did_load_filetypes = 0
-
-
 -- Turn on spell checking in git commits
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "gitcommit",
