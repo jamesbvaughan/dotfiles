@@ -11,6 +11,9 @@ exec --no-startup-id gnome-keyring-daemon --start --components=secrets
 # syncthing
 exec --no-startup-id synthingtray
 
+# tailscale tray icon
+exec --no-startup-id tailscale-systray
+
 # use wob as an indicator bar
 set $wob_fg  '#EBDBB2FF'
 set $wob_bg  '#282828FF'
