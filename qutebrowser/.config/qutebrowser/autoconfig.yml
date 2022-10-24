@@ -9,14 +9,17 @@ settings:
   content.blocking.method:
     global: both
   content.desktop_capture:
+    https://app.slack.com: true
     https://us06web.zoom.us: true
   content.media.audio_capture:
+    https://app.slack.com: true
     https://us06web.zoom.us: true
     https://zoom.us: true
   content.media.audio_video_capture:
     https://us06web.zoom.us: true
     https://zoom.us: true
   content.media.video_capture:
+    https://app.slack.com: true
     https://us06web.zoom.us: true
     https://zoom.us: true
   content.notifications.enabled:
@@ -27,6 +30,7 @@ settings:
     https://www.messenger.com: true
     https://zoom.us: true
   content.register_protocol_handler:
+    https://calendar.google.com?cid=%25s: true
     https://mail.google.com?extsrc=mailto&url=%25s: false
     https://outlook.office.com?mailtouri=%25s: false
   spellcheck.languages:
