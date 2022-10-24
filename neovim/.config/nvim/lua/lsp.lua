@@ -51,8 +51,7 @@ local on_attach = function(_client, bufnr)
 end
 
 -- nvim-cmp supports additional completion capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+local capabilities = cmp_nvim_lsp.default_capabilities()
 
 -- set the on_attach callback and capabilities for all servers
 lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
