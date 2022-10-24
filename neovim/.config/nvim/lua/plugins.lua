@@ -160,6 +160,9 @@ require("packer").startup(function(use)
     },
   })
 
+  -- LSP plugin for typescript
+  use("jose-elias-alvarez/typescript.nvim")
+
   -- Quickfix list for lsp diagnostics
   use({
     "folke/trouble.nvim",

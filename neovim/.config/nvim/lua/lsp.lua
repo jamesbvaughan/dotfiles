@@ -3,6 +3,7 @@ local lspconfig = require("lspconfig")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local telescope_builtins = require("telescope.builtin")
 local telescope_themes = require("telescope.themes")
+local typescript_lsp = require("typescript")
 
 -- vim.lsp.set_log_level('debug')
 
@@ -106,7 +107,7 @@ lspconfig.rls.setup({
 lspconfig.sourcekit.setup({})
 lspconfig.tailwindcss.setup({})
 lspconfig.terraformls.setup({})
-lspconfig.tsserver.setup({})
+-- lspconfig.tsserver.setup({})
 lspconfig.yamlls.setup({
   settings = {
     yaml = {
@@ -114,6 +115,13 @@ lspconfig.yamlls.setup({
         enable = true,
       },
     },
+  },
+})
+
+typescript_lsp.setup({
+  server = {
+    on_attach = on_attach,
+    capabilities = capabilities,
   },
 })
 
