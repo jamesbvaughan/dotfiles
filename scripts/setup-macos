@@ -19,6 +19,7 @@ if [ "$(uname -s)" == "Darwin" ]; then
     bat \
     coreutils \
     cormacrelf/tap/dark-notify \
+    deno\
     docker-compose \
     exa \
     fd \
@@ -73,6 +74,7 @@ if [ "$(uname -s)" == "Darwin" ]; then
     slack \
     spotify \
     steam \
+    syncthing \
     tailscale \
     visual-studio-code \
     zoom
