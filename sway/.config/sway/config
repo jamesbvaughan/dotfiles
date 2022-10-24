@@ -73,6 +73,8 @@ gaps inner 16
 smart_borders on
 
 for_window [app_id="zoom"] floating enable
+for_window [app_id="blueman-manager"] floating enable
+for_window [app_id="pavucontrol"] floating enable
 
 
 ### HiDPI
