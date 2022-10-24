@@ -1,27 +1,26 @@
 {
-  "margin": "0 0 0 0",
+  "margin": "14 14 0 14",
   "modules-left": [
     "sway/workspaces",
     "sway/mode",
     "sway/window",
     "custom/media"
   ],
-  // "modules-center": [
-  //   // "sway/workspaces"
-  // ],
+  "modules-center": [
+    "clock",
+    "custom/events",
+    "custom/weather"
+  ],
   "modules-right": [
     // "idle_inhibitor",
-    "custom/events",
     "custom/spotify",
+    "pulseaudio",
     "backlight",
     "network",
     "cpu",
     "memory",
     "temperature",
-    "pulseaudio",
-    "custom/weather",
     "battery",
-    "clock",
     "tray"
   ],
   "sway/workspaces": {
@@ -46,7 +45,7 @@
   "clock": {
     // "timezone": "America/New_York",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format": "{:%a %b %d  %H:%M}",
+    "format": "{:%H:%M   %a, %b %d}",
     "format-alt": "{:%Y-%m-%d}"
   },
   "custom/events": {

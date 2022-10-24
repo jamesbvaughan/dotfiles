@@ -1,39 +1,23 @@
 /* gruvbox colors */
 @define-color bg #282828;
-@define-color bg-hard #32302f;
-@define-color bg-sofr #1d2021;
 @define-color fg #ebdbb2;
 
-@define-color black #282828;
 @define-color red #cc241d;
 @define-color green #98971a;
-@define-color yellow #d79921;
-@define-color blue #458588;
-@define-color magenta #b16286;
-@define-color cyan #689d6a;
-@define-color white #a89984;
-
-@define-color bright-black #928374;
-@define-color bright-red #fb4934;
-@define-color bright-green #b8bb26;
-@define-color bright-yellow #fabd2f;
-@define-color bright-blue #83a598;
-@define-color bright-magenta #d3869b;
-@define-color bright-cyan #8ec07c;
-@define-color bright-white #ebdbb2;
 
 * {
   border: none;
   border-radius: 0;
-  font-family: JetBrainsMono Nerd Font, sans-serif;
-  font-weight: bold;
+  font-family: Inter, sans-serif;
+  /* font-weight: 500; */
   font-size: 18px;
   min-height: 0;
-  color: @bg;
+  color: @fg;
 }
 
 window#waybar {
-  background: transparent;
+  background: alpha(@bg, 0.8);
+  padding-left: 10px;
 }
 
 window#waybar.hidden {
@@ -58,20 +42,18 @@ tooltip label {
   background: transparent;
 }
 
-#workspaces button.focused {
-  /* background: #21222C; */
-}
-
-#workspaces button.urgent {
-  /* background-color: #eb4d4b; */
-}
-
 #window {
-  /* margin-left: 10px; */
+  font-weight: bold;
 }
 
+.modules-left {
+  margin-left: 10px;
+}
 
-/* pills */
+.modules-right {
+  margin-right: 10px;
+}
+
 #battery,
 #cpu,
 #memory,
@@ -85,50 +67,15 @@ tooltip label {
 #workspaces,
 #tray,
 #custom-spotify,
+#temperature,
+#window,
+#clock,
 #custom-media,
-.modules-center {
-  margin: 0 8px;
-	border-radius: 26px;
-  padding: 6px 16px;
-  background: @bg;
-}
-#workspaces {
-  padding: 0 6px;
-  margin-left: 0px;
-}
-#temperature {
-  margin-right: 0px;
-}
-
-
-/* connect the center pills */
-#clock {
-	/* border-radius: 26px 0 0 26px; */
-  /* margin-right: 0; */
-}
 #custom-events,
-#custom-weather {
-	/* border-radius: 0 26px 26px 0; */
-  margin-left: 24px;
+#custom-weather,
+#workspaces {
+  padding: 4px 16px;
 }
-
-
-/* pill colors */
-#workspaces     { background: @blue;    }
-#mode           { background: @red;     }
-#window         { background: @green;   }
-
-.modules-center { background: @blue;    }
-
-#custom-spotify { background: @green;   }
-#pulseaudio     { background: @cyan;    }
-#backlight      { background: @blue;    }
-#network        { background: @magenta; }
-#cpu            { background: @yellow;  }
-#memory         { background: @green;   }
-#temperature    { background: @blue;    }
-#battery        { background: @magenta; }
-
 
 #battery.charging, #battery.plugged {
   background-color: @green;

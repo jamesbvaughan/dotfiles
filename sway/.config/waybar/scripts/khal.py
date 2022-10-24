@@ -25,7 +25,7 @@ for line in lines:
 output = "\n".join(new_lines).strip()
 
 if today in output:
-    data['text'] = " " + output.split('\n')[1]
+    data['text'] = "  " + output.split('\n')[1]
 else:
     data['text'] = ""
 
