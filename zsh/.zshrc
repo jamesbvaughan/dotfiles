@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 # Oh My Zsh things
 export ZSH="$HOME/.oh-my-zsh"
 plugins=(fzf)
@@ -68,3 +70,6 @@ typeset -aU path
 
 # Configure prompt
 eval "$(starship init zsh)"
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
