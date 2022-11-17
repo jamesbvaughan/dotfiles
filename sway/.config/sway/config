@@ -31,7 +31,7 @@ exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob \
 exec swayidle -w \
   before-sleep 'playerctl pause' \
   before-sleep 'swaylock' \
-	timeout 1800 'swaylock -f' \
+	timeout 1800 'swaylock --daemonize --grace 10 --screenshots --effect-pixelate 20 --fade-in 0.5 --ignore-empty-password --effect-vignette 0.2:0.5' \
 	timeout 1805 'swaymsg "output * dpms off"' \
 	resume 'swaymsg "output * dpms on"'
 
