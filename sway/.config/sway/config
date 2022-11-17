@@ -75,6 +75,7 @@ smart_borders on
 for_window [app_id="zoom"] floating enable
 for_window [app_id="blueman-manager"] floating enable
 for_window [app_id="pavucontrol"] floating enable
+for_window [app_id="syncthingtray"] floating enable, border none, resize set 450 400, move position 3300 0
 
 
 ### HiDPI
