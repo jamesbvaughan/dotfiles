@@ -41,7 +41,7 @@ fi
 
 ## JavaScript
 # eval "$(nodenv init -)" # removing this while I try out volta
-export PATH="$(yarn global bin):$PATH"
+# export PATH="$(yarn global bin):$PATH"
 
 ## Go
 export GOPATH=$HOME/go
