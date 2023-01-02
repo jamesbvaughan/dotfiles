@@ -57,8 +57,7 @@ WEATHER_CODES = {
 
 data = {}
 
-
-weather = requests.get("https://wttr.in/?format=j1").json()
+weather = requests.get("https://wttr.in/37.89410772158915,-122.30366699783897?format=j1").json()
 
 
 def format_time(time):
