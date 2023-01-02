@@ -77,8 +77,14 @@ vim.keymap.set('n', '<leader>s', ':setlocal spell! spelllang=en_us<cr>')
 vim.keymap.set('n', 'g/', ':nohlsearch<cr>')
 
 -- Turn on spell checking in git commits
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "gitcommit",
+--   command = "setlocal spell",
+-- })
+
+-- Turn on spell checking globally
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "gitcommit",
+  pattern = "*",
   command = "setlocal spell",
 })
 
