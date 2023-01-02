@@ -1,1 +1,13 @@
-# vim: ft=toml
+# vim: ft=conf
+
+font=JetBrainsMono Nerd Font 10
+anchor=bottom-right
+border-size=4
+
+# gruvbox colors
+background-color=#282828cc
+border-color=#1d2021
+text-color=#ebdbb2
+
+[urgency=high]
+border-color=#cc241d
