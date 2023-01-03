@@ -18,17 +18,8 @@ exec --no-startup-id synthingtray
 exec --no-startup-id tailscale-systray
 
 # use wob as an indicator bar
-set $wob_fg  '#EBDBB2FF'
-set $wob_bg  '#282828FF'
-set $wob_red '#CC241DFF'
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
-exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob \
-  --border-color $wob_fg \
-  --background-color $wob_bg \
-  --bar-color $wob_fg \
-  --overflow-border-color $wob_fg \
-  --overflow-background-color $wob_bg \
-  --overflow-bar-color $wob_red
+exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 
 # set up a lock screen
 exec swayidle -w \
