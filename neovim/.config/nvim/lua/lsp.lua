@@ -33,7 +33,6 @@ local on_attach = function(_client, bufnr)
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
   vim.keymap.set("n", "gr", vim.lsp.buf.references)
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
-  vim.keymap.set("v", "<leader>ca", vim.lsp.buf.range_code_action)
   -- vim.keymap.set("n", "<leader>ca", function ()
   --   telescope_builtins.lsp_code_actions(telescope_themes.get_cursor())
   -- end)
@@ -43,9 +42,7 @@ local on_attach = function(_client, bufnr)
   vim.keymap.set("n", "<leader>q", ":TroubleToggle<CR>")
 
   -- Formatting
-  vim.api.nvim_create_user_command('Format', vim.lsp.buf.formatting, {})
-  vim.api.nvim_create_user_command('FormatSync', vim.lsp.buf.formatting_seq_sync, {})
-  vim.keymap.set("n", "<leader>fm", vim.lsp.buf.format)
+  vim.keymap.set("n", "<leader>fm", function() vim.lsp.buf.format({ async = true }) end)
 
   -- Format on save
   -- vim.cmd([[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]])

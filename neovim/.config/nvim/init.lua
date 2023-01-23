@@ -46,12 +46,15 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 ---- persistent undo files
-vim.opt.undodir = vim.fn.getenv('HOME')..'/.local/nvim/undofiles'
+vim.opt.undodir = vim.fn.getenv('HOME') .. '/.local/nvim/undofiles'
 vim.opt.undofile = true
+
+---- always show the sign column
+vim.opt.signcolumn = 'yes'
 
 
 ---- configure the spell file
-vim.opt.spellfile = vim.fn.getenv('HOME')..'/.config/nvim/spell/en.utf-8.add'
+vim.opt.spellfile = vim.fn.getenv('HOME') .. '/.config/nvim/spell/en.utf-8.add'
 
 
 -- Keybindings
@@ -83,10 +86,10 @@ vim.keymap.set('n', 'g/', ':nohlsearch<cr>')
 -- })
 
 -- Turn on spell checking globally
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  command = "setlocal spell",
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "*",
+--   command = "setlocal spell",
+-- })
 
 
 -- Plugins

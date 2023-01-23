@@ -224,19 +224,16 @@ require("packer").startup(function(use)
   use({
     "ellisonleao/gruvbox.nvim",
     config = function()
-      require("gruvbox").setup({
-        transparent_mode = true,
-        overrides = {
-          -- Set a color for copilot completion menu items
-          CmpItemKindCopilot = { fg = "#98971A" },
+      require("gruvbox").setup({})
 
-          -- Fix some issues with gitsigns colors
-          SignColumn     = { bg = "NONE" },
-          GitSignsAdd    = { bg = "NONE", fg = "#b8bb26" },
-          GitSignsChange = { bg = "NONE", fg = "#fabd2f" },
-          GitSignsDelete = { bg = "NONE", fg = "#cc241d" },
-        }
-      })
+      -- Override some specific colors
+      vim.api.nvim_set_hl(0, "Normal", { bg = NONE })
+      vim.api.nvim_set_hl(0, "VertSplit", { bg = NONE })
+      vim.api.nvim_set_hl(0, "SignColumn", { bg = NONE })
+      vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = NONE, fg = "#b8bb26" })
+      vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "NONE", fg = "#fabd2f" })
+      vim.api.nvim_set_hl(0, "GitSignsDelete", { bg = "NONE", fg = "#cc241d" })
+      vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#98971A" })
     end,
   })
   use({
