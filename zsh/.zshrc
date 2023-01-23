@@ -61,6 +61,7 @@ export MANPATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman:$MANPATH"
 export EDITOR='nvim'
 
 ## Personal scripts
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 
 
