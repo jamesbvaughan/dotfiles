@@ -92,7 +92,3 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Plugins
 
 require('plugins')
-
-
--- Load any extra machine-specific config
-pcall(require, 'extra')
