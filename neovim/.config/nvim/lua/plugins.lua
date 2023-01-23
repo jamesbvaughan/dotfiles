@@ -183,16 +183,16 @@ require("packer").startup(function(use)
   })
 
   -- Stabilize the trouble window
-  use({
-    "luukvbaal/stabilize.nvim",
-    config = function()
-      require("stabilize").setup({
-        -- This is necessary to get stabilize to work in some cases.
-        -- See https://github.com/luukvbaal/stabilize.nvim#note
-        nested = "QuickFixCmdPost,DiagnosticChanged *",
-      })
-    end,
-  })
+  -- use({
+  --   "luukvbaal/stabilize.nvim",
+  --   config = function()
+  --     require("stabilize").setup({
+  --       -- This is necessary to get stabilize to work in some cases.
+  --       -- See https://github.com/luukvbaal/stabilize.nvim#note
+  --       nested = "QuickFixCmdPost,DiagnosticChanged *",
+  --     })
+  --   end,
+  -- })
 
   -- Install nvim-cmp, and buffer source as a dependency
   use({
@@ -236,10 +236,8 @@ require("packer").startup(function(use)
   use({
     "ellisonleao/gruvbox.nvim",
     config = function()
-      vim.g.gruvbox_italic = 1
-      vim.g.gruvbox_transparent_bg = 1
-      -- vim.g.gruvbox_sign_column = "bg0"
       require("gruvbox").setup({
+        transparent_mode = true,
         overrides = {
           -- Set a color for copilot completion menu items
           CmpItemKindCopilot = { fg = "#98971A" },
@@ -249,6 +247,7 @@ require("packer").startup(function(use)
           GitSignsAdd    = { bg = "NONE", fg = "#b8bb26" },
           GitSignsChange = { bg = "NONE", fg = "#fabd2f" },
           GitSignsDelete = { bg = "NONE", fg = "#cc241d" },
+
         }
       })
     end,
@@ -360,7 +359,7 @@ require("packer").startup(function(use)
   })
 
   -- puppet language niceties
-  use("rodjek/vim-puppet")
+  -- use("rodjek/vim-puppet")
 
   -- undo tree
   use({
@@ -371,7 +370,7 @@ require("packer").startup(function(use)
   })
 
   -- handlebars support
-  use("mustache/vim-mustache-handlebars")
+  -- use("mustache/vim-mustache-handlebars")
 
   -- which-key
   use({
@@ -385,12 +384,13 @@ require("packer").startup(function(use)
   use({
     "lukas-reineke/indent-blankline.nvim",
     config = function()
-      require("indent_blankline").setup({})
+      require("indent_blankline").setup({
+        show_current_context = true,
+      })
     end,
   })
 
   -- quick navigation within a file
-  -- use("ggandor/lightspeed.nvim")
   use({
     'ggandor/leap.nvim',
     config = function()
@@ -436,13 +436,14 @@ require("packer").startup(function(use)
   })
 
   -- highlight real colors inside nvim
-  -- for example: "#123456"
-  -- TODO: make this actually work
-  use("norcalli/nvim-colorizer.lua")
-
-  pcall(function()
-    require("extra_packages")(use)
-  end)
+  -- for example: "#920565"
+  use({ "brenoprata10/nvim-highlight-colors",
+    config = function()
+      require('nvim-highlight-colors').setup({
+        enable_tailwind = true,
+      })
+    end
+  })
 
   -- Automatically set up configuration after cloning packer.nvim
   if packer_bootstrap then
@@ -457,9 +458,3 @@ require("completion")
 -- Color things
 
 vim.cmd("colorscheme gruvbox")
-require("colorizer").setup({})
-
---- Remove the background color set by gruvbox
-vim.api.nvim_set_hl(0, "Normal", { guibg = NONE, ctermbg = NONE })
-vim.api.nvim_set_hl(0, "VertSplit", { guibg = NONE, ctermbg = NONE })
-vim.api.nvim_set_hl(0, "SignColumn", { guibg = NONE, ctermbg = NONE })

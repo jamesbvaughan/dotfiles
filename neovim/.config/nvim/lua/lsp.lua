@@ -92,22 +92,22 @@ lspconfig.jsonls.setup({
     },
   },
 })
-lspconfig.prismals.setup({})
-lspconfig.pylsp.setup({})
-lspconfig.pyright.setup({})
-lspconfig.rls.setup({
+lspconfig.openscad_lsp.setup({
+  cmd = { "/Users/james/code/openscad-LSP/target/debug/openscad-lsp", "--stdio" },
   settings = {
-    rust = {
-      unstable_features = true,
-      build_on_save = false,
-      all_features = true,
+    openscad = {
+      -- fmt_exe = "/opt/homebrew/bin/clang-format",
+      fmt_style = "gnu",
     },
   },
 })
+lspconfig.prismals.setup({})
+lspconfig.pylsp.setup({})
+lspconfig.pyright.setup({})
+lspconfig.rust_analyzer.setup({})
 lspconfig.sourcekit.setup({})
 lspconfig.tailwindcss.setup({})
 lspconfig.terraformls.setup({})
--- lspconfig.tsserver.setup({})
 lspconfig.yamlls.setup({
   settings = {
     yaml = {
@@ -164,6 +164,7 @@ null_ls.setup({
     null_ls.builtins.formatting.rubocop,
     null_ls.builtins.formatting.shfmt,
     null_ls.builtins.formatting.joker,
+    require("typescript.extensions.null-ls.code-actions"),
   },
 })
 
