@@ -54,6 +54,9 @@ end
 -- nvim-cmp supports additional completion capabilities
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
+-- Enable snippet capabilities for completion
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 -- set the on_attach callback and capabilities for all servers
 lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
   capabilities = capabilities,
@@ -101,6 +104,9 @@ lspconfig.openscad_lsp.setup({
     },
   },
 })
+lspconfig.prismals.setup({})
+lspconfig.pyright.setup({})
+lspconfig.rls.setup({})
 lspconfig.prismals.setup({})
 lspconfig.pylsp.setup({})
 lspconfig.pyright.setup({})
@@ -160,6 +166,7 @@ null_ls.setup({
     null_ls.builtins.diagnostics.rubocop,
     null_ls.builtins.diagnostics.shellcheck,
     null_ls.builtins.diagnostics.vale,
+    null_ls.builtins.formatting.autopep8,
     null_ls.builtins.formatting.prettier,
     null_ls.builtins.formatting.rubocop,
     null_ls.builtins.formatting.shfmt,
