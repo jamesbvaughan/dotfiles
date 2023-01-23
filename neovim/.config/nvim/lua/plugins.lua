@@ -182,18 +182,6 @@ require("packer").startup(function(use)
     end,
   })
 
-  -- Stabilize the trouble window
-  -- use({
-  --   "luukvbaal/stabilize.nvim",
-  --   config = function()
-  --     require("stabilize").setup({
-  --       -- This is necessary to get stabilize to work in some cases.
-  --       -- See https://github.com/luukvbaal/stabilize.nvim#note
-  --       nested = "QuickFixCmdPost,DiagnosticChanged *",
-  --     })
-  --   end,
-  -- })
-
   -- Install nvim-cmp, and buffer source as a dependency
   use({
     "hrsh7th/nvim-cmp",
@@ -247,7 +235,6 @@ require("packer").startup(function(use)
           GitSignsAdd    = { bg = "NONE", fg = "#b8bb26" },
           GitSignsChange = { bg = "NONE", fg = "#fabd2f" },
           GitSignsDelete = { bg = "NONE", fg = "#cc241d" },
-
         }
       })
     end,
