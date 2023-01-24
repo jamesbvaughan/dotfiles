@@ -212,31 +212,29 @@ require("packer").startup(function(use)
   })
 
   -- themes
-  use({
-    "Mofiqul/dracula.nvim",
-    config = function()
-      -- vim.g.dracula_italic_comment = true
-      -- vim.g.dracula_transparent_bg = true
-      -- vim.opt.termguicolors = true
-      -- vim.cmd("colorscheme dracula")
-    end,
-  })
+  -- use({
+  --   "Mofiqul/dracula.nvim",
+  --   config = function()
+  --     -- vim.g.dracula_italic_comment = true
+  --     -- vim.g.dracula_transparent_bg = true
+  --     -- vim.opt.termguicolors = true
+  --     -- vim.cmd("colorscheme dracula")
+  --   end,
+  -- })
   use({
     "ellisonleao/gruvbox.nvim",
     config = function()
-      require("gruvbox").setup({})
-
-      -- Override some specific colors
-      vim.api.nvim_set_hl(0, "Normal", { bg = NONE })
-      vim.api.nvim_set_hl(0, "VertSplit", { bg = NONE })
-      vim.api.nvim_set_hl(0, "SignColumn", { bg = NONE })
-      vim.api.nvim_set_hl(0, "DiagnosticSignError", { bg = NONE, fg = "#cc241d" })
-      vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { bg = NONE, fg = "#fabd2f" })
-      vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { bg = NONE })
-      vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = NONE, fg = "#b8bb26" })
-      vim.api.nvim_set_hl(0, "GitSignsChange", { bg = NONE, fg = "#fabd2f" })
-      vim.api.nvim_set_hl(0, "GitSignsDelete", { bg = NONE, fg = "#cc241d" })
-      vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#98971A" })
+      require('gruvbox').setup({
+        overrides = {
+          SignColumn =         { bg = "NONE"    },
+          GruvboxRedSign =     { bg = "NONE"    },
+          GruvboxYellowSign =  { bg = "NONE"    },
+          GruvboxBlueSign =    { bg = "NONE"    },
+          GruvboxAquaSign =    { bg = "NONE"    },
+          GruvboxGreenSign =   { bg = "NONE"    },
+          CmpItemKindCopilot = { fg = "#98971A" }
+        }
+      })
     end,
   })
   use({
