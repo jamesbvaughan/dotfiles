@@ -18,7 +18,7 @@ vim.opt.autoindent = true
 
 ---- show line numbers
 vim.opt.number = true
-vim.opt.relativenumber = true
+-- vim.opt.relativenumber = true
 
 ---- allow background buffers
 vim.opt.hidden = true
