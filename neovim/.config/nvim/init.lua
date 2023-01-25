@@ -52,6 +52,9 @@ vim.opt.undofile = true
 ---- always show the sign column
 vim.opt.signcolumn = 'yes'
 
+--- enable 24-bit color 
+vim.opt.termguicolors = true
+
 
 ---- configure the spell file
 vim.opt.spellfile = vim.fn.getenv('HOME') .. '/.config/nvim/spell/en.utf-8.add'
