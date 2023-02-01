@@ -50,7 +50,8 @@ set $down j
 set $up k
 set $right l
 
-set $term alacritty
+# set $term alacritty
+set $term kitty
 set $menu ~/.dotfiles/scripts/menu
 
 
@@ -203,4 +204,7 @@ bindsym $mod+r mode "resize"
 
 bar {
   swaybar_command waybar
+}
+bar {
+  swaybar_command "waybar --config ~/.config/waybar/config-bottom"
 }
