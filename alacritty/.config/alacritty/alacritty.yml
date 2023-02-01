@@ -19,7 +19,8 @@ scrolling:
 # Font configuration (changes require restart)
 font:
   normal:
-    family: "JetBrainsMono Nerd Font"
+    family: "Berkeley Mono"
+    # family: "JetBrainsMono Nerd Font"
 
   bold:
     style: Bold
