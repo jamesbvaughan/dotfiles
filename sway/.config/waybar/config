@@ -1,140 +1,46 @@
-{
-  "margin": "0 0 0 0",
-  "modules-left": [
-    "sway/workspaces",
-    "sway/mode",
-    "sway/window",
-    "custom/media"
-  ],
-  // "modules-center": [
-  //   // "sway/workspaces"
-  // ],
-  "modules-right": [
-    // "idle_inhibitor",
-    "custom/events",
-    "custom/spotify",
-    "backlight",
-    "network",
-    "cpu",
-    "memory",
-    "temperature",
-    "pulseaudio",
-    "custom/weather",
-    "battery",
-    "clock",
-    "tray"
-  ],
-  "sway/workspaces": {
-    "format": "{icon}",
-    "format-icons": {
-      "urgent": "",
-      "focused": "",
-      "default": ""
-    // },
-    // "persistent_workspaces": {
-    //   "1": [],
-    //   "2": [],
-    //   "3": []
-    }
+[
+  {
+    // "margin": "0 0 0 0",
+    "modules-left": [
+      "sway/workspaces",
+      "sway/window"
+    ],
+    "modules-center": [
+      "custom/events"
+    ],
+    "modules-right": [
+      "pulseaudio",
+      "custom/weather",
+      "battery",
+      "clock",
+      "tray"
+    ],
+    "include": [
+      "~/.config/waybar/modules.json"
+    ]
   },
-  "sway/mode": {
-      "format": "<span style=\"italic\">{}</span>"
-  },
-  "sway/window": {
-    "max-length": 80
-  },
-  "clock": {
-    // "timezone": "America/New_York",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format": "{:%a %b %d  %H:%M}",
-    "format-alt": "{:%Y-%m-%d}"
-  },
-  "custom/events": {
-    "format": "{}",
-    "max-length": 30,
-    "tooltip": true,
-    "interval": 300,
-    "format-icons": {
-      "default": ""
-    },
-    "exec": "$HOME/.config/waybar/scripts/khal.py",
-    "return-type": "json"
-  },
-  "cpu": {
-    "format": "{usage}% "
-  },
-  "memory": {
-    "format": "{}% "
-  },
-  "temperature": {
-    "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input"
-  },
-  "backlight": {
-    "format": "{percent}% {icon}",
-    "format-icons": ["", ""],
-    "on-scroll-up": "brightnessctl set +10%",
-    "on-scroll-down": "brightnessctl set 10%-"
-  },
-  "battery": {
-    "states": {
-      // "good": 95,
-      "warning": 30,
-      "critical": 15
-    },
-    "format": "{capacity}% {icon}",
-    "format-charging": "{capacity}% ",
-    "format-plugged": "{capacity}% ",
-    "format-alt": "{time} {icon}",
-    // "format-good": "", // An empty format will hide the module
-    // "format-full": "",
-    "format-icons": [" ", " ", " ", " ", " "]
-  },
-  "network": {
-    "format-wifi": "{essid} ({signalStrength}%) ",
-    "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-    "format-linked": "{ifname} (No IP) ",
-    "format-disconnected": "Disconnected ⚠",
-    "format-alt": "{ifname}: {ipaddr}/{cidr}"
-  },
-  "pulseaudio": {
-    // "scroll-step": 1, // %, can be a float
-    "format": "{volume}% {icon} {format_source}",
-    "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
-    "format-source": "{volume}% ",
-    "format-source-muted": "",
-    "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": ["", "", ""]
-    },
-    "on-click": "pavucontrol"
-  },
-  "custom/spotify": {
-    "format": "{} ",
-    "escape": true,
-    "max-length": 40,
-    "interval": 5,
-    "on-click": "spt playback --toggle",
-    "on-click-right": "alacritty -e spt",
-    "exec": "spt playback",
-    "exec-if": "pgrep spotify"
-  },
-  "tray": {
-    "icon-size": 24,
-    "spacing": 4
-  },
-  "custom/weather": {
-   "format": "{}",
-    "tooltip": true,
-    "interval": 1800,
-    "exec": "$HOME/.config/waybar/scripts/wttr.py",
-    "return-type": "json"
+  {
+    "position": "bottom",
+    "modules-left": [
+      "sway/mode"
+    ],
+    "modules-center": [
+      "custom/media",
+      "mpd",
+      "custom/spotify"
+    ],
+    "modules-right": [
+      "backlight",
+      "network#wifi",
+      "network#ethernet",
+      "cpu",
+      "memory",
+      "temperature",
+      "battery"
+    ],
+    "include": [
+      "~/.config/waybar/modules.json"
+    ]
   }
-}
+]
 // vim: ft=jsonc
