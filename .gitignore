@@ -1,5 +1,4 @@
 .DS_Store
-*/**/.DS_Store
 
 neovim/.config/nvim/plugin/packer_compiled.lua
 neovim/.config/nvim/lua/extra*
@@ -7,3 +6,5 @@ neovim/.config/nvim/lua/extra*
 tmux/.config/tmux/plugins/
 
 qutebrowser/.config/qutebrowser/dracula
+
+.luarc.json
