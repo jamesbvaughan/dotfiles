@@ -48,10 +48,10 @@ lsp.setup_nvim_cmp({
     ['<C-n>'] = cmp_next,
     ['<S-Tab>'] = cmp_prev,
     ['<C-p>'] = cmp_prev,
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
+    -- ['<CR>'] = cmp.mapping.confirm {
+    --   behavior = cmp.ConfirmBehavior.Replace,
+    --   select = true,
+    -- },
   }),
   -- window = {
   --   documentation = cmp.config.window.bordered(),
