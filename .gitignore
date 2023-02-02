@@ -7,4 +7,6 @@ tmux/.config/tmux/plugins/
 
 qutebrowser/.config/qutebrowser/dracula
 
+lazy-lock.json
+
 .luarc.json
