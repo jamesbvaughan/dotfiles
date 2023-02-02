@@ -64,3 +64,5 @@ vim.opt.incsearch = true
 
 ---- hide the netrw banner
 vim.g.netrw_banner = 0
+
+vim.opt.laststatus = 3
