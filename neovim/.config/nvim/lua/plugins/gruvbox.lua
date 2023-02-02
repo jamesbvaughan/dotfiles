@@ -16,4 +16,11 @@ return {
       vim.cmd("colorscheme gruvbox")
     end,
   },
+
+  -- {
+  --   "cormacrelf/dark-notify",
+  --   config = function()
+  --     require('dark_notify').run()
+  --   end,
+  -- },
 }

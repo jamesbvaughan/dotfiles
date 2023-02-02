@@ -1,0 +1,2 @@
+-- quit netrw with q
+-- vim.keymap.set('n', 'q', '<c-o>')

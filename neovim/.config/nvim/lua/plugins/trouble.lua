@@ -4,7 +4,9 @@ return {
     dependencies = {
       "kyazdani42/nvim-web-devicons",
     },
-    lazy = true,
+    keys = {
+      { "<leader>q", ":TroubleToggle<cr>" },
+    },
     opts = {
       auto_close = true,
       auto_open = true,

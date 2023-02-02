@@ -1,118 +1,45 @@
--- luacheck: globals vim
-local lspconfig = require("lspconfig")
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
-local telescope_builtins = require("telescope.builtin")
-local telescope_themes = require("telescope.themes")
-local typescript_lsp = require("typescript")
+local lsp = require("lsp-zero")
 
 
--- vim.lsp.set_log_level('debug')
+lsp.preset("recommended")
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = false,
-  float = {
-    source = "always",
-  },
-  signs = true,
-  underline = true,
-  update_in_insert = false,
+
+-- Configure lua language server for Neovim
+--
+lsp.nvim_workspace({
+  library = vim.api.nvim_get_runtime_file('', true)
 })
 
-local on_attach = function(_client, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
-  vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
-  vim.keymap.set("n", "gd", function()
-    telescope_builtins.lsp_definitions(telescope_themes.get_cursor())
-  end)
-  vim.keymap.set("n", "K", vim.lsp.buf.hover)
-  vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
-  -- bufmap('<C-k>', vim.lsp.buf.signature_help)
-  vim.keymap.set("n", "<leader>D", function()
-    telescope_builtins.lsp_type_definitions(telescope_themes.get_cursor())
-  end)
-  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
-  vim.keymap.set("n", "gr", vim.lsp.buf.references)
-  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
-  -- vim.keymap.set("n", "<leader>ca", function ()
-  --   telescope_builtins.lsp_code_actions(telescope_themes.get_cursor())
-  -- end)
-  -- vim.keymap.set("n", "<leader>e", vim.lsp.diagnostic.show_line_diagnostics)
-  -- vim.keymap.set("n", "[d", vim.lsp.diagnostic.goto_prev)
-  -- vim.keymap.set("n", "]d", vim.lsp.diagnostic.goto_next)
-  vim.keymap.set("n", "<leader>q", ":TroubleToggle<CR>")
-
-  -- Formatting
-  vim.keymap.set("n", "<leader>fm", function() vim.lsp.buf.format({ async = true }) end)
-
-  -- Format on save
-  -- vim.cmd([[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]])
-end
-
--- nvim-cmp supports additional completion capabilities
-local capabilities = cmp_nvim_lsp.default_capabilities()
-
--- Enable snippet capabilities for completion
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
--- set the on_attach callback and capabilities for all servers
-lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
-  capabilities = capabilities,
-  on_attach = on_attach,
+lsp.ensure_installed({
+  "bashls",
+  "cssls",
+  "eslint",
+  -- "gopls",
+  "graphql",
+  "html",
+  "jsonls",
+  "openscad_lsp",
+  "prismals",
+  "pyright",
+  "rust_analyzer",
+  "sumneko_lua",
+  "tailwindcss",
+  "terraformls",
+  "tsserver",
+  "yamlls",
 })
 
--- Enable the following language servers
-lspconfig.bashls.setup({})
-lspconfig.cssls.setup({
-  settings = {
-    scss = {
-      lint = {
-        unknownAtRules = "ignore",
-      },
-    },
-  },
-})
-lspconfig.clojure_lsp.setup({})
-lspconfig.dartls.setup({})
--- lspconfig.denols.setup({})
-lspconfig.eslint.setup({
-  settings = {
-    codeActionOnSave = {
-      enable = true,
-    },
-  }
-})
-lspconfig.flow.setup({})
-lspconfig.gopls.setup({})
-lspconfig.graphql.setup({})
-lspconfig.html.setup({})
-lspconfig.jsonls.setup({
+
+-- Config for specific language servers
+--
+lsp.configure('jsonls', {
   settings = {
     json = {
       schemas = require('schemastore').json.schemas(),
     },
   },
 })
-lspconfig.openscad_lsp.setup({
-  cmd = { "/Users/james/code/openscad-LSP/target/debug/openscad-lsp", "--stdio" },
-  settings = {
-    openscad = {
-      -- fmt_exe = "/opt/homebrew/bin/clang-format",
-      fmt_style = "gnu",
-    },
-  },
-})
-lspconfig.prismals.setup({})
-lspconfig.pyright.setup({})
-lspconfig.rls.setup({})
-lspconfig.prismals.setup({})
-lspconfig.pylsp.setup({})
-lspconfig.pyright.setup({})
-lspconfig.rust_analyzer.setup({})
-lspconfig.sourcekit.setup({})
-lspconfig.tailwindcss.setup({})
-lspconfig.terraformls.setup({})
-lspconfig.yamlls.setup({
+lsp.configure('yamlls', {
   settings = {
     yaml = {
       schemastore = {
@@ -121,69 +48,71 @@ lspconfig.yamlls.setup({
     },
   },
 })
-
-typescript_lsp.setup({
-  server = {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  },
-})
-
--- the lua language server requres some additional setup
--- copied from https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-lspconfig.sumneko_lua.setup {
+lsp.configure('sumneko_lua', {
   settings = {
     Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = runtime_path,
-      },
       diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim', 'NONE' },
-        unusedLocalExclude = { '_*' }
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
+        globals = { 'vim' },
+        unusedLocalExclude = { '_*' },
       },
     },
   },
-}
-
--- Use null-ls for general linters
-local null_ls = require("null-ls")
-null_ls.setup({
-  on_attach = on_attach,
-  sources = {
-    null_ls.builtins.diagnostics.rubocop,
-    null_ls.builtins.diagnostics.shellcheck,
-    null_ls.builtins.diagnostics.vale,
-    null_ls.builtins.formatting.autopep8,
-    null_ls.builtins.formatting.prettier,
-    null_ls.builtins.formatting.rubocop,
-    null_ls.builtins.formatting.shfmt,
-    null_ls.builtins.formatting.joker,
-    require("typescript.extensions.null-ls.code-actions"),
-  },
 })
+-- lspconfig.cssls.setup({
+--   settings = {
+--     scss = {
+--       lint = {
+--         unknownAtRules = "ignore",
+--       },
+--     },
+--   },
+-- })
+-- lspconfig.eslint.setup({
+--   settings = {
+--     codeActionOnSave = {
+--       enable = true,
+--     },
+--   }
+-- })
+-- lspconfig.openscad_lsp.setup({
+--   cmd = { "/Users/james/code/openscad-LSP/target/debug/openscad-lsp", "--stdio" },
+--   settings = {
+--     openscad = {
+--       -- fmt_exe = "/opt/homebrew/bin/clang-format",
+--       fmt_style = "gnu",
+--     },
+--   },
+-- })
 
--- Configure symbols for diagnostic signs
-local signs = {
-  Error = " ",
-  Warn = " ",
-  Hint = " ",
-  Info = " ",
-}
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
+-- require("typescript").setup({
+--   server = {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--   },
+-- })
+
+
+-- Override some default keymaps
+lsp.set_preferences({
+  set_lsp_keymaps = {omit = {'gd', 'go'}}
+})
+lsp.on_attach(function(_client, bufnr)
+  local opts = { buffer = bufnr }
+
+  vim.keymap.set("n", "<leader>fm", ':LspZeroFormat<CR>', opts)
+  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+  vim.keymap.set("n", "gd", function()
+    require("telescope.builtin").lsp_definitions(
+      require("telescope.themes").get_cursor()
+    )
+  end, opts)
+  vim.keymap.set("n", "go", function()
+    require("telescope.builtin").lsp_type_definitions(
+      require("telescope.themes").get_cursor()
+    )
+  end, opts)
+end)
+
 
 -- Show line diagnostics in hover window
 vim.o.updatetime = 500
@@ -198,3 +127,10 @@ vim.api.nvim_create_autocmd("CursorHold", {
     vim.diagnostic.open_float(nil, opts)
   end
 })
+
+
+require("null_ls")
+require("completion")
+
+
+lsp.setup()

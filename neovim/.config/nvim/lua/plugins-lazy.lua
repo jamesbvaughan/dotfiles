@@ -28,36 +28,15 @@ require("lazy").setup({
     build = "cp ./*.py ~/.config/kitty/"
   },
 
-  "windwp/nvim-autopairs",
+  -- Better integration between nvim and tmux
+  -- "christoomey/vim-tmux-navigator",
 
-  -- buffer line
-  {
-    "akinsho/bufferline.nvim",
-    dependencies = "kyazdani42/nvim-web-devicons",
-    opts = {
-      options = {
-        show_buffer_close_icons = false,
-        show_close_icon = false,
-        always_show_bufferline = false,
-        diagnostics = true,
-      },
-    },
-  },
+  "windwp/nvim-autopairs",
 
   {
     "mbbill/undotree",
     keys = {
       { "U", ":UndotreeToggle<cr>" }
-    },
-  },
-
-  "folke/which-key.nvim",
-
-  -- visualize indentation
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    opts = {
-      show_current_context = true,
     },
   },
 
@@ -67,15 +46,6 @@ require("lazy").setup({
     config = function()
       require('leap').set_default_keymaps()
     end,
-  },
-
-  -- highlight real colors inside nvim
-  -- for example: "#920565"
-  {
-    "brenoprata10/nvim-highlight-colors",
-    opts = {
-      enable_tailwind = true,
-    },
   },
 
   -- nice bindings for working with comments
@@ -96,5 +66,5 @@ require("lazy").setup({
   },
 })
 
+
 require("lsp")
-require("completion")
