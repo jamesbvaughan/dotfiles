@@ -5,6 +5,7 @@ local telescope_builtins = require("telescope.builtin")
 local telescope_themes = require("telescope.themes")
 local typescript_lsp = require("typescript")
 
+
 -- vim.lsp.set_log_level('debug')
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -133,7 +134,7 @@ typescript_lsp.setup({
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-require 'lspconfig'.sumneko_lua.setup {
+lspconfig.sumneko_lua.setup {
   settings = {
     Lua = {
       runtime = {
