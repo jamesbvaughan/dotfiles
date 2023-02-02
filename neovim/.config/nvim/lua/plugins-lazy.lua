@@ -36,7 +36,7 @@ require("lazy").setup({
   {
     "mbbill/undotree",
     keys = {
-      { "U", ":UndotreeToggle<cr>" }
+      { "U", vim.cmd.UndotreeToggle },
     },
   },
 
