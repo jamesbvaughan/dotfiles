@@ -45,6 +45,9 @@ require("lazy").setup({
     'ggandor/leap.nvim',
     config = function()
       require('leap').set_default_keymaps()
+
+      -- Grey out the search area
+      vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
     end,
   },
 
