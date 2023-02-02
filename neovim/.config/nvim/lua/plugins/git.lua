@@ -36,5 +36,12 @@ return {
         end
       },
     },
+    opts = {
+      integrations = {
+        diffview = true
+      }
+    }
   },
+
+  'sindrets/diffview.nvim',
 }
