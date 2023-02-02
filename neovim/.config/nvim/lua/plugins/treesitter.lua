@@ -13,10 +13,8 @@ return {
       -- Show context at the top of the butter
       "nvim-treesitter/nvim-treesitter-context"
     },
-    init = function()
-      -- vim.cmd(":TSUpdate<cr>")
-      -- Run TSUpdate
-      -- vim
+    build = function()
+      vim.cmd.TSUpdate()
     end,
     config = function()
       require("nvim-treesitter.configs").setup({
