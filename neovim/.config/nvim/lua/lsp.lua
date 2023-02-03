@@ -94,23 +94,28 @@ lsp.configure('sumneko_lua', {
 
 -- Override some default keymaps
 lsp.set_preferences({
-  set_lsp_keymaps = {omit = {'gd', 'go'}}
+  set_lsp_keymaps = { omit = { 'gd', 'go' } }
 })
 lsp.on_attach(function(_client, bufnr)
   local opts = { buffer = bufnr }
 
-  vim.keymap.set("n", "<leader>fm", ':LspZeroFormat<CR>', opts)
-  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+  vim.keymap.set("n", "<leader>fm", vim.cmd.LspZeroFormat,
+    vim.tbl_extend("force", opts, { desc = "Format" }))
+
+  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action,
+    vim.tbl_extend("force", opts, { desc = "Show available code actions" }))
+
   vim.keymap.set("n", "gd", function()
     require("telescope.builtin").lsp_definitions(
       require("telescope.themes").get_cursor()
     )
-  end, opts)
+  end, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
+
   vim.keymap.set("n", "go", function()
     require("telescope.builtin").lsp_type_definitions(
       require("telescope.themes").get_cursor()
     )
-  end, opts)
+  end, vim.tbl_extend("force", opts, { desc = "Go to type definition" }))
 end)
 
 

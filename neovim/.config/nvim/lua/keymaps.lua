@@ -1,13 +1,13 @@
 -- buffer navigation and management
 vim.keymap.set('n', '<s-h>', ':bprev<cr>')
 vim.keymap.set('n', '<s-l>', ':bnext<cr>')
-vim.keymap.set('n', '<leader>d', ':bdel<cr>')
+vim.keymap.set('n', '<leader>d', ':bdel<cr>', { desc = "Close the current buffer" })
 
 -- toggle spell checking
-vim.keymap.set('n', '<leader>s', ':setlocal spell! spelllang=en_us<cr>')
+vim.keymap.set('n', '<leader>s', ':setlocal spell! spelllang=en_us<cr>', {desc="Toggle spell checking"})
 
 -- unhighlight the current search
-vim.keymap.set('n', 'g/', ':nohlsearch<cr>')
+vim.keymap.set('n', 'g/', ':nohlsearch<cr>', { desc = "Clear the search highlight" })
 
 -- move lines up and down in visual mode
 vim.keymap.set('x', 'J', ':move \'>+1<cr>gv-gv')
@@ -25,4 +25,4 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 vim.keymap.set('x', 'p', '\"_dP')
 
 -- open netrw
-vim.keymap.set('n', '<leader>e', vim.cmd.Explore)
+vim.keymap.set('n', '<leader>e', vim.cmd.Explore, { desc = "Open the explorer" })

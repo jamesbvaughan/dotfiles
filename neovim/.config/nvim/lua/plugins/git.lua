@@ -3,7 +3,7 @@ return {
     "tpope/vim-fugitive",
     dependencies = "tpope/vim-rhubarb",
     keys = {
-      { "gh", ":GBrowse<cr>" },
+      { "gh", ":GBrowse<cr>", desc = "Open the current file in GitHub" },
       -- { "gs", ":Git<cr>" },
       -- { "gl", ":Git log --pretty --oneline --abbrev-commit --graph -20 <cr>" },
     }
@@ -33,7 +33,8 @@ return {
           --local cwd = vim.fn.expand('%:p:h')
           require("neogit").open()
           --vim.cmd(":lcd" .. cwd)
-        end
+        end,
+        desc = "Open neogit",
       },
     },
     opts = {

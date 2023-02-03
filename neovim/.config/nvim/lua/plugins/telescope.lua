@@ -1,3 +1,9 @@
+local telescope_builtin = function(name, opts)
+  return function()
+    require("telescope.builtin")[name](opts)
+  end
+end
+
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -10,51 +16,44 @@ return {
     keys = {
       {
         "<leader>ff",
-        function()
-          require("telescope.builtin").find_files()
-        end
+        telescope_builtin("find_files"),
+        desc = "Find files"
       },
       {
         "<leader>fg",
-        function()
-          require("telescope.builtin").live_grep()
-        end
+        telescope_builtin("live_grep"),
+        desc = "Live grep"
       },
       {
         "<leader>fb",
-        function()
-          require("telescope.builtin").buffers()
-        end
+        telescope_builtin("buffers"),
+        desc = "Search open buffers"
       },
       {
         "<leader>fa",
-        function()
-          require("telescope.builtin").git_files({ show_untracked = true })
-        end
+        telescope_builtin("git_files", { show_untracked = true }),
+        desc = "Find files in current git repo",
       },
       {
         "<leader>fs",
-        function()
-          require("telescope.builtin").grep_string()
-        end
+        telescope_builtin("grep_string"),
+        desc = "Search for the word under the cursor",
       },
       {
         "<leader>ft",
-        function()
-          require("telescope.builtin").treesitter()
-        end
+        telescope_builtin("treesitter"),
+        desc = "Search treesitter symbols",
       },
       {
         "<leader>fc",
-        function()
-          require("telescope.builtin").git_files({
-            cwd = "~/.dotfiles",
-            show_untracked = true,
-          })
-        end
+        telescope_builtin("git_files", {
+          cwd = "~/.dotfiles",
+          show_untracked = true,
+        }),
+        desc = "Search dotfiles repo",
       },
     },
-    config = function ()
+    config = function()
       local telescope = require("telescope")
       local actions = require("telescope.actions")
 
