@@ -8,6 +8,7 @@
       "custom/events"
     ],
     "modules-right": [
+      "backlight",
       "pulseaudio",
       "custom/weather",
       "clock",
@@ -28,7 +29,6 @@
       "custom/spotify"
     ],
     "modules-right": [
-      "backlight",
       "network#wifi",
       "network#ethernet",
       "cpu",
