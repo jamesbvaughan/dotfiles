@@ -1,6 +1,5 @@
 [
   {
-    // "margin": "0 0 0 0",
     "modules-left": [
       "sway/workspaces",
       "sway/window"
@@ -11,7 +10,6 @@
     "modules-right": [
       "pulseaudio",
       "custom/weather",
-      "battery",
       "clock",
       "tray"
     ],
