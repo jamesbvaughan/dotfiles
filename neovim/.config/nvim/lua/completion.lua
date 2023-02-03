@@ -8,12 +8,10 @@ local has_words_before = function()
 end
 
 local cmp_next = cmp.mapping(function(fallback)
-  if cmp.visible() then
-    cmp.select_next_item()
+  if cmp.visible() and has_words_before() then
+    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
   elseif luasnip.expand_or_jumpable() then
     luasnip.expand_or_jump()
-  elseif has_words_before() then
-    cmp.complete()
   else
     fallback()
   end
@@ -21,7 +19,7 @@ end, { 'i', 's' })
 
 local cmp_prev = cmp.mapping(function(fallback)
   if cmp.visible() then
-    cmp.select_prev_item()
+    cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
   elseif luasnip.jumpable(-1) then
     luasnip.jump(-1)
   else
@@ -35,9 +33,9 @@ lsp.setup_nvim_cmp({
     { name = 'nvim_lua' },
     { name = 'path' },
     { name = 'nvim_lsp_signature_help' },
-    { name = 'nvim_lsp', keyword_length = 3 },
-    { name = 'buffer', keyword_length = 3 },
-    { name = 'luasnip', keyword_length = 2 },
+    { name = 'nvim_lsp' },
+    { name = 'buffer' },
+    { name = 'luasnip' },
   },
   preselect = 'none',
   completion = {
@@ -48,31 +46,18 @@ lsp.setup_nvim_cmp({
     ['<C-n>'] = cmp_next,
     ['<S-Tab>'] = cmp_prev,
     ['<C-p>'] = cmp_prev,
-    -- ['<CR>'] = cmp.mapping.confirm {
-    --   behavior = cmp.ConfirmBehavior.Replace,
-    --   select = true,
-    -- },
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+    }),
   }),
-  -- window = {
-  --   documentation = cmp.config.window.bordered(),
-  -- },
-  -- formatting = {
-  --   format = function(entry, vim_item)
-  --     if entry.source.name == "copilot" then
-  --       vim_item.kind = " Copilot"
-  --       -- vim_item.kind = ""
-  --       vim_item.kind_hl_group = "CmpItemKindCopilot"
-  --       return vim_item
-  --     end
-  --
-  --     local formatter = require("lspkind").cmp_format({
-  --       maxwidth = 50,
-  --       mode = "symbol_text",
-  --     })
-  --
-  --     return formatter(entry, vim_item)
-  --   end
-  -- },
+  formatting = {
+    format = require("lspkind").cmp_format({
+      preset = "codicons",
+      symbol_map = {
+        Copilot = "",
+      },
+    }),
+  },
   -- snippet = {
   --   expand = function(args)
   --     luasnip.lsp_expand(args.body)
