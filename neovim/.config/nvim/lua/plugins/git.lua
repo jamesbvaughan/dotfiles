@@ -3,13 +3,12 @@ return {
     "tpope/vim-fugitive",
     dependencies = "tpope/vim-rhubarb",
     keys = {
-      { "gh", ":GBrowse<cr>", desc = "Open the current file in GitHub" },
+      { "gh", vim.cmd.GBrowse, desc = "Open the current file in GitHub" },
       -- { "gs", ":Git<cr>" },
       -- { "gl", ":Git log --pretty --oneline --abbrev-commit --graph -20 <cr>" },
     }
   },
 
-  -- git signs
   {
     "lewis6991/gitsigns.nvim",
     opts = {
@@ -25,17 +24,7 @@ return {
     'TimUntersberger/neogit',
     dependencies = 'nvim-lua/plenary.nvim',
     keys = {
-      {
-        "<leader>g",
-        function()
-          -- Open the neogit status buffer for the current buffer's repository
-          -- require("neogit").open({ cwd = vim.fn.expand("%:p:h") })
-          --local cwd = vim.fn.expand('%:p:h')
-          require("neogit").open()
-          --vim.cmd(":lcd" .. cwd)
-        end,
-        desc = "Open neogit",
-      },
+      { "<leader>g", vim.cmd.Neogit, desc = "Open neogit" },
     },
     opts = {
       integrations = {
@@ -46,8 +35,15 @@ return {
 
   {
     'sindrets/diffview.nvim',
+    keys = {
+      {
+        "<leader>h",
+        function() vim.cmd.DiffviewFileHistory("%") end,
+        desc = "Open diffview for the current file"
+      },
+    },
     opts = {
       enhanced_diff_hl = true,
-    }
+    },
   },
 }
