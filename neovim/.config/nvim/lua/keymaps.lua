@@ -1,13 +1,6 @@
--- buffer navigation and management
-vim.keymap.set('n', '<s-h>', ':bprev<cr>')
-vim.keymap.set('n', '<s-l>', ':bnext<cr>')
-vim.keymap.set('n', '<leader>d', ':bdel<cr>', { desc = "Close the current buffer" })
-
--- toggle spell checking
-vim.keymap.set('n', '<leader>s', ':setlocal spell! spelllang=en_us<cr>', {desc="Toggle spell checking"})
-
--- unhighlight the current search
-vim.keymap.set('n', 'g/', ':nohlsearch<cr>', { desc = "Clear the search highlight" })
+-- buffer navigation
+vim.keymap.set('n', '<s-h>', vim.cmd.bprev)
+vim.keymap.set('n', '<s-l>', vim.cmd.bnext)
 
 -- move lines up and down in visual mode
 vim.keymap.set('x', 'J', ':move \'>+1<cr>gv-gv')
@@ -24,5 +17,32 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 -- allow pasting without clearing the current paste buffer
 vim.keymap.set('x', 'p', '\"_dP')
 
--- open netrw
-vim.keymap.set('n', '<leader>e', vim.cmd.Explore, { desc = "Open the explorer" })
+vim.keymap.set(
+  'n',
+  '<leader>d',
+  vim.cmd.bdelete,
+  { desc = "Close the current buffer" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>s',
+  function()
+    vim.opt_local.spell = not vim.opt_local.spell:get()
+  end,
+  { desc = "Toggle spell checking" }
+)
+
+vim.keymap.set(
+  'n',
+  'g/',
+  vim.cmd.nohlsearch,
+  { desc = "Clear the search highlight" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>e',
+  vim.cmd.Explore,
+  { desc = "Open the explorer" }
+)
