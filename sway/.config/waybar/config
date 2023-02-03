@@ -1,6 +1,5 @@
 [
   {
-    // "margin": "0 0 0 0",
     "modules-left": [
       "sway/workspaces",
       "sway/window"
@@ -9,9 +8,9 @@
       "custom/events"
     ],
     "modules-right": [
+      "backlight",
       "pulseaudio",
       "custom/weather",
-      "battery",
       "clock",
       "tray"
     ],
@@ -30,7 +29,6 @@
       "custom/spotify"
     ],
     "modules-right": [
-      "backlight",
       "network#wifi",
       "network#ethernet",
       "cpu",
