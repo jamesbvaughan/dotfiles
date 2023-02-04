@@ -13,12 +13,11 @@ return {
   -- github copilot
   {
     "zbirenbaum/copilot.lua",
-    opts = {
-      suggestion = { enabled = false },
-      panel = { enabled = false },
-    },
     config = function()
-      require("copilot").setup()
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
     end
   },
 
