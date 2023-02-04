@@ -20,7 +20,12 @@ vim.keymap.set('x', 'p', '\"_dP')
 vim.keymap.set(
   'n',
   '<leader>d',
-  vim.cmd.bdelete,
+  function()
+    local current_buffer = vim.api.nvim_get_current_buf()
+    local previous_buffer = vim.fn.bufnr('#')
+    vim.api.nvim_set_current_buf(previous_buffer)
+    vim.api.nvim_buf_delete(current_buffer, {})
+  end,
   { desc = "Close the current buffer" }
 )
 
