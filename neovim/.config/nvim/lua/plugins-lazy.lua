@@ -74,4 +74,4 @@ require("lazy").setup({
 })
 
 
-require("lspconfig")
+require("lsp")
