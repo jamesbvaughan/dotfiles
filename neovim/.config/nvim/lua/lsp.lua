@@ -22,7 +22,7 @@ lsp.ensure_installed({
   "prismals",
   "pyright",
   "rust_analyzer",
-  "sumneko_lua",
+  "lua_ls",
   "tailwindcss",
   "terraformls",
   "tsserver",
@@ -48,7 +48,7 @@ lsp.configure('yamlls', {
     },
   },
 })
-lsp.configure('sumneko_lua', {
+lsp.configure('lua_ls', {
   settings = {
     Lua = {
       diagnostics = {
