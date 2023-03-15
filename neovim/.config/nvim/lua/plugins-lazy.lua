@@ -63,6 +63,15 @@ require("lazy").setup({
       })
     end,
   },
+
+
+  {
+    "dpayne/CodeGPT.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+  }
 }, {
   checker = {
     enabled = true,
