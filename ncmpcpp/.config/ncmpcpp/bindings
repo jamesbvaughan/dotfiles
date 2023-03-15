@@ -22,9 +22,6 @@ def_key "x"
 def_key "g"
   move_home
 
-def_key "g"
-  move_home
-
 def_key "/"
   find_item_forward
 
