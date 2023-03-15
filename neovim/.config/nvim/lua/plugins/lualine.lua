@@ -3,7 +3,6 @@ return {
     "hoob3rt/lualine.nvim",
     dependencies = {
       "kyazdani42/nvim-web-devicons",
-      "arkav/lualine-lsp-progress",
     },
     opts = {
       options = {
@@ -21,7 +20,6 @@ return {
             "filename",
             path = 1,
           },
-          "lsp_progress"
         },
         lualine_x = {
           "filetype",
