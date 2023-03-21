@@ -59,15 +59,6 @@ lsp.configure('lua_ls', {
     },
   },
 })
--- lspconfig.cssls.setup({
---   settings = {
---     scss = {
---       lint = {
---         unknownAtRules = "ignore",
---       },
---     },
---   },
--- })
 lsp.configure('eslint', {
   settings = {
     codeActionOnSave = {
@@ -86,22 +77,6 @@ lsp.configure('eslint', {
     }
   }
 })
--- lspconfig.openscad_lsp.setup({
---   cmd = { "/Users/james/code/openscad-LSP/target/debug/openscad-lsp", "--stdio" },
---   settings = {
---     openscad = {
---       -- fmt_exe = "/opt/homebrew/bin/clang-format",
---       fmt_style = "gnu",
---     },
---   },
--- })
-
--- require("typescript").setup({
---   server = {
---     on_attach = on_attach,
---     capabilities = capabilities,
---   },
--- })
 
 
 -- Override some default keymaps
