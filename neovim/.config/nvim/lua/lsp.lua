@@ -68,13 +68,24 @@ lsp.configure('lua_ls', {
 --     },
 --   },
 -- })
--- lspconfig.eslint.setup({
---   settings = {
---     codeActionOnSave = {
---       enable = true,
---     },
---   }
--- })
+lsp.configure('eslint', {
+  settings = {
+    codeActionOnSave = {
+      enable = true,
+    },
+    -- Disable some rules to speed up lint results.
+    -- These still run in pre-commit hooks and in CI.
+    rulesCustomizations = {
+      { rule = "@typescript-eslint/no-misused-promises", severity = "off" },
+      { rule = "@typescript-eslint/no-unsafe-argument", severity = "off" },
+      { rule = "@typescript-eslint/no-unsafe-assignment", severity = "off" },
+      { rule = "import/defaults", severity = "off" },
+      { rule = "import/namespace", severity = "off" },
+      { rule = "import/no-cycle", severity = "off" },
+      { rule = "import/no-unresolved", severity = "off" },
+    }
+  }
+})
 -- lspconfig.openscad_lsp.setup({
 --   cmd = { "/Users/james/code/openscad-LSP/target/debug/openscad-lsp", "--stdio" },
 --   settings = {
