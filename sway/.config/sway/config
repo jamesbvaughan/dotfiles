@@ -1,8 +1,5 @@
 # xwayland disable
 
-# set some systemd env vars
-exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-
 # dim color temperature at night
 exec /usr/lib/geoclue-2.0/demos/agent
 exec gammastep
