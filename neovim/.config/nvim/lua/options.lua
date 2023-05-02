@@ -31,7 +31,7 @@ vim.opt.clipboard = 'unnamedplus'
 vim.opt.scrolloff = 5
 
 ---- stabilize the quickfix window's effect on other windows
-vim.opt.splitkeep = 'screen'
+-- vim.opt.splitkeep = 'screen'
 
 ---- ignore these when autocompleting paths
 vim.opt.wildignore = vim.opt.wildignore + 'node_modules/*,vendor/bundle/*,tmp/*'

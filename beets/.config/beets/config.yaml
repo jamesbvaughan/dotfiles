@@ -1,6 +1,6 @@
-directory: ~/Music/Music/Media.localized
+directory: ~/music
 
-library: ~/Music/Music/beets-library.db
+library: ~/music/beets-library.db
 
 import:
   move: yes
@@ -9,7 +9,7 @@ duplicates:
   delete: yes
 
 match:
-  strong_rec_thresh: 0.10
+  strong_rec_thresh: 0.20
 
 ui:
   color: yes

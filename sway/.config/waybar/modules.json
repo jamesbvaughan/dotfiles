@@ -74,15 +74,17 @@
     ]
   },
   "network#wifi": {
-    "format-wifi": "{essid} ({signalStrength}%) ",
+    "interface": "w*",
+    "format-wifi": "{essid} ({signalStrength}%) {ipaddr} ",
     "format-ethernet": "",
     "format-linked": "",
     "format-disconnected": "",
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
   "network#ethernet": {
+    "interface": "en*",
     "format-wifi": "",
-    "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+    "format-ethernet": "{ifname}: {ipaddr} ",
     "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "",
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
