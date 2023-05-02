@@ -1,7 +1,5 @@
-local lsp = require("lsp-zero")
-
-
-lsp.preset("recommended")
+local lsp = require("lsp-zero").preset({})
+local lspconfig = require("lspconfig")
 
 
 -- Configure lua language server for Neovim
@@ -15,6 +13,7 @@ lsp.ensure_installed({
   "cssls",
   "eslint",
   -- "gopls",
+  -- "glslls",
   "graphql",
   "html",
   "jsonls",
@@ -29,10 +28,14 @@ lsp.ensure_installed({
   "yamlls",
 })
 
+-- Tell lsp-zero to skip rust-analyzer because we use rust-tools for rust LSP
+-- config.
+-- lsp.skip_server_setup({ "rust_analyzer" })
+
 
 -- Config for specific language servers
 --
-lsp.configure('jsonls', {
+lspconfig.jsonls.setup({
   settings = {
     json = {
       schemas = require('schemastore').json.schemas(),
@@ -40,7 +43,7 @@ lsp.configure('jsonls', {
     },
   },
 })
-lsp.configure('yamlls', {
+lspconfig.yamlls.setup({
   settings = {
     yaml = {
       schemastore = {
@@ -49,16 +52,17 @@ lsp.configure('yamlls', {
     },
   },
 })
-lsp.configure('lua_ls', {
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { 'vim' },
-        unusedLocalExclude = { '_*' },
-      },
-    },
-  },
-})
+lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
+-- lspconfig.lua_ls.setup({
+--   settings = {
+--     Lua = {
+--       diagnostics = {
+--         globals = { 'vim' },
+--         unusedLocalExclude = { '_*' },
+--       },
+--     },
+--   },
+-- })
 -- lspconfig.cssls.setup({
 --   settings = {
 --     scss = {
@@ -68,7 +72,7 @@ lsp.configure('lua_ls', {
 --     },
 --   },
 -- })
-lsp.configure('eslint', {
+lspconfig.eslint.setup({
   settings = {
     codeActionOnSave = {
       enable = true,
@@ -76,13 +80,13 @@ lsp.configure('eslint', {
     -- Disable some rules to speed up lint results.
     -- These still run in pre-commit hooks and in CI.
     rulesCustomizations = {
-      { rule = "@typescript-eslint/no-misused-promises", severity = "off" },
-      { rule = "@typescript-eslint/no-unsafe-argument", severity = "off" },
+      { rule = "@typescript-eslint/no-misused-promises",  severity = "off" },
+      { rule = "@typescript-eslint/no-unsafe-argument",   severity = "off" },
       { rule = "@typescript-eslint/no-unsafe-assignment", severity = "off" },
-      { rule = "import/defaults", severity = "off" },
-      { rule = "import/namespace", severity = "off" },
-      { rule = "import/no-cycle", severity = "off" },
-      { rule = "import/no-unresolved", severity = "off" },
+      { rule = "import/defaults",                         severity = "off" },
+      { rule = "import/namespace",                        severity = "off" },
+      { rule = "import/no-cycle",                         severity = "off" },
+      { rule = "import/no-unresolved",                    severity = "off" },
     }
   }
 })
@@ -102,13 +106,25 @@ lsp.configure('eslint', {
 --     capabilities = capabilities,
 --   },
 -- })
+lspconfig.rust_analyzer.setup({
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = { allFeatures = true },
+      checkOnSave = {
+        command = "clippy",
+        allFeatures = true
+      },
+    },
+  },
+})
 
 
 -- Override some default keymaps
 lsp.set_preferences({
   set_lsp_keymaps = { omit = { 'gd', 'go' } }
 })
-lsp.on_attach(function(_client, bufnr)
+
+local function lsp_attach(_client, bufnr)
   local opts = { buffer = bufnr }
 
   vim.keymap.set("n", "<leader>fm", vim.cmd.LspZeroFormat,
@@ -128,7 +144,40 @@ lsp.on_attach(function(_client, bufnr)
       require("telescope.themes").get_cursor()
     )
   end, vim.tbl_extend("force", opts, { desc = "Go to type definition" }))
-end)
+end
+
+lsp.on_attach(lsp_attach)
+
+-- lsp.format_on_save({
+--   servers = {
+--     ['lua_ls'] = {'lua'},
+--     ['rust_analyzer'] = {'rust'},
+--   }
+-- })
+lsp.format_on_save({
+  format_opts = {
+    timeout_ms = 10000,
+  },
+  servers = {
+    ['null-ls'] = {'javascript', 'typescript'},
+  }
+})
+
+
+local rust_tools = require("rust-tools")
+
+rust_tools.setup({
+  server = {
+    on_attach = lsp_attach,
+    ["rust-analyzer"] = {
+      cargo = { allFeatures = true },
+      checkOnSave = {
+        command = "clippy",
+        allFeatures = true
+      },
+    },
+  },
+})
 
 
 -- Show line diagnostics in hover window

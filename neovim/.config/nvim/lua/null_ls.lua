@@ -6,6 +6,10 @@ local null_opts = lsp.build_options('null-ls', {})
 null_ls.setup({
   on_attach = null_opts.on_attach,
   sources = {
+    null_ls.builtins.diagnostics.glslc,
+    -- null_ls.builtins.diagnostics.glslc.with({
+    --   extra_args = { "--target-env=opengl" },
+    -- }),
     null_ls.builtins.diagnostics.rubocop,
     null_ls.builtins.diagnostics.shellcheck,
     null_ls.builtins.diagnostics.vale,

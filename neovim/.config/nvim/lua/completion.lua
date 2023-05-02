@@ -27,7 +27,7 @@ local cmp_prev = cmp.mapping(function(fallback)
   end
 end, { 'i', 's' })
 
-lsp.setup_nvim_cmp({
+cmp.setup({
   sources = {
     { name = 'copilot' },
     { name = 'nvim_lua' },
@@ -48,6 +48,7 @@ lsp.setup_nvim_cmp({
     ['<C-p>'] = cmp_prev,
     ['<CR>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
+      select = false,
     }),
   }),
   formatting = {

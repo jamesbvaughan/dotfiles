@@ -2,10 +2,10 @@ return {
   {
     "tpope/vim-fugitive",
     dependencies = "tpope/vim-rhubarb",
+    lazy = false,
     keys = {
       { "gh", vim.cmd.GBrowse, desc = "Open the current file in GitHub" },
-      -- { "gs", ":Git<cr>" },
-      -- { "gl", ":Git log --pretty --oneline --abbrev-commit --graph -20 <cr>" },
+      { "gl", ":Git log --pretty --oneline --abbrev-commit --graph -20 <cr>" },
     }
   },
 
