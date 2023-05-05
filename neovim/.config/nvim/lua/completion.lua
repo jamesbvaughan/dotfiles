@@ -52,12 +52,13 @@ cmp.setup({
       select = false,
     }),
     formatting = {
-        format = require("lspkind").cmp_format({
-            preset = "codicons",
-            symbol_map = {
-                Copilot = "",
-            },
-        }),
+        -- TODO: Find out why this isn't working
+        -- format = lspkind.cmp_format({
+        --     preset = "codicons",
+        --     symbol_map = {
+        --         Copilot = "",
+        --     },
+        -- }),
     },
     -- snippet = {
     --   expand = function(args)
