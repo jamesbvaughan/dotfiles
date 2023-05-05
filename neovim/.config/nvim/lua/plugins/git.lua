@@ -27,6 +27,7 @@ return {
       { "<leader>g", vim.cmd.Neogit, desc = "Open neogit" },
     },
     opts = {
+      disable_insert_on_commit = false,
       integrations = {
         diffview = true
       }
