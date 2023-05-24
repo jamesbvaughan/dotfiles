@@ -61,7 +61,7 @@ output "*" bg /home/james/code/wallpapers/gruvbox/houseonthesideofalake.jpg fill
 
 default_border pixel 4
 # hide_edge_borders both
-gaps inner 16
+# gaps inner 16
 smart_borders on
 
 for_window [app_id="zoom"] floating enable
