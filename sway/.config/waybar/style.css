@@ -1,5 +1,6 @@
 /* gruvbox colors */
-@define-color bg #282828;
+/* @define-color bg #282828; */
+@define-color bg #1d2021;
 @define-color fg #ebdbb2;
 
 @define-color red #cc241d;
@@ -16,7 +17,8 @@
 }
 
 window#waybar {
-  background: alpha(@bg, 0.8);
+  /* background: alpha(@bg, 0.8); */
+  background: @bg;
   padding-left: 10px;
 }
 
