@@ -18,6 +18,9 @@ vim.opt.autoindent = true
 vim.opt.number = true
 -- vim.opt.relativenumber = true
 
+---- highlight the current line
+vim.opt.cursorline = true
+
 ---- auto read files changed outside vim
 vim.opt.autoread = true
 
