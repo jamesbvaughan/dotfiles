@@ -51,15 +51,14 @@ cmp.setup({
       behavior = cmp.ConfirmBehavior.Replace,
       select = false,
     }),
-    formatting = {
-        -- TODO: Find out why this isn't working
-        -- format = lspkind.cmp_format({
-        --     preset = "codicons",
-        --     symbol_map = {
-        --         Copilot = "",
-        --     },
-        -- }),
-    },
+    -- formatting = {
+    --     format = require("lspkind").cmp_format({
+    --         preset = "codicons",
+    --         symbol_map = {
+    --             Copilot = "",
+    --         },
+    --     }),
+    -- },
     -- snippet = {
     --   expand = function(args)
     --     luasnip.lsp_expand(args.body)
