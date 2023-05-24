@@ -43,6 +43,7 @@ return {
         desc = "Open diffview for the current file"
       },
     },
+    lazy = false,
     opts = {
       enhanced_diff_hl = true,
     },
