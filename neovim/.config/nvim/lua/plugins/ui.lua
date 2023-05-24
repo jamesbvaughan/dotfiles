@@ -42,7 +42,7 @@ return {
   {
     "b0o/incline.nvim",
     config = function()
-      local colors = require("gruvbox.palette")
+      -- local colors = require("gruvbox.palette")
 
       require("incline").setup({
         highlight = {
@@ -64,4 +64,21 @@ return {
       })
     end,
   },
+
+  -- Highlight the hovered symbol
+  {
+    "RRethy/vim-illuminate",
+    config = function()
+      require("illuminate").configure({
+        delay = 0,
+        under_cursor = false,
+        filetypes_denylist = {
+          'dirvish',
+          'fugitive',
+          'TelescopePrompt',
+          'NeogitStatus',
+        },
+      })
+    end,
+  }
 }
