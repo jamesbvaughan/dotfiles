@@ -154,14 +154,14 @@ lsp.on_attach(lsp_attach)
 --     ['rust_analyzer'] = {'rust'},
 --   }
 -- })
-lsp.format_on_save({
-  format_opts = {
-    timeout_ms = 10000,
-  },
-  servers = {
-    ['null-ls'] = {'javascript', 'typescript'},
-  }
-})
+-- lsp.format_on_save({
+--   format_opts = {
+--     timeout_ms = 10000,
+--   },
+--   servers = {
+--     ['null-ls'] = {'javascript', 'typescript'},
+--   }
+-- })
 
 
 local rust_tools = require("rust-tools")
