@@ -1,19 +1,43 @@
 {
+  // "margin": "0 0 0 0",
+  "position": "bottom",
+  "modules-left": [
+    "sway/window"
+  ],
+  // "modules-center": [
+  //   // "sway/workspaces"
+  // ],
+  "modules-right": [
+    // "idle_inhibitor",
+    "custom/events",
+    "custom/spotify",
+    "mpd",
+    "backlight",
+    "network",
+    "cpu",
+    "memory",
+    "temperature",
+    "pulseaudio",
+    "custom/weather",
+    "battery",
+    "clock",
+    "tray"
+  ],
   "sway/workspaces": {
     "format": "{icon}",
     "format-icons": {
       "urgent": "",
       "focused": "",
       "default": ""
-      // },
-      // "persistent_workspaces": {
-      //   "1": [],
-      //   "2": [],
-      //   "3": []
+    // },
+    // "persistent_workspaces": {
+    //   "1": [],
+    //   "2": [],
+    //   "3": []
     }
   },
   "sway/mode": {
-    "format": "<span style=\"italic\">{}</span>"
+      "format": "<span style=\"italic\">{}</span>"
   },
   "sway/window": {
     "max-length": 80
@@ -26,7 +50,7 @@
   },
   "custom/events": {
     "format": "{}",
-    "max-length": 100,
+    "max-length": 30,
     "tooltip": true,
     "interval": 300,
     "format-icons": {
@@ -46,10 +70,7 @@
   },
   "backlight": {
     "format": "{percent}% {icon}",
-    "format-icons": [
-      "",
-      ""
-    ],
+    "format-icons": ["", ""],
     "on-scroll-up": "brightnessctl set +10%",
     "on-scroll-down": "brightnessctl set 10%-"
   },
@@ -65,28 +86,13 @@
     "format-alt": "{time} {icon}",
     // "format-good": "", // An empty format will hide the module
     // "format-full": "",
-    "format-icons": [
-      " ",
-      " ",
-      " ",
-      " ",
-      " "
-    ]
+    "format-icons": [" ", " ", " ", " ", " "]
   },
-  "network#wifi": {
-    "interface": "w*",
-    "format-wifi": "{essid} ({signalStrength}%) {ipaddr} ",
-    "format-ethernet": "",
-    "format-linked": "",
-    "format-disconnected": "",
-    "format-alt": "{ifname}: {ipaddr}/{cidr}"
-  },
-  "network#ethernet": {
-    "interface": "en*",
-    "format-wifi": "",
-    "format-ethernet": "{ifname}: {ipaddr} ",
+  "network": {
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
     "format-linked": "{ifname} (No IP) ",
-    "format-disconnected": "",
+    "format-disconnected": "Disconnected ⚠",
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
   "pulseaudio": {
@@ -104,11 +110,7 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": [
-        "",
-        "",
-        ""
-      ]
+      "default": ["", "", ""]
     },
     "on-click": "pavucontrol"
   },
@@ -127,31 +129,11 @@
     "spacing": 4
   },
   "custom/weather": {
-    "format": "{}",
+   "format": "{}",
     "tooltip": true,
     "interval": 1800,
     "exec": "$HOME/.config/waybar/scripts/wttr.py",
     "return-type": "json"
-  },
-  "custom/notification": {
-    "tooltip": false,
-    "format": "{icon}",
-    "format-icons": {
-      "notification": "<span foreground='red'><sup></sup></span>",
-      "none": "",
-      "dnd-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-none": "",
-      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "inhibited-none": "",
-      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-inhibited-none": ""
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true
   }
 }
 // vim: ft=jsonc

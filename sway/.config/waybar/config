@@ -12,7 +12,8 @@
       "pulseaudio",
       "custom/weather",
       "clock",
-      "tray"
+      "tray",
+      "custom/notification"
     ],
     "include": [
       "~/.config/waybar/modules.json"

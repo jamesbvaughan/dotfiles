@@ -9,10 +9,13 @@ exec dbus-update-activation-environment --all
 exec gnome-keyring-daemon --start --components=secrets
 
 # syncthing
-exec syncthingtray --wait
+# exec syncthingtray --wait
 
 # tailscale tray icon
 exec tailscale-systray
+
+# Sway notification daemon
+exec swaync
 
 # use wob as an indicator bar
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
@@ -103,6 +106,8 @@ bindsym $mod+q kill
 bindsym $mod+space exec $menu
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+q exit
+
+bindsym $mod+n exec swaync-client --toggle-panel
 
 floating_modifier $mod normal
 bindsym $mod+t floating toggle
