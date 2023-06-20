@@ -60,7 +60,12 @@ return {
       -- UI for loaders
       {
         'j-hui/fidget.nvim',
-        opts = {}
+        tag = 'legacy',
+        opts = {
+          text = {
+            spinner = "circle_halves",
+          },
+        },
       },
 
       -- Additional lua configuration

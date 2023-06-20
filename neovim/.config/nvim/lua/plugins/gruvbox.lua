@@ -1,7 +1,10 @@
 return {
   {
     "ellisonleao/gruvbox.nvim",
+    lazy = false,
+    priority = 100,
     opts = {
+      transparent_mode = true,
       overrides = {
         SignColumn = { bg = "NONE" },
         GruvboxRedSign = { bg = "NONE" },
@@ -17,10 +20,23 @@ return {
     end,
   },
 
-  -- {
-  --   "cormacrelf/dark-notify",
-  --   config = function()
-  --     require('dark_notify').run()
-  --   end,
-  -- },
+  {
+    "f-person/auto-dark-mode.nvim",
+    lazy = false,
+    priority = 90,
+    opts = {
+      update_interval = 1000,
+      set_dark_mode = function()
+        vim.api.nvim_set_option('background', 'dark')
+        vim.cmd('colorscheme gruvbox')
+      end,
+      set_light_mode = function()
+        vim.api.nvim_set_option('background', 'light')
+        vim.cmd('colorscheme gruvbox')
+      end,
+    },
+    init = function()
+      require('auto-dark-mode').init()
+    end,
+  }
 }
