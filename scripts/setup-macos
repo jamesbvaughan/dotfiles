@@ -20,7 +20,6 @@ if [ "$(uname -s)" == "Darwin" ]; then
     coreutils \
     cormacrelf/tap/dark-notify \
     deno\
-    docker-compose \
     exa \
     fd \
     fzf \
@@ -36,9 +35,8 @@ if [ "$(uname -s)" == "Darwin" ]; then
     luarocks \
     markdownlint-cli \
     meetingbar \
+    mprocs \
     neovim \
-    nodenv \
-    prettier \
     python \
     rbenv \
     rg \
@@ -52,29 +50,34 @@ if [ "$(uname -s)" == "Darwin" ]; then
     tmuxinator \
     tree \
     vale \
+    volta \
     yamllint \
     zsh
 
   # Install some casks
   brew install --quiet --cask \
     1password \
-    alfred \
+    1password-cli \
+    arc \
     bartender \
     blender \
     cron \
-    docker \
     dropbox \
+    discord \
     figma \
     keepingyouawake \
-    logseq \
+    kitty \
+    linear-linear \
+    linearmouse \
     monitorcontrol \
     notion \
+    obsidian \
+    orbstack \
     raycast \
     signal \
     slack \
     spotify \
     steam \
-    syncthing \
     tailscale \
     visual-studio-code \
     zoom
@@ -86,15 +89,15 @@ if [ "$(uname -s)" == "Darwin" ]; then
 
   # Enable window dragging by Cmd-ctrl + click'n'drag
   # Disable this via `defaults delete -g NSWindowShouldDragOnGesture`
-  defaults write -g NSWindowShouldDragOnGesture -bool true   
+  defaults write -g NSWindowShouldDragOnGesture -bool true
 fi
 
 # Place config files where they belong
 stow \
-  alfred \
   git \
   hushlogin \
   iterm2 \
+  kitty \
   luacheck \
   neovim \
   skhd \
