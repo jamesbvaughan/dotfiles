@@ -35,7 +35,6 @@ if [ "$(uname -s)" == "Darwin" ]; then
     lua-language-server \
     luarocks \
     markdownlint-cli \
-    meetingbar \
     neovim \
     nodenv \
     prettier \
@@ -58,15 +57,12 @@ if [ "$(uname -s)" == "Darwin" ]; then
   # Install some casks
   brew install --quiet --cask \
     1password \
-    alfred \
     bartender \
     blender \
     cron \
-    docker \
     dropbox \
     figma \
     keepingyouawake \
-    logseq \
     monitorcontrol \
     notion \
     raycast \
@@ -74,24 +70,20 @@ if [ "$(uname -s)" == "Darwin" ]; then
     slack \
     spotify \
     steam \
-    syncthing \
     tailscale \
     visual-studio-code \
     zoom
-  #   # Add this back once the cask is > v3.5
-  #   # iterm2
 
   # Enable global key-repeat
   defaults write -g ApplePressAndHoldEnabled -bool false
 
   # Enable window dragging by Cmd-ctrl + click'n'drag
   # Disable this via `defaults delete -g NSWindowShouldDragOnGesture`
-  defaults write -g NSWindowShouldDragOnGesture -bool true   
+  defaults write -g NSWindowShouldDragOnGesture -bool true
 fi
 
 # Place config files where they belong
 stow \
-  alfred \
   git \
   hushlogin \
   iterm2 \
