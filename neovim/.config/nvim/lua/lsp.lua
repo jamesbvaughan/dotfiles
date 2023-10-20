@@ -1,5 +1,8 @@
 local lsp = require("lsp-zero").preset({})
 local lspconfig = require("lspconfig")
+local ih = require("lsp-inlayhints")
+
+ih.setup()
 
 
 -- Configure lua language server for Neovim
@@ -87,6 +90,37 @@ lspconfig.eslint.setup({
       { rule = "import/namespace",                        severity = "off" },
       { rule = "import/no-cycle",                         severity = "off" },
       { rule = "import/no-unresolved",                    severity = "off" },
+    }
+  }
+})
+lspconfig.tsserver.setup({
+  on_attach = function(client, bufnr)
+    ih.on_attach(client, bufnr)
+  end,
+  settings = {
+    typescript = {
+      inlayHints = {
+        includeInlayParameterNameHints = 'all',
+        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+      }
+    },
+    javascript = {
+      inlayHints = {
+        includeInlayParameterNameHints = 'all',
+        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+      }
     }
   }
 })

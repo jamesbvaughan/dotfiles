@@ -57,6 +57,9 @@ return {
       { 'L3MON4D3/LuaSnip' },
       { 'rafamadriz/friendly-snippets' },
 
+      -- Inlay hints
+      { 'lvimuser/lsp-inlayhints.nvim' },
+
       -- UI for loaders
       {
         'j-hui/fidget.nvim',
