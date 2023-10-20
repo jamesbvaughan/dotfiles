@@ -20,7 +20,6 @@ if [ "$(uname -s)" == "Darwin" ]; then
     coreutils \
     cormacrelf/tap/dark-notify \
     deno\
-    docker-compose \
     exa \
     fd \
     fzf \
@@ -35,9 +34,8 @@ if [ "$(uname -s)" == "Darwin" ]; then
     lua-language-server \
     luarocks \
     markdownlint-cli \
+    mprocs \
     neovim \
-    nodenv \
-    prettier \
     python \
     rbenv \
     rg \
@@ -51,20 +49,28 @@ if [ "$(uname -s)" == "Darwin" ]; then
     tmuxinator \
     tree \
     vale \
+    volta \
     yamllint \
     zsh
 
   # Install some casks
   brew install --quiet --cask \
     1password \
+    1password-cli \
+    arc \
     bartender \
     blender \
     cron \
     dropbox \
+    discord \
     figma \
     keepingyouawake \
+    linear-linear \
+    linearmouse \
     monitorcontrol \
     notion \
+    obsidian \
+    orbstack \
     raycast \
     signal \
     slack \
@@ -87,6 +93,7 @@ stow \
   git \
   hushlogin \
   iterm2 \
+  kitty \
   luacheck \
   neovim \
   skhd \
