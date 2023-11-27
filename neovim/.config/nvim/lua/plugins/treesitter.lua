@@ -50,10 +50,11 @@ return {
         endwise = {
           enable = true,
         },
-        context_commentstring = {
-          enable = true,
-          enable_autocmd = false,
-        },
+        -- TODO: figure out why this stopped working
+        -- context_commentstring = {
+        --   enable = true,
+        --   enable_autocmd = false,
+        -- },
         textobjects = {
           select = {
             enable = true,
