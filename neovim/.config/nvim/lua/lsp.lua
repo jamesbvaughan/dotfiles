@@ -73,6 +73,10 @@ lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 --   },
 -- })
 lspconfig.eslint.setup({
+  capabilities = {
+    document_formatting = false,
+    document_range_formatting = false,
+  },
   settings = {
     codeActionOnSave = {
       enable = true,
@@ -90,6 +94,17 @@ lspconfig.eslint.setup({
     }
   }
 })
+lspconfig.tsserver.setup({
+  capabilities = {
+    document_formatting = false,
+    document_range_formatting = false,
+  },
+  -- settings = {
+  --   formatting = {
+  --     enable = false,
+  --   },
+  -- },
+});
 -- lspconfig.openscad_lsp.setup({
 --   cmd = { "/Users/james/code/openscad-LSP/target/debug/openscad-lsp", "--stdio" },
 --   settings = {
@@ -124,8 +139,13 @@ lsp.set_preferences({
   set_lsp_keymaps = { omit = { 'gd', 'go' } }
 })
 
-local function lsp_attach(_client, bufnr)
+local function lsp_attach(client, bufnr)
   local opts = { buffer = bufnr }
+
+  -- if client.name == "tsserver" then
+  --   client.capabilities.document_formatting = false
+  --   client.capabilities.document_range_formatting = false
+  -- end
 
   vim.keymap.set("n", "<leader>fm", vim.cmd.LspZeroFormat,
     vim.tbl_extend("force", opts, { desc = "Format" }))
