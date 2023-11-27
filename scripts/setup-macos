@@ -58,7 +58,6 @@ if [ "$(uname -s)" == "Darwin" ]; then
     1password \
     1password-cli \
     arc \
-    bartender \
     blender \
     cron \
     dropbox \
