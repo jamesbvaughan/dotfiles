@@ -34,7 +34,6 @@ if [ "$(uname -s)" == "Darwin" ]; then
     lua-language-server \
     luarocks \
     markdownlint-cli \
-    meetingbar \
     mprocs \
     neovim \
     python \
@@ -59,14 +58,12 @@ if [ "$(uname -s)" == "Darwin" ]; then
     1password \
     1password-cli \
     arc \
-    bartender \
     blender \
     cron \
     dropbox \
     discord \
     figma \
     keepingyouawake \
-    kitty \
     linear-linear \
     linearmouse \
     monitorcontrol \
@@ -81,8 +78,6 @@ if [ "$(uname -s)" == "Darwin" ]; then
     tailscale \
     visual-studio-code \
     zoom
-  #   # Add this back once the cask is > v3.5
-  #   # iterm2
 
   # Enable global key-repeat
   defaults write -g ApplePressAndHoldEnabled -bool false

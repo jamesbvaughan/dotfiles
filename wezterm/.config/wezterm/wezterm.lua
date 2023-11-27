@@ -2,6 +2,7 @@ local wezterm = require 'wezterm'
 local config = {}
 
 config.font = wezterm.font 'Berkeley Mono'
+-- config.font = wezterm.font 'Monaspace Argon'
 config.font_size = 16
 
 config.hide_tab_bar_if_only_one_tab = true
@@ -18,9 +19,9 @@ end
 
 local function scheme_for_appearance(appearance)
   if appearance:find 'Dark' then
-    return 'GruvboxDarkHard'
+    return 'flexoki-dark'
   else
-    return 'Gruvbox Light'
+    return 'flexoki-light'
   end
 end
 

@@ -30,11 +30,15 @@ return {
       { "<leader>g", vim.cmd.Neogit, desc = "Open neogit" },
     },
     opts = {
+      disable_hint = true,
       disable_insert_on_commit = false,
       integrations = {
-        telescope = true,
         diffview = true,
-      }
+        telescope = true,
+      },
+      telescope_sorter = function()
+        return require("telescope").extensions.fzf.native_fzf_sorter()
+      end,
     }
   },
 

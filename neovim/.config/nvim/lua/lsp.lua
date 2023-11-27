@@ -1,5 +1,8 @@
 local lsp = require("lsp-zero").preset({})
 local lspconfig = require("lspconfig")
+local ih = require("lsp-inlayhints")
+
+ih.setup()
 
 
 -- Configure lua language server for Neovim
@@ -95,16 +98,45 @@ lspconfig.eslint.setup({
   }
 })
 lspconfig.tsserver.setup({
-  capabilities = {
-    document_formatting = false,
-    document_range_formatting = false,
-  },
   -- settings = {
   --   formatting = {
   --     enable = false,
   --   },
   -- },
-});
+  capabilities = {
+    document_formatting = false,
+    document_range_formatting = false,
+  },
+  on_attach = function(client, bufnr)
+    ih.on_attach(client, bufnr)
+  end,
+  settings = {
+    typescript = {
+      inlayHints = {
+        includeInlayParameterNameHints = 'all',
+        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+      }
+    },
+    javascript = {
+      inlayHints = {
+        includeInlayParameterNameHints = 'all',
+        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+      }
+    }
+  }
+})
 -- lspconfig.openscad_lsp.setup({
 --   cmd = { "/Users/james/code/openscad-LSP/target/debug/openscad-lsp", "--stdio" },
 --   settings = {
