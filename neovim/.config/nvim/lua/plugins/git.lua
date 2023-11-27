@@ -4,7 +4,7 @@ return {
     dependencies = "tpope/vim-rhubarb",
     lazy = false,
     keys = {
-      { "gh", vim.cmd.GBrowse, desc = "Open the current file in GitHub" },
+      { "gh", vim.cmd.GBrowse,                                               desc = "Open the current file in GitHub" },
       { "gl", ":Git log --pretty --oneline --abbrev-commit --graph -20 <cr>" },
     }
   },
@@ -22,14 +22,18 @@ return {
 
   {
     'TimUntersberger/neogit',
-    dependencies = 'nvim-lua/plenary.nvim',
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
     keys = {
       { "<leader>g", vim.cmd.Neogit, desc = "Open neogit" },
     },
     opts = {
       disable_insert_on_commit = false,
       integrations = {
-        diffview = true
+        telescope = true,
+        diffview = true,
       }
     }
   },
