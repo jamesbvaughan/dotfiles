@@ -76,6 +76,10 @@ lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 --   },
 -- })
 lspconfig.eslint.setup({
+  capabilities = {
+    document_formatting = false,
+    document_range_formatting = false,
+  },
   settings = {
     codeActionOnSave = {
       enable = true,
@@ -94,6 +98,15 @@ lspconfig.eslint.setup({
   }
 })
 lspconfig.tsserver.setup({
+  -- settings = {
+  --   formatting = {
+  --     enable = false,
+  --   },
+  -- },
+  capabilities = {
+    document_formatting = false,
+    document_range_formatting = false,
+  },
   on_attach = function(client, bufnr)
     ih.on_attach(client, bufnr)
   end,
@@ -158,8 +171,13 @@ lsp.set_preferences({
   set_lsp_keymaps = { omit = { 'gd', 'go' } }
 })
 
-local function lsp_attach(_client, bufnr)
+local function lsp_attach(client, bufnr)
   local opts = { buffer = bufnr }
+
+  -- if client.name == "tsserver" then
+  --   client.capabilities.document_formatting = false
+  --   client.capabilities.document_range_formatting = false
+  -- end
 
   vim.keymap.set("n", "<leader>fm", vim.cmd.LspZeroFormat,
     vim.tbl_extend("force", opts, { desc = "Format" }))
