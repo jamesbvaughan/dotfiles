@@ -110,32 +110,33 @@ lspconfig.tsserver.setup({
   on_attach = function(client, bufnr)
     ih.on_attach(client, bufnr)
   end,
-  settings = {
-    typescript = {
-      inlayHints = {
-        includeInlayParameterNameHints = 'all',
-        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-        includeInlayFunctionParameterTypeHints = true,
-        includeInlayVariableTypeHints = true,
-        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-        includeInlayPropertyDeclarationTypeHints = true,
-        includeInlayFunctionLikeReturnTypeHints = true,
-        includeInlayEnumMemberValueHints = true,
-      }
-    },
-    javascript = {
-      inlayHints = {
-        includeInlayParameterNameHints = 'all',
-        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-        includeInlayFunctionParameterTypeHints = true,
-        includeInlayVariableTypeHints = true,
-        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-        includeInlayPropertyDeclarationTypeHints = true,
-        includeInlayFunctionLikeReturnTypeHints = true,
-        includeInlayEnumMemberValueHints = true,
-      }
-    }
-  }
+  -- I've commented this out because I don't think I actually like inlay hints
+  -- settings = {
+  --   typescript = {
+  --     inlayHints = {
+  --       includeInlayParameterNameHints = 'all',
+  --       includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+  --       includeInlayFunctionParameterTypeHints = true,
+  --       includeInlayVariableTypeHints = true,
+  --       includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+  --       includeInlayPropertyDeclarationTypeHints = true,
+  --       includeInlayFunctionLikeReturnTypeHints = true,
+  --       includeInlayEnumMemberValueHints = true,
+  --     }
+  --   },
+  --   javascript = {
+  --     inlayHints = {
+  --       includeInlayParameterNameHints = 'all',
+  --       includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+  --       includeInlayFunctionParameterTypeHints = true,
+  --       includeInlayVariableTypeHints = true,
+  --       includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+  --       includeInlayPropertyDeclarationTypeHints = true,
+  --       includeInlayFunctionLikeReturnTypeHints = true,
+  --       includeInlayEnumMemberValueHints = true,
+  --     }
+  --   }
+  -- }
 })
 -- lspconfig.openscad_lsp.setup({
 --   cmd = { "/Users/james/code/openscad-LSP/target/debug/openscad-lsp", "--stdio" },
