@@ -24,6 +24,9 @@ exec swaync
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 
+# gesture thing
+exec --no-startup-id libinput-gestures
+
 # set up a lock screen
 # exec swayidle -w \
 #   before-sleep 'playerctl pause' \
