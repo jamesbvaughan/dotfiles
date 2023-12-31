@@ -2,6 +2,7 @@
 c = c  # noqa: F821 pylint: disable=E0602,C0103
 config = config  # noqa: F821 pylint: disable=E0602,C0103
 
+c.aliases['fill-password'] = 'spawn --userscript 1pass'
 
 config.bind("<Ctrl-W>", 'fake-key <Ctrl-Backspace>', mode='insert')
 config.bind("<Ctrl-A>", 'fake-key <Home>', mode='insert')
