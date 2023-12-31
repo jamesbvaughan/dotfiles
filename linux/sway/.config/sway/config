@@ -24,7 +24,7 @@ exec swaync
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 
-set $lock_cmd 'swaylock --daemonize --grace 10 --screenshots --effect-pixelate 20 --fade-in 0.5 --ignore-empty-password --effect-vignette 0.2:0.5'
+set $lock_cmd 'swaylock --daemonize --grace 10 --screenshots --effect-pixelate 16  --ignore-empty-password'
 
 # set up a lock screen
 exec swayidle -w \
