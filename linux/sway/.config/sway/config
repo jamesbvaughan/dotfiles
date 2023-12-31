@@ -65,12 +65,13 @@ set $menu ~/.dotfiles/scripts/menu
 ### Wallpaper
 
 # output "*" bg /home/james/code/wallpapers/gruvbox/houseonthesideofalake.jpg fill
+output "*" bg #000000 solid_color
 
 
 ### Window configuration
 
-default_border pixel 4
-# hide_edge_borders both
+default_border pixel 1
+# hide_edge_borders smart_no_gaps
 # gaps inner 16
 smart_borders on
 
@@ -97,6 +98,8 @@ input type:touchpad {
   tap enabled
   natural_scroll enabled
   middle_emulation enabled
+  pointer_accel 0.2
+  scroll_factor 0.6
 }
 
 input type:keyboard {
