@@ -1,5 +1,3 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 # Oh My Zsh things
 export ZSH="$HOME/.oh-my-zsh"
 plugins=(fzf)
@@ -22,6 +20,13 @@ EXTRA_CONFIG=$HOME/.zshrc.extra ; [ -f $EXTRA_CONFIG ] && source $EXTRA_CONFIG
 if [ -x "$(command -v brew)" ]; then
   HOMEBREW_PREFIX=$(brew --prefix)
   fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
+
+  ## Python (brew symlinks)
+  export PATH="$HOMEBREW_PREFIX/opt/python@3.9/libexec/bin:$PATH"
+
+  ## GNU coreutils
+  export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
+  export MANPATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman:$MANPATH"
 fi
 
 
@@ -50,13 +55,6 @@ export PATH="$GOPATH/bin:$PATH"
 ## Flutter
 export PATH="$HOME/code/flutter/bin:$PATH"
 
-## Python (brew symlinks)
-export PATH="$HOMEBREW_PREFIX/opt/python@3.9/libexec/bin:$PATH"
-
-## GNU coreutils
-export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
-export MANPATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman:$MANPATH"
-
 ## Neovim
 export EDITOR='nvim'
 
@@ -64,20 +62,15 @@ export EDITOR='nvim'
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 
+# bun
+export BUN_INSTALL="$HOME/.bun"
+if [ -s "$BUN_INSTALL/_bun" ]; then
+  source "/Users/james/.bun/_bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+fi
 
 # Remove duplicate entries in $PATH
 typeset -aU path
 
-
 # Configure prompt
 eval "$(starship init zsh)"
-
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
-
-# bun completions
-[ -s "/Users/james/.bun/_bun" ] && source "/Users/james/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
