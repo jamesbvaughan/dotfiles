@@ -57,7 +57,7 @@ WEATHER_CODES = {
 
 data = {}
 
-weather = requests.get("https://wttr.in/37.89410772158915,-122.30366699783897?format=j1").json()
+weather = requests.get("https://wttr.in?format=j1").json()
 
 
 def format_time(time):
@@ -88,7 +88,7 @@ def format_chances(hour):
 
 
 data['text'] = WEATHER_CODES[weather['current_condition'][0]['weatherCode']] + \
-    " " + weather['current_condition'][0]['FeelsLikeF']+ "°"
+    " " + weather['current_condition'][0]['FeelsLikeF']+ "° " + weather["nearest_area"][0]["areaName"][0]["value"]
 #data['text'] = weather['current_condition'][0]['FeelsLikeF']+"°"
 
 data['tooltip'] = f"<b>{weather['current_condition'][0]['weatherDesc'][0]['value']} {weather['current_condition'][0]['temp_F']}°</b>\n"
