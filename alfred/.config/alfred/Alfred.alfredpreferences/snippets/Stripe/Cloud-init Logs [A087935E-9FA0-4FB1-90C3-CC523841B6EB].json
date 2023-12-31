@@ -1,8 +1,0 @@
-{
-  "alfredsnippet" : {
-    "snippet" : "less -R \/var\/log\/cloud-init-output.log",
-    "uid" : "A087935E-9FA0-4FB1-90C3-CC523841B6EB",
-    "name" : "Cloud-init Logs",
-    "keyword" : "cil"
-  }
-}

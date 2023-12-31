@@ -1,0 +1,45 @@
+[
+  {
+    "modules-left": [
+      "sway/workspaces",
+      "sway/window"
+    ],
+    "modules-center": [
+      "custom/events"
+    ],
+    "modules-right": [
+      "backlight",
+      "pulseaudio",
+      "custom/weather",
+      "clock",
+      "tray",
+      "custom/notification"
+    ],
+    "include": [
+      "~/.config/waybar/modules.json"
+    ]
+  },
+  {
+    "position": "bottom",
+    "modules-left": [
+      "cpu",
+      "memory",
+      "temperature",
+      "sway/mode"
+    ],
+    "modules-center": [
+      "custom/media",
+      "mpd",
+      "custom/spotify"
+    ],
+    "modules-right": [
+      "network#wifi",
+      "network#ethernet",
+      "battery"
+    ],
+    "include": [
+      "~/.config/waybar/modules.json"
+    ]
+  }
+]
+// vim: ft=jsonc

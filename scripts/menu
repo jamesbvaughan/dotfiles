@@ -1,12 +1,13 @@
 #!/bin/sh
 
 exec j4-dmenu-desktop \
-  --term=alacritty \
+  --term=wezterm \
   --dmenu='bemenu \
     --ignorecase \
     --center \
     --list 10 \
-    --margin 1400 \
+    --width-factor 0.4 \
+    --fixed-height \
     --prompt "" \
     --line-height 30 \
     --nb "#21222C" \
@@ -17,4 +18,4 @@ exec j4-dmenu-desktop \
     --ff "#F8F8F2" \
     --hb "#F8F8F2" \
     --hf "#21222C" \
-    --fn "JetBrains Mono Nerd Font 20px"'
+    --fn "Berkeley Mono 32px"'
