@@ -37,13 +37,14 @@ exec swayidle -w \
 
 ### Colors
 
-set $green '#98971a'
-set $red   '#cc241d'
-set $black '#1d2021'
-set $blue  '#458588'
+set $green  '#98971a'
+set $red    '#cc241d'
+set $black  '#1d2021'
+set $blue   '#458588'
+set $orange '#fe8019'
 
 # class          border backgr. text indicator child_border
-client.focused   $red   $red    $red $blue     $green
+client.focused   $red   $red    $red $blue     $orange
 client.unfocused $red   $red    $red $red      $black
 
 
@@ -70,7 +71,7 @@ output "*" bg #000000 solid_color
 ### Window configuration
 
 default_border pixel 1
-# hide_edge_borders smart_no_gaps
+# hide_edge_borders vertical
 # gaps inner 16
 smart_borders on
 
