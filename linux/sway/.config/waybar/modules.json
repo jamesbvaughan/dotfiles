@@ -5,11 +5,6 @@
       "urgent": "",
       "focused": "",
       "default": ""
-      // },
-      // "persistent_workspaces": {
-      //   "1": [],
-      //   "2": [],
-      //   "3": []
     }
   },
   "sway/mode": {
@@ -19,7 +14,6 @@
     "max-length": 80
   },
   "clock": {
-    // "timezone": "America/New_York",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format": "{:%a %b %d  %H:%M}",
     "format-alt": "{:%Y-%m-%d}"
@@ -42,7 +36,6 @@
     "format": "{}% "
   },
   "temperature": {
-    "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input"
   },
   "backlight": {
     "format": "{percent}% {icon}",
