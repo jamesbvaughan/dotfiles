@@ -126,6 +126,11 @@
     "exec": "$HOME/.config/waybar/scripts/wttr.py",
     "return-type": "json"
   },
+  "custom/separator": {
+    "format": "|",
+    "interval": "once",
+    "tooltip": false
+  },
   "custom/notification": {
     "tooltip": false,
     "format": "{icon}",

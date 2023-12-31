@@ -123,3 +123,8 @@ label:focus {
 #custom-media.custom-vlc {
   background-color: #ffa000;
 }
+
+#custom-separator {
+  color: #444;
+  /* margin: 0 5px; */
+}

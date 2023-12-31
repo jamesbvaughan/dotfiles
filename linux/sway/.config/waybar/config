@@ -2,6 +2,7 @@
   {
     "modules-left": [
       "sway/workspaces",
+      "custom/separator",
       "sway/window"
     ],
     "modules-center": [
@@ -9,9 +10,13 @@
     ],
     "modules-right": [
       "backlight",
+      "custom/separator",
       "pulseaudio",
+      "custom/separator",
       "custom/weather",
+      "custom/separator",
       "clock",
+      "custom/separator",
       "tray",
       "custom/notification"
     ],
@@ -23,7 +28,9 @@
     "position": "bottom",
     "modules-left": [
       "cpu",
+      "custom/separator",
       "memory",
+      "custom/separator",
       "temperature",
       "sway/mode"
     ],
@@ -35,6 +42,7 @@
     "modules-right": [
       "network#wifi",
       "network#ethernet",
+      "custom/separator",
       "battery"
     ],
     "include": [
