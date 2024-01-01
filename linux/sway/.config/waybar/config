@@ -32,6 +32,8 @@
       "memory",
       "custom/separator",
       "temperature",
+      "custom/separator",
+      "custom/wattage",
       "sway/mode"
     ],
     "modules-center": [

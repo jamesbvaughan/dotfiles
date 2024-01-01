@@ -111,9 +111,8 @@
     "max-length": 40,
     "interval": 5,
     "on-click": "spt playback --toggle",
-    "on-click-right": "alacritty -e spt",
-    "exec": "spt playback",
-    "exec-if": "pgrep spotify"
+    "on-click-right": "wezterm -e spt",
+    "exec": "spt playback"
   },
   "tray": {
     "icon-size": 24,
@@ -125,6 +124,11 @@
     "interval": 1800,
     "exec": "$HOME/.config/waybar/scripts/wttr.py",
     "return-type": "json"
+  },
+  "custom/wattage": {
+    "format": " {} 󱐋",
+    "interval": 5,
+    "exec": "$HOME/.config/waybar/scripts/wattage.sh"
   },
   "custom/separator": {
     "format": "|",
