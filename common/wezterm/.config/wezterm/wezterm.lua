@@ -12,6 +12,12 @@ config.hide_tab_bar_if_only_one_tab = true
 -- Window
 -- config.window_background_opacity = 0.8
 -- config.macos_window_background_blur = 40
+config.window_padding = {
+  left = '1px',
+  right = '1px',
+  top = '1px',
+  bottom = '1px',
+}
 
 -- Colors
 --- Set up a version of gruvbox with a pure black background
