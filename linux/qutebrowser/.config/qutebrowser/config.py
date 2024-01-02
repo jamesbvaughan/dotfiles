@@ -30,9 +30,9 @@ c.downloads.remove_finished = 2000
 c.editor.command = ["wezterm", "-e", "nvim", "{}"]
 
 c.fonts.default_family = "Berkeley Mono"
-c.fonts.default_size = "20px"
+c.fonts.default_size = "16px"
 
-c.zoom.default = "125%"
+# c.zoom.default = "125%"
 
 c.statusbar.padding = {
     'top': 4,
