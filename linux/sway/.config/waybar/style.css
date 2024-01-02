@@ -11,7 +11,7 @@
   border-radius: 0;
   font-family: Berkeley Mono, sans-serif;
   /* font-weight: 500; */
-  font-size: 18px;
+  font-size: 16px;
   min-height: 0;
   color: @fg;
 }

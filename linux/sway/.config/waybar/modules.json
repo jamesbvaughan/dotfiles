@@ -105,6 +105,8 @@
     },
     "on-click": "pavucontrol"
   },
+  "bluetooth": {
+  },
   "custom/spotify": {
     "format": "{} ",
     "escape": true,
