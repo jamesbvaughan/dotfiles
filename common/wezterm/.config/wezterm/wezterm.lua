@@ -3,7 +3,7 @@ local config = wezterm.config_builder()
 
 -- Font
 config.font = wezterm.font 'Berkeley Mono'
-config.font_size = 16
+config.font_size = 12
 
 -- Tab bar
 config.use_fancy_tab_bar = false
