@@ -11,11 +11,15 @@ exec gammastep
 exec dbus-update-activation-environment --all
 exec gnome-keyring-daemon --start --components=secrets
 
+# enable an authentication agent
+# https://wiki.archlinux.org/title/Polkit#Authentication_agents
+exec lxpolkit
+
 # syncthing
 # exec syncthingtray --wait
 
 # tailscale tray icon
-exec tailscale-systray
+# exec tailscale-systray
 
 # Sway notification daemon
 exec swaync
@@ -83,7 +87,7 @@ for_window [app_id="syncthingtray"] floating enable, border none, resize set 450
 
 ### HiDPI
 
-output eDP-1 scale 1
+output eDP-1 scale 1.2
 
 
 ### Font
