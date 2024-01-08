@@ -28,6 +28,12 @@ return {
     end,
   },
 
+  -- Highlight TODOs
+  {
+    "folke/todo-comments.nvim",
+    opts = {},
+  },
+
   -- Visualize indentation
   "lukas-reineke/indent-blankline.nvim",
 
