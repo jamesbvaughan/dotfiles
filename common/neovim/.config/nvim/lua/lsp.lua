@@ -172,7 +172,7 @@ lsp.set_preferences({
   set_lsp_keymaps = { omit = { 'gd', 'go' } }
 })
 
-local function lsp_attach(client, bufnr)
+local function lsp_attach(_, bufnr)
   local opts = { buffer = bufnr }
 
   -- if client.name == "tsserver" then
