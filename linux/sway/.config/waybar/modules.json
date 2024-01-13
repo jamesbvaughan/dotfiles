@@ -110,7 +110,7 @@
   "custom/spotify": {
     "format": "{} ",
     "escape": true,
-    "max-length": 40,
+    "max-length": 60,
     "interval": 5,
     "on-click": "spt playback --toggle",
     "on-click-right": "wezterm -e spt",
@@ -123,7 +123,7 @@
   "custom/weather": {
     "format": "{}",
     "tooltip": true,
-    "interval": 1800,
+    "interval": 300,
     "exec": "$HOME/.config/waybar/scripts/wttr.py",
     "return-type": "json"
   },
