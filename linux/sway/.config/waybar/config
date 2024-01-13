@@ -45,7 +45,9 @@
       "network#wifi",
       "network#ethernet",
       "custom/separator",
+      "custom/blank",
       "bluetooth",
+      "custom/blank",
       "custom/separator",
       "battery"
     ],

@@ -132,6 +132,11 @@
     "interval": 5,
     "exec": "$HOME/.config/waybar/scripts/wattage.sh"
   },
+  "custom/blank": {
+    "format": " ",
+    "interval": "once",
+    "tooltip": false
+  },
   "custom/separator": {
     "format": "|",
     "interval": "once",
