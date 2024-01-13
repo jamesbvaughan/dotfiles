@@ -1,6 +1,5 @@
 # Oh My Zsh things
 export ZSH="$HOME/.oh-my-zsh"
-plugins=(fzf)
 source $ZSH/oh-my-zsh.sh
 
 
@@ -74,3 +73,6 @@ typeset -aU path
 
 # Configure prompt
 eval "$(starship init zsh)"
+
+# Configure Atuin
+eval "$(atuin init zsh)"
