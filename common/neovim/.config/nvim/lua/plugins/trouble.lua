@@ -10,11 +10,11 @@ return {
     opts = {
       auto_close = true,
       auto_open = true,
-      height = 5,
-      mode = "document_diagnostics",
-      group = false,
+      -- height = 5,
+      -- mode = "document_diagnostics",
+      -- group = false,
       padding = false,
-      indent_lines = false,
+      -- indent_lines = false,
     },
   },
 }
