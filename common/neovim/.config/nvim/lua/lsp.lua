@@ -1,13 +1,12 @@
 local lsp_zero = require("lsp-zero")
 local lspconfig = require("lspconfig")
 
--- Override some default keymaps
-lsp_zero.set_preferences({
-  set_lsp_keymaps = { omit = { 'gd', 'go' } }
-})
-
-local function lsp_attach(client, bufnr)
+local function lsp_attach(_client, bufnr)
   local opts = { buffer = bufnr }
+  lsp_zero.default_keymaps({
+    buffer = bufnr,
+    exclude = { 'gd', 'go' },
+  })
 
   vim.keymap.set("n", "<leader>fm", vim.cmd.LspZeroFormat,
     vim.tbl_extend("force", opts, { desc = "Format" }))
@@ -53,20 +52,19 @@ require('mason-lspconfig').setup({
   },
   handlers = {
     lsp_zero.default_setup,
-    -- lua_ls = function()
-    --   local lua_opts = lsp_zero.nvim_lua_ls()
-    --   lspconfig.lua_ls.setup(lua_opts)
-    --   -- lspconfig.lua_ls.setup({
-    --   --   settings = {
-    --   --     Lua = {
-    --   --       diagnostics = {
-    --   --         globals = { 'vim' },
-    --   --         unusedLocalExclude = { '_*' },
-    --   --       },
-    --   --     },
-    --   --   },
-    --   -- })
-    -- end,
+    lua_ls = function()
+      -- local lua_opts = lsp_zero.nvim_lua_ls()
+      -- lspconfig.lua_ls.setup(lua_opts)
+      lspconfig.lua_ls.setup({
+        settings = {
+          Lua = {
+            diagnostics = {
+              unusedLocalExclude = { '_*' },
+            },
+          },
+        },
+      })
+    end,
     jsonls = function()
       lspconfig.jsonls.setup({
         settings = {
