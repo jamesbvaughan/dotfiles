@@ -9,35 +9,36 @@ local has_words_before = function()
 end
 
 local cmp_next = cmp.mapping(function(fallback)
-      if cmp.visible() and has_words_before() then
-        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' })
+  if cmp.visible() and has_words_before() then
+    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+  elseif luasnip.expand_or_jumpable() then
+    luasnip.expand_or_jump()
+  else
+    fallback()
+  end
+end, { 'i', 's' })
 
 local cmp_prev = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-      elseif luasnip.jumpable( -1) then
-        luasnip.jump( -1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' })
+  if cmp.visible() then
+    cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+  elseif luasnip.jumpable(-1) then
+    luasnip.jump(-1)
+  else
+    fallback()
+  end
+end, { 'i', 's' })
 
 cmp.setup({
-  sources = {
+  sources = cmp.config.sources({
     { name = 'copilot' },
     { name = 'nvim_lua' },
-    { name = 'path' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lsp' },
-    { name = 'buffer' },
     { name = 'luasnip' },
-  },
+  }, {
+    { name = 'path' },
+    { name = 'buffer' },
+  }),
   preselect = 'none',
   completion = {
     completeopt = 'menu,menuone,noinsert,noselect'
@@ -70,29 +71,29 @@ cmp.setup({
 -- Completions in git commits
 require("cmp_git").setup()
 cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-        { name = 'cmp_git' },
-    }, {
-        { name = 'buffer' },
-    })
+  sources = cmp.config.sources({
+    { name = 'cmp_git' },
+  }, {
+    { name = 'buffer' },
+  })
 })
 
 -- Use buffer source for `/`
 cmp.setup.cmdline('/', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-        { name = 'buffer' }
-    }
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
 })
 
 -- Use cmdline & path source for ':'
 cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-        { name = 'path' }
-    }, {
-        { name = 'cmdline' }
-    })
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
 })
 
 -- Use nvim-autopairs to insert parens after completing a function name
