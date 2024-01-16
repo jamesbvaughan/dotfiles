@@ -29,15 +29,16 @@ local cmp_prev = cmp.mapping(function(fallback)
 end, { 'i', 's' })
 
 cmp.setup({
-  sources = {
+  sources = cmp.config.sources({
     { name = 'copilot' },
     { name = 'nvim_lua' },
-    { name = 'path' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lsp' },
-    { name = 'buffer' },
     { name = 'luasnip' },
-  },
+  }, {
+    { name = 'path' },
+    { name = 'buffer' },
+  }),
   preselect = 'none',
   completion = {
     completeopt = 'menu,menuone,noinsert,noselect'
