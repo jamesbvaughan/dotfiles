@@ -37,6 +37,7 @@
 
 ; TODO: Re-enable this conditionally
 ; https://git-scm.com/docs/git-config#_conditional_includes
+; https://blog.scottlowe.org/2023/12/15/conditional-git-configuration/
 ; Maybe exclude the actions folder?
 [gpg "ssh"]
 	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
