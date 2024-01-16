@@ -2,14 +2,6 @@ return {
   -- Pull JSON schemas from SchemsStore for use with jsonls
   "b0o/schemastore.nvim",
 
-  -- LSP plugin for non-LSP sources, like linters
-  "jose-elias-alvarez/null-ls.nvim",
-
-  "jay-babu/mason-null-ls.nvim",
-
-  -- LSP plugin for typescript
-  "jose-elias-alvarez/typescript.nvim",
-
   -- github copilot
   {
     "zbirenbaum/copilot.lua",
@@ -34,12 +26,21 @@ return {
 
   {
     'VonHeikemen/lsp-zero.nvim',
-    branch = 'v2.x',
+    branch = 'v3.x',
     dependencies = {
       -- LSP Support
       { 'neovim/nvim-lspconfig' },
       { 'williamboman/mason.nvim' },
       { 'williamboman/mason-lspconfig.nvim' },
+
+      -- Specific language support
+      {
+        "pmizio/typescript-tools.nvim",
+        dependencies = {
+          "nvim-lua/plenary.nvim",
+        },
+      },
+      'simrat39/rust-tools.nvim',
 
       -- Autocompletion
       { 'hrsh7th/nvim-cmp' },
@@ -55,9 +56,6 @@ return {
 
       -- Snippets
       { 'L3MON4D3/LuaSnip' },
-
-      -- Inlay hints
-      { 'lvimuser/lsp-inlayhints.nvim' },
 
       -- UI for loaders
       {

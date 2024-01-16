@@ -1,4 +1,4 @@
-local lsp = require("lsp-zero")
+local lsp_zero = require("lsp-zero")
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 
@@ -43,7 +43,8 @@ cmp.setup({
   completion = {
     completeopt = 'menu,menuone,noinsert,noselect'
   },
-  mapping = lsp.defaults.cmp_mappings({
+  formatting = lsp_zero.cmp_format(),
+  mapping = lsp_zero.defaults.cmp_mappings({
     ['<Tab>'] = cmp_next,
     ['<C-n>'] = cmp_next,
     ['<S-Tab>'] = cmp_prev,
@@ -52,20 +53,23 @@ cmp.setup({
       behavior = cmp.ConfirmBehavior.Replace,
       select = false,
     }),
-    -- formatting = {
-    --     format = require("lspkind").cmp_format({
-    --         preset = "codicons",
-    --         symbol_map = {
-    --             Copilot = "",
-    --         },
-    --     }),
-    -- },
-    -- snippet = {
-    --   expand = function(args)
-    --     luasnip.lsp_expand(args.body)
-    --   end,
-    -- },
+    -- scroll up and down the documentation window
+    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(4),
   })
+  -- formatting = {
+  --     format = require("lspkind").cmp_format({
+  --         preset = "codicons",
+  --         symbol_map = {
+  --             Copilot = "",
+  --         },
+  --     }),
+  -- },
+  -- snippet = {
+  --   expand = function(args)
+  --     luasnip.lsp_expand(args.body)
+  --   end,
+  -- },
 })
 
 -- Completions in git commits
