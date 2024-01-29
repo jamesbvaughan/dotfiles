@@ -177,7 +177,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
   end
 })
 
-lsp.set_sign_icons({
+lsp_zero.set_sign_icons({
   error = '',
   warn = '',
   hint = '',
