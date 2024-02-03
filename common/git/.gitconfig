@@ -2,8 +2,7 @@
 	name = James Vaughan
   username = jamesbvaughan
 	email = james@jamesbvaughan.com
-	; signingkey = ~/.ssh/id_rsa
-  signingkey = ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDNf4b6E5gUW/X/wdsUxTQ3yRrZ8ZmIf0T9wscRzKG9AR2jjUGrjgrH+Hie2zePP9Td9BDyFyhRhUhEmE4QA0pEO+S9RtsIlaLjlCq77IaZkLj/S3uUapYIlbqo5bss+VqZbRzphxUMKFtWZtZOQ3DYQ53+xu6Ii2SPl8+yzemZDSPIi75Bihy1jj4XGp1+ORBalAFiVCz5eBtd5/NAh0q4KlWjdx6Bon3suY0Y2DbaAeW3rq7QNotuPcWiJoFQ22o+k3N/cwGftUStVlkTYy5U6w/XaAxL9pLwp9uV6PN8t1DTUBV9gg6G++1qVatgtmI8BO5OOj6sROHHSmfkGwacPnC0Y2Te5OHOEtX4wuBkRLChyzrapwydgw2NgQyySC4tasHe4o2z84nm4kNQBlcz28Ud7yJAdeo41APXUPyoY6VZAXOVr3rGBYDYqODw2vkJy2bJ5uzHM+3sbulkHwpPd+f4iyc/mdBZvDj6nMFdY81kTEzEN9HgWOKFytLkdw+niappgT9zQ72RRqTFLl1Aeo9AmiojhW67+U1ZDnN/b8Fz8cnLliJwaVyPNiXjdihQ151JEJfE7vT44uyWfpthn+7LJVSB+MzZ1JIPAYOleuIVs5PXnV+fGfRuZlCWACLh7nPaKaMs0n3Am5VF0kIGwwo1Hb2pMvbcW+2RFFT/3w==
+	signingkey = ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDNf4b6E5gUW/X/wdsUxTQ3yRrZ8ZmIf0T9wscRzKG9AR2jjUGrjgrH+Hie2zePP9Td9BDyFyhRhUhEmE4QA0pEO+S9RtsIlaLjlCq77IaZkLj/S3uUapYIlbqo5bss+VqZbRzphxUMKFtWZtZOQ3DYQ53+xu6Ii2SPl8+yzemZDSPIi75Bihy1jj4XGp1+ORBalAFiVCz5eBtd5/NAh0q4KlWjdx6Bon3suY0Y2DbaAeW3rq7QNotuPcWiJoFQ22o+k3N/cwGftUStVlkTYy5U6w/XaAxL9pLwp9uV6PN8t1DTUBV9gg6G++1qVatgtmI8BO5OOj6sROHHSmfkGwacPnC0Y2Te5OHOEtX4wuBkRLChyzrapwydgw2NgQyySC4tasHe4o2z84nm4kNQBlcz28Ud7yJAdeo41APXUPyoY6VZAXOVr3rGBYDYqODw2vkJy2bJ5uzHM+3sbulkHwpPd+f4iyc/mdBZvDj6nMFdY81kTEzEN9HgWOKFytLkdw+niappgT9zQ72RRqTFLl1Aeo9AmiojhW67+U1ZDnN/b8Fz8cnLliJwaVyPNiXjdihQ151JEJfE7vT44uyWfpthn+7LJVSB+MzZ1JIPAYOleuIVs5PXnV+fGfRuZlCWACLh7nPaKaMs0n3Am5VF0kIGwwo1Hb2pMvbcW+2RFFT/3w==
 
 [core]
 	editor = nvim
@@ -29,12 +28,24 @@
 
 [gpg "ssh"]
   program = "/opt/1Password/op-ssh-sign"
+  ; program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
 
 [diff]
-  # https://link.springer.com/article/10.1007/s10664-019-09772-z#Sec31
+  ; https://link.springer.com/article/10.1007/s10664-019-09772-z#Sec31
   algorithm = histogram
   tool = vimdiff
 
 [diff "lockb"]
 	textconv = bun
 	binary = true
+
+; TODO: Re-enable this conditionally
+; https://git-scm.com/docs/git-config#_conditional_includes
+; https://blog.scottlowe.org/2023/12/15/conditional-git-configuration/
+; Maybe exclude the actions folder?
+; [gpg "ssh"]
+; 	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+
+[advice]
+	detachedHead = false
