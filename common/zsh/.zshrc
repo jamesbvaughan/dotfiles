@@ -51,9 +51,6 @@ fi
 export GOPATH=$HOME/go
 export PATH="$GOPATH/bin:$PATH"
 
-## Flutter
-export PATH="$HOME/code/flutter/bin:$PATH"
-
 ## Neovim
 export EDITOR='nvim'
 
@@ -71,8 +68,6 @@ fi
 # Remove duplicate entries in $PATH
 typeset -aU path
 
-# Configure prompt
 eval "$(starship init zsh)"
-
-# Configure Atuin
+eval "$(zoxide init zsh --cmd cd)"
 eval "$(atuin init zsh)"
