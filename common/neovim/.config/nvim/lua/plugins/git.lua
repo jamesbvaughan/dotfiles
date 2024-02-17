@@ -2,7 +2,6 @@ return {
   {
     "tpope/vim-fugitive",
     dependencies = "tpope/vim-rhubarb",
-    lazy = false,
     keys = {
       { "gh", vim.cmd.GBrowse,                                               desc = "Open the current file in GitHub" },
       { "gl", ":Git log --pretty --oneline --abbrev-commit --graph -20 <cr>" },
@@ -21,7 +20,7 @@ return {
   },
 
   {
-    'TimUntersberger/neogit',
+    'NeogitOrg/neogit',
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
@@ -36,6 +35,7 @@ return {
         diffview = true,
         telescope = true,
       },
+      graph_style = "unicode",
       telescope_sorter = function()
         return require("telescope").extensions.fzf.native_fzf_sorter()
       end,
@@ -51,7 +51,6 @@ return {
         desc = "Open diffview for the current file"
       },
     },
-    lazy = false,
     opts = {
       enhanced_diff_hl = true,
     },

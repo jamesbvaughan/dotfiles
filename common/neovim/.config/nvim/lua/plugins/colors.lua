@@ -1,9 +1,8 @@
 return {
   {
     "ellisonleao/gruvbox.nvim",
-    enabled = true,
     lazy = false,
-    priority = 100,
+    priority = 1000,
     opts = {
       transparent_mode = true,
       overrides = {
@@ -23,29 +22,15 @@ return {
 
   {
     "hylophile/flatwhite.nvim",
-    enabled = true,
-    lazy = false,
-    priority = 100,
+    lazy = true,
     opts = {
       transparent_bg = true,
     },
   },
 
-  -- {
-  --   "jamesbvaughan/flexoki-nvim",
-  --   name = "flexoki",
-  --   lazy = false,
-  --   priority = 100,
-  --   init = function()
-  --     vim.cmd("colorscheme flexoki")
-  --   end,
-  -- },
-
   {
     "f-person/auto-dark-mode.nvim",
-    enabled = true,
     lazy = false,
-    priority = 90,
     opts = {
       update_interval = 1000,
       set_dark_mode = function()
