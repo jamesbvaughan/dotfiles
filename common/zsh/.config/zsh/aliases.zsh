@@ -5,6 +5,7 @@ alias tmux='tmux -u'
 alias ber='bundle exec ruby'
 alias cat='bat'
 alias ls='eza --long --header'
+alias tree='eza --tree'
 
 # Git
 alias gb="git branch"
