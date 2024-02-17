@@ -1,0 +1,5 @@
+keymap_procs: # keymap when process list is focused
+  <C-q>: { c: toggle-focus }
+keymap_term: # keymap when terminal is focused
+  reset: true
+  <C-q>: { c: toggle-focus }
