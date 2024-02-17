@@ -1,65 +1,21 @@
+local dial_map = function(command, mode)
+  return function()
+    require("dial.map").manipulate(command, mode)
+  end
+end
+
 return {
   {
     "monaqa/dial.nvim",
     keys = {
-      {
-        "<c-a>",
-        function()
-          require("dial.map").manipulate("increment", "normal")
-        end,
-        mode = "n"
-      },
-      {
-        "<C-x>",
-        function()
-          require("dial.map").manipulate("decrement", "normal")
-        end,
-        mode = "n"
-      },
-      {
-        "g<C-a>",
-        function()
-          require("dial.map").manipulate("increment", "gnormal")
-        end,
-        mode = "n"
-      },
-      {
-        "g<C-x>",
-        function()
-          require("dial.map").manipulate("decrement", "gnormal")
-        end,
-        mode = "n"
-      },
-      {
-        "<C-a>",
-        function()
-          require("dial.map").manipulate("increment", "visual")
-        end,
-        mode = "v"
-      },
-      {
-        "<C-x>",
-        function()
-          require("dial.map").manipulate("decrement", "visual")
-        end,
-        mode = "v"
-      },
-
-      {
-        "g<C-a>",
-        function()
-          require("dial.map").manipulate("increment", "gvisual")
-        end,
-        mode = "v"
-      },
-
-      {
-        "g<C-x>",
-        function()
-          require("dial.map").manipulate("decrement", "gvisual")
-        end,
-        mode = "v"
-      },
+      { "<c-a>",  dial_map("increment", "normal"),  mode = "n" },
+      { "<c-x>",  dial_map("decrement", "normal"),  mode = "n" },
+      { "g<c-a>", dial_map("increment", "gnormal"), mode = "n" },
+      { "g<c-x>", dial_map("decrement", "gnormal"), mode = "n" },
+      { "<c-a>",  dial_map("increment", "visual"),  mode = "v" },
+      { "<c-x>",  dial_map("decrement", "visual"),  mode = "v" },
+      { "g<c-a>", dial_map("increment", "gvisual"), mode = "v" },
+      { "g<c-x>", dial_map("decrement", "gvisual"), mode = "v" },
     },
     config = function()
       local augend = require("dial.augend")

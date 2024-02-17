@@ -56,7 +56,7 @@ cmp.setup({
     -- scroll up and down the documentation window
     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
     ['<C-d>'] = cmp.mapping.scroll_docs(4),
-  })
+  }),
   -- formatting = {
   --     format = require("lspkind").cmp_format({
   --         preset = "codicons",
@@ -65,11 +65,11 @@ cmp.setup({
   --         },
   --     }),
   -- },
-  -- snippet = {
-  --   expand = function(args)
-  --     luasnip.lsp_expand(args.body)
-  --   end,
-  -- },
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
 })
 
 -- Completions in git commits

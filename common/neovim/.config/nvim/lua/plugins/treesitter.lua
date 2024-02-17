@@ -8,8 +8,6 @@ return {
       "windwp/nvim-ts-autotag",
       -- auto-add "end" in ruby and similar languages
       "RRethy/nvim-treesitter-endwise",
-      -- Handle mutliple languages per file for picking comment strings
-      'JoosepAlviste/nvim-ts-context-commentstring',
       -- Show context at the top of the butter
       "nvim-treesitter/nvim-treesitter-context"
     },
@@ -38,6 +36,7 @@ return {
           "vim",
           "yaml",
         },
+        auto_install = true,
         highlight = {
           enable = true,
         },
@@ -50,11 +49,6 @@ return {
         endwise = {
           enable = true,
         },
-        -- TODO: figure out why this stopped working
-        -- context_commentstring = {
-        --   enable = true,
-        --   enable_autocmd = false,
-        -- },
         textobjects = {
           select = {
             enable = true,
@@ -65,9 +59,19 @@ return {
               ["if"] = "@function.inner",
               ["ac"] = "@class.outer",
               ["ic"] = "@class.inner",
-              -- Commenting these out so they don't conflict with "paragraph"
-              -- ["ap"] = "@parameter.outer",
-              -- ["ip"] = "@parameter.inner",
+              -- "a" for "argument" since "p" could clash with the default of
+              -- "paragraph"
+              ["aa"] = "@parameter.outer",
+              ["ia"] = "@parameter.inner",
+            },
+          },
+          lsp_interop = {
+            enable = true,
+            border = 'none',
+            floating_preview_opts = {},
+            peek_definition_code = {
+              ["<leader>df"] = "@function.outer",
+              ["<leader>dF"] = "@class.outer",
             },
           },
           swap = {
