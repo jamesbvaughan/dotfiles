@@ -23,27 +23,14 @@ require("lazy").setup({
 
   "tpope/vim-repeat",
 
-  {
-    "knubie/vim-kitty-navigator",
-    build = "cp ./*.py ~/.config/kitty/"
-  },
-
   -- Better integration between nvim and tmux
   {
     "christoomey/vim-tmux-navigator",
-    lazy = false,
-    cmd = {
-      "TmuxNavigateLeft",
-      "TmuxNavigateDown",
-      "TmuxNavigateUp",
-      "TmuxNavigateRight",
-      "TmuxNavigatePrevious",
-    },
     keys = {
-      { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
-      { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
-      { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
-      { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+      { "<c-h>",  "<cmd><C-U>TmuxNavigateLeft<cr>" },
+      { "<c-j>",  "<cmd><C-U>TmuxNavigateDown<cr>" },
+      { "<c-k>",  "<cmd><C-U>TmuxNavigateUp<cr>" },
+      { "<c-l>",  "<cmd><C-U>TmuxNavigateRight<cr>" },
       { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
     },
   },
@@ -71,6 +58,7 @@ require("lazy").setup({
   -- nice bindings for working with comments
   {
     'numToStr/Comment.nvim',
+    event = { "InsertEnter" },
     dependencies = {
       'JoosepAlviste/nvim-ts-context-commentstring',
     },
@@ -80,15 +68,6 @@ require("lazy").setup({
       })
     end,
   },
-
-
-  {
-    "dpayne/CodeGPT.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-    },
-  }
 }, {
   checker = {
     enabled = true,
@@ -98,6 +77,3 @@ require("lazy").setup({
     notify = false,
   },
 })
-
-
-require("lsp")

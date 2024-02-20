@@ -1,6 +1,5 @@
 # Oh My Zsh things
 export ZSH="$HOME/.oh-my-zsh"
-plugins=(fzf)
 source $ZSH/oh-my-zsh.sh
 
 
@@ -52,9 +51,6 @@ fi
 export GOPATH=$HOME/go
 export PATH="$GOPATH/bin:$PATH"
 
-## Flutter
-export PATH="$HOME/code/flutter/bin:$PATH"
-
 ## Neovim
 export EDITOR='nvim'
 
@@ -72,7 +68,6 @@ fi
 # Remove duplicate entries in $PATH
 typeset -aU path
 
-# Configure prompt
 eval "$(starship init zsh)"
-
+eval "$(zoxide init zsh --cmd cd)"
 eval "$(atuin init zsh)"

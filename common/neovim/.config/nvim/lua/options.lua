@@ -4,6 +4,9 @@ vim.g.mapleader = ' '
 ---- don't use swap files
 vim.opt.swapfile = false
 
+---- disable the startup screen
+vim.opt.shortmess:append({ I = true })
+
 ---- indentation (2 spaces, no tabs)
 local indent = 2
 vim.opt.tabstop = indent

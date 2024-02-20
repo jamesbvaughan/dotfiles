@@ -106,6 +106,9 @@ require('mason-lspconfig').setup({
             { rule = "import/namespace",                        severity = "off" },
             { rule = "import/no-cycle",                         severity = "off" },
             { rule = "import/no-unresolved",                    severity = "off" },
+
+            -- Disable some rules that conflight with tsserver warnings
+            { rule = "unused-imports/no-unused-vars",           severity = "off" },
           }
         }
       })
@@ -183,6 +186,3 @@ lsp_zero.set_sign_icons({
   hint = '',
   info = '⚑'
 })
-
-
-require("completion")

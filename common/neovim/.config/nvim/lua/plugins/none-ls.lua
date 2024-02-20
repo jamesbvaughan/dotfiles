@@ -21,7 +21,7 @@ return {
           -- }),
           -- null_ls.builtins.diagnostics.rubocop,
           null_ls.builtins.diagnostics.shellcheck,
-          null_ls.builtins.diagnostics.vale,
+          -- null_ls.builtins.diagnostics.vale,
           null_ls.builtins.formatting.autopep8,
           null_ls.builtins.formatting.prettierd,
           -- null_ls.builtins.formatting.rubocop,

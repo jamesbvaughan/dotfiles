@@ -7,7 +7,6 @@ end
 return {
   {
     "nvim-telescope/telescope.nvim",
-    priority = 500,
     dependencies = {
       {
         "nvim-telescope/telescope-fzf-native.nvim",

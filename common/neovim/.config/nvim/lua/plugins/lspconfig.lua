@@ -5,79 +5,27 @@ return {
   -- github copilot
   {
     "zbirenbaum/copilot.lua",
-    config = function()
-      require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      })
-    end
+    event = 'InsertEnter',
+    opts = {
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+    }
   },
 
   {
     "zbirenbaum/copilot-cmp",
-    config = function()
-      require("copilot_cmp").setup({
-        -- formatters = {
-        --   insert_text = require("copilot_cmp.format").remove_existing
-        -- },
-      })
-    end
+    event = 'InsertEnter',
+    config = true,
   },
 
-  {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v3.x',
-    dependencies = {
-      -- LSP Support
-      { 'neovim/nvim-lspconfig' },
-      { 'williamboman/mason.nvim' },
-      { 'williamboman/mason-lspconfig.nvim' },
-
-      -- Specific language support
-      {
-        "pmizio/typescript-tools.nvim",
-        dependencies = {
-          "nvim-lua/plenary.nvim",
-        },
-      },
-      'simrat39/rust-tools.nvim',
-
-      -- Autocompletion
-      { 'hrsh7th/nvim-cmp' },
-      { "hrsh7th/cmp-cmdline" },
-      { "hrsh7th/cmp-nvim-lsp-signature-help" },
-      { 'hrsh7th/cmp-buffer' },
-      { 'hrsh7th/cmp-nvim-lsp' },
-      { 'hrsh7th/cmp-nvim-lua' },
-      { 'hrsh7th/cmp-path' },
-      { "onsails/lspkind-nvim" },
-      { "petertriho/cmp-git" },
-      { 'saadparwaiz1/cmp_luasnip' },
-
-      -- Snippets
-      { 'L3MON4D3/LuaSnip' },
-
-      -- UI for loaders
-      {
-        'j-hui/fidget.nvim',
-        tag = 'legacy',
-        opts = {
-          text = {
-            spinner = "circle_halves",
-          },
-        },
-      },
-
-      -- Additional lua configuration
-      'folke/neodev.nvim',
-    }
-  },
 
   {
     'L3MON4D3/LuaSnip',
     dependencies = {
       'rafamadriz/friendly-snippets',
     },
+    lazy = true,
+    build = "make install_jsregexp",
     config = function(_, opts)
       if opts then require("luasnip").config.setup(opts) end
       vim.tbl_map(
@@ -101,5 +49,83 @@ return {
     end,
   },
 
-  'simrat39/rust-tools.nvim',
+  {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v3.x',
+    lazy = true,
+    config = false,
+    init = function()
+      -- Disable automatic setup, we are doing it manually
+      vim.g.lsp_zero_extend_cmp = 0
+      vim.g.lsp_zero_extend_lspconfig = 0
+    end,
+  },
+  {
+    'williamboman/mason.nvim',
+    lazy = false,
+    config = true,
+  },
+
+  -- Autocompletion
+  {
+    'hrsh7th/nvim-cmp',
+    event = 'InsertEnter',
+    dependencies = {
+      { 'L3MON4D3/LuaSnip' },
+      { "hrsh7th/cmp-cmdline" },
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-nvim-lua' },
+      { 'hrsh7th/cmp-path' },
+      { "petertriho/cmp-git" },
+      { 'saadparwaiz1/cmp_luasnip' },
+    },
+    config = function()
+      require("../completion")
+    end
+  },
+
+  -- LSP
+  {
+    'neovim/nvim-lspconfig',
+    cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
+    event = { 'BufReadPre', 'BufNewFile' },
+    dependencies = {
+      { 'williamboman/mason-lspconfig.nvim' },
+
+      -- LSP Completions
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { "hrsh7th/cmp-nvim-lsp-signature-help" },
+      { "onsails/lspkind-nvim" },
+
+      -- UI for loaders
+      {
+        'j-hui/fidget.nvim',
+        tag = 'legacy',
+        opts = {
+          text = {
+            spinner = "circle_halves",
+          },
+        },
+      },
+
+      -- Additional lua configuration
+      'folke/neodev.nvim',
+
+      -- Specific language support
+      {
+        "pmizio/typescript-tools.nvim",
+        dependencies = {
+          "nvim-lua/plenary.nvim",
+        },
+      },
+      'simrat39/rust-tools.nvim',
+
+      -- Error window
+      "folke/trouble.nvim",
+    },
+    config = function()
+      require("../lsp")
+    end
+  }
+
 }
