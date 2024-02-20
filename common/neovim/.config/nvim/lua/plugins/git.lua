@@ -1,6 +1,7 @@
 return {
   {
     "tpope/vim-fugitive",
+    lazy = false,
     dependencies = "tpope/vim-rhubarb",
     keys = {
       { "gh", vim.cmd.GBrowse,                                               desc = "Open the current file in GitHub" },
