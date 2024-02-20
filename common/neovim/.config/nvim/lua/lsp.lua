@@ -185,5 +185,4 @@ lsp_zero.set_sign_icons({
 })
 
 
-require("none-ls")
 require("completion")
