@@ -134,15 +134,12 @@ require("mason-lspconfig").setup({
 require("typescript-tools").setup({
 	on_attach = lsp_attach,
 	capabilities = lsp_zero.get_capabilities(),
-	-- settings = {
-	--   formatting = {
-	--     enable = false,
-	--   },
-	-- },
-	-- capabilities = {
-	--   document_formatting = false,
-	--   document_range_formatting = false,
-	-- },
+	settings = {
+		expose_as_code_action = "all",
+		--   formatting = {
+		--     enable = false,
+		--   },
+	},
 })
 
 -- TODO: Replace this with rustacean.nvim
