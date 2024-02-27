@@ -65,6 +65,8 @@ if [ -s "$BUN_INSTALL/_bun" ]; then
   export PATH="$BUN_INSTALL/bin:$PATH"
 fi
 
+export JAVA_HOME="/opt/homebrew/opt/openjdk"
+
 # Remove duplicate entries in $PATH
 typeset -aU path
 
