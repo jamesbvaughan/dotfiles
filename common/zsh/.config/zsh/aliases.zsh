@@ -26,7 +26,8 @@ alias prune="git branch --merged main | grep -v main | xargs -n 1 git branch -d"
 alias prunedev="git branch --merged dev | grep -v dev |  grep -v main | xargs -n 1 git branch -d"
 alias stash="git stash"
 alias pop="git stash pop"
-alias pr="hub pull-request"
+alias pr="gh pr create --fill && gh pr view --web"
+alias pushr="git push && gh pr create --fill && gh pr view --web"
 
 function gsha() {
   local sha=`git rev-parse HEAD`
