@@ -1,0 +1,45 @@
+---
+import:
+  # - ~/.config/alacritty/dracula.yml
+  - ~/.config/alacritty/gruvbox-black.yml
+
+window:
+  padding:
+    x: 1
+    y: 1
+  dynamic_padding: true
+  # opacity: 0.8
+  decorations: full
+  # decorations: "Transparent"
+  # decorations: "None"
+  # decorations: "Buttonless"
+
+# Font configuration (changes require restart)
+font:
+  normal:
+    family: BerkeleyMono Nerd Font
+
+  # size: 12
+
+# draw_bold_text_with_bright_colors: true
+
+bell:
+  animation: EaseOutExpo
+  duration: 50
+
+key_bindings:
+  - { key: V, mods: Command, action: Paste }
+  - { key: C, mods: Command, action: Copy }
+  - { key: Paste, action: Paste }
+  - { key: Copy, action: Copy }
+  - { key: Q, mods: Command, action: Quit }
+  - { key: W, mods: Command, action: Quit }
+  - { key: Key0, mods: Command, action: ResetFontSize }
+  - { key: Equals, mods: Command, action: IncreaseFontSize }
+  - { key: Minus, mods: Command, action: DecreaseFontSize }
+  - { key: N, mods: Command, action: SpawnNewInstance }
+  - { key: F, mods: Command, action: ToggleFullscreen }
+  # - { key: H, mods: Command, action: None }
+  # - { key: K, mods: Command, action: ClearHistory }
+  # - { key: K, mods: Command, chars: "\x0c" }
+  # - { key: Back, chars: "\x7f" }
