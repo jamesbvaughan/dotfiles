@@ -43,6 +43,7 @@ require("mason-lspconfig").setup({
 		"rust_analyzer",
 		"lua_ls",
 		"tailwindcss",
+		"taplo",
 		"terraformls",
 		"tsserver",
 		"yamlls",
