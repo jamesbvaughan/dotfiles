@@ -25,5 +25,5 @@ bindings = [
 ]
 
 [window]
-decorations = "full"
+decorations = "buttonless"
 dynamic_padding = true
