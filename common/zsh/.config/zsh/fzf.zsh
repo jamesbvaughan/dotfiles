@@ -1,11 +1,8 @@
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+export FZF_DEFAULT_OPTS='
     --color=dark
-    --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
-    --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7
-    --preview "[[ $(file --mime {}) =~ binary ]] &&
-                 echo {} is a binary file ||
-                 (highlight -O ansi {} ||
-                 cat {}) 2> /dev/null | head -$LINES"
+    --color=fg:-1,bg:-1,hl:#928374,fg+:-1,bg+:-1,hl+:#fb4934:
+    --color=info:#8ec07c,prompt:#fb4934,pointer:#fb4934,marker:#fb4934,spinner:#fb4934
+    --preview "bat --color=always --plain --line-range=:$FZF_PREVIEW_LINES {}"
     --inline-info
 '
 
