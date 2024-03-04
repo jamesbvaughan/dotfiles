@@ -126,4 +126,11 @@ return {
 			require("../lsp")
 		end,
 	},
+
+	-- Rust LSP
+	{
+		"mrcjkb/rustaceanvim",
+		version = "^4",
+		ft = { "rust" },
+	},
 }

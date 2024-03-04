@@ -32,15 +32,12 @@ require("mason-lspconfig").setup({
 		"bashls",
 		"cssls",
 		"eslint",
-		-- "gopls",
-		-- "glslls",
 		"graphql",
 		"html",
 		"jsonls",
 		"openscad_lsp",
 		"prismals",
 		"pyright",
-		"rust_analyzer",
 		"lua_ls",
 		"tailwindcss",
 		"taplo",
@@ -113,22 +110,8 @@ require("mason-lspconfig").setup({
 		end,
 		-- Set this to noop because we're using typescript-tools instead
 		tsserver = lsp_zero.noop,
-		--   lspconfig.tsserver.setup({
-		--   })
-		-- end,
-		rust_analyzer = function()
-			lspconfig.rust_analyzer.setup({
-				settings = {
-					["rust-analyzer"] = {
-						cargo = { allFeatures = true },
-						checkOnSave = {
-							command = "clippy",
-							allFeatures = true,
-						},
-					},
-				},
-			})
-		end,
+		-- Set this to noop because we're using rustaceanvim instead
+		rust_analyzer = lsp_zero.noop,
 	},
 })
 
@@ -137,27 +120,14 @@ require("typescript-tools").setup({
 	capabilities = lsp_zero.get_capabilities(),
 	settings = {
 		expose_as_code_action = "all",
-		--   formatting = {
-		--     enable = false,
-		--   },
 	},
 })
 
--- TODO: Replace this with rustacean.nvim
--- local rust_tools = require("rust-tools")
---
--- rust_tools.setup({
---   server = {
---     on_attach = lsp_attach,
---     ["rust-analyzer"] = {
---       cargo = { allFeatures = true },
---       checkOnSave = {
---         command = "clippy",
---         allFeatures = true
---       },
---     },
---   },
--- })
+vim.g.rustaceanvim = {
+	server = {
+		capabilities = lsp_zero.get_capabilities(),
+	},
+}
 
 -- Show line diagnostics in hover window
 vim.o.updatetime = 500
