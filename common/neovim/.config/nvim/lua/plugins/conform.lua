@@ -18,6 +18,7 @@ return {
 		formatters_by_ft = {
 			lua = { "stylua" },
 			rust = { "rustfmt" },
+			sh = { "shfmt" },
 			css = prettier_formatters,
 			graphql = prettier_formatters,
 			html = prettier_formatters,
