@@ -65,6 +65,11 @@ if [ -s "$BUN_INSTALL/_bun" ]; then
   export PATH="$BUN_INSTALL/bin:$PATH"
 fi
 
+# rust
+if [ -s "$HOME/.cargo/env" ]; then
+  source "$HOME/.cargo/env"
+fi
+
 export JAVA_HOME="/opt/homebrew/opt/openjdk"
 
 # Remove duplicate entries in $PATH
