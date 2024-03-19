@@ -3,7 +3,7 @@
 neovim/.config/nvim/plugin/packer_compiled.lua
 neovim/.config/nvim/lua/extra*
 
-tmux/.config/tmux/plugins/
+common/tmux/.config/tmux/plugins/
 
 qutebrowser/.config/qutebrowser/dracula
 
