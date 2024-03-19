@@ -22,6 +22,18 @@
 
 [commit]
   gpgsign = true
+  ; Show the whole diff in the editor comment to make it easier to remember what
+  ; you're committing.
+  verbose = true
+
+[merge]
+  ; More useful merge diffs
+  ; See https://ductile.systems/zdiff3/ for an explanation
+  conflictStyle = zdiff3
+
+[rebase]
+  ; Automatically stash and pop before and after rebasing
+  autoStash = true
 
 [gpg]
 	format = ssh
