@@ -39,9 +39,7 @@
 	format = ssh
 
 [gpg "ssh"]
-  ; program = "/opt/1Password/op-ssh-sign"
   program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-
 
 [diff]
   ; https://link.springer.com/article/10.1007/s10664-019-09772-z#Sec31
@@ -51,13 +49,6 @@
 [diff "lockb"]
 	textconv = bun
 	binary = true
-
-; TODO: Re-enable this conditionally
-; https://git-scm.com/docs/git-config#_conditional_includes
-; https://blog.scottlowe.org/2023/12/15/conditional-git-configuration/
-; Maybe exclude the actions folder?
-; [gpg "ssh"]
-; 	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 
 [advice]
 	detachedHead = false
