@@ -34,6 +34,8 @@
 [rebase]
   ; Automatically stash and pop before and after rebasing
   autoStash = true
+  ; Automatically update refs when rebasing
+	updateRefs = true
 
 [gpg]
 	format = ssh
