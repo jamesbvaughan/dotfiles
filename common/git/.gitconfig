@@ -44,11 +44,21 @@
 [diff]
   ; https://link.springer.com/article/10.1007/s10664-019-09772-z#Sec31
   algorithm = histogram
-  tool = vimdiff
+  tool = difftastic
+  external = difft
 
 [diff "lockb"]
 	textconv = bun
 	binary = true
+
+[difftool]
+  prompt = false
+
+[difftool "difftastic"]
+  cmd = difft $LOCAL $REMOTE
+
+[pager]
+  difftool = true
 
 [advice]
 	detachedHead = false
