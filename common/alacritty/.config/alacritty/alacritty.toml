@@ -1,6 +1,8 @@
 #:schema https://raw.githubusercontent.com/distinction-dev/alacritty-schema/main/alacritty/reference.json
 
-import = ["/Users/james/.config/alacritty/gruvbox-black.toml"]
+# import = ["/Users/james/.config/alacritty/gruvbox-black.toml"]
+# import = ["/Users/james/.config/alacritty/catppuccin_latte.toml"]
+import = ["/Users/james/.config/alacritty/catppuccin_mocha.toml"]
 
 [env]
 TERM = "xterm-256color"
