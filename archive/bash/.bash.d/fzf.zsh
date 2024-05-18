@@ -35,29 +35,3 @@ _gen_fzf_default_opts
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!**/.git/*" --glob "!**/node_modules/*"'
 
 export FZF_CTRL_R_OPTS="--preview '' --no-info"
-
-
-# Setup fzf
-# ---------
-local fzf_dir
-if [ -d '/usr/local/opt/fzf' ]; then
-  fzf_dir='/usr/local/opt/fzf'
-elif [ -d '/usr/share/fzf' ]; then
-  fzf_dir='/usr/share/fzf'
-elif [ -d '/opt/homebrew/opt/fzf' ]; then
-  fzf_dir='/opt/homebrew/opt/fzf'
-else
-  echo "Seems like fzf isn't installed!"
-fi
-
-if [[ ! "$PATH" == *$fzf_dir* ]]; then
-  export PATH="${PATH:+${PATH}:}$fzf_dir/bin"
-fi
-
-# Auto-completion
-# ---------------
-[[ $- == *i* ]] && source "$fzf_dir/shell/completion.zsh" 2> /dev/null
-
-# Key bindings
-# ------------
-source "$fzf_dir/shell/key-bindings.zsh"
