@@ -64,6 +64,7 @@
 
 [advice]
 	detachedHead = false
+	skippedCherryPicks = false
 
 [rerere]
   ; Reuse recorded resolution of merge conflicts
