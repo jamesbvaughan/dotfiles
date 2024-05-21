@@ -128,3 +128,5 @@ typeset -aU path
 
 # eval "$(starship init zsh)"
 eval "$(zoxide init zsh --cmd cd)"
+# eval "$(atuin init zsh)"
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
