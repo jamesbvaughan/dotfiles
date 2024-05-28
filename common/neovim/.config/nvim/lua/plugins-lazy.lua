@@ -69,6 +69,19 @@ require("lazy").setup({
 			})
 		end,
 	},
+
+	{
+		"stevearc/oil.nvim",
+		opts = {
+			keymaps = {
+				["q"] = "actions.close",
+			},
+		},
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		keys = {
+			{ "-", vim.cmd.Oil },
+		},
+	},
 }, {
 	checker = {
 		enabled = true,
