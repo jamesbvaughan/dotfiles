@@ -67,6 +67,10 @@ return {
 				},
 			})
 
+			require("treesitter-context").setup({
+				max_lines = 5,
+			})
+
 			vim.opt.foldlevel = 20
 			vim.wo.foldmethod = "expr"
 			vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
