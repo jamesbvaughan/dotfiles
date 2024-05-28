@@ -29,3 +29,4 @@ bindings = [
 [window]
 decorations = "buttonless"
 dynamic_padding = true
+option_as_alt = "Both"
