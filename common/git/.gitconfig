@@ -70,3 +70,6 @@
   ; Reuse recorded resolution of merge conflicts
   ; https://git-scm.com/book/en/v2/Git-Tools-Rerere
 	enabled = true
+
+[alias]
+  fomo = !git fetch origin && git rebase origin/main
