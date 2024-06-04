@@ -37,6 +37,8 @@ return {
 		opts = {
 			integrations = {
 				lsp_trouble = true,
+				mason = true,
+				which_key = true,
 				native_lsp = {
 					enabled = true,
 					virtual_text = {
@@ -52,7 +54,7 @@ return {
 						information = { "underline" },
 					},
 					inlay_hints = {
-						background = true,
+						background = false,
 					},
 				},
 			},
@@ -65,19 +67,5 @@ return {
 	{
 		"f-person/auto-dark-mode.nvim",
 		lazy = false,
-		opts = {
-			update_interval = 1000,
-			set_dark_mode = function()
-				vim.api.nvim_set_option("background", "dark")
-				-- vim.cmd('colorscheme gruvbox')
-			end,
-			set_light_mode = function()
-				vim.api.nvim_set_option("background", "light")
-				-- vim.cmd('colorscheme flatwhite')
-			end,
-		},
-		init = function()
-			require("auto-dark-mode").init()
-		end,
 	},
 }

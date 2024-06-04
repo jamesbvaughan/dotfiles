@@ -8,6 +8,10 @@ local function lsp_attach(_client, bufnr)
 		exclude = { "gd", "go" },
 	})
 
+	-- Disabling this because I don't like how it makes lines go longer than my
+	-- preferred line length and wrap.
+	-- vim.lsp.inlay_hint.enable(true)
+
 	vim.keymap.set(
 		"n",
 		"<leader>ca",
@@ -107,19 +111,40 @@ require("mason-lspconfig").setup({
 			})
 		end,
 		-- Set this to noop because we're using typescript-tools instead
-		tsserver = lsp_zero.noop,
+		-- tsserver = lsp_zero.noop,
+		tsserver = function()
+			lspconfig.tsserver.setup({
+				settings = {
+					expose_as_code_action = "all",
+
+					typescript = {
+						inlayHints = {
+							-- includeInlayParameterNameHints: 'none' | 'literals' | 'all';
+							includeInlayParameterNameHints = "all",
+							includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+							includeInlayFunctionParameterTypeHints = true,
+							includeInlayVariableTypeHints = true,
+							includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+							includeInlayPropertyDeclarationTypeHints = true,
+							includeInlayFunctionLikeReturnTypeHints = true,
+							includeInlayEnumMemberValueHints = true,
+						},
+					},
+				},
+			})
+		end,
 		-- Set this to noop because we're using rustaceanvim instead
 		rust_analyzer = lsp_zero.noop,
 	},
 })
 
-require("typescript-tools").setup({
-	on_attach = lsp_attach,
-	capabilities = lsp_zero.get_capabilities(),
-	settings = {
-		expose_as_code_action = "all",
-	},
-})
+-- require("typescript-tools").setup({
+-- 	on_attach = lsp_attach,
+-- 	capabilities = lsp_zero.get_capabilities(),
+-- 	settings = {
+-- 		expose_as_code_action = "all",
+-- 	},
+-- })
 
 vim.g.rustaceanvim = {
 	server = {
