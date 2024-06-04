@@ -107,6 +107,8 @@ require("mason-lspconfig").setup({
 						-- Disable some rules that conflight with tsserver warnings
 						{ rule = "unused-imports/no-unused-vars", severity = "off" },
 					},
+
+					experimental = {},
 				},
 			})
 		end,
