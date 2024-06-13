@@ -100,6 +100,7 @@ require("mason-lspconfig").setup({
 						{ rule = "@typescript-eslint/no-unsafe-argument", severity = "off" },
 						{ rule = "@typescript-eslint/no-unsafe-assignment", severity = "off" },
 						{ rule = "import/defaults", severity = "off" },
+						{ rule = "import/extensions", severity = "off" },
 						{ rule = "import/namespace", severity = "off" },
 						{ rule = "import/no-cycle", severity = "off" },
 						{ rule = "import/no-unresolved", severity = "off" },
