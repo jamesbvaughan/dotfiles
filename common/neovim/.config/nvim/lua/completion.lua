@@ -47,9 +47,9 @@ cmp.setup({
 	},
 	formatting = lsp_zero.cmp_format(),
 	mapping = lsp_zero.defaults.cmp_mappings({
-		["<Tab>"] = cmp_next,
+		-- ["<Tab>"] = cmp_next,
 		["<C-n>"] = cmp_next,
-		["<S-Tab>"] = cmp_prev,
+		-- ["<S-Tab>"] = cmp_prev,
 		["<C-p>"] = cmp_prev,
 		["<CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
