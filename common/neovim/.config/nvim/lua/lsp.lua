@@ -72,6 +72,17 @@ require("mason-lspconfig").setup({
 				},
 			})
 		end,
+		cssls = function()
+			lspconfig.cssls.setup({
+				settings = {
+					scss = {
+						lint = {
+							unknownAtRules = "ignore",
+						},
+					},
+				},
+			})
+		end,
 		yamlls = function()
 			lspconfig.yamlls.setup({
 				settings = {
