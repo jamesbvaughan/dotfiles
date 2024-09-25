@@ -59,8 +59,6 @@ require("mason-lspconfig").setup({
 	handlers = {
 		lsp_zero.default_setup,
 		lua_ls = function()
-			-- local lua_opts = lsp_zero.nvim_lua_ls()
-			-- lspconfig.lua_ls.setup(lua_opts)
 			lspconfig.lua_ls.setup({
 				settings = {
 					Lua = {
@@ -77,6 +75,17 @@ require("mason-lspconfig").setup({
 					json = {
 						schemas = require("schemastore").json.schemas(),
 						validate = { enable = true },
+					},
+				},
+			})
+		end,
+		cssls = function()
+			lspconfig.cssls.setup({
+				settings = {
+					scss = {
+						lint = {
+							unknownAtRules = "ignore",
+						},
 					},
 				},
 			})
@@ -122,8 +131,6 @@ require("mason-lspconfig").setup({
 				},
 			})
 		end,
-		-- Set this to noop because we're using typescript-tools instead
-		-- tsserver = lsp_zero.noop,
 		ts_ls = function()
 			lspconfig.ts_ls.setup({
 				settings = {
@@ -149,14 +156,6 @@ require("mason-lspconfig").setup({
 		rust_analyzer = lsp_zero.noop,
 	},
 })
-
--- require("typescript-tools").setup({
--- 	on_attach = lsp_attach,
--- 	capabilities = lsp_zero.get_capabilities(),
--- 	settings = {
--- 		expose_as_code_action = "all",
--- 	},
--- })
 
 vim.g.rustaceanvim = {
 	server = {
