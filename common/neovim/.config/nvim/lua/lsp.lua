@@ -30,6 +30,13 @@ end
 
 lsp_zero.on_attach(lsp_attach)
 
+lsp_zero.extend_lspconfig({
+	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+	lsp_attach = lsp_attach,
+	float_border = "rounded",
+	sign_text = true,
+})
+
 require("mason").setup({})
 require("mason-lspconfig").setup({
 	ensure_installed = {
@@ -44,7 +51,9 @@ require("mason-lspconfig").setup({
 		"lua_ls",
 		"tailwindcss",
 		"taplo",
-		"tsserver",
+		"terraformls",
+		"tflint",
+		"ts_ls",
 		"yamlls",
 	},
 	handlers = {
@@ -115,8 +124,8 @@ require("mason-lspconfig").setup({
 		end,
 		-- Set this to noop because we're using typescript-tools instead
 		-- tsserver = lsp_zero.noop,
-		tsserver = function()
-			lspconfig.tsserver.setup({
+		ts_ls = function()
+			lspconfig.ts_ls.setup({
 				settings = {
 					expose_as_code_action = "all",
 

@@ -46,7 +46,7 @@ cmp.setup({
 		completeopt = "menu,menuone,noinsert,noselect",
 	},
 	formatting = lsp_zero.cmp_format(),
-	mapping = lsp_zero.defaults.cmp_mappings({
+	mapping = cmp.mapping.preset.insert({
 		-- ["<Tab>"] = cmp_next,
 		["<C-n>"] = cmp_next,
 		-- ["<S-Tab>"] = cmp_prev,
