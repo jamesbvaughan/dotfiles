@@ -6,17 +6,12 @@ return {
 	{
 		"zbirenbaum/copilot.lua",
 		event = "InsertEnter",
-		opts = {
-			suggestion = { enabled = false },
-			panel = { enabled = false },
-		},
+		config = true,
+		-- opts = {
+		-- 	suggestion = { enabled = false },
+		-- 	panel = { enabled = false },
+		-- },
 	},
-
-	-- {
-	-- 	"zbirenbaum/copilot-cmp",
-	-- 	event = "InsertEnter",
-	-- 	config = true,
-	-- },
 
 	{
 		"L3MON4D3/LuaSnip",
@@ -67,36 +62,36 @@ return {
 	},
 
 	-- Autocompletion
-	-- {
-	-- 	"hrsh7th/nvim-cmp",
-	-- 	dependencies = {
-	-- 		{ "L3MON4D3/LuaSnip" },
-	-- 		{ "hrsh7th/cmp-cmdline" },
-	-- 		{ "hrsh7th/cmp-buffer" },
-	-- 		{ "hrsh7th/cmp-nvim-lua" },
-	-- 		{ "hrsh7th/cmp-path" },
-	-- 		{ "petertriho/cmp-git" },
-	-- 		{ "saadparwaiz1/cmp_luasnip" },
-	-- 	},
-	-- 	config = function()
-	-- 		require("../completion")
-	-- 	end,
-	-- },
+	{
+		"hrsh7th/nvim-cmp",
+		enabled = true,
+		dependencies = {
+			{ "L3MON4D3/LuaSnip" },
+			{ "hrsh7th/cmp-buffer" },
+			{ "hrsh7th/cmp-cmdline" },
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "hrsh7th/cmp-nvim-lsp-signature-help" },
+			{ "hrsh7th/cmp-nvim-lua" },
+			{ "hrsh7th/cmp-path" },
+			{ "onsails/lspkind-nvim" },
+			{ "petertriho/cmp-git" },
+			{ "saadparwaiz1/cmp_luasnip" },
+			{
+				"zbirenbaum/copilot-cmp",
+				event = "InsertEnter",
+				config = true,
+			},
+		},
+		config = function()
+			require("../completion")
+		end,
+	},
 	{
 		"saghen/blink.cmp",
+		enabled = false,
 		lazy = false, -- lazy loading handled internally
-		-- optional: provides snippets for the snippet source
 		dependencies = "rafamadriz/friendly-snippets",
-
-		-- use a release tag to download pre-built binaries
 		version = "v0.*",
-		-- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-		-- build = 'cargo build --release',
-		-- If you use nix, you can build from source using latest nightly rust with:
-		-- build = 'nix run .#build-plugin',
-
-		---@module 'blink.cmp'
-		---@type blink.cmp.Config
 		opts = {
 			highlight = {
 				-- sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -104,29 +99,12 @@ return {
 				-- will be removed in a future release, assuming themes add support
 				use_nvim_cmp_as_default = true,
 			},
-			-- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-			-- adjusts spacing to ensure icons are aligned
-			nerd_font_variant = "normal",
 
-			-- keymap = {
-			-- 	accept = "<CR>",
-			-- },
-
-			-- trigger = {
-			-- 	signature_help = { enabled = true },
-			-- },
-
-			-- windows = {
-			-- 	documentation = {
-			-- 		auto_show = true,
-			-- 	},
-			-- },
-
-			-- experimental auto-brackets support
-			-- accept = { auto_brackets = { enabled = true } }
-
-			-- experimental signature help support
-			-- trigger = { signature_help = { enabled = true } }
+			windows = {
+				documentation = {
+					auto_show = true,
+				},
+			},
 		},
 	},
 
@@ -137,11 +115,6 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			{ "williamboman/mason-lspconfig.nvim" },
-
-			-- LSP Completions
-			-- { "hrsh7th/cmp-nvim-lsp" },
-			-- { "hrsh7th/cmp-nvim-lsp-signature-help" },
-			-- { "onsails/lspkind-nvim" },
 
 			-- UI for loaders
 			{
