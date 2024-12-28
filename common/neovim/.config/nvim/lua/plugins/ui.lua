@@ -2,12 +2,13 @@
 --
 return {
 	-- Override the default input and select menu styling
-	"stevearc/dressing.nvim",
+	{ "stevearc/dressing.nvim", event = "VeryLazy" },
 
 	-- Show a fancy buffer line
 	{
 		"akinsho/bufferline.nvim",
 		dependencies = "kyazdani42/nvim-web-devicons",
+		event = "VeryLazy",
 		opts = {
 			options = {
 				show_buffer_close_icons = false,
@@ -21,6 +22,7 @@ return {
 	-- Give hints for keymaps
 	{
 		"folke/which-key.nvim",
+		event = "VeryLazy",
 		config = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
@@ -31,12 +33,14 @@ return {
 	-- Highlight TODOs
 	{
 		"folke/todo-comments.nvim",
+		event = "VeryLazy",
 		opts = {},
 	},
 
 	-- Visualize indentation
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		event = "VeryLazy",
 		main = "ibl",
 		---@module "ibl"
 		---@type ibl.config
@@ -48,6 +52,7 @@ return {
 	-- Highlight real colors inside nvim (example: #920565)
 	{
 		"brenoprata10/nvim-highlight-colors",
+		event = "VeryLazy",
 		opts = {
 			enable_tailwind = true,
 		},
@@ -56,6 +61,7 @@ return {
 	-- Add a label for the current file name
 	{
 		"b0o/incline.nvim",
+		event = "VeryLazy",
 		config = function()
 			-- local colors = require("gruvbox.palette")
 

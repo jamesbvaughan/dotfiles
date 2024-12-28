@@ -14,6 +14,7 @@ return {
 		build = function()
 			vim.cmd.TSUpdate()
 		end,
+		event = "VeryLazy",
 		config = function()
 			---@diagnostic disable-next-line: missing-fields
 			require("nvim-treesitter.configs").setup({

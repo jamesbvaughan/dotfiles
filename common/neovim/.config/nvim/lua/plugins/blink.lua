@@ -3,13 +3,15 @@
 
 return {
 	"saghen/blink.cmp",
-	enabled = true,
-	lazy = false, -- lazy loading handled internally
 	dependencies = {
 		"rafamadriz/friendly-snippets",
 		"giuxtaposition/blink-cmp-copilot",
 	},
 	version = "v0.*",
+	event = "InsertEnter",
+
+	---@module 'blink.cmp'
+	---@type blink.cmp.Config
 	opts = {
 		keymap = {
 			-- Manually invoke copilot completion

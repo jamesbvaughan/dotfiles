@@ -20,13 +20,20 @@ require("lazy").setup({
 	-- Load plugins from ./plugins/*.lua
 	{ import = "plugins" },
 
-	"tpope/vim-surround",
+	{
+		"tpope/vim-surround",
+		event = "InsertEnter",
+	},
 
-	"tpope/vim-repeat",
+	{
+		"tpope/vim-repeat",
+		event = "InsertEnter",
+	},
 
 	-- Better integration between nvim and tmux
 	{
 		"christoomey/vim-tmux-navigator",
+		event = "VeryLazy",
 		keys = {
 			{ "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
 			{ "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
@@ -44,6 +51,7 @@ require("lazy").setup({
 
 	{
 		"mbbill/undotree",
+		event = "InsertEnter",
 		keys = {
 			{ "U", vim.cmd.UndotreeToggle },
 		},
@@ -81,6 +89,7 @@ require("lazy").setup({
 
 	{
 		"stevearc/oil.nvim",
+		event = "VeryLazy",
 		opts = {
 			keymaps = {
 				["q"] = "actions.close",
@@ -96,6 +105,7 @@ require("lazy").setup({
 	{
 		"davidmh/mdx.nvim",
 		config = true,
+		ft = "mdx",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 	},
 }, {
@@ -105,5 +115,22 @@ require("lazy").setup({
 	},
 	change_detection = {
 		notify = false,
+	},
+	performance = {
+		cache = {
+			enabled = true,
+		},
+		rtp = {
+			disabled_plugins = {
+				-- "matchit",
+				-- "matchparen",
+				"netrwPlugin",
+				"gzip",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+			},
+		},
 	},
 })
