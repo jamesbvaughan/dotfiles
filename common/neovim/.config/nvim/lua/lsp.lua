@@ -31,7 +31,8 @@ end
 lsp_zero.on_attach(lsp_attach)
 
 lsp_zero.extend_lspconfig({
-	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+	-- capabilities = require("cmp_nvim_lsp").default_capabilities(),
+	capabilities = require("blink.cmp").get_lsp_capabilities(),
 	lsp_attach = lsp_attach,
 	float_border = "rounded",
 	sign_text = true,

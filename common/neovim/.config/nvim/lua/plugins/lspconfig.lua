@@ -1,5 +1,5 @@
 return {
-	-- Pull JSON schemas from SchemsStore for use with jsonls
+	-- Pull JSON schemas from SchemaStore for use with jsonls
 	"b0o/schemastore.nvim",
 
 	-- github copilot
@@ -64,7 +64,7 @@ return {
 	-- Autocompletion
 	{
 		"hrsh7th/nvim-cmp",
-		enabled = true,
+		enabled = false,
 		dependencies = {
 			{ "L3MON4D3/LuaSnip" },
 			{ "hrsh7th/cmp-buffer" },
@@ -88,16 +88,28 @@ return {
 	},
 	{
 		"saghen/blink.cmp",
-		enabled = false,
+		enabled = true,
 		lazy = false, -- lazy loading handled internally
-		dependencies = "rafamadriz/friendly-snippets",
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+			"giuxtaposition/blink-cmp-copilot",
+		},
 		version = "v0.*",
 		opts = {
-			highlight = {
+			appearance = {
 				-- sets the fallback highlight groups to nvim-cmp's highlight groups
 				-- useful for when your theme doesn't support blink.cmp
 				-- will be removed in a future release, assuming themes add support
 				use_nvim_cmp_as_default = true,
+			},
+
+			keymap = {
+				-- Manually invoke copilot completion
+				["<A-y>"] = {
+					function(cmp)
+						cmp.show({ providers = { "copilot" } })
+					end,
+				},
 			},
 
 			windows = {
@@ -105,6 +117,50 @@ return {
 					auto_show = true,
 				},
 			},
+
+			completion = {
+				menu = {
+					draw = {
+						columns = {
+							{ "label", "label_description", gap = 1 },
+							{ "kind_icon", "kind", gap = 1 },
+						},
+					},
+				},
+			},
+
+			sources = {
+				providers = {
+					copilot = {
+						name = "copilot",
+						module = "blink-cmp-copilot",
+						score_offset = 100,
+						async = true,
+
+						-- This is only necessary to get item labels
+						transform_items = function(_, items)
+							local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+							local kind_idx = #CompletionItemKind + 1
+							CompletionItemKind[kind_idx] = "Copilot"
+							for _, item in ipairs(items) do
+								item.kind = kind_idx
+							end
+							return items
+						end,
+					},
+				},
+				completion = {
+					enabled_providers = {
+						"lsp",
+						"path",
+						"snippets",
+						"buffer",
+						"copilot",
+					},
+				},
+			},
+
+			signature = { enabled = true },
 		},
 	},
 
