@@ -1,0 +1,6 @@
+theme = dark:catppuccin-mocha,light:catppuccin-latte
+
+font-family = TX-02
+font-style = SemiCondensed
+
+window-decoration = false
