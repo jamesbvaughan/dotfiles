@@ -15,6 +15,7 @@ return {
 			vim.cmd.TSUpdate()
 		end,
 		config = function()
+			---@diagnostic disable-next-line: missing-fields
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = "all",
 				auto_install = true,
@@ -70,10 +71,6 @@ return {
 			require("treesitter-context").setup({
 				max_lines = 5,
 			})
-
-			vim.opt.foldlevel = 20
-			vim.wo.foldmethod = "expr"
-			vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 		end,
 	},
 }

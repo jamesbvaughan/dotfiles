@@ -45,7 +45,7 @@ return {
 		},
 
 		opts = {
-			-- auto_close = true,
+			auto_close = true,
 			-- auto_open = true,
 			-- auto_preview = false,
 			-- height = 5,

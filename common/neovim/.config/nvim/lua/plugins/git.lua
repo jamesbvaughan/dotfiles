@@ -1,19 +1,5 @@
 return {
 	{
-		"tpope/vim-fugitive",
-		lazy = false,
-		dependencies = "tpope/vim-rhubarb",
-		keys = {
-			{
-				"gh",
-				vim.cmd.GBrowse,
-				desc = "Open the current file in GitHub",
-			},
-			{ "gl", ":Git log --pretty --oneline --abbrev-commit --graph -20 <cr>" },
-		},
-	},
-
-	{
 		"lewis6991/gitsigns.nvim",
 		opts = {
 			current_line_blame = true,
@@ -29,6 +15,7 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
+			"sindrets/diffview.nvim",
 		},
 		keys = {
 			{ "<leader>g", vim.cmd.Neogit, desc = "Open neogit" },

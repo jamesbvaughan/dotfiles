@@ -37,7 +37,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.scrolloff = 5
 
 ---- stabilize the quickfix window's effect on other windows
--- vim.opt.splitkeep = 'screen'
+vim.opt.splitkeep = "screen"
 
 ---- ignore these when autocompleting paths
 vim.opt.wildignore = vim.opt.wildignore + "node_modules/*,vendor/bundle/*,tmp/*"
@@ -64,12 +64,21 @@ vim.opt.termguicolors = true
 vim.opt.spellfile = vim.fn.getenv("HOME") .. "/.config/nvim/spell/en.utf-8.add"
 
 ---- don't keep search results highlighted
-vim.opt.hlsearch = false
+-- vim.opt.hlsearch = false
 
 ---- highlight search results incrementally
 vim.opt.incsearch = true
 
 ---- hide the netrw banner
 vim.g.netrw_banner = 0
+
+---- folding
+vim.o.fillchars = "eob: ,fold: ,foldopen:,foldsep: ,foldclose:"
+vim.o.foldcolumn = "1"
+vim.o.foldenable = true
+vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldmethod = "expr"
 
 vim.opt.laststatus = 3

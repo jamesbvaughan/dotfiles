@@ -1,6 +1,7 @@
 -- Bootstrap lazy.nvim
 --
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+---@diagnostic disable-next-line: undefined-field
 if not vim.uv.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
@@ -16,6 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Install plugins
 --
 require("lazy").setup({
+	-- Load plugins from ./plugins/*.lua
 	{ import = "plugins" },
 
 	"tpope/vim-surround",
@@ -34,7 +36,11 @@ require("lazy").setup({
 		},
 	},
 
-	"windwp/nvim-autopairs",
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = true,
+	},
 
 	{
 		"mbbill/undotree",
@@ -46,6 +52,8 @@ require("lazy").setup({
 	-- quick navigation within a file
 	{
 		"ggandor/leap.nvim",
+		-- Potentially replacing with flash.lua
+		enabled = false,
 		config = function()
 			require("leap").set_default_keymaps()
 
@@ -64,6 +72,7 @@ require("lazy").setup({
 			"JoosepAlviste/nvim-ts-context-commentstring",
 		},
 		config = function()
+			---@diagnostic disable-next-line: missing-fields
 			require("Comment").setup({
 				pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
 			})

@@ -122,3 +122,7 @@ Intrasport
 LSP
 SchemaStore
 jsonls
+lsp
+tsserver
+autocompleting
+quickfix

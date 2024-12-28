@@ -31,7 +31,6 @@ end
 lsp_zero.on_attach(lsp_attach)
 
 lsp_zero.extend_lspconfig({
-	-- capabilities = require("cmp_nvim_lsp").default_capabilities(),
 	capabilities = require("blink.cmp").get_lsp_capabilities(),
 	lsp_attach = lsp_attach,
 	float_border = "rounded",
@@ -39,6 +38,7 @@ lsp_zero.extend_lspconfig({
 })
 
 require("mason").setup({})
+---@diagnostic disable-next-line: missing-fields
 require("mason-lspconfig").setup({
 	ensure_installed = {
 		"bashls",
@@ -124,7 +124,7 @@ require("mason-lspconfig").setup({
 						{ rule = "import/no-cycle", severity = "off" },
 						{ rule = "import/no-unresolved", severity = "off" },
 
-						-- Disable some rules that conflight with tsserver warnings
+						-- Disable some rules that conflict with tsserver warnings
 						{ rule = "unused-imports/no-unused-vars", severity = "off" },
 					},
 
@@ -163,20 +163,6 @@ vim.g.rustaceanvim = {
 		capabilities = lsp_zero.get_capabilities(),
 	},
 }
-
--- Show line diagnostics in hover window
-vim.o.updatetime = 500
-vim.api.nvim_create_autocmd("CursorHold", {
-	callback = function()
-		local opts = {
-			focusable = false,
-			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-			source = "always",
-			scope = "cursor",
-		}
-		vim.diagnostic.open_float(nil, opts)
-	end,
-})
 
 lsp_zero.set_sign_icons({
 	error = "",

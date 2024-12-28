@@ -11,8 +11,9 @@ return {
 				globalstatus = true,
 			},
 			extensions = {
+				"oil",
 				"quickfix",
-				"fugitive",
+				"trouble",
 			},
 			sections = {
 				lualine_c = {
