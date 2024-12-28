@@ -82,6 +82,13 @@ require("lazy").setup({
 			{ "-", vim.cmd.Oil },
 		},
 	},
+
+	-- MDX highlighting
+	{
+		"davidmh/mdx.nvim",
+		config = true,
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+	},
 }, {
 	checker = {
 		enabled = true,
