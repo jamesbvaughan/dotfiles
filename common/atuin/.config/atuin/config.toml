@@ -1,46 +1,5 @@
-## With workspace filtering enabled, Atuin will filter for commands executed
-## in any directory within a git repository tree (default: false)
-workspaces = false
+# In git repos, only show commands that were executed in that repo
+workspaces = true
 
-## prevent commands matching any of these regexes from being written to history.
-## Note that these regular expressions are unanchored, i.e. if they don't start
-## with ^ or end with $, they'll match anywhere in the command.
-## For details on the supported regular expression syntax, see
-## https://docs.rs/regex/latest/regex/#syntax
-# history_filter = [
-#   "^secret-cmd",
-#   "^innocuous-cmd .*--secret=.+"
-# ]
-
-## prevent commands run with cwd matching any of these regexes from being written
-## to history. Note that these regular expressions are unanchored, i.e. if they don't
-## start with ^ or end with $, they'll match anywhere in CWD.
-## For details on the supported regular expression syntax, see
-## https://docs.rs/regex/latest/regex/#syntax
-# cwd_filter = [
-#   "^/very/secret/area"
-# ]
-
-## Configure whether or not to show the help row, which includes the current Atuin
-## version (and whether an update is available), a keymap hint, and the total
-## amount of commands in your history.
+# Hide the help text
 show_help = false
-
-## Defaults to true. If enabled, upon hitting enter Atuin will immediately execute the command. Press tab to return to the shell and edit.
-# This applies for new installs. Old installs will keep the old behaviour unless configured otherwise.
-enter_accept = true
-
-#[stats]
-# Set commands where we should consider the subcommand for statistics. Eg, kubectl get vs just kubectl
-#common_subcommands = [
-#  "cargo",
-#  "go",
-#  "git",
-#  "npm",
-#  "yarn",
-#  "pnpm",
-#  "kubectl",
-#]
-
-# Set commands that should be totally stripped and ignored from stats
-#common_prefix = ["sudo"]
