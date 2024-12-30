@@ -48,10 +48,6 @@ return {
 				},
 				ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
 			},
-			{
-				"simrat39/rust-tools.nvim",
-				ft = { "rust" },
-			},
 		},
 		init = function()
 			-- Reserve a space in the gutter
@@ -79,9 +75,6 @@ return {
 					vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
 					vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
 					vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-					vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-					vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
-					vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
 
 					vim.keymap.set(
 						"n",
@@ -219,30 +212,21 @@ return {
 							},
 						})
 					end,
-					-- Set this to noop because we're using rustaceanvim instead
-					-- rust_analyzer = lsp_zero.noop,
 				},
 			})
 
-			-- vim.g.rustaceanvim = {
-			-- 	server = {
-			-- 		capabilities = lsp_zero.get_capabilities(),
-			-- 	},
-			-- }
-
-			-- lsp_zero.set_sign_icons({
-			-- 	error = "",
-			-- 	warn = "",
-			-- 	hint = "",
-			-- 	info = "⚑",
-			-- })
+			local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
+			for type, icon in pairs(signs) do
+				local hl = "DiagnosticSign" .. type
+				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+			end
 		end,
 	},
 
 	-- Rust LSP
 	{
 		"mrcjkb/rustaceanvim",
-		version = "^4",
+		version = "^5",
 		ft = { "rust" },
 	},
 
