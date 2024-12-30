@@ -212,6 +212,7 @@ return {
 							},
 						})
 					end,
+					rust_analyzer = function() end,
 				},
 			})
 
