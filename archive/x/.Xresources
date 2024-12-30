@@ -1,4 +1,0 @@
-/* #include ".Xresources.d/solarized-dark" */
-#include ".Xresources.d/dracula"
-#include ".Xresources.d/urxvt"
-#include ".Xresources.d/hidpi"
