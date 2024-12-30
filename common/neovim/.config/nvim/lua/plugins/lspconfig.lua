@@ -12,12 +12,6 @@ return {
 		-- },
 	},
 
-	{
-		"williamboman/mason.nvim",
-		lazy = false,
-		config = true,
-	},
-
 	-- LSP
 	{
 		"neovim/nvim-lspconfig",
@@ -25,8 +19,11 @@ return {
 		cmd = { "LspInfo", "LspInstall", "LspUninstall" },
 
 		dependencies = {
+			{
+				"williamboman/mason.nvim",
+				config = true,
+			},
 			"williamboman/mason-lspconfig.nvim",
-			"williamboman/mason.nvim",
 
 			-- Pull JSON schemas from SchemaStore for use with jsonls
 			"b0o/schemastore.nvim",
