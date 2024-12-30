@@ -11,6 +11,7 @@ return {
 			-- Load these plugin libraries explicitly so that they're available in the
 			-- relevant plugin config files even if they're not explicitly imported.
 			library = {
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 				"LazyDev",
 				"lazydev.nvim",
 				"auto-dark-mode.nvim",

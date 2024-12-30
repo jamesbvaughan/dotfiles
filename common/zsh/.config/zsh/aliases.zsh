@@ -1,11 +1,14 @@
 # etc
 alias grep="grep --color"
-alias vim="TERM=wezterm nvim"
 alias tmux='tmux -u'
 alias ber='bundle exec ruby'
 alias cat='bat'
 alias ls='eza --long --header'
 alias tree='eza --tree'
+
+# alias vim="TERM=wezterm nvim"
+alias vim="nvim"
+alias v="nvim"
 
 # Git
 alias gb="git branch"

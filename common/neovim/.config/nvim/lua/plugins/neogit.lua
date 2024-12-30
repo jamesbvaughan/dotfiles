@@ -16,7 +16,7 @@ return {
 	opts = {
 		disable_hint = true,
 		disable_insert_on_commit = false,
-		graph_style = "unicode",
+		graph_style = "kitty",
 		signs = {
 			-- { CLOSED, OPENED }
 			hunk = { "", "" },
