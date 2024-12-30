@@ -1,3 +1,6 @@
+-- Formatting plugin
+--  https://github.com/stevearc/conform.nvim
+
 local prettier_formatters = { "prettierd", "prettier", stop_after_first = true }
 
 return {
@@ -10,10 +13,11 @@ return {
 			function()
 				require("conform").format({ async = true, lsp_fallback = true })
 			end,
-			mode = "",
 			desc = "Format buffer",
 		},
 	},
+
+	---@type conform.setupOpts
 	opts = {
 		formatters_by_ft = {
 			lua = { "stylua" },

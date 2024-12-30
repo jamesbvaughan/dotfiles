@@ -8,9 +8,7 @@ return {
 		"giuxtaposition/blink-cmp-copilot",
 	},
 	version = "v0.*",
-	event = "InsertEnter",
 
-	---@module 'blink.cmp'
 	---@type blink.cmp.Config
 	opts = {
 		keymap = {

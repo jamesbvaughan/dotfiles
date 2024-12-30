@@ -33,7 +33,6 @@ require("lazy").setup({
 	-- Better integration between nvim and tmux
 	{
 		"christoomey/vim-tmux-navigator",
-		event = "VeryLazy",
 		keys = {
 			{ "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
 			{ "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
@@ -51,23 +50,9 @@ require("lazy").setup({
 
 	{
 		"mbbill/undotree",
-		event = "InsertEnter",
 		keys = {
 			{ "U", vim.cmd.UndotreeToggle },
 		},
-	},
-
-	-- quick navigation within a file
-	{
-		"ggandor/leap.nvim",
-		-- Potentially replacing with flash.lua
-		enabled = false,
-		config = function()
-			require("leap").set_default_keymaps()
-
-			-- Grey out the search area
-			vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" })
-		end,
 	},
 
 	-- nice bindings for working with comments
@@ -109,9 +94,15 @@ require("lazy").setup({
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 	},
 }, {
+	defaults = {
+		lazy = true,
+	},
 	checker = {
 		enabled = true,
 		notify = false,
+	},
+	install = {
+		colorscheme = { "catppuccin" },
 	},
 	change_detection = {
 		notify = false,
@@ -122,8 +113,6 @@ require("lazy").setup({
 		},
 		rtp = {
 			disabled_plugins = {
-				-- "matchit",
-				-- "matchparen",
 				"netrwPlugin",
 				"gzip",
 				"tarPlugin",

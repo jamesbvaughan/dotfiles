@@ -5,6 +5,7 @@ return {
 	"folke/snacks.nvim",
 	priority = 1000,
 	lazy = false,
+
 	---@type snacks.Config
 	opts = {
 		bufdelete = { enabled = true },
@@ -28,9 +29,16 @@ return {
 	},
 	keys = {
 		{
+			"<leader>d",
+			function()
+				require("snacks").bufdelete()
+			end,
+			desc = "Close the current buffer",
+		},
+		{
 			"gh",
 			function()
-				Snacks.gitbrowse.open()
+				require("snacks").gitbrowse.open()
 			end,
 			desc = "Open the current file on the web",
 		},

@@ -4,6 +4,8 @@ return {
 		"zbirenbaum/copilot.lua",
 		event = "InsertEnter",
 		config = true,
+
+		---@type copilot_config
 		-- opts = {
 		-- 	suggestion = { enabled = false },
 		-- 	panel = { enabled = false },
@@ -13,7 +15,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		lazy = false,
-		opts = {},
+		config = true,
 	},
 
 	-- LSP
@@ -21,6 +23,7 @@ return {
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		cmd = { "LspInfo", "LspInstall", "LspUninstall" },
+
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
 			"williamboman/mason.nvim",
@@ -31,7 +34,13 @@ return {
 			-- UI for loaders
 			{
 				"j-hui/fidget.nvim",
-				config = true,
+				opts = {
+					notification = {
+						window = {
+							winblend = 0,
+						},
+					},
+				},
 			},
 
 			-- Specific language support
@@ -43,7 +52,6 @@ return {
 				ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
 			},
 			{
-
 				"simrat39/rust-tools.nvim",
 				ft = { "rust" },
 			},
@@ -244,14 +252,13 @@ return {
 	-- Better inline diagnostic styling
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
-		event = "VeryLazy", -- Or `LspAttach`
-		priority = 1000, -- needs to be loaded in first
-		config = function()
+		event = "LspAttach",
+		init = function()
 			vim.diagnostic.config({ virtual_text = false })
-			require("tiny-inline-diagnostic").setup({
-				preset = "simple",
-			})
 		end,
+		opts = {
+			preset = "simple",
+		},
 	},
 
 	-- Error window

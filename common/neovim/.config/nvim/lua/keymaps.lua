@@ -17,10 +17,6 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- allow pasting without clearing the current paste buffer
 vim.keymap.set("x", "p", '"_dP')
 
-vim.keymap.set("n", "<leader>d", function()
-	Snacks.bufdelete()
-end)
-
 vim.keymap.set("n", "<leader>s", function()
 	---@diagnostic disable-next-line: undefined-field
 	vim.opt_local.spell = not vim.opt_local.spell:get()

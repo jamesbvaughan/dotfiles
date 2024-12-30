@@ -24,12 +24,6 @@ vim.opt.number = true
 ---- highlight the current line
 vim.opt.cursorline = true
 
----- auto read files changed outside vim
-vim.opt.autoread = true
-
----- enable the mouse
-vim.opt.mouse = "a"
-
 ---- use the system clipboard
 vim.opt.clipboard = "unnamedplus"
 
@@ -53,7 +47,7 @@ vim.opt.undofile = true
 ---- always show the sign column
 vim.opt.signcolumn = "yes"
 
----- always show the sign column
+---- set a default text width and show a column there
 vim.opt.textwidth = 80
 vim.opt.colorcolumn = "+1"
 
@@ -69,9 +63,6 @@ vim.opt.spellfile = vim.fn.getenv("HOME") .. "/.config/nvim/spell/en.utf-8.add"
 ---- highlight search results incrementally
 vim.opt.incsearch = true
 
----- hide the netrw banner
-vim.g.netrw_banner = 0
-
 ---- folding
 vim.o.fillchars = "eob: ,fold: ,foldopen:,foldsep: ,foldclose:"
 vim.o.foldcolumn = "1"
@@ -81,4 +72,5 @@ vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldmethod = "expr"
 
+---- use a single status line for all windows
 vim.opt.laststatus = 3
