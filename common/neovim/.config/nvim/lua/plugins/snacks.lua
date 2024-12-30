@@ -10,21 +10,11 @@ return {
 	opts = {
 		bufdelete = { enabled = true },
 		gitbrowse = { enabled = true },
-		indent = {
-			-- Disabled for now because the default highlight is too intense for my
-			-- taste.
-			enabled = false,
-			animate = { enabled = false },
-		},
+		indent = { enabled = true, animate = { enabled = false } },
 		notifier = { enabled = true },
 		quickfile = { enabled = true },
 		statuscolumn = { enabled = true },
 		toggle = { enabled = true },
-		words = {
-			-- Disabled because it seemed to really slow things down when hovering
-			-- symbols.
-			enabled = false,
-		},
 	},
 	keys = {
 		{

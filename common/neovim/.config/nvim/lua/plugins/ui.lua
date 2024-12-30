@@ -38,18 +38,6 @@ return {
 		opts = {},
 	},
 
-	-- Visualize indentation
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		event = "VeryLazy",
-		main = "ibl",
-		---@module "ibl"
-		---@type ibl.config
-		opts = {
-			scope = { enabled = false },
-		},
-	},
-
 	-- Highlight real colors inside nvim (example: #920565)
 	{
 		"brenoprata10/nvim-highlight-colors",
@@ -60,6 +48,7 @@ return {
 	},
 
 	-- Add a label for the current file name
+	--   https://github.com/b0o/incline.nvim
 	{
 		"b0o/incline.nvim",
 		event = "VeryLazy",
@@ -71,7 +60,7 @@ return {
 				return { { icon, guifg = color }, { " " }, { filename } }
 			end,
 			hide = {
-				only_win = true, -- Hide incline if only one window in tab
+				only_win = true,
 			},
 		},
 	},

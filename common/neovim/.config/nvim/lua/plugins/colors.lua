@@ -45,6 +45,14 @@ return {
 					},
 				},
 			},
+			custom_highlights = function(colors)
+				return {
+					-- Catppuccin doesn't _yet_ have built-in snacks indent support, so
+					-- I've manually chosen some colors here.
+					SnacksIndent = { fg = colors.surface0 },
+					SnacksIndentScope = { fg = colors.surface2 },
+				}
+			end,
 		},
 		init = setDark,
 	},

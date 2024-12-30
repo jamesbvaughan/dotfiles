@@ -1,7 +1,13 @@
 local telescope_builtin = function(name, opts)
 	return function()
-		require("telescope.builtin")[name](opts)
+		local ivy = require("telescope.themes").get_ivy
+		require("telescope.builtin")[name](ivy(opts))
 	end
+end
+
+local function smart_open()
+	local ivy = require("telescope.themes").get_ivy()
+	require("telescope").extensions.smart_open.smart_open(ivy)
 end
 
 return {
@@ -9,8 +15,12 @@ return {
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
 			{
-				"nvim-telescope/telescope-fzf-native.nvim",
-				build = "make",
+				"danielfalk/smart-open.nvim",
+				branch = "0.2.x",
+				dependencies = {
+					"kkharji/sqlite.lua",
+					"nvim-telescope/telescope-fzy-native.nvim",
+				},
 			},
 		},
 		keys = {
@@ -33,6 +43,11 @@ return {
 				"<leader>fa",
 				telescope_builtin("git_files", { show_untracked = true }),
 				desc = "Find files in current git repo",
+			},
+			{
+				"<leader><leader>",
+				smart_open,
+				desc = "Smart file/buffer search",
 			},
 			{
 				"<leader>fs",
@@ -70,7 +85,9 @@ return {
 				},
 			})
 
-			telescope.load_extension("fzf")
+			-- telescope.load_extension("fzf")
+			telescope.load_extension("fzy_native")
+			telescope.load_extension("smart_open")
 		end,
 	},
 }

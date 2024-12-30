@@ -24,7 +24,10 @@ return {
 			section = { "▶", "▼" },
 		},
 		telescope_sorter = function()
-			return require("telescope").extensions.fzf.native_fzf_sorter()
+			return require("telescope").extensions.fzy_native.fzy_sorter
 		end,
+		integrations = {
+			telescope = false,
+		},
 	},
 }

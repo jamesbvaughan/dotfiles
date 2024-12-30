@@ -68,13 +68,9 @@ return {
 				callback = function(event)
 					local opts = { buffer = event.buf }
 
-					vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-					vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
-					vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
-					vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
-					vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
-					vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
-					vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+					vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
 
 					vim.keymap.set(
 						"n",
@@ -83,13 +79,42 @@ return {
 						vim.tbl_extend("force", opts, { desc = "Show available code actions" })
 					)
 
-					-- vim.keymap.set("n", "gd", function()
-					-- 	require("telescope.builtin").lsp_definitions(require("telescope.themes").get_cursor())
-					-- end, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
-					--
-					-- vim.keymap.set("n", "go", function()
-					-- 	require("telescope.builtin").lsp_type_definitions(require("telescope.themes").get_cursor())
-					-- end, vim.tbl_extend("force", opts, { desc = "Go to type definition" }))
+					local function cursor_pick(telescope_builtin_name)
+						return function()
+							local telescope_builtin = require("telescope.builtin")
+							local telescope_themes = require("telescope.themes")
+							local cursor_theme = telescope_themes.get_cursor()
+							telescope_builtin[telescope_builtin_name](cursor_theme)
+						end
+					end
+
+					vim.keymap.set(
+						"n",
+						"gr",
+						cursor_pick("lsp_references"),
+						vim.tbl_extend("force", opts, { desc = "Go to references" })
+					)
+
+					vim.keymap.set(
+						"n",
+						"gi",
+						cursor_pick("lsp_implementations"),
+						vim.tbl_extend("force", opts, { desc = "Go to implementation" })
+					)
+
+					vim.keymap.set(
+						"n",
+						"gd",
+						cursor_pick("lsp_definitions"),
+						vim.tbl_extend("force", opts, { desc = "Go to definition" })
+					)
+
+					vim.keymap.set(
+						"n",
+						"go",
+						cursor_pick("lsp_type_definitions"),
+						vim.tbl_extend("force", opts, { desc = "Go to type definition" })
+					)
 				end,
 			})
 
