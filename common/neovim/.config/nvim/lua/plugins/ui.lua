@@ -2,9 +2,11 @@
 --
 return {
 	-- Override the default input and select menu styling
+	--   https://github.com/stevearc/dressing.nvim
 	{ "stevearc/dressing.nvim", event = "VeryLazy" },
 
 	-- Show a fancy buffer line
+	--   https://github.com/akinsho/bufferline.nvim
 	{
 		"akinsho/bufferline.nvim",
 		dependencies = "kyazdani42/nvim-web-devicons",
@@ -20,6 +22,7 @@ return {
 	},
 
 	-- Give hints for keymaps
+	--   https://github.com/folke/which-key.nvim
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
@@ -32,6 +35,7 @@ return {
 	},
 
 	-- Highlight TODOs
+	--   https://github.com/folke/todo-comments.nvim
 	{
 		"folke/todo-comments.nvim",
 		event = "VeryLazy",
@@ -39,6 +43,7 @@ return {
 	},
 
 	-- Highlight real colors inside nvim (example: #920565)
+	--   https://github.com/brenoprata10/nvim-highlight-colors
 	{
 		"brenoprata10/nvim-highlight-colors",
 		event = "VeryLazy",
@@ -66,6 +71,7 @@ return {
 	},
 
 	-- Highlight the hovered symbol
+	--   https://github.com/RRethy/vim-illuminate
 	{
 		"RRethy/vim-illuminate",
 		event = "CursorHold",
