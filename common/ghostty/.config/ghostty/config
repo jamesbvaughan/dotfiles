@@ -3,8 +3,8 @@
 theme = dark:catppuccin-mocha,light:catppuccin-latte
 
 font-family = TX-02
-font-style =             Retina Condensed
-font-style-italic =      Retina Condensed Oblique
+font-style =           Retina Condensed
+font-style-italic =    Retina Condensed Oblique
 font-style-bold =        Bold Condensed
 font-style-bold-italic = Bold Condensed Oblique
 
