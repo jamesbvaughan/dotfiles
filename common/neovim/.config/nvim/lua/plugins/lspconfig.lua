@@ -167,6 +167,11 @@ return {
 					cssls = function()
 						lspconfig.cssls.setup({
 							settings = {
+								css = {
+									lint = {
+										unknownAtRules = "ignore",
+									},
+								},
 								scss = {
 									lint = {
 										unknownAtRules = "ignore",
