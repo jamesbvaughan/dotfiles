@@ -1,17 +1,4 @@
 return {
-	-- github copilot
-	{
-		"zbirenbaum/copilot.lua",
-		event = "InsertEnter",
-		config = true,
-
-		---@type copilot_config
-		-- opts = {
-		-- 	suggestion = { enabled = false },
-		-- 	panel = { enabled = false },
-		-- },
-	},
-
 	-- LSP
 	{
 		"neovim/nvim-lspconfig",
@@ -137,6 +124,7 @@ return {
 					"ts_ls",
 					"yamlls",
 				},
+				automatic_installation = { exclude = { "rust_analyzer" } },
 				handlers = {
 					-- this first function is the "default handler"
 					-- it applies to every language server without a "custom handler"
@@ -258,6 +246,7 @@ return {
 	{
 		"mrcjkb/rustaceanvim",
 		version = "^5",
+		lazy = false,
 		ft = { "rust" },
 	},
 

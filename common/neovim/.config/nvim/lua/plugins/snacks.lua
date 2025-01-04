@@ -25,6 +25,13 @@ return {
 			desc = "Close the current buffer",
 		},
 		{
+			"<leader>n",
+			function()
+				require("snacks").notifier.show_history()
+			end,
+			desc = "Show notification history",
+		},
+		{
 			"gh",
 			function()
 				require("snacks").gitbrowse.open()

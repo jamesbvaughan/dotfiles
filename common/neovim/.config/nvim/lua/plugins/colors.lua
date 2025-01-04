@@ -51,6 +51,9 @@ return {
 					-- I've manually chosen some colors here.
 					SnacksIndent = { fg = colors.surface0 },
 					SnacksIndentScope = { fg = colors.surface2 },
+
+					-- Blink
+					BlinkCmpMenu = { bg = colors.mantle },
 				}
 			end,
 		},

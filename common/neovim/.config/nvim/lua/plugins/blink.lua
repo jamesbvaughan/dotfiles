@@ -6,6 +6,18 @@ return {
 	dependencies = {
 		"rafamadriz/friendly-snippets",
 		"giuxtaposition/blink-cmp-copilot",
+
+		-- github copilot
+		{
+			"zbirenbaum/copilot.lua",
+			event = "InsertEnter",
+
+			---@type copilot_config
+			opts = {
+				suggestion = { enabled = false },
+				panel = { enabled = false },
+			},
+		},
 	},
 	version = "v0.*",
 
@@ -24,16 +36,29 @@ return {
 			menu = {
 				draw = {
 					columns = {
-						{ "label", "label_description", gap = 1 },
-						{ "kind_icon", "kind", gap = 1 },
+						{ "kind_icon", "label", gap = 1 },
+					},
+					treesitter = { "lsp" },
+					components = {
+						label = {
+							width = {
+								-- Shorten the max label width since copilot labels can be
+								-- really long.
+								max = 30,
+							},
+						},
 					},
 				},
 				auto_show = function(ctx)
 					return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
 				end,
 			},
+			ghost_text = {
+				enabled = true,
+			},
 			documentation = {
 				auto_show = true,
+				auto_show_delay_ms = 0,
 			},
 		},
 
@@ -74,5 +99,11 @@ return {
 		},
 
 		signature = { enabled = true },
+
+		appearance = {
+			kind_icons = {
+				Copilot = "",
+			},
+		},
 	},
 }
