@@ -4,6 +4,6 @@
 return {
 	"davidmh/mdx.nvim",
 	config = true,
-	ft = "mdx",
+	event = "BufEnter *.mdx",
 	dependencies = { "nvim-treesitter/nvim-treesitter" },
 }
