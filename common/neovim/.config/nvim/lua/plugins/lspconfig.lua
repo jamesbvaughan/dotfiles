@@ -102,6 +102,13 @@ return {
 						cursor_pick("lsp_type_definitions"),
 						vim.tbl_extend("force", opts, { desc = "Go to type definition" })
 					)
+
+					vim.keymap.set(
+						"n",
+						"<leader>fe",
+						":EslintFixAll<CR>",
+						vim.tbl_extend("force", opts, { desc = "Run ESLint auto-fixes" })
+					)
 				end,
 			})
 
