@@ -8,4 +8,9 @@ font-style-italic =    Retina Condensed Oblique
 font-style-bold =        Bold Condensed
 font-style-bold-italic = Bold Condensed Oblique
 
+macos-icon = custom-style
+macos-icon-frame = plastic
+macos-icon-ghost-color = cdd6f4
+macos-icon-screen-color = 1e1e2e
+
 window-decoration = false
