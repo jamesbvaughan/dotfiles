@@ -1,5 +1,11 @@
 return {
 	{
+		"bezhermoso/tree-sitter-ghostty",
+		build = "make nvim_install",
+		lazy = false,
+	},
+
+	{
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
 			-- Additional text objects
