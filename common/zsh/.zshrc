@@ -114,7 +114,8 @@ if [ -s "$HOME/.cargo/env" ]; then
 fi
 
 ## Java
-export JAVA_HOME="/opt/homebrew/opt/openjdk"
+# export JAVA_HOME="/opt/homebrew/opt/openjdk"
+export JAVA_HOME="/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
 
 ## PostgreSQL
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
