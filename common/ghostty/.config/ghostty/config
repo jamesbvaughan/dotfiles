@@ -1,8 +1,11 @@
 # docs: https://ghostty.org/docs/config/reference
 
+# Reload the config with Cmd+Shift+,
+
 theme = dark:catppuccin-mocha,light:catppuccin-latte
 
-font-family = TX-02
+font-family = Berkeley Mono Variable
+
 font-style =           Retina Condensed
 font-style-italic =    Retina Condensed Oblique
 font-style-bold =        Bold Condensed
@@ -14,3 +17,5 @@ macos-icon-ghost-color = cdd6f4
 macos-icon-screen-color = 1e1e2e
 
 window-decoration = false
+
+# custom-shader = /Users/james/.config/ghostty/crt-shader-with-chromatic-aberration-glow-scanlines-dot-matrix.glsl
