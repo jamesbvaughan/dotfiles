@@ -9,19 +9,30 @@
 
 [core]
 	editor = nvim
+  ; Cache repo status for quicker status checks
+  fsmonitor = true
+  untrackedCache = true
 
 [init]
 	defaultBranch = main
 
+[branch]
+  ; Sort branches by most recent commit date
+  sort = -committerdate
+
 [push]
 	default = simple
 	autoSetupRemote = true
+  ; Always push locally created tags to the remote
+  followTags = true
 
 [pull]
 	rebase = false
 
 [fetch]
   prune = true
+  pruneTags = true
+  all = true
 
 [commit]
   gpgsign = true
@@ -40,6 +51,13 @@
   ; Automatically update refs when rebasing
 	updateRefs = true
 
+[tag]
+  sort = version:refname
+
+[column]
+  ; Try to show more useful columns in the terminal
+  ui = auto
+
 [gpg]
 	format = ssh
 
@@ -49,6 +67,11 @@
 [diff]
   ; https://link.springer.com/article/10.1007/s10664-019-09772-z#Sec31
   algorithm = histogram
+  ; Use different colors for moved code
+  colorMoved = plain
+  mnemonicPrefix = true
+  ; Try to detect renamed files
+  renames = true
   tool = difftastic
   external = difft
 
@@ -70,9 +93,14 @@
 	skippedCherryPicks = false
 
 [rerere]
-  ; Reuse recorded resolution of merge conflicts
+  ; Record resolution of merge conflicts
   ; https://git-scm.com/book/en/v2/Git-Tools-Rerere
 	enabled = true
+  ; Automatically reuse recorded resolution of merge conflicts
+  autoupdate = true
+
+[help]
+  autocorrect = prompt
 
 [alias]
   fomo = !git fetch origin && git rebase origin/main
