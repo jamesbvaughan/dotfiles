@@ -34,6 +34,11 @@ return {
 				dependencies = {
 					"nvim-lua/plenary.nvim",
 				},
+				opts = {
+					settings = {
+						expose_as_code_action = "all",
+					},
+				},
 				ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
 			},
 		},
@@ -113,16 +118,18 @@ return {
 				end,
 			})
 
+			lspconfig.oxlint.setup({})
+
 			---@diagnostic disable-next-line: missing-fields
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"bashls",
 					"cssls",
 					"eslint",
-					"graphql",
+					-- "graphql",
 					"html",
 					"jsonls",
-					"prismals",
+					-- "prismals",
 					"pyright",
 					"lua_ls",
 					"tailwindcss",
@@ -137,7 +144,7 @@ return {
 					-- this first function is the "default handler"
 					-- it applies to every language server without a "custom handler"
 					function(server_name)
-						require("lspconfig")[server_name].setup({})
+						lspconfig[server_name].setup({})
 					end,
 					lua_ls = function()
 						lspconfig.lua_ls.setup({
@@ -188,55 +195,57 @@ return {
 						})
 					end,
 					eslint = function()
-						lspconfig.eslint.setup({
-							capabilities = {
-								document_formatting = false,
-								document_range_formatting = false,
-							},
-							settings = {
-								codeActionOnSave = {
-									enable = true,
-								},
-								-- Disable some rules to speed up lint results.
-								-- These still run in pre-commit hooks and in CI.
-								rulesCustomizations = {
-									{ rule = "@typescript-eslint/no-misused-promises", severity = "off" },
-									{ rule = "@typescript-eslint/no-unsafe-argument", severity = "off" },
-									{ rule = "@typescript-eslint/no-unsafe-assignment", severity = "off" },
-									{ rule = "import/defaults", severity = "off" },
-									{ rule = "import/extensions", severity = "off" },
-									{ rule = "import/namespace", severity = "off" },
-									{ rule = "import/no-cycle", severity = "off" },
-									{ rule = "import/no-unresolved", severity = "off" },
-
-									-- Disable some rules that conflict with tsserver warnings
-									{ rule = "unused-imports/no-unused-vars", severity = "off" },
-								},
-
-								experimental = {},
-							},
-						})
+						-- disabling while I try out oxlint
+						-- lspconfig.eslint.setup({
+						-- 	capabilities = {
+						-- 		document_formatting = false,
+						-- 		document_range_formatting = false,
+						-- 	},
+						-- 	settings = {
+						-- 		codeActionOnSave = {
+						-- 			enable = true,
+						-- 		},
+						-- 		-- Disable some rules to speed up lint results.
+						-- 		-- These still run in pre-commit hooks and in CI.
+						-- 		rulesCustomizations = {
+						-- 			{ rule = "@typescript-eslint/no-misused-promises", severity = "off" },
+						-- 			{ rule = "@typescript-eslint/no-unsafe-argument", severity = "off" },
+						-- 			{ rule = "@typescript-eslint/no-unsafe-assignment", severity = "off" },
+						-- 			{ rule = "import/defaults", severity = "off" },
+						-- 			{ rule = "import/extensions", severity = "off" },
+						-- 			{ rule = "import/namespace", severity = "off" },
+						-- 			{ rule = "import/no-cycle", severity = "off" },
+						-- 			{ rule = "import/no-unresolved", severity = "off" },
+						--
+						-- 			-- Disable some rules that conflict with tsserver warnings
+						-- 			{ rule = "unused-imports/no-unused-vars", severity = "off" },
+						-- 		},
+						--
+						-- 		experimental = {},
+						-- 	},
+						-- })
 					end,
 					ts_ls = function()
-						lspconfig.ts_ls.setup({
-							settings = {
-								expose_as_code_action = "all",
-
-								typescript = {
-									inlayHints = {
-										-- includeInlayParameterNameHints: 'none' | 'literals' | 'all';
-										includeInlayParameterNameHints = "all",
-										includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-										includeInlayFunctionParameterTypeHints = true,
-										includeInlayVariableTypeHints = true,
-										includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-										includeInlayPropertyDeclarationTypeHints = true,
-										includeInlayFunctionLikeReturnTypeHints = true,
-										includeInlayEnumMemberValueHints = true,
-									},
-								},
-							},
-						})
+						-- disabling in favor of typescript-tools
+						-- lspconfig.ts_ls.setup({
+						-- 	settings = {
+						-- 		expose_as_code_action = "all",
+						--
+						-- 		typescript = {
+						-- 			inlayHints = {
+						-- 				-- includeInlayParameterNameHints: 'none' | 'literals' | 'all';
+						-- 				includeInlayParameterNameHints = "all",
+						-- 				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+						-- 				includeInlayFunctionParameterTypeHints = true,
+						-- 				includeInlayVariableTypeHints = true,
+						-- 				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+						-- 				includeInlayPropertyDeclarationTypeHints = true,
+						-- 				includeInlayFunctionLikeReturnTypeHints = true,
+						-- 				includeInlayEnumMemberValueHints = true,
+						-- 			},
+						-- 		},
+						-- 	},
+						-- })
 					end,
 					rust_analyzer = function() end,
 				},
