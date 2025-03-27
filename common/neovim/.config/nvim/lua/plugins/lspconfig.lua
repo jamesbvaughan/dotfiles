@@ -79,7 +79,7 @@ return {
 
 					vim.keymap.set(
 						"n",
-						"gr",
+						"grr",
 						cursor_pick("lsp_references"),
 						vim.tbl_extend("force", opts, { desc = "Go to references" })
 					)
