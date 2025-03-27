@@ -51,6 +51,13 @@ return {
 			local lspconfig = require("lspconfig")
 			local blink = require("blink.cmp")
 
+			vim.diagnostic.config({
+				virtual_lines = {
+					-- Only show virtual line diagnostics for the current line
+					current_line = true,
+				},
+			})
+
 			-- Add cmp_nvim_lsp capabilities settings to lspconfig
 			-- This should be executed before you configure any language server
 			lspconfig.util.default_config.capabilities =
@@ -60,17 +67,6 @@ return {
 				desc = "LSP actions",
 				callback = function(event)
 					local opts = { buffer = event.buf }
-
-					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-					vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
-
-					vim.keymap.set(
-						"n",
-						"<leader>ca",
-						vim.lsp.buf.code_action,
-						vim.tbl_extend("force", opts, { desc = "Show available code actions" })
-					)
 
 					local function cursor_pick(telescope_builtin_name)
 						return function()
@@ -268,16 +264,17 @@ return {
 	},
 
 	-- Better inline diagnostic styling
-	{
-		"rachartier/tiny-inline-diagnostic.nvim",
-		event = "LspAttach",
-		init = function()
-			vim.diagnostic.config({ virtual_text = false })
-		end,
-		opts = {
-			preset = "simple",
-		},
-	},
+	-- {
+	-- 	"rachartier/tiny-inline-diagnostic.nvim",
+	-- 	event = "LspAttach",
+	-- 	enable = false,
+	-- 	init = function()
+	-- 		vim.diagnostic.config({ virtual_text = false })
+	-- 	end,
+	-- 	opts = {
+	-- 		preset = "simple",
+	-- 	},
+	-- },
 
 	-- Error window
 	{
