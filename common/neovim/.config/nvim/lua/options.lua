@@ -75,3 +75,7 @@ vim.o.foldmethod = "expr"
 
 ---- use a single status line for all windows
 vim.opt.laststatus = 3
+
+---- set a default window border
+-- This makes things like fzf-lua look weird so I'm disabling it for now
+-- vim.o.winborder = "rounded"
