@@ -52,10 +52,11 @@ return {
 			local blink = require("blink.cmp")
 
 			vim.diagnostic.config({
-				virtual_lines = {
-					-- Only show virtual line diagnostics for the current line
-					current_line = true,
-				},
+				-- virtual_lines = {
+				-- 	-- Only show virtual line diagnostics for the current line
+				-- 	current_line = true,
+				-- },
+				virtual_lines = true,
 			})
 
 			-- Add cmp_nvim_lsp capabilities settings to lspconfig
