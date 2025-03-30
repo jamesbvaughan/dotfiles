@@ -16,6 +16,15 @@ return {
 		statuscolumn = { enabled = true },
 		toggle = { enabled = true },
 	},
+	init = function()
+		local Snacks = require("snacks")
+		-- Reference for more toggle ideas:
+		--   https://www.reddit.com/r/neovim/comments/1j55o9c/share_your_custom_toggles_using_snacks_toggle/
+		Snacks.toggle.option("spell", { name = "󰓆 Spell Checking" }):map("<leader>ts")
+		Snacks.toggle.option("wrap", { name = "󰖶 Wrap Long Lines" }):map("<leader>tw")
+		Snacks.toggle.option("list", { name = "󱁐 List (Visible Whitespace)" }):map("<leader>tl")
+		Snacks.toggle.diagnostics({ name = " Diagnostics" }):map("<leader>tD")
+	end,
 	keys = {
 		{
 			"<leader>d",

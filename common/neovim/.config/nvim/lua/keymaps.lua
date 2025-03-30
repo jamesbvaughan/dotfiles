@@ -14,17 +14,8 @@ vim.keymap.set("n", "<c-u>", "<c-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
-vim.keymap.set("n", "<leader>s", function()
-	---@diagnostic disable-next-line: undefined-field
-	vim.opt_local.spell = not vim.opt_local.spell:get()
-end, { desc = "Toggle spell checking" })
-
 vim.keymap.set("n", "g/", vim.cmd.nohlsearch, {
 	desc = "Clear the search highlight",
-})
-
-vim.keymap.set("n", "<leader>e", vim.cmd.Explore, {
-	desc = "Open the explorer",
 })
 
 vim.keymap.set("n", "yc", "yygccp", {
