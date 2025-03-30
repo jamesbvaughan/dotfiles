@@ -56,7 +56,7 @@ return {
 				-- 	-- Only show virtual line diagnostics for the current line
 				-- 	current_line = true,
 				-- },
-				virtual_lines = true,
+				virtual_lines = false,
 			})
 
 			-- Add cmp_nvim_lsp capabilities settings to lspconfig
@@ -265,17 +265,16 @@ return {
 	},
 
 	-- Better inline diagnostic styling
-	-- {
-	-- 	"rachartier/tiny-inline-diagnostic.nvim",
-	-- 	event = "LspAttach",
-	-- 	enable = false,
-	-- 	init = function()
-	-- 		vim.diagnostic.config({ virtual_text = false })
-	-- 	end,
-	-- 	opts = {
-	-- 		preset = "simple",
-	-- 	},
-	-- },
+	{
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = "LspAttach",
+		init = function()
+			vim.diagnostic.config({ virtual_text = false })
+		end,
+		opts = {
+			preset = "simple",
+		},
+	},
 
 	-- Error window
 	{
