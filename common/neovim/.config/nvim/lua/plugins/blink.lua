@@ -12,7 +12,11 @@ return {
 			"zbirenbaum/copilot.lua",
 			event = "InsertEnter",
 
-			---@type copilot_config
+			-- TODO: Contribute a change to this plugin to provide a non-strict
+			-- version of this type, as in this example:
+			-- https://github.com/Saghen/blink.cmp/blob/main/lua/blink/cmp/config/types_partial.lua
+			--
+			---@type CopilotConfig
 			opts = {
 				suggestion = { enabled = false },
 				panel = { enabled = false },
@@ -39,7 +43,8 @@ return {
 			},
 			documentation = {
 				auto_show = true,
-				auto_show_delay_ms = 500,
+				-- auto_show_delay_ms = 500,
+				auto_show_delay_ms = 0,
 			},
 		},
 
