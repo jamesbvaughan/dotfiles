@@ -7,11 +7,11 @@ return {
 
 		dependencies = {
 			{
-				"williamboman/mason.nvim",
+				"mason-org/mason.nvim",
 				cmd = { "Mason" },
 				config = true,
 			},
-			"williamboman/mason-lspconfig.nvim",
+			"mason-org/mason-lspconfig.nvim",
 
 			-- Pull JSON schemas from SchemaStore for use with jsonls
 			"b0o/schemastore.nvim",
@@ -50,6 +50,45 @@ return {
 		config = function()
 			local lspconfig = require("lspconfig")
 			local blink = require("blink.cmp")
+
+			vim.lsp.config("lua_ls", {
+				settings = {
+					Lua = {
+						diagnostics = {
+							unusedLocalExclude = { "_*" },
+						},
+					},
+				},
+			})
+
+			vim.lsp.config("jsonls", {
+				settings = {
+					json = {
+						schemas = require("schemastore").json.schemas(),
+						validate = { enable = true },
+					},
+				},
+			})
+
+			vim.lsp.config("cssls", {
+				settings = {
+					css = {
+						lint = {
+							unknownAtRules = "ignore",
+						},
+					},
+				},
+			})
+
+			vim.lsp.config("yamlls", {
+				settings = {
+					yaml = {
+						schemastore = {
+							enable = true,
+						},
+					},
+				},
+			})
 
 			vim.diagnostic.config({
 				-- virtual_lines = {
@@ -115,20 +154,16 @@ return {
 				end,
 			})
 
-			lspconfig.oxlint.setup({})
-
-			---@diagnostic disable-next-line: missing-fields
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"bashls",
 					"cssls",
 					"eslint",
-					-- "graphql",
 					"html",
 					"jsonls",
-					-- "prismals",
 					"pyright",
 					"lua_ls",
+					"oxlint",
 					"tailwindcss",
 					"taplo",
 					"terraformls",
@@ -136,115 +171,8 @@ return {
 					"ts_ls",
 					"yamlls",
 				},
-				automatic_installation = { exclude = { "rust_analyzer" } },
-				handlers = {
-					-- this first function is the "default handler"
-					-- it applies to every language server without a "custom handler"
-					function(server_name)
-						lspconfig[server_name].setup({})
-					end,
-					lua_ls = function()
-						lspconfig.lua_ls.setup({
-							settings = {
-								Lua = {
-									diagnostics = {
-										unusedLocalExclude = { "_*" },
-									},
-								},
-							},
-						})
-					end,
-					jsonls = function()
-						lspconfig.jsonls.setup({
-							settings = {
-								json = {
-									schemas = require("schemastore").json.schemas(),
-									validate = { enable = true },
-								},
-							},
-						})
-					end,
-					cssls = function()
-						lspconfig.cssls.setup({
-							settings = {
-								css = {
-									lint = {
-										unknownAtRules = "ignore",
-									},
-								},
-								scss = {
-									lint = {
-										unknownAtRules = "ignore",
-									},
-								},
-							},
-						})
-					end,
-					yamlls = function()
-						lspconfig.yamlls.setup({
-							settings = {
-								yaml = {
-									schemastore = {
-										enable = true,
-									},
-								},
-							},
-						})
-					end,
-					eslint = function()
-						-- disabling while I try out oxlint
-						-- lspconfig.eslint.setup({
-						-- 	capabilities = {
-						-- 		document_formatting = false,
-						-- 		document_range_formatting = false,
-						-- 	},
-						-- 	settings = {
-						-- 		codeActionOnSave = {
-						-- 			enable = true,
-						-- 		},
-						-- 		-- Disable some rules to speed up lint results.
-						-- 		-- These still run in pre-commit hooks and in CI.
-						-- 		rulesCustomizations = {
-						-- 			{ rule = "@typescript-eslint/no-misused-promises", severity = "off" },
-						-- 			{ rule = "@typescript-eslint/no-unsafe-argument", severity = "off" },
-						-- 			{ rule = "@typescript-eslint/no-unsafe-assignment", severity = "off" },
-						-- 			{ rule = "import/defaults", severity = "off" },
-						-- 			{ rule = "import/extensions", severity = "off" },
-						-- 			{ rule = "import/namespace", severity = "off" },
-						-- 			{ rule = "import/no-cycle", severity = "off" },
-						-- 			{ rule = "import/no-unresolved", severity = "off" },
-						--
-						-- 			-- Disable some rules that conflict with tsserver warnings
-						-- 			{ rule = "unused-imports/no-unused-vars", severity = "off" },
-						-- 		},
-						--
-						-- 		experimental = {},
-						-- 	},
-						-- })
-					end,
-					ts_ls = function()
-						-- disabling in favor of typescript-tools
-						-- lspconfig.ts_ls.setup({
-						-- 	settings = {
-						-- 		expose_as_code_action = "all",
-						--
-						-- 		typescript = {
-						-- 			inlayHints = {
-						-- 				-- includeInlayParameterNameHints: 'none' | 'literals' | 'all';
-						-- 				includeInlayParameterNameHints = "all",
-						-- 				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-						-- 				includeInlayFunctionParameterTypeHints = true,
-						-- 				includeInlayVariableTypeHints = true,
-						-- 				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-						-- 				includeInlayPropertyDeclarationTypeHints = true,
-						-- 				includeInlayFunctionLikeReturnTypeHints = true,
-						-- 				includeInlayEnumMemberValueHints = true,
-						-- 			},
-						-- 		},
-						-- 	},
-						-- })
-					end,
-					rust_analyzer = function() end,
+				automatic_enable = {
+					exclude = { "ts_ls", "eslint", "rust_analyzer" },
 				},
 			})
 
