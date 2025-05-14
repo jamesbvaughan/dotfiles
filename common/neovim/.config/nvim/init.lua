@@ -4,5 +4,5 @@ require("autocmds")
 require("plugins-lazy")
 
 if vim.g.neovide then
-  require("gui")
+	require("gui")
 end
