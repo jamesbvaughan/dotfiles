@@ -10,3 +10,4 @@ qutebrowser/.config/qutebrowser/dracula
 lazy-lock.json
 
 .luarc.json
+common/atuin/.config/atuin/atuin-receipt.json
