@@ -54,6 +54,9 @@ vim.opt.colorcolumn = "+1"
 --- enable 24-bit color
 vim.opt.termguicolors = true
 
+--- enable spell checking
+vim.opt.spell = true
+
 ---- configure the spell file
 vim.opt.spellfile = vim.fn.getenv("HOME") .. "/.config/nvim/spell/en.utf-8.add"
 
