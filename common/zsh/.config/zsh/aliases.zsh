@@ -6,7 +6,6 @@ alias cat='bat'
 alias ls='eza --long --header'
 alias tree='eza --tree'
 
-# alias vim="TERM=wezterm nvim"
 alias vim="nvim"
 alias v="nvim"
 
@@ -19,7 +18,10 @@ alias gco="git checkout"
 alias gd="git diff"
 alias gf="git fetch"
 alias gi="git init"
-alias gl="git log --pretty --oneline --abbrev-commit --graph --color"
+# alias gl="git log --pretty --oneline --abbrev-commit --graph --color"
+# alias gl="git log --pretty=format:\"%C(auto)%h%d %s %C(dim)(%an)\" --abbrev-commit --graph --color"
+alias gl="git log --graph --pretty=format:'%C(auto)%h%d%Creset %s %C(bold blue)<%an>%Creset %C(dim)(%cr)' --abbrev-commit"
+
 alias gp="git push"
 alias gpl="git pull"
 alias gs="git status"
