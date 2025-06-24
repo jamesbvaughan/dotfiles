@@ -90,10 +90,6 @@ if [ -x "$(command -v rbenv)" ]; then
   eval "$(rbenv init -)"
 fi
 
-## JavaScript
-# eval "$(nodenv init -)" # removing this while I try out volta
-# export PATH="$(yarn global bin):$PATH"
-
 ## Go
 export GOPATH=$HOME/go
 export PATH="$GOPATH/bin:$PATH"
@@ -104,7 +100,7 @@ export EDITOR='nvim'
 ## bun
 export BUN_INSTALL="$HOME/.bun"
 if [ -s "$BUN_INSTALL/_bun" ]; then
-  source "/Users/james/.bun/_bun"
+  source "$BUN_INSTALL/_bun"
   export PATH="$BUN_INSTALL/bin:$PATH"
 fi
 
@@ -123,12 +119,10 @@ export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 ## Personal scripts
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
+export PATH="$HOME/.dotfiles/scripts:$PATH"
 
 
 # Remove duplicate entries in $PATH
 typeset -aU path
 
-# eval "$(starship init zsh)"
 eval "$(zoxide init zsh --cmd cd)"
-# eval "$(atuin init zsh)"
-export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
