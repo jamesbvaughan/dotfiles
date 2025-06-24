@@ -36,7 +36,14 @@ return {
 				},
 				opts = {
 					settings = {
-						expose_as_code_action = "all",
+						expose_as_code_action = {
+							"add_missing_imports",
+							"remove_unused_imports",
+						},
+						jsx_close_tag = {
+							enable = true,
+							filetypes = { "javascriptreact", "typescriptreact" },
+						},
 					},
 				},
 				ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
