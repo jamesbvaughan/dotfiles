@@ -9,7 +9,14 @@ return {
 		"sindrets/diffview.nvim",
 	},
 	keys = {
-		{ "<leader>g", vim.cmd.Neogit, desc = "Open neogit" },
+		{
+			"<leader>g",
+			function()
+				local neogit = require("neogit")
+				neogit.open({ kind = "floating" })
+			end,
+			desc = "Open neogit",
+		},
 	},
 
 	---@type NeogitConfig
