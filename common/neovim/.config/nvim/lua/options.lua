@@ -67,7 +67,13 @@ vim.opt.spellfile = vim.fn.getenv("HOME") .. "/.config/nvim/spell/en.utf-8.add"
 vim.opt.incsearch = true
 
 ---- folding
-vim.o.fillchars = "eob: ,fold: ,foldopen:,foldsep: ,foldclose:"
+vim.opt.fillchars:append({
+	eob = " ",
+	fold = " ",
+	foldopen = "",
+	foldsep = " ",
+	foldclose = "",
+})
 vim.o.foldcolumn = "1"
 vim.o.foldenable = true
 -- vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
