@@ -1,6 +1,6 @@
 return {
 	{
-		"echasnovski/mini.nvim",
+		"nvim-mini/mini.nvim",
 		version = "*",
 		event = "VeryLazy",
 		-- There are some interesting utilities in here, but I'm not actually using

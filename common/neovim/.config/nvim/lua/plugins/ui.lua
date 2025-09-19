@@ -26,7 +26,7 @@ return {
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
-		dependencies = { { "echasnovski/mini.icons", config = true } },
+		dependencies = { { "nvim-mini/mini.icons", config = true } },
 		config = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
