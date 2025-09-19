@@ -2,7 +2,7 @@
 
 # Reload the config with Cmd+Shift+,
 
-theme = dark:catppuccin-mocha,light:catppuccin-latte
+theme = dark:Catppuccin Mocha,light:Catppuccin Latte
 
 font-family = Berkeley Mono Variable
 
