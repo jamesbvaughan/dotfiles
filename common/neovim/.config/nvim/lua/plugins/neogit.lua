@@ -3,17 +3,19 @@
 
 return {
 	"NeogitOrg/neogit",
+
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"nvim-telescope/telescope.nvim",
 		"sindrets/diffview.nvim",
 	},
+
 	keys = {
 		{
 			"<leader>g",
 			function()
 				local neogit = require("neogit")
-				neogit.open({ kind = "floating" })
+				-- neogit.open({ kind = "floating" })
+				neogit.open()
 			end,
 			desc = "Open neogit",
 		},
@@ -29,12 +31,6 @@ return {
 			hunk = { "", "" },
 			item = { "▶", "▼" },
 			section = { "▶", "▼" },
-		},
-		telescope_sorter = function()
-			return require("telescope").extensions.fzy_native.fzy_sorter
-		end,
-		integrations = {
-			telescope = false,
 		},
 	},
 }

@@ -58,6 +58,10 @@ return {
 			local lspconfig = require("lspconfig")
 			local blink = require("blink.cmp")
 
+			-- Coming in neovim v12
+			-- vim.lsp.document_color.enable()
+			-- vim.lsp.inline_completion.enable()
+
 			vim.lsp.config("lua_ls", {
 				settings = {
 					Lua = {
@@ -115,40 +119,38 @@ return {
 				callback = function(event)
 					local opts = { buffer = event.buf }
 
-					local function cursor_pick(telescope_builtin_name)
+					local function pick(name, pick_opts)
 						return function()
-							local telescope_builtin = require("telescope.builtin")
-							local telescope_themes = require("telescope.themes")
-							local cursor_theme = telescope_themes.get_cursor()
-							telescope_builtin[telescope_builtin_name](cursor_theme)
+							local Snacks = require("snacks")
+							Snacks.picker(name, pick_opts)
 						end
 					end
 
 					vim.keymap.set(
 						"n",
 						"grr",
-						cursor_pick("lsp_references"),
+						pick("lsp_references"),
 						vim.tbl_extend("force", opts, { desc = "Go to references" })
 					)
 
 					vim.keymap.set(
 						"n",
 						"gi",
-						cursor_pick("lsp_implementations"),
+						pick("lsp_implementations"),
 						vim.tbl_extend("force", opts, { desc = "Go to implementation" })
 					)
 
 					vim.keymap.set(
 						"n",
 						"gd",
-						cursor_pick("lsp_definitions"),
+						pick("lsp_definitions"),
 						vim.tbl_extend("force", opts, { desc = "Go to definition" })
 					)
 
 					vim.keymap.set(
 						"n",
 						"go",
-						cursor_pick("lsp_type_definitions"),
+						pick("lsp_type_definitions"),
 						vim.tbl_extend("force", opts, { desc = "Go to type definition" })
 					)
 

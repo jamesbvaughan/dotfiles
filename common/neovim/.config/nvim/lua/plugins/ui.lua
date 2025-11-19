@@ -1,10 +1,6 @@
 -- Plugins related to the Neovim UI
 --
 return {
-	-- Override the default input and select menu styling
-	--   https://github.com/stevearc/dressing.nvim
-	{ "stevearc/dressing.nvim", event = "VeryLazy" },
-
 	-- Show a fancy buffer line
 	--   https://github.com/akinsho/bufferline.nvim
 	{
