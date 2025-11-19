@@ -44,9 +44,6 @@ vim.opt.smartcase = true
 vim.opt.undodir = vim.fn.getenv("HOME") .. "/.local/nvim/undofiles"
 vim.opt.undofile = true
 
----- always show the sign column
-vim.opt.signcolumn = "yes"
-
 ---- set a default text width and show a column there
 vim.opt.textwidth = 80
 vim.opt.colorcolumn = "+1"
@@ -66,25 +63,5 @@ vim.opt.spellfile = vim.fn.getenv("HOME") .. "/.config/nvim/spell/en.utf-8.add"
 ---- highlight search results incrementally
 vim.opt.incsearch = true
 
----- folding
-vim.opt.fillchars:append({
-	eob = " ",
-	fold = " ",
-	foldopen = "",
-	foldsep = " ",
-	foldclose = "",
-})
-vim.o.foldcolumn = "1"
-vim.o.foldenable = true
--- vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 99
-vim.o.foldmethod = "expr"
-
 ---- use a single status line for all windows
 vim.opt.laststatus = 3
-
----- set a default window border
--- This makes things like fzf-lua look weird so I'm disabling it for now
--- vim.o.winborder = "rounded"
