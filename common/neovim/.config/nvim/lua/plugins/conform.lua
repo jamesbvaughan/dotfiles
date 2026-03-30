@@ -1,8 +1,6 @@
 -- Formatting plugin
 --  https://github.com/stevearc/conform.nvim
 
-local prettier_formatters = { "prettierd", "prettier", stop_after_first = true }
-
 return {
 	"stevearc/conform.nvim",
 	event = { "BufWritePre" },
@@ -23,15 +21,15 @@ return {
 			lua = { "stylua" },
 			rust = { "rustfmt" },
 			sh = { "shfmt" },
-			css = prettier_formatters,
-			graphql = prettier_formatters,
-			html = prettier_formatters,
-			javascript = prettier_formatters,
-			json = prettier_formatters,
-			markdown = prettier_formatters,
-			typescript = prettier_formatters,
-			typescriptreact = prettier_formatters,
-			yaml = prettier_formatters,
+			css = { "oxfmt" },
+			graphql = { "oxfmt" },
+			html = { "oxfmt" },
+			javascript = { "oxlint", "oxfmt" },
+			json = { "oxfmt" },
+			markdown = { "oxfmt" },
+			typescript = { "oxlint", "oxfmt" },
+			typescriptreact = { "oxlint", "oxfmt" },
+			yaml = { "oxfmt" },
 		},
 		format_on_save = { timeout_ms = 500, lsp_fallback = true },
 	},

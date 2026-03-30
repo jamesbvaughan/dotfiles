@@ -72,6 +72,9 @@ return {
 				},
 			})
 
+			vim.lsp.enable("oxfmt")
+			vim.lsp.enable("oxlint")
+
 			vim.lsp.config("jsonls", {
 				settings = {
 					json = {
@@ -154,12 +157,12 @@ return {
 						vim.tbl_extend("force", opts, { desc = "Go to type definition" })
 					)
 
-					vim.keymap.set(
-						"n",
-						"<leader>fe",
-						":EslintFixAll<CR>",
-						vim.tbl_extend("force", opts, { desc = "Run ESLint auto-fixes" })
-					)
+					-- vim.keymap.set(
+					-- 	"n",
+					-- 	"<leader>fe",
+					-- 	":EslintFixAll<CR>",
+					-- 	vim.tbl_extend("force", opts, { desc = "Run ESLint auto-fixes" })
+					-- )
 				end,
 			})
 
@@ -167,12 +170,12 @@ return {
 				ensure_installed = {
 					"bashls",
 					"cssls",
-					"eslint",
+					-- "eslint",
 					"html",
 					"jsonls",
 					"pyright",
 					"lua_ls",
-					"oxlint",
+					-- "oxlint",
 					"tailwindcss",
 					"taplo",
 					"terraformls",
