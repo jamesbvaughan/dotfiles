@@ -5,7 +5,7 @@ vim.pack.add({
 	gh("mason-org/mason-lspconfig.nvim"),
 	gh("j-hui/fidget.nvim"),
 	gh("nvim-lua/plenary.nvim"),
-	gh("pmizio/typescript-tools.nvim"),
+	-- gh("pmizio/typescript-tools.nvim"),
 	gh("neovim/nvim-lspconfig"),
 	{ src = gh("mrcjkb/rustaceanvim"), version = vim.version.range("8.x") },
 	gh("rachartier/tiny-inline-diagnostic.nvim"),
@@ -24,18 +24,18 @@ require("fidget").setup({
 	},
 })
 
-require("typescript-tools").setup({
-	settings = {
-		expose_as_code_action = {
-			"add_missing_imports",
-			"remove_unused_imports",
-		},
-		jsx_close_tag = {
-			enable = true,
-			filetypes = { "javascriptreact", "typescriptreact" },
-		},
-	},
-})
+-- require("typescript-tools").setup({
+-- 	settings = {
+-- 		expose_as_code_action = {
+-- 			"add_missing_imports",
+-- 			"remove_unused_imports",
+-- 		},
+-- 		jsx_close_tag = {
+-- 			enable = true,
+-- 			filetypes = { "javascriptreact", "typescriptreact" },
+-- 		},
+-- 	},
+-- })
 
 local lspconfig = require("lspconfig")
 local blink = require("blink.cmp")
@@ -52,6 +52,7 @@ vim.lsp.config("lua_ls", {
 
 vim.lsp.enable("oxfmt")
 vim.lsp.enable("oxlint")
+vim.lsp.enable("tsgo")
 
 vim.lsp.config("jsonls", {
 	settings = {
