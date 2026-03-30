@@ -3,3 +3,9 @@ workspaces = true
 
 # Hide the help text
 show_help = false
+
+search_mode = "daemon-fuzzy"
+
+[daemon]
+enabled = true
+autostart = true
