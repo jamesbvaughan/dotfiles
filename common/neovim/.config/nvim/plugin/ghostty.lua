@@ -1,3 +1,3 @@
-vim.pack.add({ gh('isak102/ghostty.nvim') })
+vim.pack.add({ gh("isak102/ghostty.nvim") })
 
 require("ghostty").setup()
