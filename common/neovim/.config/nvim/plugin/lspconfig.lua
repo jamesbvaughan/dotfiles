@@ -3,7 +3,6 @@ vim.pack.add({
 	gh("b0o/schemastore.nvim"),
 	gh("mason-org/mason.nvim"),
 	gh("mason-org/mason-lspconfig.nvim"),
-	gh("j-hui/fidget.nvim"),
 	gh("nvim-lua/plenary.nvim"),
 	-- gh("pmizio/typescript-tools.nvim"),
 	gh("neovim/nvim-lspconfig"),
@@ -15,14 +14,6 @@ vim.pack.add({
 vim.opt.signcolumn = "yes"
 
 require("mason").setup()
-
-require("fidget").setup({
-	notification = {
-		window = {
-			winblend = 0,
-		},
-	},
-})
 
 -- require("typescript-tools").setup({
 -- 	settings = {
@@ -139,11 +130,16 @@ require("mason-lspconfig").setup({
 	},
 })
 
-local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
-for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
+vim.diagnostic.config({
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "󰅚 ",
+			[vim.diagnostic.severity.WARN] = "󰀪 ",
+			[vim.diagnostic.severity.HINT] = "󰌶 ",
+			[vim.diagnostic.severity.INFO] = " ",
+		},
+	},
+})
 
 -- Better inline diagnostic styling
 vim.diagnostic.config({ virtual_text = false })
