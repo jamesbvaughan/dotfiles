@@ -1,9 +1,6 @@
 -- Visualize and navigate undo history as a tree
 --   https://github.com/mbbill/undotree
 
-return {
-	"mbbill/undotree",
-	keys = {
-		{ "U", vim.cmd.UndotreeToggle },
-	},
-}
+vim.pack.add({ gh('mbbill/undotree') })
+
+vim.keymap.set("n", "U", vim.cmd.UndotreeToggle)

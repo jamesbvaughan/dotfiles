@@ -1,9 +1,6 @@
 -- Complete pairs automatically
 --   https://github.com/windwp/nvim-autopairs
 
-return {
+vim.pack.add({ gh('windwp/nvim-autopairs') })
 
-	"windwp/nvim-autopairs",
-	event = "InsertEnter",
-	config = true,
-}
+require("nvim-autopairs").setup()
