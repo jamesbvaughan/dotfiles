@@ -47,6 +47,9 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # Completion colors
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
+# Enable atuin hex
+eval "$(atuin hex init)"
+
 
 autoload -U compinit && compinit
 
