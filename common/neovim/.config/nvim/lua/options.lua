@@ -5,7 +5,7 @@ vim.g.mapleader = " "
 vim.opt.swapfile = false
 
 ---- disable the startup screen
--- vim.opt.shortmess:append({ I = true })
+vim.opt.shortmess:append({ I = true })
 
 ---- disable folds
 vim.opt.foldenable = false
