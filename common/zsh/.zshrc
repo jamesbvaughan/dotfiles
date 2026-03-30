@@ -131,4 +131,6 @@ export PATH="$HOME/.dotfiles/scripts:$PATH"
 # Remove duplicate entries in $PATH
 typeset -aU path
 
-eval "$(zoxide init zsh --cmd cd)"
+if [[ "$CLAUDECODE" != "1" ]]; then
+    eval "$(zoxide init --cmd cd zsh)"
+fi
