@@ -6,16 +6,20 @@ theme = dark:Catppuccin Mocha,light:Catppuccin Latte
 
 font-family = Berkeley Mono Variable
 
-font-style =           Retina Condensed
-font-style-italic =    Retina Condensed Oblique
-font-style-bold =        Bold Condensed
+font-style             = Retina Condensed
+font-style-italic      = Retina Condensed Oblique
+font-style-bold        = Bold Condensed
 font-style-bold-italic = Bold Condensed Oblique
 
-macos-icon = custom-style
-macos-icon-frame = plastic
-macos-icon-ghost-color = cdd6f4
+macos-icon              = custom-style
+macos-icon-frame        = plastic
+macos-icon-ghost-color  = cdd6f4
 macos-icon-screen-color = 1e1e2e
 
 window-decoration = false
+
+# background-opacity       = 0.85
+# background-opacity-cells = true
+# background-blur          = macos-glass-regular
 
 # custom-shader = /Users/james/.config/ghostty/crt-shader-with-chromatic-aberration-glow-scanlines-dot-matrix.glsl
