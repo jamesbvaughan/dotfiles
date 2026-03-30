@@ -132,5 +132,3 @@ export PATH="$HOME/.dotfiles/scripts:$PATH"
 typeset -aU path
 
 eval "$(zoxide init zsh --cmd cd)"
-
-alias claude="/Users/james/.claude/local/claude"
