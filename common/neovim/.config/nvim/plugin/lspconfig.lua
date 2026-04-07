@@ -96,14 +96,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "grr", pick("lsp_references"), vim.tbl_extend("force", opts, { desc = "Go to references" }))
 		vim.keymap.set(
 			"n",
-			"gi",
+			"gri",
 			pick("lsp_implementations"),
 			vim.tbl_extend("force", opts, { desc = "Go to implementation" })
 		)
 		vim.keymap.set("n", "gd", pick("lsp_definitions"), vim.tbl_extend("force", opts, { desc = "Go to definition" }))
 		vim.keymap.set(
 			"n",
-			"go",
+			"grt",
 			pick("lsp_type_definitions"),
 			vim.tbl_extend("force", opts, { desc = "Go to type definition" })
 		)
