@@ -2,4 +2,6 @@
 
 vim.cmd.packadd("nvim.undotree")
 
-vim.keymap.set("n", "U", ":Undotree<CR>", { desc = "Toggle undotree" })
+local undotree = require("undotree")
+
+vim.keymap.set("n", "U", undotree.open, { desc = "Toggle undotree" })
