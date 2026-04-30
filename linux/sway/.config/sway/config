@@ -10,10 +10,12 @@ exec gammastep
 # enable a keyring
 exec dbus-update-activation-environment --all
 exec gnome-keyring-daemon --start --components=secrets
+# exec --no-startup-id /usr/lib/pam_kwallet_init
 
 # enable an authentication agent
 # https://wiki.archlinux.org/title/Polkit#Authentication_agents
-exec lxpolkit
+# exec lxpolkit
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # syncthing
 # exec syncthingtray --wait
