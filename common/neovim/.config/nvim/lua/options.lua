@@ -1,8 +1,14 @@
 --- use space as the leader key
-vim.g.mapleader = ' '
+vim.g.mapleader = " "
 
 ---- don't use swap files
 vim.opt.swapfile = false
+
+---- disable the startup screen
+vim.opt.shortmess:append({ I = true })
+
+---- disable folds
+vim.opt.foldenable = false
 
 ---- indentation (2 spaces, no tabs)
 local indent = 2
@@ -21,51 +27,44 @@ vim.opt.number = true
 ---- highlight the current line
 vim.opt.cursorline = true
 
----- auto read files changed outside vim
-vim.opt.autoread = true
-
----- enable the mouse
-vim.opt.mouse = 'a'
-
 ---- use the system clipboard
-vim.opt.clipboard = 'unnamedplus'
+vim.opt.clipboard = "unnamedplus"
 
 ---- start scrolling before hitting the bottom
 vim.opt.scrolloff = 5
 
 ---- stabilize the quickfix window's effect on other windows
--- vim.opt.splitkeep = 'screen'
+vim.opt.splitkeep = "screen"
 
 ---- ignore these when autocompleting paths
-vim.opt.wildignore = vim.opt.wildignore + 'node_modules/*,vendor/bundle/*,tmp/*'
+vim.opt.wildignore = vim.opt.wildignore + "node_modules/*,vendor/bundle/*,tmp/*"
 
 ---- only use case sensitive search when uppercase
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 ---- persistent undo files
-vim.opt.undodir = vim.fn.getenv('HOME') .. '/.local/nvim/undofiles'
+vim.opt.undodir = vim.fn.getenv("HOME") .. "/.local/nvim/undofiles"
 vim.opt.undofile = true
 
----- always show the sign column
-vim.opt.signcolumn = 'yes'
-
----- always show the sign column
-vim.opt.colorcolumn = '80'
+---- set a default text width and show a column there
+vim.opt.textwidth = 80
+vim.opt.colorcolumn = "+1"
 
 --- enable 24-bit color
 vim.opt.termguicolors = true
 
+--- enable spell checking
+vim.opt.spell = true
+
 ---- configure the spell file
-vim.opt.spellfile = vim.fn.getenv('HOME') .. '/.config/nvim/spell/en.utf-8.add'
+vim.opt.spellfile = vim.fn.getenv("HOME") .. "/.config/nvim/spell/en.utf-8.add"
 
 ---- don't keep search results highlighted
-vim.opt.hlsearch = false
+-- vim.opt.hlsearch = false
 
 ---- highlight search results incrementally
 vim.opt.incsearch = true
 
----- hide the netrw banner
-vim.g.netrw_banner = 0
-
+---- use a single status line for all windows
 vim.opt.laststatus = 3
