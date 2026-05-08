@@ -51,6 +51,13 @@
   ; Automatically update refs when rebasing
 	updateRefs = true
 
+[rerere]
+  ; Record resolution of merge conflicts
+  ; https://git-scm.com/book/en/v2/Git-Tools-Rerere
+	enabled = true
+  ; Automatically reuse recorded resolution of merge conflicts
+  autoupdate = true
+
 [tag]
   sort = version:refname
 
@@ -91,13 +98,6 @@
 [advice]
 	detachedHead = false
 	skippedCherryPicks = false
-
-[rerere]
-  ; Record resolution of merge conflicts
-  ; https://git-scm.com/book/en/v2/Git-Tools-Rerere
-	enabled = true
-  ; Automatically reuse recorded resolution of merge conflicts
-  autoupdate = true
 
 [help]
   autocorrect = prompt
