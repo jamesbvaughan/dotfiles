@@ -61,8 +61,8 @@
 [gpg]
 	format = ssh
 
-[gpg "ssh"]
-  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+; [gpg "ssh"]
+;   program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 
 [diff]
   ; https://link.springer.com/article/10.1007/s10664-019-09772-z#Sec31
