@@ -38,8 +38,8 @@
     ],
     "modules-center": [
       "custom/media",
-      "mpd",
-      "custom/spotify"
+      "mpd"
+      // "custom/spotify"
     ],
     "modules-right": [
       "network#wifi",

@@ -10,10 +10,12 @@ exec gammastep
 # enable a keyring
 exec dbus-update-activation-environment --all
 exec gnome-keyring-daemon --start --components=secrets
+# exec --no-startup-id /usr/lib/pam_kwallet_init
 
 # enable an authentication agent
 # https://wiki.archlinux.org/title/Polkit#Authentication_agents
-exec lxpolkit
+# exec lxpolkit
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # syncthing
 # exec syncthingtray --wait
@@ -62,7 +64,8 @@ set $right l
 
 # set $term alacritty
 # set $term kitty
-set $term wezterm
+# set $term wezterm
+set $term ghostty
 set $menu ~/.dotfiles/scripts/menu
 
 
@@ -74,10 +77,11 @@ output "*" bg #000000 solid_color
 
 ### Window configuration
 
-default_border pixel 1
+default_border pixel 2
 # hide_edge_borders vertical
-# gaps inner 16
+gaps inner 16
 smart_borders on
+smart_gaps on
 
 for_window [app_id="zoom"] floating enable
 for_window [app_id="blueman-manager"] floating enable

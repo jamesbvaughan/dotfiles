@@ -11,6 +11,10 @@ settings:
   content.desktop_capture:
     https://app.slack.com: true
     https://us06web.zoom.us: true
+  content.javascript.clipboard:
+    https://dash.better-auth.com: access-paste
+    https://github.com: access-paste
+    https://oxc.rs: access-paste
   content.media.audio_capture:
     https://app.slack.com: true
     https://us06web.zoom.us: true
