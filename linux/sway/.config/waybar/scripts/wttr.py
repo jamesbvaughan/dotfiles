@@ -1,5 +1,43 @@
 #!/usr/bin/env python3
 
+# Location is resolved via GeoClue when possible; wttr.in's own IP-based
+# geolocation is the fallback. The latter is what motivated this change — it
+# sometimes resolves to the wrong city even when sitting on home WiFi.
+#
+# Setup on a new machine (Arch Linux):
+#   - Install `geoclue` (>=2.7) and `python-gobject`. geoclue.service is
+#     static/socket-activated; no `systemctl enable` needed.
+#   - The default WiFi backend (beacondb) has almost no AP coverage in
+#     practice and silently degrades to IP geolocation, which is the
+#     problem we were trying to escape. Swap it for Google's Geolocation
+#     API, which has effectively-complete BSSID coverage from Android:
+#       1. In Google Cloud Console, make a project, enable the
+#          "Geolocation API", create an API key, and restrict the key to
+#          that single API so a leak can't run up other charges.
+#       2. In /etc/geoclue/geoclue.conf, under [wifi], uncomment the
+#          googleapis URL and substitute the key:
+#            url=https://www.googleapis.com/geolocation/v1/geolocate?key=YOUR_KEY
+#       3. `sudo systemctl restart geoclue` and verify with:
+#            /usr/lib/geoclue-2.0/demos/where-am-i -a 6
+#          You should see "Description: WiFi" and accuracy in the tens of
+#          meters. If it still says "GeoIP (ichnaea)" with km-scale
+#          accuracy, the WiFi source isn't reaching Google — check that
+#          NetworkManager is the active WiFi manager (not bare iwd) and
+#          that geoclue's logs (`journalctl -u geoclue`) don't show
+#          "WiFi scan failed".
+#     Positon (`https://api.positon.xyz/v1/geolocate?key=...`, free key
+#     inline in geoclue.conf) is a no-signup alternative with worse
+#     coverage than Google but better than beacondb — worth trying first
+#     if you'd rather skip the Google Cloud setup.
+#   - No allowlist entry is required under sway: with no GeoClue agent
+#     running, the daemon grants access to bus clients by default. If a
+#     future setup ever denies access, add this block to
+#     /etc/geoclue/geoclue.conf (the app_id must match the string passed
+#     to Geoclue.Simple.new_sync below):
+#       [wttr]
+#       allowed=true
+#       system=false
+
 import json
 import requests
 from datetime import datetime
@@ -57,7 +95,27 @@ WEATHER_CODES = {
 
 data = {}
 
-weather = requests.get("https://wttr.in?format=j1").json()
+
+def get_location():
+    """Return 'lat,lon' from GeoClue, or None on any failure."""
+    try:
+        import gi
+        gi.require_version("Geoclue", "2.0")
+        from gi.repository import Geoclue
+        clue = Geoclue.Simple.new_sync(
+            "wttr", Geoclue.AccuracyLevel.NEIGHBORHOOD, None
+        )
+        loc = clue.get_location()
+        result = f"{loc.get_property('latitude')},{loc.get_property('longitude')}"
+        clue.get_client().call_stop_sync(None)
+        return result
+    except Exception:
+        return None
+
+
+location = get_location()
+url = f"https://wttr.in/{location}?format=j1" if location else "https://wttr.in?format=j1"
+weather = requests.get(url).json()
 
 
 def format_time(time):

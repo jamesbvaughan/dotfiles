@@ -30,7 +30,7 @@ exec swaync
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 
-set $lock_cmd 'swaylock --daemonize --grace 10 --screenshots --effect-pixelate 16  --ignore-empty-password'
+set $lock_cmd 'pidof hyprlock || hyprlock --grace 10'
 
 # set up a lock screen
 exec swayidle -w \
@@ -38,7 +38,7 @@ exec swayidle -w \
 	timeout 1805 'swaymsg "output * dpms off"' \
 	resume 'swaymsg "output * dpms on"' \
   before-sleep 'playerctl pause' \
-  before-sleep 'swaylock'
+  before-sleep 'pidof hyprlock || hyprlock --grace 10'
 
 
 ### Colors
@@ -66,7 +66,8 @@ set $right l
 # set $term kitty
 # set $term wezterm
 set $term ghostty
-set $menu ~/.dotfiles/scripts/menu
+# set $menu ~/.dotfiles/scripts/menu
+set $menu vicinae toggle
 
 
 ### Wallpaper
