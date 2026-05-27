@@ -1,9 +1,9 @@
 [
   {
     "modules-left": [
-      "sway/workspaces",
+      "hyprland/workspaces",
       "custom/separator",
-      "sway/window"
+      "hyprland/window"
     ],
     "modules-center": [
       "custom/events"
@@ -34,7 +34,7 @@
       "temperature",
       "custom/separator",
       "custom/wattage",
-      "sway/mode"
+      "hyprland/submap"
     ],
     "modules-center": [
       "custom/media",

@@ -1,16 +1,16 @@
 {
-  "sway/workspaces": {
+  "hyprland/workspaces": {
     "format": "{icon}",
     "format-icons": {
       "urgent": "",
-      "focused": "",
+      "active": "",
       "default": ""
     }
   },
-  "sway/mode": {
+  "hyprland/submap": {
     "format": "<span style=\"italic\">{}</span>"
   },
-  "sway/window": {
+  "hyprland/window": {
     "max-length": 80
   },
   "clock": {
