@@ -97,15 +97,38 @@ data = {}
 
 
 def get_location():
-    """Return 'lat,lon' from GeoClue, or None on any failure."""
+    """Return 'lat,lon' from GeoClue, or None on any failure.
+
+    Waits briefly after the first fix: GeoClue emits an IP-based estimate
+    first (sub-second) and a WiFi-based one ~1-2s later. Returning on the
+    first signal gives us the IP fix and lands us kilometres off.
+    """
     try:
         import gi
         gi.require_version("Geoclue", "2.0")
-        from gi.repository import Geoclue
+        from gi.repository import Geoclue, GLib
+
         clue = Geoclue.Simple.new_sync(
             "wttr", Geoclue.AccuracyLevel.NEIGHBORHOOD, None
         )
-        loc = clue.get_location()
+
+        loop = GLib.MainLoop()
+        best = [clue.get_location()]
+
+        def on_notify(*_):
+            loc = clue.get_location()
+            if loc.get_property("accuracy") < best[0].get_property("accuracy"):
+                best[0] = loc
+            if best[0].get_property("accuracy") < 500:
+                loop.quit()
+
+        clue.connect("notify::location", on_notify)
+
+        if best[0].get_property("accuracy") >= 500:
+            GLib.timeout_add(5000, lambda: loop.quit() or False)
+            loop.run()
+
+        loc = best[0]
         result = f"{loc.get_property('latitude')},{loc.get_property('longitude')}"
         clue.get_client().call_stop_sync(None)
         return result
