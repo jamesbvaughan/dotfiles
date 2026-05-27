@@ -125,7 +125,7 @@ def get_location():
         clue.connect("notify::location", on_notify)
 
         if best[0].get_property("accuracy") >= 500:
-            GLib.timeout_add(3000, lambda: loop.quit() or False)
+            GLib.timeout_add(5000, lambda: loop.quit() or False)
             loop.run()
 
         loc = best[0]
