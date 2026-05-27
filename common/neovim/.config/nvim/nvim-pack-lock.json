@@ -110,7 +110,7 @@
       "src": "https://github.com/brenoprata10/nvim-highlight-colors"
     },
     "nvim-lspconfig": {
-      "rev": "deb0df61b2d6691e745b16a42755e10ad38218e9",
+      "rev": "6f76a3eeadc2ee235d74cd7d5319e95a261084af",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
@@ -138,7 +138,7 @@
       "src": "https://github.com/JoosepAlviste/nvim-ts-context-commentstring"
     },
     "nvim-web-devicons": {
-      "rev": "7d8dad2c837fcdf2e65997e68657c1a21c568074",
+      "rev": "dfbfaa967a6f7ec50789bead7ef87e336c1fa63c",
       "src": "https://github.com/kyazdani42/nvim-web-devicons"
     },
     "oil-git-status.nvim": {
