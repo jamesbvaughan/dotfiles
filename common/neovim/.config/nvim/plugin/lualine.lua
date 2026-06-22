@@ -1,5 +1,4 @@
 vim.pack.add({
-	gh("kyazdani42/nvim-web-devicons"),
 	gh("hoob3rt/lualine.nvim"),
 })
 

@@ -41,9 +41,18 @@ vim.lsp.config("lua_ls", {
 	},
 })
 
+-- knip isn't in nvim-lspconfig, so define it ourselves.
+-- https://github.com/webpro-nl/knip/blob/main/packages/language-server/README.md
+vim.lsp.config("knip", {
+	cmd = { "npx", "@knip/language-server", "--stdio" },
+	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+	root_markers = { "knip.json", "knip.jsonc", "knip.ts", "knip.config.ts", "knip.config.js", "package.json" },
+})
+
 vim.lsp.enable("oxfmt")
 vim.lsp.enable("oxlint")
 vim.lsp.enable("tsgo")
+vim.lsp.enable("knip")
 
 vim.lsp.config("jsonls", {
 	settings = {

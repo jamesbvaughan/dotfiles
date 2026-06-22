@@ -2,7 +2,6 @@
 --   https://github.com/stevearc/oil.nvim
 
 vim.pack.add({
-	gh("nvim-tree/nvim-web-devicons"),
 	gh("stevearc/oil.nvim"),
 	gh("refractalize/oil-git-status.nvim"),
 })

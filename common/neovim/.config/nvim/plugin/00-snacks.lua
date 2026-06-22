@@ -79,4 +79,5 @@ vim.keymap.set(
 	pick("git_files", { cwd = "~/.dotfiles", untracked = true }),
 	{ desc = "Search dotfiles repo" }
 )
-vim.keymap.set("n", "<leader>gp", pick("gh_pr"), { desc = "Pull Requests" })
+-- Disabling this for now because it causes a delay before <leader>g opens Neogit
+-- vim.keymap.set("n", "<leader>gp", pick("gh_pr"), { desc = "Pull Requests" })

@@ -73,37 +73,35 @@ vim.g.no_plugin_maps = true
 
 require("nvim-treesitter-textobjects").setup({
 	select = {
-		enable = true,
 		lookahead = true,
 		include_surrounding_whitespace = true,
-		keymaps = {
-			["af"] = "@function.outer",
-			["if"] = "@function.inner",
-			["ac"] = "@class.outer",
-			["ic"] = "@class.inner",
-			["aa"] = "@parameter.outer",
-			["ia"] = "@parameter.inner",
-		},
-	},
-	lsp_interop = {
-		enable = true,
-		border = "none",
-		floating_preview_opts = {},
-		peek_definition_code = {
-			["<leader>df"] = "@function.outer",
-			["<leader>dF"] = "@class.outer",
-		},
-	},
-	swap = {
-		enable = true,
-		swap_next = {
-			["<leader>a"] = "@parameter.inner",
-		},
-		swap_previous = {
-			["<leader>A"] = "@parameter.inner",
-		},
 	},
 })
+
+-- The main-branch textobjects API no longer registers keymaps from setup(),
+-- so bind them manually against the module functions.
+local ts_select = require("nvim-treesitter-textobjects.select")
+local select_keymaps = {
+	["af"] = "@function.outer",
+	["if"] = "@function.inner",
+	["ac"] = "@class.outer",
+	["ic"] = "@class.inner",
+	["aa"] = "@parameter.outer",
+	["ia"] = "@parameter.inner",
+}
+for key, query in pairs(select_keymaps) do
+	vim.keymap.set({ "x", "o" }, key, function()
+		ts_select.select_textobject(query, "textobjects")
+	end, { desc = "Select " .. query })
+end
+
+local ts_swap = require("nvim-treesitter-textobjects.swap")
+vim.keymap.set("n", "<leader>a", function()
+	ts_swap.swap_next("@parameter.inner")
+end, { desc = "Swap parameter with next" })
+vim.keymap.set("n", "<leader>A", function()
+	ts_swap.swap_previous("@parameter.inner")
+end, { desc = "Swap parameter with previous" })
 
 require("treesitter-context").setup({
 	max_lines = 5,
