@@ -134,3 +134,6 @@ typeset -aU path
 if [[ "$CLAUDECODE" != "1" ]]; then
     eval "$(zoxide init --cmd cd zsh)"
 fi
+
+# Pi
+export PATH="/Users/james/.volta/tools/image/node/24.15.0/bin:$PATH"
