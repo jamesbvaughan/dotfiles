@@ -1,0 +1,15 @@
+{
+  "lastChangelogVersion": "0.83.0",
+  "theme": "catppuccin-mocha",
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-sonnet-5",
+  "defaultThinkingLevel": "medium",
+  "enabledModels": [
+    "anthropic/claude-opus-5",
+    "anthropic/claude-sonnet-5",
+    "anthropic/claude-haiku-4-5"
+  ],
+  "terminal": {
+    "showTerminalProgress": true
+  }
+}
