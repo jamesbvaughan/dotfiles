@@ -83,6 +83,15 @@ vim.lsp.config("yamlls", {
 	},
 })
 
+vim.lsp.config("html", {
+	settings = {
+		html = {},
+		css = {},
+		javascript = {},
+	},
+})
+vim.lsp.enable("html")
+
 vim.diagnostic.config({
 	virtual_lines = false,
 })
