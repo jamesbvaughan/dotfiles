@@ -69,11 +69,7 @@ set $down j
 set $up k
 set $right l
 
-# set $term alacritty
-# set $term kitty
-# set $term wezterm
 set $term ghostty
-# set $menu ~/.dotfiles/scripts/menu
 set $menu vicinae toggle
 
 
