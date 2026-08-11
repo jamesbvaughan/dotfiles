@@ -3,6 +3,13 @@
 # Set up the XDG environment
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
+# Ask for dark mode.
+# Sway has no settings daemon of its own, so nothing sets this unless we do.
+# xdg-desktop-portal-gtk relays these to org.freedesktop.appearance, which is
+# what Chrome, Electron, Firefox, and GTK4/libadwaita apps actually read.
+exec gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+exec gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+
 # dim color temperature at night
 exec /usr/lib/geoclue-2.0/demos/agent
 exec gammastep
