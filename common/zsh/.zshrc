@@ -137,3 +137,4 @@ fi
 
 # Pi
 export PATH="/Users/james/.volta/tools/image/node/24.15.0/bin:$PATH"
+export PATH="/home/james/.local/share/pi-node/node-v22.23.2-linux-x64/bin:$PATH"
