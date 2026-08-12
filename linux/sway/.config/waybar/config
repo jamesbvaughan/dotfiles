@@ -17,6 +17,8 @@
       "custom/separator",
       "clock",
       "custom/separator",
+      "custom/lock",
+      "custom/separator",
       "tray",
       "custom/notification"
     ],

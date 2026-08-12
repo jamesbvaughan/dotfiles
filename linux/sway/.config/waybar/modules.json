@@ -158,6 +158,12 @@
     "interval": "once",
     "tooltip": false
   },
+  "custom/lock": {
+    "format": "",
+    "interval": "once",
+    "tooltip": false,
+    "on-click": "hyprlock --grace 0"
+  },
   "custom/notification": {
     "tooltip": false,
     "format": "{icon}",
