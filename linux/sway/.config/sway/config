@@ -93,7 +93,7 @@ output "*" bg #000000 solid_color
 
 default_border pixel 2
 # hide_edge_borders vertical
-gaps inner 16
+# gaps inner 16
 smart_borders on
 smart_gaps on
 
