@@ -9,7 +9,7 @@
     //   "custom/events"
     // ],
     "modules-right": [
-      "backlight",
+      "custom/brightness",
       "custom/separator",
       "pulseaudio",
       "custom/separator",

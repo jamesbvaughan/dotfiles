@@ -44,14 +44,24 @@
     "format": "{}% "
   },
   "temperature": {},
-  "backlight": {
-    "format": "{percent}% {icon}",
+  // Not waybar's built-in "backlight" module: that one only reads
+  // /sys/class/backlight, where the Studio Display never appears. This follows
+  // whichever display is active, same as the XF86MonBrightness bindings.
+  "custom/brightness": {
+    "format": "{}% {icon}",
     "format-icons": [
       "",
       ""
     ],
-    "on-scroll-up": "brightnessctl set +10%",
-    "on-scroll-down": "brightnessctl set 10%-"
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/scripts/brightness.sh",
+    // Only a backstop for changes made on the display itself; brightness.sh
+    // signals us directly whenever it changes something.
+    "interval": 30,
+    "signal": 1,
+    "tooltip": false,
+    "on-scroll-up": "$HOME/.dotfiles/scripts/brightness.sh up",
+    "on-scroll-down": "$HOME/.dotfiles/scripts/brightness.sh down"
   },
   "battery": {
     "states": {
