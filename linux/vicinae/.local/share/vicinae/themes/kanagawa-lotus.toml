@@ -1,0 +1,83 @@
+# Kanagawa Lotus for vicinae, to match ghostty and neovim.
+# Colors come from rebelot/kanagawa.nvim's `lotus` theme.
+# Docs: https://docs.vicinae.com/theming/getting-started
+
+[meta]
+version = 1
+name = "Kanagawa Lotus"
+description = "The light Kanagawa variant"
+variant = "light"
+inherits = "vicinae-light"
+
+[colors.core]
+accent = "#4d699b"            # lotusBlue4
+accent_foreground = "#f2ecbc" # lotusWhite3
+background = "#f2ecbc"        # lotusWhite3
+foreground = "#545464"        # lotusInk1
+secondary_background = "#e5ddb0" # lotusWhite2
+border = "#a09cac"            # lotusViolet1
+
+[colors.main_window]
+border = "#a09cac"
+footer = { background = "colors.core.secondary_background" }
+
+[colors.settings_window]
+border = "#a09cac"
+
+[colors.accents]
+blue = "#4d699b"    # lotusBlue4
+green = "#6f894e"   # lotusGreen
+magenta = "#b35b79" # lotusPink
+orange = "#cc6d00"  # lotusOrange
+red = "#c84053"     # lotusRed
+yellow = "#77713f"  # lotusYellow
+cyan = "#597b75"    # lotusAqua
+purple = "#624c83"  # lotusViolet4
+
+[colors.shortcut]
+border = "colors.core.border"
+
+[colors.text]
+default = "colors.core.foreground"
+muted = "#8a8980"       # lotusGray3
+danger = "#c84053"      # lotusRed
+success = "#6f894e"     # lotusGreen
+placeholder = "#a09cac" # lotusViolet1
+selection = { background = "#4d699b", foreground = "#f2ecbc" }
+
+[colors.text.links]
+default = "#4d699b"
+visited = "#624c83"
+
+[colors.input]
+border = "#a09cac"
+border_focus = "#4d699b"
+border_error = "#c84053"
+
+[colors.button.primary]
+background = "#e5ddb0" # lotusWhite2
+foreground = "#545464"
+hover = { background = "#e4d794" }
+focus = { outline = "colors.core.accent" }
+
+[colors.list.item.hover]
+foreground = "#545464"
+secondary_foreground = "#545464"
+
+[colors.list.item.selection]
+background = "#e4d794" # lotusWhite4
+foreground = "#545464"
+secondary_background = "#e4d794"
+secondary_foreground = "#545464"
+
+[colors.grid.item]
+background = "#e5ddb0"
+hover = { outline = "#545464" }
+selection = { outline = "#545464" }
+
+[colors.scrollbars]
+background = "#a09cac"
+
+[colors.loading]
+bar = "#4d699b"
+spinner = "#545464"

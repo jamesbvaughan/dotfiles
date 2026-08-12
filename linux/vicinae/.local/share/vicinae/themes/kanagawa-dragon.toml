@@ -1,0 +1,83 @@
+# Kanagawa Dragon for vicinae, to match ghostty and neovim.
+# Colors come from rebelot/kanagawa.nvim's `dragon` theme.
+# Docs: https://docs.vicinae.com/theming/getting-started
+
+[meta]
+version = 1
+name = "Kanagawa Dragon"
+description = "The near-black Kanagawa variant"
+variant = "dark"
+inherits = "vicinae-dark"
+
+[colors.core]
+accent = "#8ba4b0"            # dragonBlue2
+accent_foreground = "#181616" # dragonBlack3
+background = "#181616"        # dragonBlack3
+foreground = "#c5c9c5"        # dragonWhite
+secondary_background = "#1D1C19" # dragonBlack2
+border = "#393836"            # dragonBlack5
+
+[colors.main_window]
+border = "#393836"
+footer = { background = "colors.core.secondary_background" }
+
+[colors.settings_window]
+border = "#393836"
+
+[colors.accents]
+blue = "#8ba4b0"    # dragonBlue2
+green = "#8a9a7b"   # dragonGreen2
+magenta = "#a292a3" # dragonPink
+orange = "#b6927b"  # dragonOrange
+red = "#c4746e"     # dragonRed
+yellow = "#c4b28a"  # dragonYellow
+cyan = "#8ea4a2"    # dragonAqua
+purple = "#8992a7"  # dragonViolet
+
+[colors.shortcut]
+border = "colors.core.border"
+
+[colors.text]
+default = "colors.core.foreground"
+muted = "#a6a69c"       # dragonGray
+danger = "#c4746e"      # dragonRed
+success = "#8a9a7b"     # dragonGreen2
+placeholder = "#737c73" # dragonAsh
+selection = { background = "#8ba4b0", foreground = "#181616" }
+
+[colors.text.links]
+default = "#8ba4b0"
+visited = "#a292a3"
+
+[colors.input]
+border = "#393836"
+border_focus = "#8ba4b0"
+border_error = "#c4746e"
+
+[colors.button.primary]
+background = "#282727" # dragonBlack4
+foreground = "#c5c9c5"
+hover = { background = "#393836" }
+focus = { outline = "colors.core.accent" }
+
+[colors.list.item.hover]
+foreground = "#c5c9c5"
+secondary_foreground = "#c5c9c5"
+
+[colors.list.item.selection]
+background = "#282727"
+foreground = "#c5c9c5"
+secondary_background = "#282727"
+secondary_foreground = "#c5c9c5"
+
+[colors.grid.item]
+background = "#1D1C19"
+hover = { outline = "#c5c9c5" }
+selection = { outline = "#c5c9c5" }
+
+[colors.scrollbars]
+background = "#393836"
+
+[colors.loading]
+bar = "#8ba4b0"
+spinner = "#c5c9c5"
