@@ -123,6 +123,7 @@ input type:touchpad {
   pointer_accel 1
   accel_profile flat
   scroll_factor 0.1
+  click_method clickfinger
 }
 
 input type:keyboard {
