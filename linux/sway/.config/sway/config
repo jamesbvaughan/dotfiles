@@ -55,11 +55,12 @@ exec swayidle -w \
 
 ### Colors
 
-set $green  '#98971a'
-set $red    '#cc241d'
-set $black  '#1d2021'
-set $blue   '#458588'
-set $orange '#fe8019'
+# kanagawa dragon
+set $green  '#87a987'
+set $red    '#c4746e'
+set $black  '#181616'
+set $blue   '#8ba4b0'
+set $orange '#b6927b'
 
 # class          border backgr. text indicator child_border
 client.focused   $red   $red    $red $blue     $orange
@@ -81,7 +82,7 @@ set $menu vicinae toggle
 ### Wallpaper
 
 # output "*" bg /home/james/code/wallpapers/gruvbox/houseonthesideofalake.jpg fill
-output "*" bg #000000 solid_color
+output "*" bg #181616 solid_color
 
 
 ### Window configuration

@@ -2,7 +2,7 @@
 
 # Reload the config with Cmd+Shift+,
 
-theme = dark:Catppuccin Mocha,light:Catppuccin Latte
+theme = dark:Kanagawa Dragon,light:Kanagawa Lotus
 
 # Fonts
 
@@ -22,8 +22,8 @@ font-style-bold-italic = Bold Condensed Oblique
 # Custom icon styling
 macos-icon              = custom-style
 macos-icon-frame        = plastic
-macos-icon-ghost-color  = cdd6f4
-macos-icon-screen-color = 1e1e2e
+macos-icon-ghost-color  = c5c9c5
+macos-icon-screen-color = 181616
 
 # Hide the macOS title bar
 # window-decoration = false

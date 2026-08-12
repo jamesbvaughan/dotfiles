@@ -1,53 +1,34 @@
+-- `colorscheme kanagawa` resolves to the variant configured for the current
+-- `background`, so both callbacks use the same name.
 local function setDark()
 	vim.opt.background = "dark"
-	vim.cmd("colorscheme catppuccin")
+	vim.cmd("colorscheme kanagawa")
 end
 
 local function setLight()
 	vim.opt.background = "light"
-	vim.cmd("colorscheme catppuccin")
+	vim.cmd("colorscheme kanagawa")
 end
 
 vim.pack.add({
-	{ src = gh("catppuccin/nvim"), name = "catppuccin" },
+	{ src = gh("rebelot/kanagawa.nvim"), name = "kanagawa" },
 	gh("f-person/auto-dark-mode.nvim"),
 })
 
----@type CatppuccinOptions
-require("catppuccin").setup({
-	integrations = {
-		blink_cmp = true,
-		diffview = true,
-		fidget = true,
-		lsp_trouble = true,
-		notify = true,
-		snacks = true,
-		which_key = true,
-		native_lsp = {
-			enabled = true,
-			virtual_text = {
-				errors = { "italic" },
-				hints = { "italic" },
-				warnings = { "italic" },
-				information = { "italic" },
-				ok = { "italic" },
-			},
-			underlines = {
-				errors = { "undercurl" },
-				hints = { "underline" },
-				warnings = { "undercurl" },
-				information = { "underline" },
-			},
-			inlay_hints = {
-				background = true,
-			},
-		},
-	},
-	custom_highlights = function(colors)
+---@type KanagawaConfig
+require("kanagawa").setup({
+	-- dragon is the near-black variant (bg #181616); lotus is its light pair.
+	background = { dark = "dragon", light = "lotus" },
+	commentStyle = { italic = true },
+	keywordStyle = { italic = true },
+	statementStyle = { bold = true },
+	terminalColors = true,
+	overrides = function(colors)
+		local theme = colors.theme
 		return {
-			SnacksIndent = { fg = colors.surface0 },
-			SnacksIndentScope = { fg = colors.surface2 },
-			BlinkCmpMenu = { bg = colors.mantle },
+			SnacksIndent = { fg = theme.ui.bg_p2 },
+			SnacksIndentScope = { fg = theme.ui.nontext },
+			BlinkCmpMenu = { bg = theme.ui.bg_m1 },
 		}
 	end,
 })
