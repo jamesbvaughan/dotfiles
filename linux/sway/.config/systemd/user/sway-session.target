@@ -1,0 +1,9 @@
+[Unit]
+# Bare sway never activates graphical-session.target itself, so user services
+# installed as WantedBy=graphical-session.target (vicinae, etc.) never start at
+# login. Sway's config starts this target, and BindsTo pulls in the real one.
+Description=sway compositor session
+Documentation=man:systemd.special(7)
+BindsTo=graphical-session.target
+Wants=graphical-session-pre.target
+After=graphical-session-pre.target

@@ -1,0 +1,23 @@
+[Unit]
+# GeoClue 2.8 blocks Manager.GetClient until an agent registers itself. With no
+# agent running the call never returns, every location request dies on the 25s
+# D-Bus timeout, and callers silently fall back to IP geolocation — which is
+# how the waybar weather module ended up reporting a city 40 miles away.
+#
+# Desktop environments ship their own agent (gnome-shell, phosh, ...); bare
+# sway ships none, so run geoclue's demo agent. Its desktop id must stay in
+# the `whitelist=` line of [agent] in /etc/geoclue/geoclue.conf, where
+# `geoclue-demo-agent` is listed by default.
+Description=GeoClue location agent
+Documentation=https://gitlab.freedesktop.org/geoclue/geoclue
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=exec
+ExecStart=/usr/lib/geoclue-2.0/demos/agent
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=graphical-session.target
