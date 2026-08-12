@@ -12,6 +12,9 @@ lazy-lock.json
 .luarc.json
 common/atuin/.config/atuin/atuin-receipt.json
 
+# sunsetr's coordinates
+linux/sunsetr/.config/sunsetr/geo.toml
+
 common/pi/.pi/agent/auth.json
 common/pi/.pi/agent/sessions/
 common/pi/.pi/agent/models-store.json

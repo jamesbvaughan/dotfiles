@@ -1,0 +1,47 @@
+# sunsetr -- automatic blue light filter, replacing gammastep.
+#
+# Coordinates are deliberately absent from this file. They live in geo.toml
+# alongside it, which is gitignored, so this repo stays free of a home
+# location accurate to a kilometre. sunsetr reads geo.toml in preference to
+# this file when it exists. On a new machine, run `sunsetr geo` once and pick
+# the nearest city; there is no location daemon to set up, because sunsetr has
+# no GeoClue support -- the city picker and a one-time IP guess on first run
+# are its only two location inputs.
+#
+# Careful: this file is a stow symlink, and sunsetr replaces it with a regular
+# 0600 copy on any write, silently orphaning the repo version. Reads are safe.
+# `sunsetr set` and `sunsetr geo` both count as writes, and `sunsetr geo` only
+# escapes this because it lands in geo.toml instead. To change anything below,
+# edit this file directly and run `sunsetr restart` -- never `sunsetr set`.
+
+#[Backend]
+# "auto" resolves to the generic Wayland backend under sway, which drives
+# wlr-gamma-control-unstable-v1 -- the same protocol gammastep used.
+backend = "auto"
+
+# Sunset and sunrise are computed from the coordinates in geo.toml rather than
+# from wall-clock times, which is what gammastep did with its location provider.
+transition_mode = "geo"
+
+#[Smoothing]
+smoothing = true
+startup_duration = 0.5
+shutdown_duration = 0.5
+adaptive_interval = 1
+
+#[Time-based config]
+night_temp = 3300
+day_temp = 6500
+night_gamma = 90
+day_gamma = 100
+update_interval = "auto"
+
+#[Static config]
+static_temp = 6500
+static_gamma = 100
+
+#[Manual transitions]
+# Unused while transition_mode is "geo", but sunsetr wants them present.
+sunset = "19:00:00"
+sunrise = "06:00:00"
+transition_duration = 45

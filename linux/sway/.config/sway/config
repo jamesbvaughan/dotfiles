@@ -12,11 +12,6 @@ exec systemctl --user start sway-session.target
 exec gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 exec gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 
-# dim color temperature at night
-exec /usr/lib/geoclue-2.0/demos/agent
-exec gammastep
-
-
 # enable an authentication agent
 # https://wiki.archlinux.org/title/Polkit#Authentication_agents
 exec /usr/lib/hyprpolkitagent/hyprpolkitagent
