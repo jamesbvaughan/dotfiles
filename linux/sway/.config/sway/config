@@ -92,7 +92,10 @@ for_window [app_id="syncthingtray"] floating enable, border none, resize set 450
 
 ### HiDPI
 
+# Laptop built-in display
 output eDP-1 scale 1.6
+# External display (often an Apple Studio Display)
+output DP-1 scale 2
 
 
 ### Lid switch
