@@ -1,7 +1,5 @@
-# xwayland disable
-
-# Set up the XDG environment
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+# Set up the XDG environment.
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 # Activate graphical-session.target so user services enabled against it (vicinae,
 # etc.) actually start at login.
