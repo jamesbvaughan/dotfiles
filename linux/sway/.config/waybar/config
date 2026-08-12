@@ -49,6 +49,8 @@
       "bluetooth",
       "custom/blank",
       "custom/separator",
+      "systemd-failed-units",
+      "custom/separator",
       "battery"
     ],
     "include": [

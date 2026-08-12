@@ -167,6 +167,15 @@
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
     "escape": true
+  },
+  "systemd-failed-units": {
+    "hide-on-ok": false,
+    "format": " ✗ {nr_failed} ",
+    "format-ok": " ✓ ",
+    "system": true,
+    "user": false,
+    "tooltip-format": "{nr_failed} failed units:n{failed_units_list}",
+    "tooltip-unit-format": "{scope}: {name} ({active_state})"
   }
 }
 // vim: ft=jsonc
