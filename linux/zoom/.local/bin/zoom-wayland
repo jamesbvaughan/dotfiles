@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# Run Zoom as a native Wayland client instead of through XWayland.
+#
+# Zoom's UI is blurry under sway because /usr/bin/zoom is ZoomLauncher, which
+# calls setenv("QT_QPA_PLATFORM", "xcb") with overwrite enabled just before
+# exec'ing the real binary. That is unconditional -- exporting
+# QT_QPA_PLATFORM=wayland in the environment does nothing, the child still
+# comes up on xcb. XWayland clients get no fractional scale from sway, so at
+# `output eDP-1 scale 1.6` they render at 1x and are scaled up, and every
+# glyph is interpolated.
+#
+# The Qt Wayland plugins are bundled (/opt/zoom/Qt/plugins/platforms/
+# libqwayland-egl.so and libqwayland-generic.so), so the fix is just to skip
+# the launcher and set up its environment ourselves. These three variables are
+# exactly what it was injecting, recovered by diffing /proc/<child>/environ
+# against the launcher's own.
+#
+# What is lost by bypassing ZoomLauncher: its crash-restart loop and its log
+# wrapper. URL handling is *not* lost -- the main binary parses zoommtg:// and
+# zoomus:// itself and forwards them over its Qt single-instance socket, so
+# meeting links still work.
+
+LD_LIBRARY_PATH=/opt/zoom/Qt/lib:/opt/zoom/cef:/opt/zoom
+export LD_LIBRARY_PATH
+
+# Zoom's data directory. It defaults here anyway, but the launcher set it
+# explicitly and there's no reason to find out the hard way where a future
+# version would otherwise put things.
+SSB_HOME="$HOME/.zoom"
+export SSB_HOME
+
+QT_QPA_PLATFORM=wayland
+export QT_QPA_PLATFORM
+
+# Qt picking the Wayland plugin isn't enough on its own: Zoom separately
+# decides whether it's "native Wayland" -- which is what gates its
+# PipeWire/portal screen-sharing path -- and that check reads
+# XDG_SESSION_TYPE. Sway's dbus-update-activation-environment line exports it
+# now, but set it here too so this works no matter what launches it. Without
+# it Zoom logs "isNativeWayland: 0" and falls back to X11 capture even while
+# rendering through Wayland.
+XDG_SESSION_TYPE=wayland
+export XDG_SESSION_TYPE
+
+exec /opt/zoom/zoom "$@"

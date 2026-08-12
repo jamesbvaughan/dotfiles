@@ -1,0 +1,15 @@
+# How xdg-desktop-portal-wlr picks what to share.
+#
+# Without a chooser it has no way to ask which output you meant, so on a
+# multi-output setup it either guesses or fails. slurp lets you click the
+# output; -o restricts the selection to whole outputs and -r makes it a
+# single click rather than a drag.
+
+[screencast]
+chooser_type=simple
+chooser_cmd=slurp -f %o -or
+
+# wlroots screencast captures at the output's refresh rate by default, which on
+# this panel means encoding far more frames than a video call needs. Capping
+# keeps a share from eating a core.
+max_fps=30

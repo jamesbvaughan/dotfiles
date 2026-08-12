@@ -1,5 +1,9 @@
 # Set up the XDG environment.
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec dbus-update-activation-environment --systemd \
+  DISPLAY \
+  WAYLAND_DISPLAY \
+  XDG_CURRENT_DESKTOP=sway \
+  XDG_SESSION_TYPE=wayland
 
 # Activate graphical-session.target so user services enabled against it (vicinae,
 # etc.) actually start at login.
@@ -84,7 +88,7 @@ gaps inner 10
 smart_borders on
 smart_gaps on
 
-# for_window [app_id="zoom"] floating enable
+for_window [app_id="Zoom"] floating enable
 # for_window [app_id="blueman-manager"] floating enable
 # for_window [app_id="pavucontrol"] floating enable
 # for_window [app_id="syncthingtray"] floating enable, border none, resize set 450 400, move position 3300 0

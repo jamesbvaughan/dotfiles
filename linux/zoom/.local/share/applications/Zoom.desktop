@@ -1,0 +1,27 @@
+# Overrides /usr/share/applications/Zoom.desktop to launch Zoom on Wayland
+# rather than XWayland. See .local/bin/zoom-wayland for why a wrapper is
+# needed instead of just an environment variable.
+#
+# Exec has to name the wrapper by absolute path. The desktop spec would allow a
+# bare command resolved from PATH, but vicinae runs as a systemd user service
+# and the user manager's PATH is only /usr/local/bin:/usr/bin -- launching from
+# $mod+space would fail to find anything in ~/.local/bin.
+#
+# Keep the rest in sync with the packaged file on Zoom upgrades; the MimeType
+# and X-KDE-Protocols lists below are what make zoommtg:// links open here.
+
+[Desktop Entry]
+Name=Zoom Workplace
+Comment=Zoom Video Conference
+Exec=/home/james/.local/bin/zoom-wayland %U
+Icon=Zoom
+Terminal=false
+Type=Application
+Encoding=UTF-8
+Categories=Network;Application;
+# "Zoom", not the packaged file's "zoom": the native Wayland app_id is
+# capitalised, where the XWayland WM_CLASS was not.
+StartupWMClass=Zoom
+MimeType=x-scheme-handler/zoommtg;x-scheme-handler/zoomus;x-scheme-handler/tel;x-scheme-handler/callto;x-scheme-handler/zoomphonecall;x-scheme-handler/zoomphonesms;x-scheme-handler/zoomcontactcentercall;application/x-zoom
+X-KDE-Protocols=zoommtg;zoomus;tel;callto;zoomphonecall;zoomphonesms;zoomcontactcentercall;
+Name[en_US]=Zoom Workplace
