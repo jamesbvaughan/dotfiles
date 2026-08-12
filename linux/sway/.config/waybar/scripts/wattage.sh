@@ -1,6 +1,7 @@
 #!/bin/bash
 
-microwatts=$(cat /sys/class/power_supply/BAT0/power_now)
+bat=/sys/class/power_supply/BAT1
+microwatts=$(( $(cat "$bat/current_now") * $(cat "$bat/voltage_now") / 1000000 ))
 
 watts=$(echo "scale=1; $microwatts / 1000000" | bc)
 

@@ -1,13 +1,13 @@
 [
   {
     "modules-left": [
-      "hyprland/workspaces",
+      "ext/workspaces",
       "custom/separator",
-      "hyprland/window"
+      "sway/window"
     ],
-    "modules-center": [
-      "custom/events"
-    ],
+    // "modules-center": [
+    //   "custom/events"
+    // ],
     "modules-right": [
       "backlight",
       "custom/separator",
@@ -33,14 +33,14 @@
       "custom/separator",
       "temperature",
       "custom/separator",
-      "custom/wattage",
-      "hyprland/submap"
+      "custom/wattage"
+      // "hyprland/submap"
     ],
-    "modules-center": [
-      "custom/media",
-      "mpd"
-      // "custom/spotify"
-    ],
+    // "modules-center": [
+    //   "custom/media",
+    //   "mpd"
+    //   // "custom/spotify"
+    // ],
     "modules-right": [
       "network#wifi",
       "network#ethernet",

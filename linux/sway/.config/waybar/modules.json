@@ -1,4 +1,12 @@
 {
+  "ext/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "urgent": "",
+      "active": "",
+      "default": ""
+    }
+  },
   "hyprland/workspaces": {
     "format": "{icon}",
     "format-icons": {
@@ -35,8 +43,7 @@
   "memory": {
     "format": "{}% "
   },
-  "temperature": {
-  },
+  "temperature": {},
   "backlight": {
     "format": "{percent}% {icon}",
     "format-icons": [
@@ -105,8 +112,7 @@
     },
     "on-click": "pavucontrol"
   },
-  "bluetooth": {
-  },
+  "bluetooth": {},
   "custom/spotify": {
     "format": "{} ",
     "escape": true,
