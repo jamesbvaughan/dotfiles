@@ -173,7 +173,7 @@
     "format": " ✗ {nr_failed} ",
     "format-ok": " ✓ ",
     "system": true,
-    "user": false,
+    "user": true,
     "tooltip-format": "{nr_failed} failed units:n{failed_units_list}",
     "tooltip-unit-format": "{scope}: {name} ({active_state})"
   }
