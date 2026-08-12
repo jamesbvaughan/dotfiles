@@ -77,14 +77,15 @@ set $menu vicinae toggle
 ### Wallpaper
 
 # output "*" bg /home/james/code/wallpapers/gruvbox/houseonthesideofalake.jpg fill
-output "*" bg #181616 solid_color
+# output "*" bg #181616 solid_color
+output "*" bg #080606 solid_color
 
 
 ### Window configuration
 
 default_border pixel 2
 # hide_edge_borders vertical
-# gaps inner 16
+gaps inner 10
 smart_borders on
 smart_gaps on
 
