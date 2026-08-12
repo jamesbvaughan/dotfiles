@@ -99,6 +99,10 @@ output eDP-1 scale 1.6
 # External display (often an Apple Studio Display)
 output DP-1 scale 2
 
+# The Apple Studio Display shows two devides, and this one is never visible.
+# Explicitly disable it to avoid confusion.
+output DP-2 disable
+
 
 ### Lid switch
 
