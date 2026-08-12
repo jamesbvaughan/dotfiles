@@ -95,6 +95,15 @@ for_window [app_id="syncthingtray"] floating enable, border none, resize set 450
 output eDP-1 scale 1.6
 
 
+### Lid switch
+
+# Turn the built-in display off when the lid closes.
+# --reload reapplies this on config reload, so starting or reloading sway with
+# the lid shut keeps eDP-1 off.
+bindswitch --reload --locked lid:on  output eDP-1 disable
+bindswitch --reload --locked lid:off output eDP-1 enable
+
+
 ### Font
 
 font pango:Berkeley Mono 10px
