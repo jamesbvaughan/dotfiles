@@ -122,7 +122,9 @@
     },
     "on-click": "pavucontrol"
   },
-  "bluetooth": {},
+  "bluetooth": {
+    "on-click": "ghostty --class=bluetui.Bluetui -e bluetui"
+  },
   "custom/spotify": {
     "format": "{} ",
     "escape": true,

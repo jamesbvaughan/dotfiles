@@ -86,6 +86,7 @@ smart_borders on
 smart_gaps on
 
 for_window [app_id="Zoom"] floating enable
+for_window [app_id="^bluetui\.Bluetui$"] floating enable, resize set 900 700
 # for_window [app_id="blueman-manager"] floating enable
 # for_window [app_id="pavucontrol"] floating enable
 # for_window [app_id="syncthingtray"] floating enable, border none, resize set 450 400, move position 3300 0
