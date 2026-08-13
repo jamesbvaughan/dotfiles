@@ -44,6 +44,15 @@
     "format": "{}% "
   },
   "temperature": {},
+  "custom/display": {
+    "format": "{} 󰍹",
+    "exec": "$HOME/.config/waybar/scripts/display-mode.py",
+    "return-type": "json",
+    "on-click": "$HOME/.config/waybar/scripts/display-mode.py --toggle",
+    "signal": 2,
+    "interval": 30,
+    "tooltip": true
+  },
   // Not waybar's built-in "backlight" module: that one only reads
   // /sys/class/backlight, where the Studio Display never appears. This follows
   // whichever display is active, same as the XF86MonBrightness bindings.
