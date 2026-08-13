@@ -98,7 +98,7 @@ for_window [app_id="^bluetui\.Bluetui$"] floating enable, resize set 900 700
 ### HiDPI
 
 # Laptop built-in display
-output eDP-1 scale 1.4
+output eDP-1 scale 1.5
 # External display (often an Apple Studio Display)
 output DP-1 scale 2
 
