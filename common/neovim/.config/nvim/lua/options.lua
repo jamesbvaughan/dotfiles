@@ -4,7 +4,9 @@ vim.g.mapleader = " "
 ---- don't use swap files
 vim.opt.swapfile = false
 
----- disable the startup screen
+---- don't use a backup directory
+vim.o.writebackup = false
+
 vim.opt.shortmess:append({ I = true })
 
 ---- disable folds
