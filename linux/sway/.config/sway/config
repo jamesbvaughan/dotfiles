@@ -20,6 +20,9 @@ exec /usr/lib/hyprpolkitagent/hyprpolkitagent
 # 1Password
 exec 1password --silent
 
+# NetworkManager
+exec nm-applet
+
 # Dropbox
 exec dropbox
 
