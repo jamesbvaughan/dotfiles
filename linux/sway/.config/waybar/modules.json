@@ -155,7 +155,7 @@
     "return-type": "json"
   },
   "custom/wattage": {
-    "format": " {} 󱐋",
+    "format": "{} 󱐋",
     "interval": 5,
     "exec": "$HOME/.config/waybar/scripts/wattage.sh"
   },
@@ -197,8 +197,8 @@
   },
   "systemd-failed-units": {
     "hide-on-ok": false,
-    "format": " ✗ {nr_failed} ",
-    "format-ok": " ✓ ",
+    "format": "✗ {nr_failed}",
+    "format-ok": "✓",
     "system": true,
     "user": true,
     "tooltip-format": "{nr_failed} failed units:n{failed_units_list}",

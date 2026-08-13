@@ -9,8 +9,6 @@
     //   "custom/events"
     // ],
     "modules-right": [
-      "custom/display",
-      "custom/separator",
       "custom/brightness",
       "custom/separator",
       "pulseaudio",
@@ -37,7 +35,9 @@
       "custom/separator",
       "temperature",
       "custom/separator",
-      "custom/wattage"
+      "custom/wattage",
+      "custom/separator",
+      "custom/display"
       // "hyprland/submap"
     ],
     // "modules-center": [

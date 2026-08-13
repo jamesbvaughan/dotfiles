@@ -80,7 +80,9 @@ tooltip label {
 #custom-media,
 #custom-events,
 #custom-weather,
+#custom-wattage,
 #custom-lock,
+#systemd-failed-units,
 #workspaces {
   padding: 4px 16px;
 }
