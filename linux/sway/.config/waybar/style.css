@@ -37,6 +37,23 @@ tooltip label {
   color: @fg;
 }
 
+menu {
+  background: @bg;
+  border: 1px solid @gray;
+  padding: 4px;
+}
+
+menu menuitem {
+  background: transparent;
+  padding: 4px 8px;
+  color: @fg;
+}
+
+menu menuitem:hover {
+  background: #2a2a2a;
+  color: @fg;
+}
+
 #workspaces button {
   padding: 0 8px;
 }
