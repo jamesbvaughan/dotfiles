@@ -1,19 +1,9 @@
 {
   "ext/workspaces": {
-    "format": "{icon}",
-    "format-icons": {
-      "urgent": "",
-      "active": "",
-      "default": ""
-    }
+    "format": "{name}"
   },
   "hyprland/workspaces": {
-    "format": "{icon}",
-    "format-icons": {
-      "urgent": "",
-      "active": "",
-      "default": ""
-    }
+    "format": "{name}"
   },
   "hyprland/submap": {
     "format": "<span style=\"italic\">{}</span>"
