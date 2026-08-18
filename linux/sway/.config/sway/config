@@ -142,10 +142,17 @@ input type:touchpad {
   tap enabled
   natural_scroll enabled
   middle_emulation enabled
-  pointer_accel 1
-  accel_profile flat
-  scroll_factor 0.1
   click_method clickfinger
+  scroll_factor 0.1
+
+  # Linear
+  accel_profile flat
+  pointer_accel 1.0
+
+  # Non-linear
+  # accel_profile ???
+  # pointer_accel 0.7
+
 }
 
 input type:keyboard {
