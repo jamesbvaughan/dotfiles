@@ -1,3 +1,26 @@
+# Kanagawa Dragon-aligned dark theme for nmtui/newt dialogs
+export NEWT_COLORS='
+root=black,black
+window=black,black
+border=gray,black
+shadow=black,black
+title=yellow,black
+button=lightgray,black
+actbutton=black,yellow
+compactbutton=lightgray,black
+checkbox=lightgray,black
+actcheckbox=black,yellow
+entry=white,black
+actentry=black,yellow
+label=gray,black
+listbox=white,black
+actlistbox=black,yellow
+textbox=white,black
+acttextbox=black,yellow
+helpline=gray,black
+roottext=gray,black
+'
+
 # etc
 alias grep="grep --color"
 alias tmux='tmux -u'
