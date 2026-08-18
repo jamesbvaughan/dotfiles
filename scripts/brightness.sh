@@ -14,10 +14,11 @@
 # Docked with the lid shut, the lid:on bindswitch in the sway config disables
 # eDP-1, so we fall through to the Studio Display.
 #
-# The steps differ between the two - 5% internal, asdbctl's built-in 10% for
-# the Studio Display. Not worth the arithmetic to reconcile.
+# Both devices adjust in increments configured by STEP.
 
 set -eu
+
+STEP=5
 
 action=${1:-}
 case $action in
@@ -28,18 +29,26 @@ esac
 # Both branches print the resulting percentage on stdout, for wob and waybar.
 internal() {
   case $action in
-    up) brightnessctl set +5% >/dev/null ;;
-    down) brightnessctl set 5%- >/dev/null ;;
+    up) brightnessctl set "+${STEP}%" >/dev/null ;;
+    down) brightnessctl set "${STEP}%-" >/dev/null ;;
   esac
   brightnessctl -m | cut -d, -f4 | tr -d '%'
 }
 
 studio_display() {
-  case $action in
-    up | down) asdbctl "$action" >/dev/null 2>&1 || return 1 ;;
-  esac
   percent=$(asdbctl get 2>/dev/null | sed -En 's/^brightness ([0-9]+)$/\1/p')
   [ -n "$percent" ] || return 1
+
+  case $action in
+    up)
+      percent=$((percent + STEP > 100 ? 100 : percent + STEP))
+      asdbctl set "$percent" >/dev/null 2>&1 || return 1
+      ;;
+    down)
+      percent=$((percent - STEP < 0 ? 0 : percent - STEP))
+      asdbctl set "$percent" >/dev/null 2>&1 || return 1
+      ;;
+  esac
   echo "$percent"
 }
 
