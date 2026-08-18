@@ -26,6 +26,9 @@ exec nm-applet
 # Dropbox
 exec dropbox
 
+# Localsend
+exec localsend --hidden
+
 # syncthing
 # exec syncthingtray --wait
 
