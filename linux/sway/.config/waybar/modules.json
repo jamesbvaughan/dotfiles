@@ -31,11 +31,9 @@
     "max-length": 100,
     "tooltip": true,
     "interval": 300,
-    "format-icons": {
-      "default": ""
-    },
     "exec": "$HOME/.config/waybar/scripts/khal.py",
-    "return-type": "json"
+    "return-type": "json",
+    "on-click": "xdg-open https://calendar.google.com"
   },
   "cpu": {
     "format": "{usage}% "

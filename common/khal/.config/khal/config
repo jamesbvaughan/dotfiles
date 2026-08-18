@@ -1,0 +1,22 @@
+[calendars]
+[[google-work]]
+path = ~/.local/share/calendars/google-work/
+readonly = true
+color = dark blue
+
+[[google-personal]]
+path = ~/.local/share/calendars/google-personal/
+readonly = true
+color = dark green
+
+[locale]
+timeformat = %H:%M
+dateformat = %Y-%m-%d
+longdateformat = %Y-%m-%d
+datetimeformat = %Y-%m-%d %H:%M
+longdatetimeformat = %Y-%m-%d %H:%M
+firstweekday = 0
+
+[default]
+timedelta = 10d
+highlight_event_days = true

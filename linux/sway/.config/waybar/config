@@ -5,9 +5,9 @@
       "custom/separator",
       "sway/window"
     ],
-    // "modules-center": [
-    //   "custom/events"
-    // ],
+    "modules-center": [
+      "custom/events"
+    ],
     "modules-right": [
       "custom/brightness",
       "custom/separator",

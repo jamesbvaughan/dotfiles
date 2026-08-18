@@ -1,0 +1,34 @@
+[general]
+status_path = "~/.local/share/vdirsyncer/status/"
+
+[pair google_work]
+a = "google_work_local"
+b = "google_work_remote"
+collections = null
+conflict_resolution = "b wins"
+
+[storage google_work_local]
+type = "filesystem"
+path = "~/.local/share/calendars/google-work/"
+fileext = ".ics"
+
+[storage google_work_remote]
+type = "http"
+# Kept outside the dotfiles repository because this URL grants read access.
+url.fetch = ["command", "cat", "~/.config/vdirsyncer/google-work-calendar-url"]
+
+[pair google_personal]
+a = "google_personal_local"
+b = "google_personal_remote"
+collections = null
+conflict_resolution = "b wins"
+
+[storage google_personal_local]
+type = "filesystem"
+path = "~/.local/share/calendars/google-personal/"
+fileext = ".ics"
+
+[storage google_personal_remote]
+type = "http"
+# Kept outside the dotfiles repository because this URL grants read access.
+url.fetch = ["command", "cat", "~/.config/vdirsyncer/google-personal-calendar-url"]
