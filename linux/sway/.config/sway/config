@@ -34,6 +34,7 @@ exec localsend --hidden
 
 # tailscale tray icon
 # exec tailscale-systray
+exec trayscale --hide-window
 
 # use wob as an indicator bar
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
@@ -93,6 +94,7 @@ smart_gaps on
 
 for_window [app_id="Zoom"] floating enable
 for_window [app_id="^bluetui\.Bluetui$"] floating enable, resize set 900 700
+for_window [app_id="^dev\.deedles\.Trayscale$"] floating enable
 # for_window [app_id="blueman-manager"] floating enable
 # for_window [app_id="pavucontrol"] floating enable
 # for_window [app_id="syncthingtray"] floating enable, border none, resize set 450 400, move position 3300 0
