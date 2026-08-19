@@ -49,6 +49,44 @@ vim.lsp.config("knip", {
 	root_markers = { "knip.json", "knip.jsonc", "knip.ts", "knip.config.ts", "knip.config.js", "package.json" },
 })
 
+-- nvim-lspconfig's oxlint and oxfmt configs look for their binary in
+-- `<root_dir>/node_modules/.bin` and nowhere else. That single-level check loses
+-- in a Yarn workspaces monorepo: their root_dir is the *nearest* directory with
+-- an ox config or an oxlint-mentioning package.json, which in arcol is the
+-- individual workspace (every apps/* and packages/* has its own
+-- oxlint.config.ts), while Yarn hoists the real binaries up to the repo root.
+-- So the lookup misses, both fall back to a bare `oxlint`/`oxfmt` on $PATH, and
+-- with neither installed globally the editor reports the servers as unavailable.
+--
+-- Walking upward fixes it. conform.nvim already does this for the same two
+-- binaries via util.from_node_modules, which is why format-on-save kept working
+-- while the language servers didn't -- a confusing split worth remembering.
+local function node_modules_bin(name, from)
+	-- parents() yields `from` itself first when handed a path inside it, so this
+	-- checks the root_dir before climbing.
+	for dir in vim.fs.parents(vim.fs.joinpath(from, "placeholder")) do
+		local bin = vim.fs.joinpath(dir, "node_modules", ".bin", name)
+		if vim.fn.executable(bin) == 1 then
+			return bin
+		end
+	end
+end
+
+-- Both servers are launched as `{ binary, "--lsp" }`, so one builder covers them.
+-- Falling back to the bare name preserves upstream behaviour on a machine where
+-- these *are* installed globally.
+local function ox_cmd(name)
+	return function(dispatchers, config)
+		local root = (config or {}).root_dir
+		local bin = (root and node_modules_bin(name, root)) or name
+		return vim.lsp.rpc.start({ bin, "--lsp" }, dispatchers)
+	end
+end
+
+-- Overriding only `cmd` keeps upstream's root_dir, filetypes and before_init.
+vim.lsp.config("oxlint", { cmd = ox_cmd("oxlint") })
+vim.lsp.config("oxfmt", { cmd = ox_cmd("oxfmt") })
+
 vim.lsp.enable("oxfmt")
 vim.lsp.enable("oxlint")
 vim.lsp.enable("tsgo")
