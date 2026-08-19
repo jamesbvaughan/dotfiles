@@ -1,0 +1,22 @@
+[Default Applications]
+text/html=google-chrome.desktop
+x-scheme-handler/http=google-chrome.desktop
+x-scheme-handler/https=google-chrome.desktop
+x-scheme-handler/about=google-chrome.desktop
+x-scheme-handler/unknown=google-chrome.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
+x-scheme-handler/mailto=google-chrome.desktop
+x-scheme-handler/slack=slack.desktop
+image/png=swayimg.desktop
+image/jpeg=swayimg.desktop
+image/jpg=swayimg.desktop
+image/gif=swayimg.desktop
+image/webp=swayimg.desktop
+image/svg+xml=swayimg.desktop
+image/heif=swayimg.desktop
+image/avif=swayimg.desktop
+image/tiff=swayimg.desktop
+image/bmp=swayimg.desktop
+image/x-bmp=swayimg.desktop
+
+[Added Associations]
