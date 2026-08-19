@@ -79,3 +79,14 @@ alias nig="npm install --global"
 alias nis="npm install --save"
 alias nisd="npm install --save-dev"
 alias ns="npm start"
+
+# Yazi wrapper (changes cwd on quit)
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
