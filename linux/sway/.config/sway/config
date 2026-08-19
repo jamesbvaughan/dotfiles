@@ -231,8 +231,8 @@ bindsym $mod+a focus parent
 bindsym $mod+z focus child
 
 set $screenshot_file ~/screenshots/screenshot-at-$(date +"%Y-%m-%d-%H-%M-%S").png
-bindsym $mod+Control+4 exec grimshot --notify save area $screenshot_file
-bindsym $mod+Control+5 exec grimshot --notify save output $screenshot_file
+bindsym $mod+Control+4 exec grimshot --notify savecopy area $screenshot_file
+bindsym $mod+Control+5 exec grimshot --notify savecopy output $screenshot_file
 
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pactl get-sink-volume @DEFAULT_SINK@ | head -n 1| awk '{print substr($5, 1, length($5)-1)}' > $WOBSOCK
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pactl get-sink-volume @DEFAULT_SINK@ | head -n 1 | awk '{print substr($5, 1, length($5)-1)}' > $WOBSOCK
