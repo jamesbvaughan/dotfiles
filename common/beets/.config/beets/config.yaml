@@ -1,0 +1,40 @@
+# Beets library configuration
+# https://beets.readthedocs.io/en/stable/reference/config.html
+
+directory: ~/Dropbox/Documents/60-69 Media/62 Music
+library: ~/.local/share/beets/library.db
+
+import:
+  move: true
+  write: true
+  resume: ask
+
+paths:
+  default: $albumartist/$album%aunique{}/$track $title
+  singleton: Non-Album/$artist/$title
+  comp: Compilations/$album%aunique{}/$track $title
+
+plugins:
+  - musicbrainz
+  - fetchart
+  - embedart
+  - chroma
+  - replaygain
+  - duplicates
+  - missing
+  - badfiles
+  - edit
+
+fetchart:
+  auto: true
+  cautious: true
+
+embedart:
+  auto: true
+
+replaygain:
+  auto: true
+  backend: ffmpeg
+
+ui:
+  color: true
