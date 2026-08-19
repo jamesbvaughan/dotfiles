@@ -1,5 +1,6 @@
 ncmpcpp_directory = ~/.config/ncmpcpp
-mpd_music_dir = ~/music
+lyrics_directory = ~/.local/share/ncmpcpp/lyrics
+mpd_music_dir = ~/Dropbox/Documents/60-69 Media/62 Music
 
 # header_visibility = no
 # statusbar_visibility = no
