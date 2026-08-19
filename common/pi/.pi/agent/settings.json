@@ -1,13 +1,15 @@
 {
-  "lastChangelogVersion": "0.83.0",
-  "theme": "catppuccin-mocha",
-  "defaultProvider": "anthropic",
-  "defaultModel": "claude-sonnet-5",
+  "lastChangelogVersion": "0.84.2",
+  "theme": "kanagawa-lotus/kanagawa-dragon",
+  "defaultProvider": "vercel-ai-gateway",
+  "defaultModel": "anthropic/claude-opus-5",
   "defaultThinkingLevel": "medium",
   "enabledModels": [
-    "anthropic/claude-opus-5",
-    "anthropic/claude-sonnet-5",
-    "anthropic/claude-haiku-4-5"
+    "vercel-ai-gateway/anthropic/claude-opus-5",
+    "vercel-ai-gateway/anthropic/claude-sonnet-5",
+    "vercel-ai-gateway/google/gemini-3.6-flash",
+    "vercel-ai-gateway/google/gemini-3.7-flash",
+    "vercel-ai-gateway/openai/gpt-5.6-sol"
   ],
   "terminal": {
     "showTerminalProgress": true
