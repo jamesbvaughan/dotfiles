@@ -46,7 +46,7 @@ def main() -> None:
             timeout=15,
         )
         # khal emits one JSON array per day in the requested range.
-        events = [
+        raw_events = [
             event
             for line in result.stdout.splitlines()
             if line.strip()
@@ -54,6 +54,16 @@ def main() -> None:
             if event.get("cancelled") != "CANCELLED"
             and event.get("all-day") != "True"
         ]
+
+        # Deduplicate events by uid or (title, start-date, start-time)
+        seen: set[str] = set()
+        events = []
+        for event in raw_events:
+            uid = event.get("uid")
+            key = uid if uid else (event.get("title"), event.get("start-date"), event.get("start-time"))
+            if key not in seen:
+                seen.add(key)
+                events.append(event)
     except subprocess.TimeoutExpired:
         emit(tooltip="Calendar query timed out")
         return
