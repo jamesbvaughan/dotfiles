@@ -65,6 +65,7 @@ WEATHER_CODES = {
     '119': '☁️',
     '122': '☁️',
     '143': '🌫',
+    '149': '🌫',
     '176': '🌦',
     '179': '🌧',
     '182': '🌧',
@@ -266,7 +267,7 @@ def format_chances(hour):
     return ", ".join(conditions)
 
 
-data['text'] = WEATHER_CODES[weather['current_condition'][0]['weatherCode']] + \
+data['text'] = WEATHER_CODES.get(weather['current_condition'][0]['weatherCode'], '🌡️') + \
     " " + weather['current_condition'][0]['FeelsLikeF']+ "° " + city
 #data['text'] = weather['current_condition'][0]['FeelsLikeF']+"°"
 
@@ -287,7 +288,7 @@ for i, day in enumerate(weather['weather']):
         if i == 0:
             if int(format_time(hour['time'])) < datetime.now().hour-2:
                 continue
-        data['tooltip'] += f"{format_time(hour['time'])} {WEATHER_CODES[hour['weatherCode']]} {format_temp(hour['FeelsLikeF'])} {hour['weatherDesc'][0]['value']}, {format_chances(hour)}\n"
+        data['tooltip'] += f"{format_time(hour['time'])} {WEATHER_CODES.get(hour['weatherCode'], '🌡️')} {format_temp(hour['FeelsLikeF'])} {hour['weatherDesc'][0]['value']}, {format_chances(hour)}\n"
 
 # Put any degradation at the top of the tooltip, so a wrong-looking city is
 # one hover away from its explanation rather than a log dive. Escaped because
