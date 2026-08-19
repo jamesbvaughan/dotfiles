@@ -2,7 +2,7 @@
   "lastChangelogVersion": "0.84.2",
   "theme": "kanagawa-lotus/kanagawa-dragon",
   "defaultProvider": "vercel-ai-gateway",
-  "defaultModel": "anthropic/claude-opus-5",
+  "defaultModel": "google/gemini-3.6-flash",
   "defaultThinkingLevel": "medium",
   "enabledModels": [
     "vercel-ai-gateway/anthropic/claude-opus-5",
