@@ -87,6 +87,11 @@ output "*" bg #080606 solid_color
 
 ### Window configuration
 
+# Switch to active window
+# The default is "smart" which sets the alert status, but I need a more clear
+# color for the workspace indicator if I go back to that.
+focus_on_window_activation focus
+
 default_border pixel 2
 # hide_edge_borders vertical
 gaps inner 10
