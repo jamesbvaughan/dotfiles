@@ -20,7 +20,7 @@ def format_hz(mhz):
 
 def main():
     toggle = "--toggle" in sys.argv or "-t" in sys.argv or "toggle" in sys.argv
-    
+
     outputs = get_outputs()
     if not outputs:
         print(json.dumps({"text": "N/A", "tooltip": "Unable to query Sway outputs"}))
@@ -86,8 +86,7 @@ def main():
         f"Display: {output_name}\n"
         f"Resolution: {w}x{h}\n"
         f"Current Frame Rate: {curr_hz_str}\n"
-        f"Available Frame Rates: {rates_str}\n"
-        f"(Click to toggle)"
+        f"Available Frame Rates: {rates_str}"
     )
 
     print(json.dumps({
