@@ -15,7 +15,8 @@ exec gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 
 # enable an authentication agent
 # https://wiki.archlinux.org/title/Polkit#Authentication_agents
-exec /usr/lib/hyprpolkitagent/hyprpolkitagent
+# exec /usr/lib/hyprpolkitagent/hyprpolkitagent
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # 1Password
 exec 1password --silent
