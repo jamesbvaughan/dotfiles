@@ -13,7 +13,7 @@ exec systemctl --user start sway-session.target
 exec gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 exec gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 
-# enable an authentication agent
+# Authentication agent
 # https://wiki.archlinux.org/title/Polkit#Authentication_agents
 # exec /usr/lib/hyprpolkitagent/hyprpolkitagent
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
