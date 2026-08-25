@@ -28,6 +28,23 @@
   "mpd": {
     "max-length": 80
   },
+  "mpris": {
+    "format": "{player_icon} {dynamic}",
+    "format-paused": "{status_icon} <i>{dynamic}</i>",
+    "dynamic-order": [
+      "title",
+      "artist",
+      "album"
+    ],
+    "player-icons": {
+      "default": "▶",
+      "mpv": "🎵"
+    },
+    "status-icons": {
+      "paused": "⏸"
+    }
+    // "ignored-players": ["firefox"]
+  },
   "cpu": {
     "format": "{usage}% "
   },

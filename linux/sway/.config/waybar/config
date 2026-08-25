@@ -42,7 +42,8 @@
     ],
     "modules-center": [
       // "custom/media",
-      "mpd"
+      // "mpd"
+      "mpris"
       // "custom/spotify"
     ],
     "modules-right": [
