@@ -1,0 +1,6 @@
+#!/bin/bash
+FLAGS=""
+if [[ -f ~/.config/chrome-flags.conf ]]; then
+    FLAGS="$(grep -v '^#' ~/.config/chrome-flags.conf | tr '\n' ' ')"
+fi
+exec /usr/bin/slack $FLAGS "$@"
