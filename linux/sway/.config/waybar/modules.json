@@ -25,6 +25,9 @@
     "return-type": "json",
     "on-click": "xdg-open https://calendar.google.com"
   },
+  "mpd": {
+    "max-length": 80
+  },
   "cpu": {
     "format": "{usage}% "
   },
