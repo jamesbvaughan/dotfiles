@@ -1,0 +1,92 @@
+## Configuration file for CAVA (Console-based Audio Visualizer)
+## Managed by GNU Stow in ~/.dotfiles/common/cava/.config/cava/config
+
+[general]
+# Live config reloading
+live-config = 1
+
+# Framerate (60 fps for smooth rendering)
+framerate = 120
+
+# Sensitivity control
+autosens = 1
+sensitivity = 100
+
+# Bar configuration (0 = auto-fill terminal)
+bars = 0
+bar_width = 2
+bar_spacing = 1
+center_align = 1
+max_height = 100
+
+# Frequency cutoffs (Hz)
+lower_cutoff_freq = 50
+higher_cutoff_freq = 12000
+
+# Seconds with no input before going to sleep mode (0 = disabled)
+sleep_timer = 0
+
+
+[input]
+# Audio capturing method (pipewire/pulse/alsa/auto)
+method = pipewire
+source = auto
+
+
+[output]
+method = noncurses
+orientation = bottom
+
+# Channels: stereo (mirrored low-to-high from center) or mono
+channels = mono
+
+# Enables synchronized render to prevent tearing in modern terminals (Ghostty/Alacritty)
+synchronized_sync = 1
+
+# Show flat base bar when audio is silent
+show_idle_bar_heads = 1
+
+
+[color]
+# Custom hex gradient mode
+# gradient = 1
+# gradient_count = 6
+#
+# # --- Theme: Catppuccin Mocha ---
+# gradient_color_1 = '#89b4fa' # Blue
+# gradient_color_2 = '#74c7ec' # Sapphire
+# gradient_color_3 = '#a6e3a1' # Green
+# gradient_color_4 = '#f9e2af' # Yellow
+# gradient_color_5 = '#fab387' # Peach
+# gradient_color_6 = '#f38ba8' # Red
+
+# --- Preset: Cyberpunk / Synthwave (Uncomment to use) ---
+# gradient_color_1 = '#00f0ff' # Neon Cyan
+# gradient_color_2 = '#7000ff' # Deep Purple
+# gradient_color_3 = '#bd00ff' # Electric Purple
+# gradient_color_4 = '#ff007f' # Hot Pink
+# gradient_color_5 = '#ff003c' # Neon Red
+# gradient_color_6 = '#ffee00' # Bright Yellow
+
+# --- Preset: Dracula / Neon Purple (Uncomment to use) ---
+# gradient_color_1 = '#bd93f9' # Purple
+# gradient_color_2 = '#8be9fd' # Cyan
+# gradient_color_3 = '#50fa7b' # Green
+# gradient_color_4 = '#f1fa8c' # Yellow
+# gradient_color_5 = '#ffb86c' # Orange
+# gradient_color_6 = '#ff79c6' # Pink
+
+# --- Preset: Nord Cool (Uncomment to use) ---
+# gradient_color_1 = '#88c0d0' # Frost Light Blue
+# gradient_color_2 = '#81a1c1' # Frost Medium Blue
+# gradient_color_3 = '#5e81ac' # Frost Dark Blue
+# gradient_color_4 = '#b48ead' # Aurora Purple
+# gradient_color_5 = '#a3be8c' # Aurora Green
+# gradient_color_6 = '#ebcb8b' # Aurora Yellow
+
+
+[smoothing]
+# Monstercat-style fluid animation smoothing
+# monstercat = 1
+# waves = 1
+# noise_reduction = 20
