@@ -35,23 +35,21 @@
       "custom/separator",
       "temperature",
       "custom/separator",
-      "custom/wattage",
-      "custom/separator",
-      "custom/display"
+      "custom/wattage"
+      // "custom/separator",
+      // "custom/display"
       // "hyprland/submap"
     ],
-    // "modules-center": [
-    //   "custom/media",
-    //   "mpd"
-    //   // "custom/spotify"
-    // ],
+    "modules-center": [
+      // "custom/media",
+      "mpd"
+      // "custom/spotify"
+    ],
     "modules-right": [
-      "network#wifi",
-      "network#ethernet",
-      "custom/separator",
-      "custom/blank",
+      // "network#wifi",
+      // "network#ethernet",
+      // "custom/separator",
       "bluetooth",
-      "custom/blank",
       "custom/separator",
       "systemd-failed-units",
       "custom/separator",
