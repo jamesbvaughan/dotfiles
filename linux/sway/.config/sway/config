@@ -61,9 +61,9 @@ set $black  '#181616'
 set $blue   '#8ba4b0'
 set $orange '#b6927b'
 
-# class          border backgr. text indicator child_border
-client.focused   $red   $red    $red $blue     $orange
-client.unfocused $red   $red    $red $red      $black
+# class          border  backgr.  text  indicator  child_border
+client.focused   $red    $red     $red  $blue      $orange
+client.unfocused $red    $red     $red  $red       $black
 
 
 ### Variables
@@ -102,13 +102,14 @@ for_window [app_id="Zoom"] floating enable
 for_window [app_id="^nwg-displays$"] floating enable
 for_window [app_id="^bluetui\.Bluetui$"] floating enable, resize set 900 700
 for_window [app_id="^dev\.deedles\.Trayscale$"] floating enable
-for_window [app_id="swayimg"] floating enable, resize set 1200 800, center
+# for_window [app_id="swayimg"] floating enable, resize set 1200 800, center
+for_window [app_id="swayimg"] floating enable, resize set 1200 800
 for_window [app_id="pavucontrol"] floating enable, resize set 900 700
 # for_window [app_id="blueman-manager"] floating enable
 # for_window [app_id="syncthingtray"] floating enable, border none, resize set 450 400, move position 3300 0
 
 
-### HiDPI
+### Displays
 
 # Laptop built-in display
 output eDP-1 scale 1.5
@@ -236,9 +237,13 @@ bindsym $mod+f fullscreen
 bindsym $mod+a focus parent
 bindsym $mod+z focus child
 
+# Screenshots
+
 set $screenshot_file ~/screenshots/screenshot-at-$(date +"%Y-%m-%d-%H-%M-%S").png
 bindsym $mod+Control+4 exec grimshot --notify savecopy area $screenshot_file
 bindsym $mod+Control+5 exec grimshot --notify savecopy output $screenshot_file
+
+# Media keys
 
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pactl get-sink-volume @DEFAULT_SINK@ | head -n 1| awk '{print substr($5, 1, length($5)-1)}' > $WOBSOCK
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pactl get-sink-volume @DEFAULT_SINK@ | head -n 1 | awk '{print substr($5, 1, length($5)-1)}' > $WOBSOCK
