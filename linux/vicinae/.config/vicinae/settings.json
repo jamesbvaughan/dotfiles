@@ -7,30 +7,29 @@
 // If you want to maintain a configuration file with your own comments and formatting, you should create a separate file and add it to the 'imports' array.
 //
 // Learn more about configuration at https://docs.vicinae.com/config
-
 {
-   "$schema": "https://vicinae.com/schemas/config.json",
-   "keybinding": "emacs",
-   "font": {
-      "normal": {
-         "family": "Berkeley Mono",
-         "size": 12
-      }
-   },
-   "theme": {
-      "light": {
-         "name": "kanagawa-lotus",
-         "icon_theme": "auto"
-      },
-      "dark": {
-         "name": "kanagawa-dragon",
-         "icon_theme": "auto"
-      }
-   },
-   "launcher_window": {
-      "rounding": 0,
-      "client_side_decorations": {
-         "shadow_size": 0
-      }
-   }
+  "$schema": "https://vicinae.com/schemas/config.json",
+  "keybinding": "emacs",
+  "font": {
+    "normal": {
+      "family": "Berkeley Mono",
+      "size": 12
+    }
+  },
+  "theme": {
+    "light": {
+      "name": "kanagawa-lotus",
+      "icon_theme": "auto"
+    },
+    "dark": {
+      "name": "kanagawa-dragon",
+      "icon_theme": "auto"
+    }
+  },
+  "launcher_window": {
+    "rounding": 0,
+    "client_side_decorations": {
+      "shadow_size": 0
+    }
+  }
 }

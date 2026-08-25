@@ -112,7 +112,7 @@ for_window [app_id="pavucontrol"] floating enable, resize set 900 700
 ### Displays
 
 # Laptop built-in display
-output eDP-1 scale 1.5
+output eDP-1 scale 1
 
 # Apple Studio Display
 # output DP-1 scale 2
@@ -140,7 +140,7 @@ bindswitch --reload --locked lid:off output eDP-1 enable
 
 ### Font
 
-font pango:Berkeley Mono 10px
+font pango:Berkeley Mono 20px
 
 
 ### Input configuration (man sway-input)

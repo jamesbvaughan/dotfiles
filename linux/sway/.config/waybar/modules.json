@@ -152,7 +152,7 @@
     "exec": "spt playback"
   },
   "tray": {
-    "icon-size": 24,
+    "icon-size": 32,
     "spacing": 4
   },
   "custom/weather": {

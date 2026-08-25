@@ -14,8 +14,8 @@
   border-radius: 0;
   font-family: Berkeley Mono, Symbols Nerd Font, sans-serif;
   /* font-weight: 500; */
-  font-size: 16px;
-  min-height: 0;
+  font-size: 24px;
+  min-height: 42px;
   color: @fg;
 }
 
@@ -40,12 +40,12 @@ tooltip label {
 menu {
   background: @bg;
   border: 1px solid @gray;
-  padding: 4px;
+  padding: 0px 4px;
 }
 
 menu menuitem {
   background: transparent;
-  padding: 4px 8px;
+  padding: 0px 8px;
   color: @fg;
 }
 
@@ -96,7 +96,6 @@ menu menuitem:hover {
 #custom-display,
 #network,
 #pulseaudio,
-#window,
 #workspaces,
 #tray,
 #bluetooth,
@@ -111,7 +110,7 @@ menu menuitem:hover {
 #custom-lock,
 #systemd-failed-units,
 #workspaces {
-  padding: 2px 16px;
+  padding: 0px 16px;
 }
 
 #battery.charging,

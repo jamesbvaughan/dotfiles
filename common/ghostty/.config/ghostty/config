@@ -8,6 +8,7 @@ theme = dark:Kanagawa Dragon,light:Kanagawa Lotus
 
 ## Berkeley Mono
 font-family            = Berkeley Mono Variable
+font-size              = 18
 font-style             = Retina Condensed
 font-style-italic      = Retina Condensed Oblique
 font-style-bold        = Bold Condensed
