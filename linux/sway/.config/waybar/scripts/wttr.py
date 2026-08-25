@@ -268,10 +268,10 @@ def format_chances(hour):
 
 
 data['text'] = WEATHER_CODES.get(weather['current_condition'][0]['weatherCode'], '🌡️') + \
-    " " + weather['current_condition'][0]['FeelsLikeF']+ "° " + city
-#data['text'] = weather['current_condition'][0]['FeelsLikeF']+"°"
+    " " + weather['current_condition'][0]['FeelsLikeF'] + "°"
 
-data['tooltip'] = f"<b>{weather['current_condition'][0]['weatherDesc'][0]['value']} {weather['current_condition'][0]['temp_F']}°</b>\n"
+data['tooltip'] = f"<b>{html.escape(city)}</b>\n"
+data['tooltip'] += f"<b>{weather['current_condition'][0]['weatherDesc'][0]['value']} {weather['current_condition'][0]['temp_F']}°</b>\n"
 data['tooltip'] += f"Feels like: {weather['current_condition'][0]['FeelsLikeF']}°\n"
 data['tooltip'] += f"Wind: {weather['current_condition'][0]['windspeedKmph']}Km/h\n"
 data['tooltip'] += f"Humidity: {weather['current_condition'][0]['humidity']}%\n"
