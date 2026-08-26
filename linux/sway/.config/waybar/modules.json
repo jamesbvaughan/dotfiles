@@ -80,6 +80,17 @@
     "on-scroll-up": "$HOME/.dotfiles/scripts/brightness.sh up",
     "on-scroll-down": "$HOME/.dotfiles/scripts/brightness.sh down"
   },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": "󰌪"
+    }
+  },
   "battery": {
     "states": {
       // "good": 95,

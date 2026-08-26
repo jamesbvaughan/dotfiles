@@ -109,6 +109,7 @@ menu menuitem:hover {
 #custom-wattage,
 #custom-lock,
 #systemd-failed-units,
+#power-profiles-daemon,
 #workspaces {
   padding: 0px 16px;
 }

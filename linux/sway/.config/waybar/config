@@ -54,6 +54,8 @@
       "custom/separator",
       "systemd-failed-units",
       "custom/separator",
+      "power-profiles-daemon",
+      "custom/separator",
       "battery"
     ],
     "include": [
