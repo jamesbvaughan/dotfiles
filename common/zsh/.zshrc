@@ -50,8 +50,8 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # Enable atuin hex
 eval "$(atuin hex init)"
 
-
-autoload -U compinit && compinit
+# Workmux completions
+fpath+=~/.local/share/zsh/site-functions
 
 # Source config in other files
 
@@ -78,6 +78,7 @@ if [ -x "$(command -v brew)" ]; then
   export MANPATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman:$MANPATH"
 fi
 
+autoload -U compinit && compinit
 
 # Tool-specific config
 
