@@ -1,4 +1,6 @@
 [Default Applications]
+inode/directory=org.gnome.Nautilus.desktop
+x-scheme-handler/file=org.gnome.Nautilus.desktop
 text/html=google-chrome.desktop
 x-scheme-handler/http=google-chrome.desktop
 x-scheme-handler/https=google-chrome.desktop
