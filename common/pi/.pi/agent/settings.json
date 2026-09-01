@@ -13,5 +13,8 @@
   ],
   "terminal": {
     "showTerminalProgress": true
-  }
+  },
+  "packages": [
+    "npm:@juicesharp/rpiv-ask-user-question"
+  ]
 }
