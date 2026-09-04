@@ -12,7 +12,10 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: Berkeley Mono, Symbols Nerd Font, sans-serif;
+  font-family:
+    Berkeley Mono,
+    Symbols Nerd Font,
+    sans-serif;
   /* font-weight: 500; */
   font-size: 24px;
   min-height: 42px;
@@ -59,7 +62,7 @@ menu menuitem:hover {
 }
 
 #workspaces button.focused {
-  background-color: #222;
+  background-color: #444;
   color: #000;
 }
 
@@ -117,6 +120,12 @@ menu menuitem:hover {
 #battery.charging,
 #battery.plugged {
   background-color: @green;
+}
+
+#mode {
+  background-color: @red;
+  color: @bg;
+  font-weight: bold;
 }
 
 @keyframes blink {

@@ -1,7 +1,8 @@
 [
   {
     "modules-left": [
-      "ext/workspaces",
+      "sway/workspaces",
+      "sway/mode",
       "custom/separator",
       "sway/window"
     ],

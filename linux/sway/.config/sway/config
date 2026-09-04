@@ -92,7 +92,7 @@ output "*" bg #080606 solid_color
 # color for the workspace indicator if I go back to that.
 focus_on_window_activation focus
 
-default_border pixel 2
+default_border pixel 4
 # hide_edge_borders vertical
 gaps inner 10
 smart_borders on
@@ -105,6 +105,8 @@ for_window [app_id="^dev\.deedles\.Trayscale$"] floating enable
 # for_window [app_id="swayimg"] floating enable, resize set 1200 800, center
 for_window [app_id="swayimg"] floating enable, resize set 1200 800
 for_window [app_id="pavucontrol"] floating enable, resize set 900 700
+for_window [title="^Picture in picture$"] floating enable, sticky enable
+for_window [title="^Easy Effects$"] floating enable
 # for_window [app_id="blueman-manager"] floating enable
 # for_window [app_id="syncthingtray"] floating enable, border none, resize set 450 400, move position 3300 0
 
@@ -230,6 +232,12 @@ bindsym $mod+e layout toggle split
 
 bindsym $mod+f fullscreen
 
+# Move focused workspace to adjacent display
+bindsym $mod+Ctrl+Shift+$left move workspace to output left
+bindsym $mod+Ctrl+Shift+$right move workspace to output right
+bindsym $mod+Ctrl+Shift+$up move workspace to output up
+bindsym $mod+Ctrl+Shift+$down move workspace to output down
+
 # bindsym $mod+Shift+space layout toggle splitv splith
 
 # bindsym $mod+space focus mode_toggle
@@ -278,10 +286,11 @@ mode "resize" {
     bindsym $right resize grow width 10 px or 10 ppt
 
     # return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    bindsym Return client.focused $red $red $red $blue $orange, mode "default"
+    bindsym Escape client.focused $red $red $red $blue $orange, mode "default"
+    bindsym $mod+r client.focused $red $red $red $blue $orange, mode "default"
 }
-bindsym $mod+r mode "resize"
+bindsym $mod+r client.focused $red $red $red $red $red, mode "resize"
 
 bar {
   swaybar_command waybar

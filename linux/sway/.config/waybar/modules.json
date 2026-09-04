@@ -1,6 +1,9 @@
 {
-  "ext/workspaces": {
+  "sway/workspaces": {
     "format": "{name}"
+  },
+  "sway/mode": {
+    "format": "{}"
   },
   "hyprland/workspaces": {
     "format": "{name}"
