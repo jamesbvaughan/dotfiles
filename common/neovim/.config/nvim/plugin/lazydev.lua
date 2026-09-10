@@ -7,6 +7,7 @@ vim.pack.add({ gh("folke/lazydev.nvim") })
 require("lazydev").setup({
 	library = {
 		{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+		{ path = "/usr/share/hypr/stubs", words = { "hl" } },
 		"LazyDev",
 		"lazydev.nvim",
 		"auto-dark-mode.nvim",
