@@ -1,0 +1,18 @@
+#!/bin/sh
+# Exit 0 if the laptop lid is open, non-zero if closed (clamshell mode).
+#
+# Used as a PAM guard so pam_fprintd.so is skipped when the fingerprint
+# reader is physically unreachable. See /etc/pam.d/{sudo,polkit-1,hyprlock}.
+#
+# Install: sudo install -m 755 pam-lid-open /usr/local/bin/pam-lid-open
+
+for state in /proc/acpi/button/lid/*/state; do
+	[ -r "$state" ] || continue
+	if grep -q closed "$state"; then
+		exit 1
+	fi
+	exit 0
+done
+
+# No lid found (desktop, or ACPI missing) -- assume usable.
+exit 0

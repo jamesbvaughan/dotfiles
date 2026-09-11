@@ -2,9 +2,12 @@
   {
     "modules-left": [
       "sway/workspaces",
+      "hyprland/workspaces",
       "sway/mode",
+      "hyprland/submap",
       "custom/separator",
-      "sway/window"
+      "sway/window",
+      "hyprland/window"
     ],
     "modules-center": [
       "custom/events"

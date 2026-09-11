@@ -29,10 +29,10 @@ esac
 # Both branches print the resulting percentage on stdout, for wob and waybar.
 internal() {
   case $action in
-    up) brightnessctl set "+${STEP}%" >/dev/null ;;
-    down) brightnessctl set "${STEP}%-" >/dev/null ;;
+    up) brightnessctl -c backlight set "+${STEP}%" >/dev/null 2>&1 ;;
+    down) brightnessctl -c backlight set "${STEP}%-" >/dev/null 2>&1 ;;
   esac
-  brightnessctl -m | cut -d, -f4 | tr -d '%'
+  brightnessctl -c backlight -m 2>/dev/null | cut -d, -f4 | tr -d '%'
 }
 
 studio_display() {
@@ -52,14 +52,34 @@ studio_display() {
   echo "$percent"
 }
 
-if [ "$(swaymsg -t get_outputs -r | jq '[.[] | select(.name == "eDP-1" and .active)] | length')" -gt 0 ]; then
-  internal
+laptop_active() {
+  if [ -z "${SWAYSOCK:-}" ]; then
+    SWAYSOCK=$(ls /run/user/"$(id -u)"/sway-ipc.*.sock 2>/dev/null | head -n 1 || true)
+    [ -n "$SWAYSOCK" ] && export SWAYSOCK
+  fi
+
+  if [ -n "${SWAYSOCK:-}" ] || pgrep -x sway >/dev/null; then
+    count=$(swaymsg -t get_outputs -r 2>/dev/null | jq '[.[] | select(.name == "eDP-1" and .active)] | length' 2>/dev/null || true)
+    [ "${count:-0}" -gt 0 ] 2>/dev/null || return 1
+  elif [ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ] || pgrep -x Hyprland >/dev/null; then
+    count=$(hyprctl monitors -j 2>/dev/null | jq '[.[] | select(.name == "eDP-1")] | length' 2>/dev/null || true)
+    [ "${count:-0}" -gt 0 ] 2>/dev/null || return 1
+  else
+    return 0
+  fi
+}
+
+if laptop_active; then
+  result=$(internal)
 else
   # Fall back to the internal panel if the display is unplugged or asleep.
-  studio_display || internal
+  result=$(studio_display || internal)
 fi
 
-# Nudge waybar's custom/brightness module rather than making it poll quickly.
+echo "$result"
+
+# Nudge waybar or quickshell
 if [ "$action" != get ]; then
   pkill -RTMIN+1 waybar 2>/dev/null || true
+  quickshell ipc call shell triggerBrightnessOsd "${result%.*}" 2>/dev/null || true
 fi
