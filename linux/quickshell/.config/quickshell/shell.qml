@@ -60,6 +60,9 @@ ShellRoot {
         }
     }
 
+    // Automatic Power Profile Management (AC -> Performance, Battery -> Balanced)
+    PowerManagement {}
+
     // Session Lock Screen (ext-session-lock-v1)
     LockScreen {
         id: lockScreen

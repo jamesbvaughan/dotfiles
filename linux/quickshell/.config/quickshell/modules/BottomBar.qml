@@ -181,7 +181,7 @@ PanelWindow {
                     if (!isEnabled) return "Off";
                     if (connectedCount > 0) {
                         const name = firstDevice?.deviceName || firstDevice?.name || "Connected";
-                        return name.length > 18 ? (name.substring(0, 15) + "...") : name;
+                        return name.length > 33 ? (name.substring(0, 30) + "...") : name;
                     }
                     return "On";
                 }
