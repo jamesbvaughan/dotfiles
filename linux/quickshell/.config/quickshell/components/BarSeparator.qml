@@ -2,8 +2,9 @@ import QtQuick
 import ".."
 
 Item {
+    anchors.verticalCenter: parent ? parent.verticalCenter : undefined
     implicitWidth: sepText.implicitWidth + 12
-    implicitHeight: sepText.implicitHeight
+    implicitHeight: Math.max(sepText.implicitHeight, 36)
 
     Text {
         id: sepText

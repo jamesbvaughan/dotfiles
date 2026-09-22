@@ -1,10 +1,46 @@
 -- See https://wiki.hypr.land/Configuring/Start/
 
+-------------------
+---- CONSTANTS ----
+-------------------
+
+-- Absolute path to the dotfiles scripts directory. Always spell script paths out in
+-- full: $HOME/.dotfiles/scripts is added to PATH by .zshrc, which only runs for
+-- interactive shells. The graphical session never sources it -- Hyprland is started by
+-- lightdm via start-hyprland -- so a bare `lock.sh` here resolves to nothing and the
+-- `sh -c` wrapper exits 127 without a word. That silently disabled every lock path:
+-- the lid bind did nothing, and swayidle's before-sleep hook returned instantly, which
+-- released its sleep inhibitor and let the machine suspend unlocked.
+local scripts = os.getenv("HOME") .. "/.dotfiles/scripts/"
+
+
 ------------------
 ---- MONITORS ----
 ------------------
 
--- Primary Apple Studio Display
+-- Helper to check if laptop lid is physically closed
+local function is_lid_closed()
+  local f = io.open("/proc/acpi/button/lid/LID0/state", "r")
+  if not f then return false end
+  local content = f:read("*a")
+  f:close()
+  return content:match("closed") ~= nil
+end
+
+-- Is a real external display currently active?
+-- Only trust the compositor's live output list. Do NOT read /sys/class/drm/*/status:
+-- the kernel updates connector status asynchronously, so right after a Thunderbolt
+-- unplug it still reports "connected" and we would wrongly keep eDP-1 disabled.
+local function has_external_monitor()
+  for _, m in ipairs(hl.get_monitors()) do
+    if m.name ~= "eDP-1" and m.name ~= "DP-2" then
+      return true
+    end
+  end
+  return false
+end
+
+-- Primary Apple Studio Display or Pro Display XDR
 hl.monitor({
   output   = "DP-1",
   mode     = "5120x2880@60Hz",
@@ -12,21 +48,13 @@ hl.monitor({
   scale    = 1,
 })
 
--- Disable Apple Studio Display secondary ghost interface
+-- Disable secondary ghost interface from dual-tile Apple displays
 hl.monitor({
   output   = "DP-2",
   disabled = true,
 })
 
--- Laptop built-in display
-hl.monitor({
-  output   = "eDP-1",
-  mode     = "2880x1920@120Hz",
-  position = "2751x2880",
-  scale    = 1,
-})
-
--- Fallback for any other display
+-- Fallback for any other external display
 hl.monitor({
   output   = "",
   mode     = "preferred",
@@ -34,24 +62,53 @@ hl.monitor({
   scale    = 1,
 })
 
--- Lid switch: only disable eDP-1 when shut IF an external display is connected
-hl.bind("switch:on:Lid Switch", function()
-  local monitors = hl.get_monitors()
-  local external = false
-  for _, m in ipairs(monitors) do
-    if m.name ~= "eDP-1" then
-      external = true
-      break
-    end
-  end
-  if external then
+-- Single source of truth for eDP-1.
+--
+-- Invariant: eDP-1 is disabled ONLY in true clamshell mode (lid shut AND an external
+-- display is live). Every other case enables it. This both honours "lid open => panel on"
+-- and guarantees the session never reaches zero enabled outputs -- a state that wedges
+-- the DRM backend (the compositor reshuffles CRTCs, the panel can end up on a pipe the
+-- Intel driver cannot drive, and every atomic commit then fails with EINVAL).
+--
+-- Note: `disabled = false` must be passed explicitly. Omitting it leaves an
+-- already-disabled output disabled, no matter what mode/position you set.
+local function update_monitors()
+  local has_ext = has_external_monitor()
+
+  if is_lid_closed() and has_ext then
     hl.monitor({ output = "eDP-1", disabled = true })
+  else
+    hl.monitor({
+      output   = "eDP-1",
+      mode     = "2880x1920@120Hz",
+      position = has_ext and "2751x2880" or "auto",
+      scale    = 1,
+      disabled = false,
+    })
   end
+end
+
+-- Runs on startup and on every `hyprctl reload`
+update_monitors()
+
+hl.bind("switch:on:Lid Switch", function()
+  update_monitors()
+  hl.exec_cmd(scripts .. "lock.sh")
 end, { locked = true })
 
 hl.bind("switch:off:Lid Switch", function()
-  hl.monitor({ output = "eDP-1", mode = "2880x1920@120Hz", position = "auto", scale = 1 })
+  update_monitors()
 end, { locked = true })
+
+hl.on("monitor.added", function()
+  update_monitors()
+end)
+
+hl.on("monitor.removed", function()
+  -- Re-evaluate on the next tick: the departing output can still appear in
+  -- hl.get_monitors() while the removal is being processed.
+  hl.timer(update_monitors, { timeout = 200, type = "oneshot" })
+end)
 
 
 ---------------------
@@ -62,7 +119,7 @@ local mainMod     = "SUPER"
 local terminal    = "ghostty"
 local fileManager = "nautilus"
 local menu        = "vicinae toggle"
-local lock_cmd    = "quickshell ipc call shell lock || hyprlock --grace 10"
+local lock_cmd    = scripts .. "lock.sh"
 
 
 -------------------
@@ -70,11 +127,16 @@ local lock_cmd    = "quickshell ipc call shell lock || hyprlock --grace 10"
 -------------------
 
 hl.on("hyprland.start", function()
-  -- Propagate environment to systemd/dbus and start graphical session target
+  -- Propagate environment to systemd/dbus, then start the graphical session target.
+  -- Chained with && on purpose: hl.exec_cmd spawns asynchronously, so as three separate
+  -- calls the target could start before the import finished. Services launched by it
+  -- (quickshell) would then come up without HYPRLAND_INSTANCE_SIGNATURE and silently fail
+  -- to reach Hyprland's IPC -- no workspace indicator, no window title.
+  -- HYPRLAND_INSTANCE_SIGNATURE must be in both lists; it is what the IPC connects through.
   hl.exec_cmd(
-  "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE")
-  hl.exec_cmd("systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE")
-  hl.exec_cmd("systemctl --user start hyprland-session.target")
+    "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE HYPRLAND_INSTANCE_SIGNATURE" ..
+    " && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE HYPRLAND_INSTANCE_SIGNATURE" ..
+    " && systemctl --user start hyprland-session.target")
 
   -- Theme and appearance
   hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme prefer-dark")
@@ -90,12 +152,24 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("localsend --hidden")
   hl.exec_cmd("trayscale --hide-window")
 
-  -- Idle management and screen lock (run lock in background so swayidle does not block sleep inhibitor)
+  -- Idle management and screen lock.
+  -- Every hook is one absolute script path, single-quoted: no nested shell quoting to get
+  -- wrong, and nothing that depends on swayidle inheriting a PATH it does not have.
+  -- `reload config-only` on resume re-runs update_monitors(), so the panel comes back even
+  -- if the lid-switch event is missed across suspend.
   hl.exec_cmd(
-  "swayidle -w timeout 1800 'quickshell ipc call shell lock || hyprlock --grace 10' timeout 1805 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'playerctl pause' before-sleep 'sh -c \"quickshell ipc call shell lock || hyprlock --grace 10 &\"'")
+    "swayidle -w" ..
+    " timeout 1800 '" .. scripts .. "lock.sh'" ..
+    " timeout 1805 '" .. scripts .. "dpms.sh off'" ..
+    " resume '" .. scripts .. "dpms.sh on && hyprctl reload config-only'" ..
+    " before-sleep 'playerctl pause'" ..
+    " before-sleep '" .. scripts .. "lock.sh --sleep'")
 
   -- Wallpaper (quickshell is managed by hyprland-session.target via systemd)
   hl.exec_cmd("hyprpaper")
+
+  -- Blue light filter / color temperature
+  hl.exec_cmd("hyprsunset")
 end)
 
 
@@ -118,17 +192,20 @@ hl.env("GDK_BACKEND", "wayland,x11,*")
 -- Kanagawa Dragon color palette
 hl.config({
   general = {
-    gaps_in       = 5,
-    gaps_out      = 10,
-    border_size   = 4,
+    gaps_in                 = 5,
+    gaps_out                = 10,
+    border_size             = 4,
 
-    col           = {
+    col                     = {
       active_border   = "rgba(c4746eff)",
       inactive_border = "rgba(181616ff)",
     },
 
-    layout        = "dwindle",
-    allow_tearing = false,
+    layout                  = "dwindle",
+    allow_tearing           = false,
+    resize_on_border        = true,
+    extend_border_grab_area = 25,
+    hover_icon_on_border    = true,
   },
 
   decoration = {
@@ -157,9 +234,10 @@ hl.config({
   },
 
   misc = {
-    force_default_wallpaper  = 0,
-    disable_splash_rendering = true,
-    focus_on_activate        = true,
+    force_default_wallpaper    = 0,
+    disable_splash_rendering   = true,
+    focus_on_activate          = true,
+    allow_session_lock_restore = true,
   },
 
   input = {
@@ -288,7 +366,8 @@ hl.window_rule({ name = "nwg-displays", match = { class = "^nwg-displays$" }, fl
 hl.window_rule({ name = "bluetui", match = { class = "^bluetui\\.Bluetui$" }, float = true, size = "900 700" })
 hl.window_rule({ name = "trayscale", match = { class = "^dev\\.deedles\\.Trayscale$" }, float = true })
 hl.window_rule({ name = "swayimg", match = { class = "swayimg" }, float = true, size = "1200 800" })
-hl.window_rule({ name = "pavucontrol", match = { class = "pavucontrol" }, float = true, size = "900 700" })
+-- hl.window_rule({ name = "pavucontrol", match = { class = "pavucontrol" }, float = true, size = "900 700" })
+hl.window_rule({ name = "pavucontrol", match = { title = "^Volume Control$" }, float = true, size = "900 700" })
 hl.window_rule({ name = "pip", match = { title = "^Picture in picture$" }, float = true, pin = true })
 hl.window_rule({ name = "easyeffects", match = { title = "^Easy Effects$" }, float = true })
 
@@ -352,14 +431,16 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 -- Screenshots (grimshot)
 hl.bind(mainMod .. " + CTRL + 4",
   hl.dsp.exec_cmd(
-  [[sh -c 'grimshot --notify savecopy area ~/screenshots/screenshot-at-$(date +"%Y-%m-%d-%H-%M-%S").png']]))
+    [[sh -c 'grimshot --notify savecopy area ~/screenshots/screenshot-at-$(date +"%Y-%m-%d-%H-%M-%S").png']]))
 hl.bind(mainMod .. " + CTRL + 5",
   hl.dsp.exec_cmd(
-  [[sh -c 'grimshot --notify savecopy output ~/screenshots/screenshot-at-$(date +"%Y-%m-%d-%H-%M-%S").png']]))
+    [[sh -c 'grimshot --notify savecopy output ~/screenshots/screenshot-at-$(date +"%Y-%m-%d-%H-%M-%S").png']]))
 
 -- Media & Volume keys
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ +5%"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ -5%"), { locked = true, repeating = true })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ +5%"),
+  { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ -5%"),
+  { locked = true, repeating = true })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("pactl set-sink-mute @DEFAULT_SINK@ toggle"), { locked = true })
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("pactl set-source-mute @DEFAULT_SOURCE@ toggle"), { locked = true })
 
@@ -370,12 +451,17 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 hl.bind("XF86Display", hl.dsp.exec_cmd(lock_cmd), { locked = true })
 hl.bind("XF86PowerOff", hl.dsp.exec_cmd("quickshell ipc call shell togglePowerDialog"), { locked = true })
 
+-- Emergency lock reset: force clears dead lock without needing a TTY switch
+hl.bind("CTRL + ALT + BackSpace", function()
+  pcall(hl.clear_crashed_lockscreen)
+end, { locked = true })
+
 -- Brightness keys
 hl.bind("XF86MonBrightnessUp",
-  hl.dsp.exec_cmd(os.getenv("HOME") .. "/.dotfiles/scripts/brightness.sh up"),
+  hl.dsp.exec_cmd(scripts .. "brightness.sh up"),
   { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown",
-  hl.dsp.exec_cmd(os.getenv("HOME") .. "/.dotfiles/scripts/brightness.sh down"),
+  hl.dsp.exec_cmd(scripts .. "brightness.sh down"),
   { locked = true, repeating = true })
 
 -- Resize submap

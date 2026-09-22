@@ -269,7 +269,16 @@ PanelWindow {
 
                         Image {
                             anchors.fill: parent
-                            source: modelData.icon
+                            source: {
+                                const icon = modelData.icon;
+                                if (icon && icon.includes("dropboxstatus")) {
+                                    const match = icon.match(/(dropboxstatus-[^?&]+)/);
+                                    if (match) {
+                                        return `file:///usr/share/icons/breeze-dark/status/24/${match[1]}.svg`;
+                                    }
+                                }
+                                return icon;
+                            }
                             fillMode: Image.PreserveAspectFit
                         }
 

@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Services.Pipewire
 import ".."
 import "../services"
@@ -44,6 +45,17 @@ Scope {
         active: ShellState.showOsd
 
         PanelWindow {
+            screen: {
+                const name = Hyprland.focusedMonitor?.name;
+                if (!name) return null;
+                for (let i = 0; i < Quickshell.screens.length; ++i) {
+                    if (Quickshell.screens[i].name === name) {
+                        return Quickshell.screens[i];
+                    }
+                }
+                return null;
+            }
+
             anchors.bottom: true
             margins.bottom: 110
             exclusiveZone: 0

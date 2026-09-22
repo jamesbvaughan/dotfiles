@@ -1,0 +1,347 @@
+#!/usr/bin/env python3
+"""
+browser-router - Air Traffic Control for Linux browsers and profiles.
+Routes URLs to specific Chrome profiles based on domain/URL patterns.
+"""
+
+import sys
+import os
+import re
+import json
+import fnmatch
+import shutil
+import argparse
+import subprocess
+from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
+
+# Built-in tomllib is available in Python 3.11+
+try:
+    import tomllib
+except ImportError:
+    tomllib = None
+
+CONFIG_DIR = os.path.expanduser("~/.config/browser-router")
+CONFIG_TOML = os.path.join(CONFIG_DIR, "config.toml")
+CONFIG_JSON = os.path.join(CONFIG_DIR, "config.json")
+CHROME_LOCAL_STATE = os.path.expanduser("~/.config/google-chrome/Local State")
+
+TRACKING_PARAMS = {
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_term",
+    "utm_content",
+    "utm_id",
+    "gclid",
+    "fbclid",
+    "mc_eid",
+    "mc_cid",
+    "_hsenc",
+    "_hsmi",
+    "igshid",
+    "si",
+}
+
+DEFAULT_CONFIG = {
+    "default_profile": "Personal",
+    "strip_tracking": True,
+    "browser": "google-chrome-stable",
+    "rules": [
+        {
+            "name": "Asana",
+            "match": ["*asana.com*"],
+            "profile": "Arcol",
+        },
+        {
+            "name": "Slack",
+            "match": ["*.slack.com*"],
+            "profile": "Arcol",
+        },
+        {
+            "name": "Arcol Internal",
+            "match": ["*arcol.io*"],
+            "profile": "Arcol",
+        },
+    ],
+}
+
+
+def load_config():
+    """Load configuration from config.toml, config.json, or fallback to default."""
+    if os.path.exists(CONFIG_TOML) and tomllib:
+        try:
+            with open(CONFIG_TOML, "rb") as f:
+                return {**DEFAULT_CONFIG, **tomllib.load(f)}
+        except Exception as e:
+            print(f"[browser-router] Warning: Failed to parse {CONFIG_TOML}: {e}", file=sys.stderr)
+
+    if os.path.exists(CONFIG_JSON):
+        try:
+            with open(CONFIG_JSON, "r", encoding="utf-8") as f:
+                return {**DEFAULT_CONFIG, **json.load(f)}
+        except Exception as e:
+            print(f"[browser-router] Warning: Failed to parse {CONFIG_JSON}: {e}", file=sys.stderr)
+
+    return DEFAULT_CONFIG
+
+
+def get_chrome_profiles():
+    """Extract profile metadata (directory, name, email) from Chrome Local State."""
+    profiles = {}
+    if os.path.exists(CHROME_LOCAL_STATE):
+        try:
+            with open(CHROME_LOCAL_STATE, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            info_cache = data.get("profile", {}).get("info_cache", {})
+            for dir_name, info in info_cache.items():
+                name = info.get("name", dir_name)
+                email = info.get("user_name", "")
+                profiles[dir_name] = {
+                    "dir": dir_name,
+                    "name": name,
+                    "email": email,
+                }
+        except Exception as e:
+            print(f"[browser-router] Note: Could not read Chrome profiles: {e}", file=sys.stderr)
+    return profiles
+
+
+def resolve_profile_directory(target, profiles):
+    """
+    Resolve a target profile identifier to a Chrome profile directory name
+    (e.g. 'Arcol' -> 'Profile 1', 'Personal' -> 'Default').
+    """
+    if not target:
+        return None
+
+    target_str = str(target).strip()
+    target_lower = target_str.lower()
+
+    # 1. Exact match on directory name (e.g. "Default", "Profile 1")
+    for dir_name in profiles:
+        if dir_name.lower() == target_lower:
+            return dir_name
+
+    # 2. Exact match on profile name (e.g. "Personal", "Arcol")
+    for dir_name, info in profiles.items():
+        if info["name"].lower() == target_lower:
+            return dir_name
+
+    # 3. Exact match on email address (e.g. "james@arcol.io")
+    for dir_name, info in profiles.items():
+        if info["email"] and info["email"].lower() == target_lower:
+            return dir_name
+
+    # 4. Substring match on profile name
+    for dir_name, info in profiles.items():
+        if target_lower in info["name"].lower():
+            return dir_name
+
+    # Fallback to returning target directly
+    return target_str
+
+
+def strip_tracking_params(url):
+    """Remove common tracking query parameters (utm_*, gclid, etc.) from a URL."""
+    try:
+        parsed = urlparse(url)
+        if not parsed.query:
+            return url
+
+        query_dict = parse_qs(parsed.query, keep_blank_values=True)
+        filtered_query = {
+            k: v for k, v in query_dict.items() if k.lower() not in TRACKING_PARAMS
+        }
+
+        # Flat encode
+        encoded_query = urlencode(filtered_query, doseq=True)
+        return urlunparse(
+            (
+                parsed.scheme,
+                parsed.netloc,
+                parsed.path,
+                parsed.params,
+                encoded_query,
+                parsed.fragment,
+            )
+        )
+    except Exception:
+        return url
+
+
+def matches_pattern(pattern, url):
+    """Check if a URL matches a pattern (regex:, glob with wildcards, or substring)."""
+    if pattern.startswith("regex:"):
+        return bool(re.search(pattern[6:], url, re.IGNORECASE))
+
+    # If pattern has wildcards, match against either full URL or hostname
+    if any(c in pattern for c in "*?[]"):
+        parsed = urlparse(url)
+        host = parsed.netloc or ""
+        regex = fnmatch.translate(pattern)
+        return bool(
+            re.search(regex, url, re.IGNORECASE)
+            or re.search(regex, host, re.IGNORECASE)
+        )
+
+    # Substring / domain matching
+    parsed = urlparse(url)
+    host = (parsed.netloc or "").lower()
+    pat = pattern.lower()
+    return pat in host or pat in url.lower()
+
+
+def route_url(url, config, profiles):
+    """
+    Determine which profile directory and rule matches the URL.
+    Returns (profile_dir, matched_rule_name, matched_pattern, cleaned_url).
+    """
+    cleaned = strip_tracking_params(url) if config.get("strip_tracking", True) else url
+
+    for rule in config.get("rules", []):
+        patterns = rule.get("match", [])
+        if isinstance(patterns, str):
+            patterns = [patterns]
+
+        for pat in patterns:
+            if matches_pattern(pat, cleaned):
+                target_profile = rule.get("profile")
+                resolved_dir = resolve_profile_directory(target_profile, profiles)
+                return resolved_dir, rule.get("name", "Unnamed rule"), pat, cleaned
+
+    # Fallback to default profile
+    default_target = config.get("default_profile")
+    resolved_dir = resolve_profile_directory(default_target, profiles)
+    return resolved_dir, "Default fallback", None, cleaned
+
+
+def list_profiles():
+    """Print all discovered Chrome profiles."""
+    profiles = get_chrome_profiles()
+    if not profiles:
+        print("No Chrome profiles detected under ~/.config/google-chrome/")
+        return
+
+    print("Detected Google Chrome profiles:")
+    print(f"  {'Directory':<14} {'Profile Name':<20} {'Email'}")
+    print("  " + "-" * 56)
+    for dir_name, info in sorted(profiles.items()):
+        name = info["name"]
+        email = info["email"] or "(no email)"
+        print(f"  {dir_name:<14} {name:<20} {email}")
+
+
+def test_url(url, config, profiles):
+    """Test URL routing without launching the browser."""
+    profile_dir, rule_name, matched_pat, cleaned_url = route_url(url, config, profiles)
+
+    # Reverse lookup profile display name
+    display_name = profile_dir
+    if profile_dir in profiles:
+        info = profiles[profile_dir]
+        display_name = f"{info['name']} ({profile_dir})"
+        if info["email"]:
+            display_name += f" <{info['email']}>"
+
+    print("=== URL Routing Test ===")
+    print(f"Input URL:      {url}")
+    if cleaned_url != url:
+        print(f"Cleaned URL:    {cleaned_url}")
+    print(f"Matched Rule:   {rule_name}")
+    if matched_pat:
+        print(f"Matched Pattern: {matched_pat}")
+    print(f"Target Profile: {display_name}")
+
+    browser_bin = config.get("browser", "google-chrome-stable")
+    cmd = [browser_bin]
+    if profile_dir:
+        cmd.append(f"--profile-directory={profile_dir}")
+    cmd.append(cleaned_url)
+    print(f"Command:        {' '.join(cmd)}")
+
+
+def launch_url(url, config, profiles, extra_flags=None):
+    """Route and open a single URL in Chrome."""
+    profile_dir, _, _, cleaned_url = route_url(url, config, profiles)
+    browser_bin = shutil.which(config.get("browser", "google-chrome-stable")) or "/usr/bin/google-chrome-stable"
+
+    cmd = [browser_bin]
+    if profile_dir:
+        cmd.append(f"--profile-directory={profile_dir}")
+    if extra_flags:
+        cmd.extend(extra_flags)
+    cmd.append(cleaned_url)
+
+    # Spawn browser asynchronously and detach completely
+    subprocess.Popen(
+        cmd,
+        start_new_session=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        stdin=subprocess.DEVNULL,
+    )
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Air Traffic Control: Route URLs to specific Chrome profiles based on rules."
+    )
+    parser.add_argument(
+        "-t",
+        "--test",
+        metavar="URL",
+        help="Simulate routing for a URL without opening the browser.",
+    )
+    parser.add_argument(
+        "-l",
+        "--list-profiles",
+        action="store_true",
+        help="List available Google Chrome profiles.",
+    )
+    parser.add_argument(
+        "urls",
+        nargs="*",
+        help="One or more URLs to open.",
+    )
+
+    args, unknown = parser.parse_known_args()
+    config = load_config()
+    profiles = get_chrome_profiles()
+
+    if args.list_profiles:
+        list_profiles()
+        return
+
+    if args.test:
+        test_url(args.test, config, profiles)
+        return
+
+    all_urls = args.urls
+    if not all_urls and not unknown:
+        # Launched with no arguments (e.g. from app launcher)
+        # Just open default browser
+        default_dir = resolve_profile_directory(config.get("default_profile"), profiles)
+        browser_bin = shutil.which(config.get("browser", "google-chrome-stable")) or "/usr/bin/google-chrome-stable"
+        cmd = [browser_bin]
+        if default_dir:
+            cmd.append(f"--profile-directory={default_dir}")
+        subprocess.Popen(
+            cmd,
+            start_new_session=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            stdin=subprocess.DEVNULL,
+        )
+        return
+
+    # Filter out URLs and flags from unknown
+    extra_flags = [u for u in unknown if u.startswith("-")]
+    remaining = [u for u in unknown if not u.startswith("-")]
+    targets = all_urls + remaining
+
+    for target in targets:
+        launch_url(target, config, profiles, extra_flags=extra_flags)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,21 @@
+[Desktop Entry]
+Version=1.0
+Name=Browser Router
+GenericName=Web Browser
+Comment=Air Traffic Control URL router for Chrome profiles
+Exec=/home/james/.local/bin/browser-router %U
+StartupNotify=true
+Terminal=false
+Icon=google-chrome
+Type=Application
+Categories=Network;WebBrowser;
+MimeType=application/pdf;application/rdf+xml;application/rss+xml;application/xhtml+xml;application/xhtml_xml;application/xml;image/gif;image/jpeg;image/png;image/webp;text/html;text/xml;x-scheme-handler/http;x-scheme-handler/https;
+Actions=new-window;new-private-window;
+
+[Desktop Action new-window]
+Name=New Window
+Exec=/home/james/.local/bin/browser-router
+
+[Desktop Action new-private-window]
+Name=New Incognito Window
+Exec=/home/james/.local/bin/browser-router --incognito

@@ -1,0 +1,44 @@
+# Air Traffic Control (browser-router) Configuration
+# Edit rules here or add new patterns as needed.
+
+# Default profile when no rules match (can be profile name, email, or directory)
+default_profile = "Personal"
+
+# Browser executable (defaults to google-chrome-stable)
+browser = "google-chrome-stable"
+
+# Automatically strip tracking parameters (utm_*, gclid, fbclid, etc.)
+strip_tracking = true
+
+# ==============================================================================
+# Rules are evaluated from top to bottom. The first matching rule wins.
+#
+# Match syntax:
+#   - Wildcard glob:   "*asana.com*", "*.slack.com*", "*/arcol-io/*"
+#   - Plain substring: "asana.com", "linear.app"
+#   - Regular expr:    "regex:^https?://([a-z0-9-]+\\.)?asana\\.com"
+#
+# Profile target:
+#   Can be a friendly name ("Arcol", "Personal"), email ("james@arcol.io"),
+#   or directory name ("Profile 1", "Default"). Run `browser-router -l` to see all.
+# ==============================================================================
+
+[[rules]]
+name = "Asana"
+match = ["*asana.com*"]
+profile = "Arcol"
+
+[[rules]]
+name = "Arcol"
+match = ["*arcol.io*"]
+profile = "Arcol"
+
+[[rules]]
+name = "Arcol GitHub"
+match = ["*github.com/ArcolTechnologyInc*"]
+profile = "Arcol"
+
+[[rules]]
+name = "LinkedIn"
+match = ["*linkedin.com*"]
+profile = "Arcol"

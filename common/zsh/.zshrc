@@ -85,11 +85,6 @@ autoload -U compinit && compinit
 ## Prettier
 export PRETTIER_EXPERIMENTAL_CLI=1
 
-## Volta
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-export PATH="/Users/james/.volta/tools/image/node/24.15.0/bin:$PATH"
-
 ## GPG
 export GPG_TTY=$(tty)
 if [[ -S "$HOME/.1password/agent.sock" ]]; then
@@ -142,6 +137,11 @@ fi
 
 # pi
 export PATH="/home/james/.local/share/pi-node/node-v22.23.2-linux-x64/bin:$PATH"
+
+## Volta
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+export PATH="/Users/james/.volta/tools/image/node/24.15.0/bin:$PATH"
 
 # Remove duplicate entries in $PATH
 typeset -aU path

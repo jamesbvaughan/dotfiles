@@ -1,11 +1,11 @@
 [Default Applications]
 inode/directory=org.gnome.Nautilus.desktop
 x-scheme-handler/file=org.gnome.Nautilus.desktop
-text/html=google-chrome.desktop
-x-scheme-handler/http=google-chrome.desktop
-x-scheme-handler/https=google-chrome.desktop
-x-scheme-handler/about=google-chrome.desktop
-x-scheme-handler/unknown=google-chrome.desktop
+text/html=browser-router.desktop
+x-scheme-handler/http=browser-router.desktop
+x-scheme-handler/https=browser-router.desktop
+x-scheme-handler/about=browser-router.desktop
+x-scheme-handler/unknown=browser-router.desktop
 x-scheme-handler/claude-cli=claude-code-url-handler.desktop
 x-scheme-handler/mailto=google-chrome.desktop
 x-scheme-handler/slack=slack.desktop

@@ -10,6 +10,7 @@ ExecStart=/usr/bin/quickshell
 Environment=QT_SCALE_FACTOR=1
 Environment=QT_QPA_PLATFORMTHEME=xdgdesktopportal
 Environment=QT_STYLE_OVERRIDE=Fusion
+Environment=QS_ICON_THEME=breeze-dark
 Restart=on-failure
 RestartSec=1s
 
