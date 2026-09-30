@@ -146,9 +146,6 @@ Scope {
         root.showFailure = false;
         root.statusMessage = "Scan fingerprint or enter password";
         root.fprintFastFailures = 0;
-        if (!fprintPam.active) {
-            root.startFprint();
-        }
     }
 
     function stopLockSession() {
@@ -172,13 +169,21 @@ Scope {
         id: sessionLock
         locked: false
 
-        // Only on lock/unlock: also restarting on `secure` reset the session a second time,
-        // wiping anything typed before the compositor confirmed the lock
+        // State is reset once per lock/unlock. The fingerprint reader is started separately,
+        // once the compositor confirms the lock (`secure`): a PAM session started as soon as
+        // `locked` flips never comes up. Keeping the two apart means confirming the lock
+        // doesn't also wipe anything already typed.
         onLockedChanged: {
             if (locked) {
                 root.startLockSession();
             } else {
                 root.stopLockSession();
+            }
+        }
+
+        onSecureChanged: {
+            if (secure && !fprintPam.active) {
+                root.startFprint();
             }
         }
 
