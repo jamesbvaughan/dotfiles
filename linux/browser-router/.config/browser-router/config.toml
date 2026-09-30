@@ -30,7 +30,7 @@ profile = "Arcol"
 
 [[rules]]
 name = "Arcol"
-match = ["*arcol.io*"]
+match = ["*arcol*"]
 profile = "Arcol"
 
 [[rules]]
@@ -40,5 +40,16 @@ profile = "Arcol"
 
 [[rules]]
 name = "LinkedIn"
-match = ["*linkedin.com*"]
+match = ["*linkedin.com*", "*lnkd.in*"]
+profile = "Arcol"
+
+[[rules]]
+name = "Stripe"
+match = ["*stripe.com*"]
+profile = "Arcol"
+
+
+[[rules]]
+name = "Intercom"
+match = ["*intercom.com*"]
 profile = "Arcol"
