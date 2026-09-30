@@ -15,8 +15,6 @@ Singleton {
     // Framework Laptop properties
     property int fanRpm: 0
     property int chargeLimit: 100
-    property string cameraStatus: "connected"
-    property string micStatus: "connected"
 
     // Disk usage properties
     property int diskUsage: 0
@@ -37,9 +35,39 @@ Singleton {
         path: "/proc/meminfo"
     }
 
+    // hwmon and thermal_zone numbering is not stable across boots, so these two are
+    // located by name at startup (see sysfsProbe). zone0 is acpitz, not the CPU.
     FileView {
         id: tempFile
-        path: "/sys/class/thermal/thermal_zone0/temp"
+    }
+
+    FileView {
+        id: fanFile
+    }
+
+    FileView {
+        id: kblightFile
+        path: "/sys/class/leds/chromeos::kbd_backlight/brightness"
+    }
+
+    FileView {
+        id: kblightMaxFile
+        path: "/sys/class/leds/chromeos::kbd_backlight/max_brightness"
+    }
+
+    Process {
+        id: sysfsProbe
+        running: true
+        command: ["sh", "-c",
+            "for z in /sys/class/thermal/thermal_zone*; do [ \"$(cat $z/type)\" = x86_pkg_temp ] && echo \"temp $z/temp\"; done;" +
+            "for h in /sys/class/hwmon/hwmon*; do [ \"$(cat $h/name)\" = cros_ec ] && echo \"fan $h/fan1_input\"; done"]
+        stdout: SplitParser {
+            onRead: line => {
+                const [kind, path] = line.split(" ");
+                if (kind === "temp") tempFile.path = path;
+                else if (kind === "fan") fanFile.path = path;
+            }
+        }
     }
 
     FileView {
@@ -86,26 +114,30 @@ Singleton {
         }
     }
 
-    // Process to query Framework stats (fan RPM, charge limit, privacy, kblight)
+    // The charge limit only changes when toggled, and reading it needs sudo framework_tool,
+    // so it's read once at startup and after each toggle rather than polled.
     Process {
-        id: frameworkStatsProc
-        command: [Quickshell.env("HOME") + "/.dotfiles/scripts/framework.sh", "stats"]
+        id: chargeLimitProc
+        running: true
+        command: [Quickshell.env("HOME") + "/.dotfiles/scripts/framework.sh", "charge-limit", "get"]
         stdout: StdioCollector {
             onStreamFinished: {
-                try {
-                    const data = JSON.parse(this.text.trim());
-                    if (data) {
-                        if (data.fan_rpm !== undefined) root.fanRpm = data.fan_rpm;
-                        if (data.charge_limit !== undefined) root.chargeLimit = data.charge_limit;
-                        if (data.camera !== undefined) root.cameraStatus = data.camera;
-                        if (data.mic !== undefined) root.micStatus = data.mic;
-                        if (data.kblight !== undefined && !ShellState.isSettingKblight) {
-                            ShellState.kblightPercent = data.kblight;
-                        }
-                    }
-                } catch (e) {}
+                const val = parseInt(this.text.trim());
+                if (!isNaN(val)) root.chargeLimit = val;
             }
         }
+    }
+
+    function toggleChargeLimit() {
+        if (chargeLimitProc.running) return;
+        chargeLimitProc.command = [Quickshell.env("HOME") + "/.dotfiles/scripts/framework.sh", "charge-limit", "toggle"];
+        chargeLimitProc.running = true;
+    }
+
+    function readInt(file) {
+        if (!file.path) return NaN;
+        file.reload();
+        return parseInt(file.text().trim());
     }
 
     function updateStats() {
@@ -145,14 +177,17 @@ Singleton {
             }
         }
 
-        // 3. Temperature
-        tempFile.reload();
-        const tempText = tempFile.text().trim();
-        if (tempText) {
-            const rawTemp = parseInt(tempText);
-            if (!isNaN(rawTemp)) {
-                root.temperature = Math.round(rawTemp / 1000);
-            }
+        // 3. Temperature, fan, keyboard backlight
+        const rawTemp = readInt(tempFile);
+        if (!isNaN(rawTemp)) root.temperature = Math.round(rawTemp / 1000);
+
+        const rpm = readInt(fanFile);
+        if (!isNaN(rpm)) root.fanRpm = rpm;
+
+        const kb = readInt(kblightFile);
+        const kbMax = readInt(kblightMaxFile);
+        if (!isNaN(kb) && kbMax > 0 && !ShellState.isSettingKblight) {
+            ShellState.kblightPercent = Math.round(kb * 100 / kbMax);
         }
 
         // 4. Wattage
@@ -188,18 +223,6 @@ Singleton {
         onTriggered: {
             failedUnitsProc.running = true;
             diskProc.running = true;
-        }
-    }
-
-    Timer {
-        interval: 3500
-        running: true
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: {
-            if (!frameworkStatsProc.running) {
-                frameworkStatsProc.running = true;
-            }
         }
     }
 }

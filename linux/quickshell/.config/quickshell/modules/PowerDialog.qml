@@ -8,8 +8,6 @@ import "../services"
 Scope {
     id: root
 
-    signal lockRequested()
-
     LazyLoader {
         active: ShellState.powerDialogOpen
 
@@ -36,12 +34,18 @@ Scope {
 
                 property int selectedIndex: 0
 
+                // Least destructive first: Lock is selected by default, so a stray Enter
+                // (e.g. hitting the power key twice) never shuts the machine down
                 readonly property var actions: [
-                    { actionId: "shutdown", label: "Shut Down", icon: "", keyHint: "S", color: Theme.red },
-                    { actionId: "reboot",   label: "Restart",   icon: "", keyHint: "R", color: Theme.orange },
+                    { actionId: "lock",     label: "Lock",      icon: "", keyHint: "L", color: Theme.blue },
                     { actionId: "suspend",  label: "Suspend",   icon: "󰒲", keyHint: "U", color: Theme.aqua },
-                    { actionId: "lock",     label: "Lock",      icon: "", keyHint: "L", color: Theme.blue }
+                    { actionId: "reboot",   label: "Restart",   icon: "", keyHint: "R", color: Theme.orange },
+                    { actionId: "shutdown", label: "Shut Down", icon: "", keyHint: "S", color: Theme.red }
                 ]
+
+                function executeById(actionId) {
+                    executeAction(actions.findIndex(a => a.actionId === actionId));
+                }
 
                 function executeAction(index) {
                     if (index < 0 || index >= actions.length) return;
@@ -55,14 +59,11 @@ Scope {
                     } else if (action.actionId === "suspend") {
                         Quickshell.execDetached(["systemctl", "suspend"]);
                     } else if (action.actionId === "lock") {
-                        root.lockRequested();
+                        ShellState.lock();
                     }
                 }
 
-                Component.onCompleted: {
-                    dialogFocusScope.selectedIndex = 0;
-                    dialogFocusScope.forceActiveFocus();
-                }
+                Component.onCompleted: dialogFocusScope.forceActiveFocus()
 
                 Timer {
                     interval: 30
@@ -84,16 +85,16 @@ Scope {
                         dialogFocusScope.executeAction(dialogFocusScope.selectedIndex);
                         event.accepted = true;
                     } else if (event.key === Qt.Key_S) {
-                        dialogFocusScope.executeAction(0);
+                        dialogFocusScope.executeById("shutdown");
                         event.accepted = true;
                     } else if (event.key === Qt.Key_R) {
-                        dialogFocusScope.executeAction(1);
+                        dialogFocusScope.executeById("reboot");
                         event.accepted = true;
                     } else if (event.key === Qt.Key_U || event.key === Qt.Key_Z) {
-                        dialogFocusScope.executeAction(2);
+                        dialogFocusScope.executeById("suspend");
                         event.accepted = true;
                     } else if (event.key === Qt.Key_L) {
-                        dialogFocusScope.executeAction(3);
+                        dialogFocusScope.executeById("lock");
                         event.accepted = true;
                     }
                 }
@@ -190,7 +191,7 @@ Scope {
 
                             // Subtitle
                             Text {
-                                text: "Press Enter to shut down, or choose an option"
+                                text: "Press Enter to lock, or choose an option"
                                 font.family: Theme.fontFamily
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.fgDim
@@ -267,7 +268,7 @@ Scope {
                                             Text {
                                                 id: keyHintText
                                                 anchors.centerIn: parent
-                                                text: (actionCard.index === 0 && actionCard.isSelected) ? "Enter" : actionCard.modelData.keyHint
+                                                text: actionCard.isSelected ? "Enter" : actionCard.modelData.keyHint
                                                 font.family: Theme.fontFamily
                                                 font.pixelSize: 13
                                                 font.bold: true
@@ -299,7 +300,7 @@ Scope {
                             }
 
                             Text {
-                                text: "Hotkeys: [S] [R] [U] [L]"
+                                text: "Hotkeys: [L] [U] [R] [S]"
                                 font.family: Theme.fontFamily
                                 font.pixelSize: 15
                                 color: Theme.fgMuted

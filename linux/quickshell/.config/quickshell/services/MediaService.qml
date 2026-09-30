@@ -37,8 +37,6 @@ Singleton {
     }
 
     readonly property bool hasPlayer: player !== null
-    readonly property string identity: player?.identity ?? ""
-    readonly property string desktopEntry: player?.desktopEntry ?? ""
     readonly property string appName: {
         if (!player) return "";
         return player.identity || player.desktopEntry || "Media";
@@ -48,9 +46,6 @@ Singleton {
     readonly property string trackArtist: player?.trackArtist ?? ""
     readonly property string trackAlbum: player?.trackAlbum ?? ""
     readonly property string trackArtUrl: player?.trackArtUrl ?? ""
-    readonly property bool canControl: player?.canControl ?? false
-    readonly property bool canGoNext: player?.canGoNext ?? false
-    readonly property bool canGoPrevious: player?.canGoPrevious ?? false
 
     readonly property string trackLabel: {
         if (trackArtist && trackTitle) {
@@ -65,10 +60,6 @@ Singleton {
         if (player) {
             player.togglePlaying();
         }
-    }
-
-    function playPause() {
-        togglePlaying();
     }
 
     function next() {

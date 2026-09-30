@@ -4,18 +4,22 @@ import QtQuick.Controls
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Services.Pam
-import Quickshell.Services.UPower
 import ".."
 import "../services"
 
 Scope {
     id: root
 
-    property alias locked: sessionLock.locked
     property string currentText: ""
     property bool unlockInProgress: false
     property bool showFailure: false
     property string statusMessage: "Scan fingerprint or enter password"
+
+    // Fingerprint attempt tracking: only a real "no match" is shown as a failure;
+    // timeouts and device errors (e.g. stale sessions after resume) retry silently with backoff
+    property bool fprintMismatch: false
+    property real fprintStartedAt: 0
+    property int fprintFastFailures: 0
 
     onCurrentTextChanged: {
         showFailure = false;
@@ -68,25 +72,42 @@ Scope {
                 if (/^(Place|Swipe) your/i.test(msg)) {
                     return;
                 }
+                // Timeouts and device errors happen without any user interaction; stay quiet
+                if (/^(Verification timed out|An unknown error|An unexpected error)/i.test(msg)) {
+                    return;
+                }
+                if (/^Failed to match/i.test(msg)) {
+                    root.fprintMismatch = true;
+                    root.showFailure = true;
+                    root.statusMessage = "Fingerprint not recognized";
+                    return;
+                }
+                // Actionable scan hints (too short, not centered, ...)
                 root.statusMessage = msg;
             }
         }
 
         onCompleted: result => {
             if (result === PamResult.Success) {
+                root.fprintFastFailures = 0;
                 root.statusMessage = "Unlocked";
                 root.currentText = "";
                 sessionLock.locked = false;
-            } else {
-                root.showFailure = true;
-                if (!root.statusMessage || root.statusMessage === "Scan fingerprint or enter password") {
-                    root.statusMessage = "Fingerprint not recognized";
-                }
-                // If fingerprint failed/timed out and user isn't entering password, retry
-                if (sessionLock.locked && !root.unlockInProgress) {
-                    fprintRetryTimer.restart();
-                }
+                return;
             }
+            if (!sessionLock.locked || root.unlockInProgress) return;
+
+            if (root.fprintMismatch) {
+                root.fprintFastFailures = 0;
+                fprintRetryTimer.interval = 1200;
+            } else {
+                // No finger involved: timed out or the device errored. Sessions that die
+                // almost immediately (e.g. right after resume) back off exponentially.
+                const elapsed = Date.now() - root.fprintStartedAt;
+                root.fprintFastFailures = elapsed < 5000 ? root.fprintFastFailures + 1 : 0;
+                fprintRetryTimer.interval = Math.min(1200 * Math.pow(2, root.fprintFastFailures), 30000);
+            }
+            fprintRetryTimer.restart();
         }
     }
 
@@ -98,9 +119,15 @@ Scope {
             if (sessionLock.locked && !root.unlockInProgress && !fprintPam.active) {
                 root.showFailure = false;
                 root.statusMessage = "Scan fingerprint or enter password";
-                fprintPam.start();
+                root.startFprint();
             }
         }
+    }
+
+    function startFprint() {
+        fprintMismatch = false;
+        fprintStartedAt = Date.now();
+        fprintPam.start();
     }
 
     function tryPasswordUnlock() {
@@ -118,8 +145,9 @@ Scope {
         root.unlockInProgress = false;
         root.showFailure = false;
         root.statusMessage = "Scan fingerprint or enter password";
+        root.fprintFastFailures = 0;
         if (!fprintPam.active) {
-            fprintPam.start();
+            root.startFprint();
         }
     }
 
@@ -133,21 +161,24 @@ Scope {
         root.statusMessage = "Scan fingerprint or enter password";
     }
 
+    Connections {
+        target: ShellState
+        function onLockRequested() {
+            sessionLock.locked = true;
+        }
+    }
+
     WlSessionLock {
         id: sessionLock
         locked: false
 
+        // Only on lock/unlock: also restarting on `secure` reset the session a second time,
+        // wiping anything typed before the compositor confirmed the lock
         onLockedChanged: {
             if (locked) {
                 root.startLockSession();
             } else {
                 root.stopLockSession();
-            }
-        }
-
-        onSecureChanged: {
-            if (secure) {
-                root.startLockSession();
             }
         }
 
@@ -160,41 +191,9 @@ Scope {
                 anchors.fill: parent
                 focus: true
 
-                // Multi-stage timers to guarantee focus after compositor window mapping
-                Timer {
-                    id: focusTimer1
-                    interval: 50
-                    running: sessionLock.locked
-                    onTriggered: pwdInput.forceActiveFocus()
-                }
-                Timer {
-                    id: focusTimer2
-                    interval: 150
-                    running: sessionLock.locked
-                    onTriggered: pwdInput.forceActiveFocus()
-                }
-                Timer {
-                    id: focusTimer3
-                    interval: 350
-                    running: sessionLock.locked
-                    onTriggered: pwdInput.forceActiveFocus()
-                }
-
+                // Giving the field focus within the surface is enough: it gets active focus as
+                // soon as the compositor hands the surface the keyboard
                 Component.onCompleted: pwdInput.forceActiveFocus()
-
-                Connections {
-                    target: surface
-                    function onVisibleChanged() {
-                        if (surface.visible) pwdInput.forceActiveFocus();
-                    }
-                }
-
-                Connections {
-                    target: sessionLock
-                    function onSecureChanged() {
-                        if (sessionLock.secure) pwdInput.forceActiveFocus();
-                    }
-                }
 
                 // Global key catcher: typing anywhere routes focus directly to password input
                 Keys.onPressed: event => {
@@ -220,26 +219,13 @@ Scope {
                     spacing: 8
 
                     Text {
-                        readonly property real pct: (UPower.displayDevice?.percentage ?? 1.0) * 100
-                        readonly property int state: UPower.displayDevice?.state ?? 0
-                        readonly property bool isCharging: state === 1 || state === 5
-                        readonly property bool isPlugged: state === 4
-
-                        text: {
-                            if (isCharging) return "󰂄";
-                            if (isPlugged) return "";
-                            if (pct <= 15) return "";
-                            if (pct <= 35) return "";
-                            if (pct <= 60) return "";
-                            if (pct <= 85) return "";
-                            return "";
-                        }
+                        text: BatteryService.icon
                         font.family: Theme.iconFont
                         font.pixelSize: Theme.fontSizeLarge
-                        color: (isCharging || isPlugged) ? Theme.green : (pct <= 20 ? Theme.red : (pct <= 35 ? Theme.orange : Theme.fg))
+                        color: BatteryService.color
                     }
                     Text {
-                        text: Math.round((UPower.displayDevice?.percentage ?? 1.0) * 100) + "%"
+                        text: Math.round(BatteryService.percent) + "%"
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeNormal
                         font.bold: true

@@ -1,142 +1,90 @@
 #!/usr/bin/env python3
 """
-Framework Laptop 13 Pro management helper for Quickshell & Hyprland.
-Provides fast JSON stats and hardware control via framework_tool.
+Framework Laptop 13 Pro hardware controls for Quickshell & Hyprland.
+
+  framework.sh kblight get|set N|up [N]|down [N]
+  framework.sh charge-limit get|set N|toggle
+
+The keyboard backlight is a plain LED class device, driven through brightnessctl
+(which goes via logind, so no root). Only the charge limit needs framework_tool,
+which needs `sudo -n` (NOPASSWD rule for /usr/bin/framework_tool). Fan speed and
+the backlight level are read straight from sysfs by Quickshell's SystemStats, so
+nothing here is polled.
 """
 
-import sys
 import re
 import subprocess
-import shutil
+import sys
 
 TOOL = "/usr/bin/framework_tool"
+KBD_LED = "chromeos::kbd_backlight"
 
-def run_cmd(args, timeout=2.0):
-    cmd = ["sudo", "-n", TOOL] + args
+
+def framework_tool(*args, timeout=2.0):
     try:
-        res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=timeout)
+        res = subprocess.run(["sudo", "-n", TOOL, *args], capture_output=True, text=True, timeout=timeout)
         return res.stdout
     except Exception:
         return ""
 
+
 def quickshell_ipc(method, *args):
-    if not shutil.which("quickshell"):
-        return
-    args_str = " ".join(str(a) for a in args)
-    call_str = f"{method} {args_str}".strip()
-    subprocess.run(["quickshell", "ipc", "call", "shell", call_str],
+    subprocess.run(["quickshell", "ipc", "call", "shell", method, *map(str, args)],
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-def get_stats():
-    import json
-    stats = {
-        "fan_rpm": 0,
-        "charge_limit": 100,
-        "camera": "connected",
-        "mic": "connected",
-        "kblight": 0,
-    }
-
-    # 1. Thermal / Fan
-    thermal = run_cmd(["--thermal"])
-    m_fan = re.search(r"Fan.*?:\s*(\d+)\s*RPM", thermal)
-    if m_fan:
-        stats["fan_rpm"] = int(m_fan.group(1))
-
-    # 2. Charge Limit
-    charge = run_cmd(["--charge-limit"])
-    m_charge = re.search(r"Maximum\s*(\d+)%", charge)
-    if m_charge:
-        stats["charge_limit"] = int(m_charge.group(1))
-
-    # 3. Privacy Switches
-    privacy = run_cmd(["--privacy"])
-    m_cam = re.search(r"Camera:\s*(\w+)", privacy)
-    if m_cam:
-        stats["camera"] = m_cam.group(1).lower()
-    m_mic = re.search(r"Microphone:\s*(\w+)", privacy)
-    if m_mic:
-        stats["mic"] = m_mic.group(1).lower()
-
-    # 4. Keyboard Backlight
-    kb = run_cmd(["--kblight"])
-    m_kb = re.search(r"Keyboard backlight:\s*(\d+)%", kb)
-    if m_kb:
-        stats["kblight"] = int(m_kb.group(1))
-
-    return json.dumps(stats)
 
 def get_kblight():
-    kb = run_cmd(["--kblight"])
-    m = re.search(r"Keyboard backlight:\s*(\d+)%", kb)
+    res = subprocess.run(["brightnessctl", "-d", KBD_LED, "-m"], capture_output=True, text=True)
+    m = re.search(r",(\d+)%,", res.stdout)
     return int(m.group(1)) if m else 0
+
 
 def set_kblight(val):
     val = max(0, min(100, int(val)))
-    run_cmd(["--kblight", str(val)])
+    subprocess.run(["brightnessctl", "-q", "-d", KBD_LED, "set", f"{val}%"],
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     quickshell_ipc("triggerKblightOsd", val)
     return val
 
-def toggle_charge_limit():
-    charge = run_cmd(["--charge-limit"])
-    m = re.search(r"Maximum\s*(\d+)%", charge)
-    curr = int(m.group(1)) if m else 100
-    target = 80 if curr >= 90 else 100
-    run_cmd(["--charge-limit", str(target)])
-    return target
+
+def get_charge_limit():
+    m = re.search(r"Maximum\s*(\d+)%", framework_tool("--charge-limit"))
+    return int(m.group(1)) if m else 100
+
 
 def set_charge_limit(val):
     val = max(20, min(100, int(val)))
-    run_cmd(["--charge-limit", str(val)])
+    framework_tool("--charge-limit", str(val))
     return val
 
+
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: framework.sh <stats|kblight|charge-limit> [args...]")
-        sys.exit(1)
+    cmd = sys.argv[1] if len(sys.argv) > 1 else ""
+    sub = sys.argv[2] if len(sys.argv) > 2 else "get"
+    arg = sys.argv[3] if len(sys.argv) > 3 else None
 
-    cmd = sys.argv[1]
-
-    if cmd == "stats":
-        print(get_stats())
-    elif cmd == "kblight":
-        sub = sys.argv[2] if len(sys.argv) > 2 else "get"
+    if cmd == "kblight":
         if sub == "get":
             print(get_kblight())
         elif sub == "set":
-            val = int(sys.argv[3]) if len(sys.argv) > 3 else 0
-            new_val = set_kblight(val)
-            print(new_val)
-        elif sub == "up":
-            delta = int(sys.argv[3]) if len(sys.argv) > 3 else 10
-            curr = get_kblight()
-            new_val = set_kblight(curr + delta)
-            print(new_val)
-        elif sub == "down":
-            delta = int(sys.argv[3]) if len(sys.argv) > 3 else 10
-            curr = get_kblight()
-            new_val = set_kblight(curr - delta)
-            print(new_val)
+            print(set_kblight(arg or 0))
+        elif sub in ("up", "down"):
+            delta = int(arg or 10) * (1 if sub == "up" else -1)
+            print(set_kblight(get_kblight() + delta))
         else:
-            print(f"Unknown kblight subcommand: {sub}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(f"Unknown kblight subcommand: {sub}")
     elif cmd == "charge-limit":
-        sub = sys.argv[2] if len(sys.argv) > 2 else "get"
         if sub == "get":
-            charge = run_cmd(["--charge-limit"])
-            m = re.search(r"Maximum\s*(\d+)%", charge)
-            print(int(m.group(1)) if m else 100)
+            print(get_charge_limit())
         elif sub == "set":
-            val = int(sys.argv[3]) if len(sys.argv) > 3 else 100
-            print(set_charge_limit(val))
+            print(set_charge_limit(arg or 100))
         elif sub == "toggle":
-            print(toggle_charge_limit())
+            print(set_charge_limit(80 if get_charge_limit() >= 90 else 100))
         else:
-            print(f"Unknown charge-limit subcommand: {sub}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(f"Unknown charge-limit subcommand: {sub}")
     else:
-        print(f"Unknown command: {cmd}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit("Usage: framework.sh <kblight|charge-limit> [args...]")
+
 
 if __name__ == "__main__":
     main()

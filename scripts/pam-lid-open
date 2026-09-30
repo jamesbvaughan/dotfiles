@@ -1,8 +1,12 @@
 #!/bin/sh
 # Exit 0 if the laptop lid is open, non-zero if closed (clamshell mode).
 #
-# Used as a PAM guard so pam_fprintd.so is skipped when the fingerprint
-# reader is physically unreachable. See /etc/pam.d/{sudo,polkit-1,hyprlock}.
+# Meant as a PAM guard so pam_fprintd.so is skipped when the fingerprint
+# reader is physically unreachable. NOT currently wired up: /etc/pam.d/sudo
+# and polkit-1 call pam_fprintd.so unconditionally. To enable, install it and
+# put this line directly above the pam_fprintd.so line in each file:
+#
+#   auth [success=ignore default=1] pam_exec.so quiet /usr/local/bin/pam-lid-open
 #
 # Install: sudo install -m 755 pam-lid-open /usr/local/bin/pam-lid-open
 

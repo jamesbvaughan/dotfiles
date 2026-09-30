@@ -52,9 +52,9 @@ Item {
 
         function updateValue(mouseX) {
             const clamped = Math.max(0, Math.min(track.width, mouseX));
-            const newVal = clamped / track.width;
-            root.value = newVal;
-            root.moved(newVal);
+            // Only report the new value: assigning root.value here would break the caller's
+            // binding, and the slider would stop following external changes after one drag
+            root.moved(clamped / track.width);
         }
 
         onPressed: mouse => updateValue(mouse.x)

@@ -4,7 +4,6 @@ import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Services.Pipewire
 import Quickshell.Services.SystemTray
-import Quickshell.Services.Notifications
 import ".."
 import "../components"
 import "../services"
@@ -120,7 +119,6 @@ PanelWindow {
                 font.family: Theme.fontFamily
                 font.pixelSize: Theme.fontSizeNormal
                 color: Theme.fgDim
-                elide: Text.ElideRight
             }
         }
 
@@ -152,14 +150,9 @@ PanelWindow {
                 iconColor: Theme.yellow
                 text: ShellState.brightnessPercent + "%"
                 tooltipText: "Brightness: " + ShellState.brightnessPercent + "% (scroll to adjust)"
-                onScrollUp: {
-                    Quickshell.execDetached([Quickshell.env("HOME") + "/.dotfiles/scripts/brightness.sh", "up"]);
-                    ShellState.triggerBrightnessOsd(Math.min(100, ShellState.brightnessPercent + 5));
-                }
-                onScrollDown: {
-                    Quickshell.execDetached([Quickshell.env("HOME") + "/.dotfiles/scripts/brightness.sh", "down"]);
-                    ShellState.triggerBrightnessOsd(Math.max(0, ShellState.brightnessPercent - 5));
-                }
+                // brightness.sh reports the resulting level back through the OSD IPC call
+                onScrollUp: Quickshell.execDetached([Quickshell.env("HOME") + "/.dotfiles/scripts/brightness.sh", "up"])
+                onScrollDown: Quickshell.execDetached([Quickshell.env("HOME") + "/.dotfiles/scripts/brightness.sh", "down"])
                 onClicked: {
                     ShellState.triggerBrightnessOsd(ShellState.brightnessPercent);
                 }
@@ -245,9 +238,7 @@ PanelWindow {
                 icon: ""
                 iconColor: Theme.orange
                 tooltipText: "Lock screen"
-                onClicked: {
-                    lockScreen.locked = true;
-                }
+                onClicked: ShellState.lock()
             }
 
             BarSeparator {}
@@ -314,11 +305,11 @@ PanelWindow {
             // Notifications Center Toggle Button
             BarItem {
                 icon: ShellState.dndEnabled ? "" : ""
-                iconColor: ShellState.dndEnabled ? Theme.red : (notificationServer.trackedNotifications.values.length > 0 ? Theme.orange : Theme.fgDim)
-                badge: notificationServer.trackedNotifications.values.length > 0 ? notificationServer.trackedNotifications.values.length.toString() : ""
+                iconColor: ShellState.dndEnabled ? Theme.red : (NotificationService.count > 0 ? Theme.orange : Theme.fgDim)
+                badge: NotificationService.count > 0 ? NotificationService.count.toString() : ""
                 badgeColor: Theme.red
                 active: ShellState.notificationCenterOpen
-                tooltipText: ShellState.dndEnabled ? "Do Not Disturb (active)" : (notificationServer.trackedNotifications.values.length > 0 ? (notificationServer.trackedNotifications.values.length + " notifications") : "No notifications")
+                tooltipText: ShellState.dndEnabled ? "Do Not Disturb (active)" : (NotificationService.count > 0 ? (NotificationService.count + " notifications") : "No notifications")
                 onClicked: ShellState.toggleNotificationCenter()
                 onRightClicked: ShellState.dndEnabled = !ShellState.dndEnabled
             }

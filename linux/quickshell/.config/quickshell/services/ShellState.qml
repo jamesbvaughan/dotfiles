@@ -2,7 +2,6 @@ pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Io
-import Quickshell.Services.Pipewire
 import ".."
 
 Singleton {
@@ -13,8 +12,15 @@ Singleton {
 
     property bool powerDialogOpen: false
 
+    // Handled by LockScreen; lets the bar, power dialog and IPC lock without reaching into it
+    signal lockRequested()
+
+    function lock() {
+        lockRequested();
+    }
+
     property bool showOsd: false
-    property string osdType: "volume" // "volume" | "brightness"
+    property string osdType: "volume" // "volume" | "brightness" | "kblight"
     property real osdValue: 0.0 // 0.0 to 1.0
     property string osdIcon: ""
     property string osdLabel: ""
@@ -22,7 +28,7 @@ Singleton {
     // Brightness state (tracked via brightness.sh or IPC)
     property int brightnessPercent: 100
 
-    // Keyboard backlight state
+    // Keyboard backlight state (polled from sysfs by SystemStats unless a slider drag is in flight)
     property int kblightPercent: 0
     property bool isSettingKblight: false
 
@@ -82,12 +88,31 @@ Singleton {
         osdTimer.restart();
     }
 
+    // Slider drags call these on every mouse move; the hardware writes are throttled so a
+    // drag doesn't fork a process per pixel. The last value always gets written.
+    function setBrightness(percent) {
+        brightnessPercent = Math.min(Math.max(percent, 0), 100);
+        if (!brightnessWrite.running) brightnessWrite.start();
+    }
+
     function setKblight(percent) {
         isSettingKblight = true;
         kblightPercent = Math.min(Math.max(percent, 0), 100);
         triggerKblightOsd(kblightPercent);
-        Quickshell.execDetached([Quickshell.env("HOME") + "/.dotfiles/scripts/framework.sh", "kblight", "set", kblightPercent.toString()]);
+        if (!kblightWrite.running) kblightWrite.start();
         resetKblightFlagTimer.restart();
+    }
+
+    Timer {
+        id: brightnessWrite
+        interval: 80
+        onTriggered: Quickshell.execDetached([Quickshell.env("HOME") + "/.dotfiles/scripts/brightness.sh", "set", root.brightnessPercent.toString()])
+    }
+
+    Timer {
+        id: kblightWrite
+        interval: 80
+        onTriggered: Quickshell.execDetached(["brightnessctl", "-q", "-d", "chromeos::kbd_backlight", "set", root.kblightPercent + "%"])
     }
 
     Timer {
@@ -112,21 +137,6 @@ Singleton {
                 const val = parseInt(this.text.trim());
                 if (!isNaN(val)) {
                     root.brightnessPercent = val;
-                }
-            }
-        }
-    }
-
-    // Process to query initial keyboard backlight
-    Process {
-        id: kblightQueryProc
-        command: [Quickshell.env("HOME") + "/.dotfiles/scripts/framework.sh", "kblight", "get"]
-        running: true
-        stdout: StdioCollector {
-            onStreamFinished: {
-                const val = parseInt(this.text.trim());
-                if (!isNaN(val)) {
-                    root.kblightPercent = val;
                 }
             }
         }

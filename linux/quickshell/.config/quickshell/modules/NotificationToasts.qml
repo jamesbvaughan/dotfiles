@@ -1,44 +1,60 @@
 import QtQuick
-import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Notifications
 import ".."
+import "../components"
 import "../services"
 
 Scope {
     id: root
 
-    // ListModel to hold visible toast notifications
-    ListModel {
-        id: toastModel
+    readonly property int maxToasts: 4
+    readonly property int defaultTimeoutMs: 6000
+
+    // Visible toasts, newest first, as { notification, expiresAt }. A toast is only a view:
+    // hiding it leaves the notification in the Control Center (except transient ones).
+    property var toasts: []
+
+    function show(notif) {
+        const timeout = notif.urgency === NotificationUrgency.Critical ? Infinity
+            : (notif.expireTimeout > 0 ? notif.expireTimeout * 1000 : defaultTimeoutMs);
+        const shown = [{ notification: notif, expiresAt: Date.now() + timeout }, ...toasts];
+        shown.slice(maxToasts).forEach(t => retire(t.notification));
+        toasts = shown.slice(0, maxToasts);
+    }
+
+    function hide(notif) {
+        if (!toasts.some(t => t.notification === notif)) return;
+        toasts = toasts.filter(t => t.notification !== notif);
+        retire(notif);
+    }
+
+    // Transient notifications have no place in the notification area once their toast is gone
+    function retire(notif) {
+        if (notif.transient && notif.tracked) notif.expire();
     }
 
     Connections {
-        target: notificationServer
+        target: NotificationService
 
-        function onNotification(notif) {
-            notif.tracked = true;
+        function onReceived(notif) {
+            if (!ShellState.dndEnabled) root.show(notif);
+        }
+    }
 
-            // If DND is active, do not pop up a toast
-            if (ShellState.dndEnabled) return;
-
-            toastModel.insert(0, {
-                notifId: notif.id,
-                summary: notif.summary || notif.appName || "Notification",
-                body: notif.body || "",
-                appName: notif.appName || "",
-                appIcon: notif.appIcon || ""
-            });
-
-            // Limit visible toasts
-            while (toastModel.count > 4) {
-                toastModel.remove(toastModel.count - 1);
-            }
+    // One clock for all toasts, so the list can be rebuilt freely without resetting timers
+    Timer {
+        interval: 500
+        repeat: true
+        running: root.toasts.length > 0
+        onTriggered: {
+            const now = Date.now();
+            root.toasts.filter(t => t.expiresAt <= now).forEach(t => root.hide(t.notification));
         }
     }
 
     LazyLoader {
-        active: toastModel.count > 0
+        active: root.toasts.length > 0
 
         PanelWindow {
             anchors.top: true
@@ -47,7 +63,7 @@ Scope {
             margins.right: 12
             exclusiveZone: 0
 
-            implicitWidth: 360
+            implicitWidth: 420
             implicitHeight: toastColumn.implicitHeight
             color: "transparent"
 
@@ -57,96 +73,25 @@ Scope {
                 spacing: 8
 
                 Repeater {
-                    model: toastModel
+                    model: root.toasts
 
-                    delegate: Rectangle {
-                        required property int index
-                        required property int notifId
-                        required property string summary
-                        required property string body
-                        required property string appName
-                        required property string appIcon
-
+                    delegate: NotificationCard {
+                        required property var modelData
+                        notification: modelData.notification
                         width: toastColumn.width
-                        implicitHeight: contentColumn.implicitHeight + 20
+                        maxBodyLines: 3
                         color: Theme.bg
-                        border.color: Theme.borderFocused
-                        border.width: 1
+                        border.color: notification.urgency === NotificationUrgency.Critical ? Theme.red : Theme.borderFocused
 
-                        Timer {
-                            interval: 6000
-                            running: true
-                            onTriggered: {
-                                if (index >= 0 && index < toastModel.count) {
-                                    toastModel.remove(index);
-                                }
+                        onCloseRequested: root.hide(notification)
+                        onActivated: root.hide(notification)
+
+                        // Closed elsewhere: by the app, an action, or the Control Center
+                        Connections {
+                            target: notification
+                            function onClosed() {
+                                root.toasts = root.toasts.filter(t => t.notification !== notification);
                             }
-                        }
-
-                        ColumnLayout {
-                            id: contentColumn
-                            anchors {
-                                left: parent.left
-                                right: parent.right
-                                top: parent.top
-                                margins: 10
-                            }
-                            spacing: 4
-
-                            RowLayout {
-                                Layout.fillWidth: true
-                                spacing: 8
-
-                                Text {
-                                    text: appName ? appName.toUpperCase() : "NOTIFICATION"
-                                    font.family: Theme.fontFamily
-                                    font.pixelSize: Theme.fontSizeSmall - 1
-                                    font.bold: true
-                                    color: Theme.blue
-                                    Layout.fillWidth: true
-                                }
-
-                                Text {
-                                    text: "✕"
-                                    font.family: Theme.fontFamily
-                                    font.pixelSize: Theme.fontSizeSmall
-                                    color: Theme.fgDim
-
-                                    MouseArea {
-                                        anchors.fill: parent
-                                        cursorShape: Qt.PointingHandCursor
-                                        onClicked: toastModel.remove(index)
-                                    }
-                                }
-                            }
-
-                            Text {
-                                text: summary
-                                font.family: Theme.fontFamily
-                                font.pixelSize: Theme.fontSizeNormal
-                                font.bold: true
-                                color: Theme.fg
-                                wrapMode: Text.Wrap
-                                Layout.fillWidth: true
-                            }
-
-                            Text {
-                                visible: body !== ""
-                                text: body
-                                font.family: Theme.fontFamily
-                                font.pixelSize: Theme.fontSizeSmall
-                                color: Theme.fgDim
-                                wrapMode: Text.Wrap
-                                maximumLineCount: 3
-                                elide: Text.ElideRight
-                                Layout.fillWidth: true
-                            }
-                        }
-
-                        MouseArea {
-                            anchors.fill: parent
-                            z: -1
-                            onClicked: toastModel.remove(index)
                         }
                     }
                 }

@@ -3,22 +3,11 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
-import Quickshell.Services.Notifications
-import Quickshell.Services.Pipewire
 import "modules"
 import "services"
 
 ShellRoot {
     id: root
-
-    // Central Notification Server
-    NotificationServer {
-        id: notificationServer
-        keepOnReload: true
-        bodySupported: true
-        actionsSupported: true
-        imageSupported: true
-    }
 
     // Top Bar on each connected screen
     Variants {
@@ -54,20 +43,13 @@ ShellRoot {
     NotificationCenter {}
 
     // Power Confirmation & Action Dialog
-    PowerDialog {
-        id: powerDialog
-        onLockRequested: {
-            lockScreen.locked = true;
-        }
-    }
+    PowerDialog {}
 
     // Automatic Power Profile Management (AC -> Performance, Battery -> Balanced)
     PowerManagement {}
 
     // Session Lock Screen (ext-session-lock-v1)
-    LockScreen {
-        id: lockScreen
-    }
+    LockScreen {}
 
     // IPC Handler to interface with Hyprland keybinds and scripts
     IpcHandler {
@@ -98,11 +80,7 @@ ShellRoot {
         }
 
         function lock(): void {
-            lockScreen.locked = true;
-        }
-
-        function unlock(): void {
-            lockScreen.locked = false;
+            ShellState.lock();
         }
 
         function triggerBrightnessOsd(percent: int): void {
@@ -115,12 +93,6 @@ ShellRoot {
 
         function setKblight(percent: int): void {
             ShellState.setKblight(percent);
-        }
-
-        function showVolumeOsd(): void {
-            const vol = Pipewire.defaultAudioSink?.audio.volume ?? 0;
-            const muted = Pipewire.defaultAudioSink?.audio.muted ?? false;
-            ShellState.triggerVolumeOsd(vol, muted);
         }
     }
 }

@@ -11,7 +11,7 @@ Singleton {
 
     Process {
         id: khalProc
-        command: ["python3", Quickshell.env("HOME") + "/.config/waybar/scripts/khal.py"]
+        command: [Quickshell.env("HOME") + "/.dotfiles/scripts/khal.py"]
         stdout: StdioCollector {
             onStreamFinished: {
                 try {

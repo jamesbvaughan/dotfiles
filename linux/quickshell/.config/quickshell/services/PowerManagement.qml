@@ -1,64 +1,32 @@
 import QtQuick
 import Quickshell
-import Quickshell.Io
 import Quickshell.Services.UPower
 
-Item {
+// Switches the power profile when the charger is plugged in or pulled
+// (AC -> Performance, battery -> Balanced). It only reacts to that transition, so a
+// profile picked by hand from the bar sticks until the next plug/unplug.
+Scope {
     id: root
-
-    // Reactively track whether the system is running on battery
-    readonly property bool onBattery: UPower.onBattery
 
     function applyProfile() {
         if (UPower.onBattery) {
-            if (PowerProfiles.profile !== PowerProfile.Balanced) {
-                PowerProfiles.profile = PowerProfile.Balanced;
-            }
-        } else {
-            if (PowerProfiles.hasPerformanceProfile && PowerProfiles.profile !== PowerProfile.Performance) {
-                PowerProfiles.profile = PowerProfile.Performance;
-            }
+            PowerProfiles.profile = PowerProfile.Balanced;
+        } else if (PowerProfiles.hasPerformanceProfile) {
+            PowerProfiles.profile = PowerProfile.Performance;
         }
     }
 
-    onOnBatteryChanged: {
-        applyProfile();
-    }
-
-    Component.onCompleted: {
-        applyProfile();
-    }
-
-    // Delayed fallback check in case UPower/DBus properties are still populating at startup
-    Timer {
-        id: initTimer
-        interval: 1500
-        running: true
-        repeat: false
-        onTriggered: root.applyProfile()
-    }
-
-    // Monitor systemd login1 PrepareForSleep signal to re-evaluate on wake from sleep
-    Process {
-        id: sleepMonitor
-        command: ["stdbuf", "-oL", "gdbus", "monitor", "-y", "-d", "org.freedesktop.login1", "-o", "/org/freedesktop/login1"]
-        running: true
-        stdout: SplitParser {
-            onRead: data => {
-                if (data.includes("PrepareForSleep") && data.includes("false")) {
-                    root.applyProfile();
-                    wakeTimer.restart();
-                }
-            }
+    Connections {
+        target: UPower
+        function onOnBatteryChanged() {
+            root.applyProfile();
         }
     }
 
-    // Secondary delayed check after wake to allow hardware / ACPI / tuned-ppd states to settle
+    // UPower's properties arrive over D-Bus shortly after startup; apply once they have
     Timer {
-        id: wakeTimer
         interval: 1500
-        running: false
-        repeat: false
+        running: true
         onTriggered: root.applyProfile()
     }
 }

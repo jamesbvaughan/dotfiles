@@ -2,7 +2,7 @@
 
 # Adjust or report the brightness of whichever display is actually in use.
 #
-#   brightness.sh up | down | get
+#   brightness.sh up | down | get | set <percent>
 #
 # - The internal panel goes through /sys/class/backlight via brightnessctl.
 # - Apple Studio Displays and Pro Display XDR take HID feature reports
@@ -22,9 +22,12 @@ set -eu
 STEP=5
 
 action=${1:-}
+target=${2:-}
 case $action in
   up | down | get) ;;
-  *) echo "usage: ${0##*/} up|down|get" >&2; exit 1 ;;
+  set) case $target in '' | *[!0-9]*) echo "usage: ${0##*/} set <0-100>" >&2; exit 1 ;; esac
+       [ "$target" -gt 100 ] && target=100 ;;
+  *) echo "usage: ${0##*/} up|down|get|set <percent>" >&2; exit 1 ;;
 esac
 
 # Both branches print the resulting percentage on stdout, for wob, waybar, and quickshell.
@@ -32,6 +35,7 @@ internal() {
   case $action in
     up) brightnessctl -c backlight set "+${STEP}%" >/dev/null 2>&1 ;;
     down) brightnessctl -c backlight set "${STEP}%-" >/dev/null 2>&1 ;;
+    set) brightnessctl -c backlight set "${target}%" >/dev/null 2>&1 ;;
   esac
   brightnessctl -c backlight -m 2>/dev/null | cut -d, -f4 | tr -d '%'
 }
@@ -46,6 +50,10 @@ external_display() {
         ;;
       down)
         percent=$((percent - STEP < 0 ? 0 : percent - STEP))
+        asdbctl set "$percent" >/dev/null 2>&1 || return 1
+        ;;
+      set)
+        percent=$target
         asdbctl set "$percent" >/dev/null 2>&1 || return 1
         ;;
     esac
@@ -64,6 +72,9 @@ external_display() {
         down)
           out=$(asdcontrol --brief "$dev" "--" "-${STEP}%" 2>/dev/null || true)
           ;;
+        set)
+          out=$(asdcontrol --brief "$dev" "${target}%" 2>/dev/null || true)
+          ;;
         get)
           out=$(asdcontrol --brief "$dev" 2>/dev/null || true)
           ;;
@@ -80,6 +91,7 @@ external_display() {
     case $action in
       up) ddcutil setvcp 10 + "$STEP" >/dev/null 2>&1 || true ;;
       down) ddcutil setvcp 10 - "$STEP" >/dev/null 2>&1 || true ;;
+      set) ddcutil setvcp 10 "$target" >/dev/null 2>&1 || true ;;
     esac
     cur=$(ddcutil getvcp 10 2>/dev/null | grep -oP 'current value =\s*\K[0-9]+' || true)
     if [ -n "$cur" ]; then

@@ -11,7 +11,7 @@ Singleton {
 
     Process {
         id: weatherProc
-        command: ["python3", Quickshell.env("HOME") + "/.config/waybar/scripts/wttr.py"]
+        command: [Quickshell.env("HOME") + "/.dotfiles/scripts/wttr.py"]
         stdout: StdioCollector {
             onStreamFinished: {
                 try {

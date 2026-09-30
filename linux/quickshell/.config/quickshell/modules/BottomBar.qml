@@ -105,7 +105,7 @@ PanelWindow {
                     if (SystemStats.fanRpm > 0) return Theme.blue;
                     return Theme.fgDim;
                 }
-                text: SystemStats.fanRpm > 0 ? (SystemStats.fanRpm + " RPM") : "0 RPM"
+                text: SystemStats.fanRpm + " RPM"
                 tooltipText: "Fan: " + (SystemStats.fanRpm > 0 ? (SystemStats.fanRpm + " RPM") : "0 RPM (Silent)")
                 tooltipAbove: true
             }
@@ -209,7 +209,7 @@ PanelWindow {
                 textColor: SystemStats.failedUnits > 0 ? Theme.red : Theme.green
                 tooltipText: SystemStats.failedUnits > 0 ? `${SystemStats.failedUnits} failed systemd units` : "All systemd units OK"
                 tooltipAbove: true
-                onClicked: Quickshell.execDetached(["ghostty", "-e", "systemctl", "--failed"])
+                onClicked: Quickshell.execDetached(["ghostty", "-e", "systemctl", "--user", "--failed"])
             }
 
             BarSeparator {}
@@ -262,35 +262,15 @@ PanelWindow {
 
             // Battery
             BarItem {
-                readonly property real pct: (UPower.displayDevice?.percentage ?? 1.0) * 100
-                readonly property int state: UPower.displayDevice?.state ?? 0
-                readonly property bool isCharging: state === 1 || state === 5 // Charging or PendingCharge
-                readonly property bool isPlugged: state === 4 // Fully charged / plugged
-
-                icon: {
-                    if (isCharging) return "󰂄";
-                    if (isPlugged) return "";
-                    if (pct <= 15) return "";
-                    if (pct <= 35) return "";
-                    if (pct <= 60) return "";
-                    if (pct <= 85) return "";
-                    return "";
-                }
-                iconColor: {
-                    if (isCharging || isPlugged) return Theme.green;
-                    if (pct <= 20) return Theme.red;
-                    if (pct <= 35) return Theme.orange;
-                    return Theme.fg;
-                }
-                text: Math.round(pct) + "%" + (SystemStats.chargeLimit < 100 ? (" [" + SystemStats.chargeLimit + "%]") : "")
+                icon: BatteryService.icon
+                iconColor: BatteryService.color
+                text: Math.round(BatteryService.percent) + "%" + (SystemStats.chargeLimit < 100 ? (" [" + SystemStats.chargeLimit + "%]") : "")
                 textColor: Theme.fg
-                tooltipText: (isCharging ? "Charging: " : (isPlugged ? "Plugged in: " : "Battery: ")) + Math.round(pct) + "%" +
+                tooltipText: BatteryService.statusLabel + ": " + Math.round(BatteryService.percent) + "%" +
                              "\nCharge limit: " + SystemStats.chargeLimit + "%" +
                              "\nClick to toggle limit (80% Desk / 100% Travel)"
                 tooltipAbove: true
-                onClicked: {
-                    Quickshell.execDetached([Quickshell.env("HOME") + "/.dotfiles/scripts/framework.sh", "charge-limit", "toggle"]);
-                }
+                onClicked: SystemStats.toggleChargeLimit()
             }
         }
     }

@@ -142,9 +142,6 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme prefer-dark")
   hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark")
 
-  -- Polkit authentication agent
-  hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
-
   -- Background daemons / tray apps
   hl.exec_cmd("1password --silent")
   hl.exec_cmd("nm-applet")
@@ -155,18 +152,18 @@ hl.on("hyprland.start", function()
   -- Idle management and screen lock.
   -- Every hook is one absolute script path, single-quoted: no nested shell quoting to get
   -- wrong, and nothing that depends on swayidle inheriting a PATH it does not have.
-  -- `reload config-only` on resume re-runs update_monitors(), so the panel comes back even
-  -- if the lid-switch event is missed across suspend.
+  -- `resume` belongs to the preceding timeout (the user came back from idle); it is
+  -- `after-resume` that fires after a suspend. There, `reload config-only` re-runs
+  -- update_monitors(), so the panel comes back even if the lid-switch or dock hotplug
+  -- event was missed while asleep.
   hl.exec_cmd(
     "swayidle -w" ..
     " timeout 1800 '" .. scripts .. "lock.sh'" ..
     " timeout 1805 '" .. scripts .. "dpms.sh off'" ..
-    " resume '" .. scripts .. "dpms.sh on && hyprctl reload config-only'" ..
+    " resume '" .. scripts .. "dpms.sh on'" ..
     " before-sleep 'playerctl pause'" ..
-    " before-sleep '" .. scripts .. "lock.sh --sleep'")
-
-  -- Wallpaper (quickshell is managed by hyprland-session.target via systemd)
-  hl.exec_cmd("hyprpaper")
+    " before-sleep '" .. scripts .. "lock.sh --sleep'" ..
+    " after-resume 'hyprctl reload config-only'")
 
   -- Blue light filter / color temperature
   hl.exec_cmd("hyprsunset")
@@ -218,6 +215,7 @@ hl.config({
     },
   },
 
+  -- Instant transitions (Sway-style)
   animations = {
     enabled = false,
   },
@@ -233,8 +231,11 @@ hl.config({
     preserve_split = true,
   },
 
+  -- Plain black desktop; no wallpaper daemon needed
   misc = {
     force_default_wallpaper    = 0,
+    disable_hyprland_logo      = true,
+    background_color           = "rgb(000000)",
     disable_splash_rendering   = true,
     focus_on_activate          = true,
     allow_session_lock_restore = true,
@@ -263,10 +264,6 @@ hl.config({
     },
   },
 })
-
--- Animations disabled for pure instant transitions (Sway-style)
-hl.animation({ leaf = "global", enabled = false })
-hl.animation({ leaf = "workspaces", enabled = false })
 
 -- Bump just the touchpad pointer speed (leaves external mouse untouched)
 hl.device({
@@ -366,7 +363,6 @@ hl.window_rule({ name = "nwg-displays", match = { class = "^nwg-displays$" }, fl
 hl.window_rule({ name = "bluetui", match = { class = "^bluetui\\.Bluetui$" }, float = true, size = "900 700" })
 hl.window_rule({ name = "trayscale", match = { class = "^dev\\.deedles\\.Trayscale$" }, float = true })
 hl.window_rule({ name = "swayimg", match = { class = "swayimg" }, float = true, size = "1200 800" })
--- hl.window_rule({ name = "pavucontrol", match = { class = "pavucontrol" }, float = true, size = "900 700" })
 hl.window_rule({ name = "pavucontrol", match = { title = "^Volume Control$" }, float = true, size = "900 700" })
 hl.window_rule({ name = "pip", match = { title = "^Picture in picture$" }, float = true, pin = true })
 hl.window_rule({ name = "easyeffects", match = { title = "^Easy Effects$" }, float = true })
@@ -384,7 +380,6 @@ hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("hyprctl reload"))
 hl.bind(mainMod .. " + space", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("quickshell ipc call shell toggleNotifications"))
 hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("quickshell ipc call shell togglePowerDialog"))
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(os.getenv("HOME") .. "/pw"))
 hl.bind(mainMod .. " + T", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + S", hl.dsp.window.pin())
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
@@ -431,10 +426,10 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 -- Screenshots (grimshot)
 hl.bind(mainMod .. " + CTRL + 4",
   hl.dsp.exec_cmd(
-    [[sh -c 'grimshot --notify savecopy area ~/screenshots/screenshot-at-$(date +"%Y-%m-%d-%H-%M-%S").png']]))
+    [[grimshot --notify savecopy area ~/screenshots/screenshot-at-$(date +"%Y-%m-%d-%H-%M-%S").png]]))
 hl.bind(mainMod .. " + CTRL + 5",
   hl.dsp.exec_cmd(
-    [[sh -c 'grimshot --notify savecopy output ~/screenshots/screenshot-at-$(date +"%Y-%m-%d-%H-%M-%S").png']]))
+    [[grimshot --notify savecopy output ~/screenshots/screenshot-at-$(date +"%Y-%m-%d-%H-%M-%S").png]]))
 
 -- Media & Volume keys
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ +5%"),

@@ -24,7 +24,7 @@
     "max-length": 100,
     "tooltip": true,
     "interval": 300,
-    "exec": "$HOME/.config/waybar/scripts/khal.py",
+    "exec": "$HOME/.dotfiles/scripts/khal.py",
     "return-type": "json",
     "on-click": "xdg-open https://calendar.google.com"
   },
@@ -173,7 +173,7 @@
     "format": "{}",
     "tooltip": true,
     "interval": 300,
-    "exec": "$HOME/.config/waybar/scripts/wttr.py",
+    "exec": "$HOME/.dotfiles/scripts/wttr.py",
     "return-type": "json"
   },
   "custom/wattage": {

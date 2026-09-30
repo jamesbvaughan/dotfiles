@@ -28,18 +28,15 @@ QtObject {
 
     readonly property string fontFamily: "Berkeley Mono"
     readonly property string iconFont: "Symbols Nerd Font"
-    readonly property var fontFamilies: ["Berkeley Mono", "Symbols Nerd Font", "monospace"]
 
     // Scaled typography for native 2880x1920 resolution (scale factor 1:1)
     readonly property int fontSizeSmall: 18
     readonly property int fontSizeNormal: 22
     readonly property int fontSizeLarge: 28
-    readonly property int fontSizeClock: 22
     readonly property int fontSizeLockClock: 76
 
     // Spacing & Metrics
     readonly property int barHeight: 52
-    readonly property int barPadding: 6
     readonly property int moduleSpacing: 11
     readonly property int radius: 0 // Flat sharp edges matching Sway/Hyprland rounding = 0
 }

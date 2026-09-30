@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell
-import Quickshell.Services.Notifications
 import Quickshell.Services.Pipewire
 import ".."
 import "../components"
@@ -198,10 +197,7 @@ Scope {
                                     Layout.fillWidth: true
                                     value: ShellState.brightnessPercent / 100.0
                                     progressColor: Theme.yellow
-                                    onMoved: val => {
-                                        const p = Math.round(val * 100);
-                                        ShellState.brightnessPercent = p;
-                                    }
+                                    onMoved: val => ShellState.setBrightness(Math.round(val * 100))
                                 }
 
                                 Text {
@@ -242,10 +238,7 @@ Scope {
                                     Layout.fillWidth: true
                                     value: ShellState.kblightPercent / 100.0
                                     progressColor: Theme.purple
-                                    onMoved: val => {
-                                        const p = Math.round(val * 100);
-                                        ShellState.setKblight(p);
-                                    }
+                                    onMoved: val => ShellState.setKblight(Math.round(val * 100))
                                 }
 
                                 Text {
@@ -477,7 +470,7 @@ Scope {
                         Layout.topMargin: 6
 
                         Text {
-                            text: "NOTIFICATIONS (" + notificationServer.trackedNotifications.values.length + ")"
+                            text: "NOTIFICATIONS (" + NotificationService.count + ")"
                             font.family: Theme.fontFamily
                             font.pixelSize: 20
                             font.bold: true
@@ -490,17 +483,12 @@ Scope {
                             font.family: Theme.fontFamily
                             font.pixelSize: 18
                             color: Theme.red
-                            visible: notificationServer.trackedNotifications.values.length > 0
+                            visible: NotificationService.count > 0
 
                             MouseArea {
                                 anchors.fill: parent
                                 cursorShape: Qt.PointingHandCursor
-                                onClicked: {
-                                    const notifs = notificationServer.trackedNotifications.values;
-                                    for (let i = notifs.length - 1; i >= 0; i--) {
-                                        notifs[i].dismiss();
-                                    }
-                                }
+                                onClicked: NotificationService.dismissAll()
                             }
                         }
                     }
@@ -513,7 +501,7 @@ Scope {
                         clip: true
                         spacing: 14
                         boundsBehavior: Flickable.StopAtBounds
-                        model: notificationServer.trackedNotifications.values
+                        model: NotificationService.list
 
                         ScrollBar.vertical: ScrollBar {
                             policy: ScrollBar.AsNeeded
@@ -533,74 +521,16 @@ Scope {
                             }
                         }
 
-                        delegate: Rectangle {
-                                required property var modelData
-                                width: notifList.width
-                                implicitHeight: notifCardCol.implicitHeight + 28
-                                color: Theme.surface
-                                border.color: Theme.border
-                                border.width: 1
-
-                                ColumnLayout {
-                                    id: notifCardCol
-                                    anchors {
-                                        left: parent.left
-                                        right: parent.right
-                                        top: parent.top
-                                        margins: 14
-                                    }
-                                    spacing: 8
-
-                                    RowLayout {
-                                        Layout.fillWidth: true
-
-                                        Text {
-                                            text: modelData.appName ? modelData.appName.toUpperCase() : "NOTIFICATION"
-                                            font.family: Theme.fontFamily
-                                            font.pixelSize: 16
-                                            font.bold: true
-                                            color: Theme.blue
-                                            Layout.fillWidth: true
-                                        }
-
-                                        Text {
-                                            text: "✕"
-                                            font.family: Theme.fontFamily
-                                            font.pixelSize: 20
-                                            color: Theme.fgDim
-
-                                            MouseArea {
-                                                anchors.fill: parent
-                                                cursorShape: Qt.PointingHandCursor
-                                                onClicked: modelData.dismiss()
-                                            }
-                                        }
-                                    }
-
-                                    Text {
-                                        text: modelData.summary || ""
-                                        font.family: Theme.fontFamily
-                                        font.pixelSize: 22
-                                        font.bold: true
-                                        color: Theme.fg
-                                        wrapMode: Text.Wrap
-                                        Layout.fillWidth: true
-                                    }
-
-                                    Text {
-                                        visible: modelData.body !== ""
-                                        text: modelData.body || ""
-                                        font.family: Theme.fontFamily
-                                        font.pixelSize: 18
-                                        color: Theme.fgDim
-                                        wrapMode: Text.Wrap
-                                        Layout.fillWidth: true
-                                    }
-                                }
-                            }
+                        delegate: NotificationCard {
+                            required property var modelData
+                            notification: modelData
+                            width: notifList.width
+                            onCloseRequested: notification.dismiss()
+                            onActivated: ShellState.closeNotificationCenter()
                         }
                     }
                 }
             }
         }
     }
+}
