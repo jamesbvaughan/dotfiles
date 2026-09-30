@@ -130,6 +130,25 @@ vim.lsp.config("html", {
 })
 vim.lsp.enable("html")
 
+-- mdx-analyzer needs a TypeScript SDK. Upstream only looks in the project's
+-- node_modules, so fall back to the copy bundled with mason's ts_ls for loose
+-- .mdx files outside a JS project.
+vim.lsp.config("mdx_analyzer", {
+  -- params.initializationOptions is already built by the time this runs, so
+  -- set tsdk on it directly rather than on config.init_options.
+  before_init = function(params, config)
+    local tsdk = lspconfig.util.get_typescript_server_path(config.root_dir)
+    if tsdk == "" then
+      tsdk = vim.fn.stdpath("data") .. "/mason/packages/typescript-language-server/node_modules/typescript/lib"
+    end
+    params.initializationOptions = vim.tbl_deep_extend(
+      "force",
+      params.initializationOptions or {},
+      { typescript = { tsdk = tsdk } }
+    )
+  end,
+})
+
 vim.diagnostic.config({
   virtual_lines = false,
 })
@@ -174,6 +193,7 @@ require("mason-lspconfig").setup({
     "jsonls",
     "pyright",
     "lua_ls",
+    "mdx_analyzer",
     "tailwindcss",
     "taplo",
     "terraformls",
