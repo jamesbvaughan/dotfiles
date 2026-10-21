@@ -95,7 +95,7 @@ Scope {
                 sessionLock.locked = false;
                 return;
             }
-            if (!sessionLock.locked || root.unlockInProgress) return;
+            if (!sessionLock.locked || root.unlockInProgress || ShellState.sleeping) return;
 
             if (root.fprintMismatch) {
                 root.fprintFastFailures = 0;
@@ -125,6 +125,7 @@ Scope {
     }
 
     function startFprint() {
+        if (ShellState.sleeping) return;
         fprintMismatch = false;
         fprintStartedAt = Date.now();
         fprintPam.start();
@@ -162,6 +163,31 @@ Scope {
         target: ShellState
         function onLockRequested() {
             sessionLock.locked = true;
+        }
+
+        // Stop the reader before suspend; restart it once the resume has settled
+        function onSleepingChanged() {
+            if (ShellState.sleeping) {
+                fprintRetryTimer.stop();
+                fprintResumeTimer.stop();
+                if (fprintPam.active) fprintPam.abort();
+            } else if (sessionLock.locked) {
+                fprintResumeTimer.restart();
+            }
+        }
+    }
+
+    // fprintd and the USB reader need a moment after wake before a session can start
+    Timer {
+        id: fprintResumeTimer
+        interval: 1500
+        onTriggered: {
+            if (sessionLock.locked && !root.unlockInProgress && !fprintPam.active) {
+                root.fprintFastFailures = 0;
+                root.showFailure = false;
+                root.statusMessage = "Scan fingerprint or enter password";
+                root.startFprint();
+            }
         }
     }
 

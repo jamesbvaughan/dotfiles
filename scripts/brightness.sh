@@ -40,21 +40,38 @@ internal() {
   brightnessctl -c backlight -m 2>/dev/null | cut -d, -f4 | tr -d '%'
 }
 
+asdbctl_get() {
+  asdbctl get 2>/dev/null | sed -En 's/^brightness ([0-9]+)$/\1/p'
+}
+
 external_display() {
   # 1. Try asdbctl (Apple Studio Display / Studio Display XDR)
-  if percent=$(asdbctl get 2>/dev/null | sed -En 's/^brightness ([0-9]+)$/\1/p'); [ -n "$percent" ]; then
+  if percent=$(asdbctl_get); [ -n "$percent" ]; then
     case $action in
-      up)
-        percent=$((percent + STEP > 100 ? 100 : percent + STEP))
-        asdbctl set "$percent" >/dev/null 2>&1 || return 1
-        ;;
-      down)
-        percent=$((percent - STEP < 0 ? 0 : percent - STEP))
-        asdbctl set "$percent" >/dev/null 2>&1 || return 1
+      up | down)
+        # asdbctl rounds percent -> nits -> percent down, so some values (e.g. 13)
+        # read back unchanged. Keep stepping until the display actually moves.
+        start=$percent
+        want=$percent
+        tries=0
+        while [ "$percent" = "$start" ] && [ "$tries" -lt 5 ]; do
+          if [ "$action" = up ]; then
+            [ "$want" -ge 100 ] && break
+            want=$((want + STEP > 100 ? 100 : want + STEP))
+          else
+            [ "$want" -le 0 ] && break
+            want=$((want - STEP < 0 ? 0 : want - STEP))
+          fi
+          asdbctl set "$want" >/dev/null 2>&1 || return 1
+          percent=$(asdbctl_get)
+          [ -n "$percent" ] || percent=$want
+          tries=$((tries + 1))
+        done
         ;;
       set)
-        percent=$target
-        asdbctl set "$percent" >/dev/null 2>&1 || return 1
+        asdbctl set "$target" >/dev/null 2>&1 || return 1
+        percent=$(asdbctl_get)
+        [ -n "$percent" ] || percent=$target
         ;;
     esac
     echo "$percent"

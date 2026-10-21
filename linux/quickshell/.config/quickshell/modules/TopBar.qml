@@ -195,6 +195,13 @@ PanelWindow {
 
             BarSeparator {}
 
+            // Bluetooth Module (dropdown with paired devices)
+            BluetoothMenu {
+                barWindow: bar
+            }
+
+            BarSeparator {}
+
             // Weather Module
             BarItem {
                 text: WeatherService.weatherText

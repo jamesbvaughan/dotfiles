@@ -153,17 +153,16 @@ hl.on("hyprland.start", function()
   -- Every hook is one absolute script path, single-quoted: no nested shell quoting to get
   -- wrong, and nothing that depends on swayidle inheriting a PATH it does not have.
   -- `resume` belongs to the preceding timeout (the user came back from idle); it is
-  -- `after-resume` that fires after a suspend. There, `reload config-only` re-runs
-  -- update_monitors(), so the panel comes back even if the lid-switch or dock hotplug
-  -- event was missed while asleep.
+  -- `after-resume` that fires after a suspend. swayidle keeps only one command per event
+  -- (a repeated `before-sleep` silently replaces the earlier one), so everything around
+  -- a suspend goes through sleep-hook.sh.
   hl.exec_cmd(
     "swayidle -w" ..
     " timeout 1800 '" .. scripts .. "lock.sh'" ..
     " timeout 1805 '" .. scripts .. "dpms.sh off'" ..
     " resume '" .. scripts .. "dpms.sh on'" ..
-    " before-sleep 'playerctl pause'" ..
-    " before-sleep '" .. scripts .. "lock.sh --sleep'" ..
-    " after-resume 'hyprctl reload config-only'")
+    " before-sleep '" .. scripts .. "sleep-hook.sh before'" ..
+    " after-resume '" .. scripts .. "sleep-hook.sh after'")
 
   -- Blue light filter / color temperature
   hl.exec_cmd("hyprsunset")
@@ -363,6 +362,7 @@ hl.window_rule({ name = "nwg-displays", match = { class = "^nwg-displays$" }, fl
 hl.window_rule({ name = "bluetui", match = { class = "^bluetui\\.Bluetui$" }, float = true, size = "900 700" })
 hl.window_rule({ name = "trayscale", match = { class = "^dev\\.deedles\\.Trayscale$" }, float = true })
 hl.window_rule({ name = "swayimg", match = { class = "swayimg" }, float = true, size = "1200 800" })
+hl.window_rule({ name = "satty", match = { class = "^(com\\.gabm\\.satty|satty)$" }, float = true })
 hl.window_rule({ name = "pavucontrol", match = { title = "^Volume Control$" }, float = true, size = "900 700" })
 hl.window_rule({ name = "pip", match = { title = "^Picture in picture$" }, float = true, pin = true })
 hl.window_rule({ name = "easyeffects", match = { title = "^Easy Effects$" }, float = true })
@@ -423,13 +423,9 @@ hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "m-1" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
--- Screenshots (grimshot)
-hl.bind(mainMod .. " + CTRL + 4",
-  hl.dsp.exec_cmd(
-    [[grimshot --notify savecopy area ~/screenshots/screenshot-at-$(date +"%Y-%m-%d-%H-%M-%S").png]]))
-hl.bind(mainMod .. " + CTRL + 5",
-  hl.dsp.exec_cmd(
-    [[grimshot --notify savecopy output ~/screenshots/screenshot-at-$(date +"%Y-%m-%d-%H-%M-%S").png]]))
+-- Screenshots: saved to ~/screenshots + clipboard; the notification's Edit button opens satty
+hl.bind(mainMod .. " + CTRL + 4", hl.dsp.exec_cmd(scripts .. "screenshot.sh area"))
+hl.bind(mainMod .. " + CTRL + 5", hl.dsp.exec_cmd(scripts .. "screenshot.sh output"))
 
 -- Media & Volume keys
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ +5%"),

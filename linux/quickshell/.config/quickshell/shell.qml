@@ -83,6 +83,15 @@ ShellRoot {
             ShellState.lock();
         }
 
+        // Called by swayidle's before-sleep / after-resume hooks
+        function prepareForSleep(): void {
+            ShellState.sleeping = true;
+        }
+
+        function resumedFromSleep(): void {
+            ShellState.sleeping = false;
+        }
+
         function triggerBrightnessOsd(percent: int): void {
             ShellState.triggerBrightnessOsd(percent);
         }

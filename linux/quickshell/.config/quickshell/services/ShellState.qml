@@ -19,6 +19,21 @@ Singleton {
         lockRequested();
     }
 
+    // True between swayidle's before-sleep and after-resume hooks (see hyprland.lua). The lock
+    // screen keeps the fingerprint reader idle meanwhile: a scan still running when the machine
+    // suspends leaves fprintd holding a wedged device that fails every attempt after wake.
+    property bool sleeping: false
+
+    // Failsafe in case after-resume never arrives (e.g. swayidle died). Timers run on the
+    // monotonic clock, which stops during suspend, so this fires ~20s after the actual wake.
+    onSleepingChanged: sleeping ? sleepFailsafe.restart() : sleepFailsafe.stop()
+
+    Timer {
+        id: sleepFailsafe
+        interval: 20000
+        onTriggered: root.sleeping = false
+    }
+
     property bool showOsd: false
     property string osdType: "volume" // "volume" | "brightness" | "kblight"
     property real osdValue: 0.0 // 0.0 to 1.0

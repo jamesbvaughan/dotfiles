@@ -56,12 +56,12 @@ Scope {
                 return null;
             }
 
-            anchors.bottom: true
-            margins.bottom: 110
+            anchors.top: true
+            margins.top: 80
             exclusiveZone: 0
 
-            implicitWidth: 380
-            implicitHeight: 66
+            implicitWidth: 475
+            implicitHeight: 82
             color: "transparent"
 
             mask: Region {}
@@ -75,22 +75,22 @@ Scope {
                 RowLayout {
                     anchors {
                         fill: parent
-                        leftMargin: 22
-                        rightMargin: 22
+                        leftMargin: 28
+                        rightMargin: 28
                     }
-                    spacing: 18
+                    spacing: 22
 
                     Text {
                         text: ShellState.osdIcon
                         font.family: Theme.iconFont
-                        font.pixelSize: Theme.fontSizeLarge
+                        font.pixelSize: Theme.fontSizeLarge * 1.25
                         color: ShellState.osdType === "brightness" ? Theme.yellow : (ShellState.osdType === "kblight" ? Theme.purple : Theme.blue)
                         Layout.alignment: Qt.AlignVCenter
                     }
 
                     Rectangle {
                         Layout.fillWidth: true
-                        implicitHeight: 10
+                        implicitHeight: 12
                         color: Theme.surface
 
                         Rectangle {
@@ -105,11 +105,11 @@ Scope {
                     Text {
                         text: ShellState.osdLabel
                         font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeNormal
+                        font.pixelSize: Theme.fontSizeNormal * 1.25
                         font.bold: true
                         color: Theme.fg
                         Layout.alignment: Qt.AlignVCenter
-                        Layout.preferredWidth: 54
+                        Layout.preferredWidth: 68
                         horizontalAlignment: Text.AlignRight
                     }
                 }

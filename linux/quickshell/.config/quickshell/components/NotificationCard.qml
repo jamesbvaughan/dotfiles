@@ -58,12 +58,12 @@ Rectangle {
             Text {
                 text: "✕"
                 font.family: Theme.fontFamily
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeSmall + 4
                 color: Theme.fgDim
 
                 MouseArea {
                     anchors.fill: parent
-                    anchors.margins: -6
+                    anchors.margins: -8
                     cursorShape: Qt.PointingHandCursor
                     onClicked: root.closeRequested()
                 }
@@ -74,14 +74,26 @@ Rectangle {
             Layout.fillWidth: true
             spacing: 12
 
-            Image {
-                visible: root.notification.image !== "" && status === Image.Ready
-                source: root.notification.image
+            // The slot is reserved as soon as the notification has an image, so the text
+            // doesn't jump sideways when the async load finishes. Only a failed load
+            // collapses it (one shift, but only in that rare case).
+            Rectangle {
+                visible: root.notification.image !== "" && notifImage.status !== Image.Error
+                color: Theme.surfaceHover
                 Layout.preferredWidth: 56
                 Layout.preferredHeight: 56
                 Layout.alignment: Qt.AlignTop
-                fillMode: Image.PreserveAspectCrop
-                asynchronous: true
+
+                Image {
+                    id: notifImage
+                    anchors.fill: parent
+                    visible: status === Image.Ready
+                    source: root.notification.image
+                    fillMode: Image.PreserveAspectCrop
+                    asynchronous: true
+                    sourceSize.width: 112
+                    sourceSize.height: 112
+                }
             }
 
             ColumnLayout {

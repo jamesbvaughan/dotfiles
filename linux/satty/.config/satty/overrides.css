@@ -1,0 +1,17 @@
+/* Satty draws its toolbars at GTK's native 1x size, which is tiny on the 2880x1920 panel
+ * running at scale 1 (GTK4 ignores GDK_SCALE on Wayland). Enlarge just the toolbars.
+ * Built-in styles: https://github.com/Satty-org/Satty/blob/main/src/assets/default.css */
+
+.toolbar {
+    font-size: 1.5em;
+}
+
+.toolbar button {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 6px;
+}
+
+.toolbar image {
+    -gtk-icon-size: 26px;
+}

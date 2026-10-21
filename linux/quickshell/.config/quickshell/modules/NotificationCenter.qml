@@ -292,6 +292,8 @@ Scope {
                                         fillMode: Image.PreserveAspectCrop
                                         asynchronous: true
                                         cache: true
+                                        sourceSize.width: 208
+                                        sourceSize.height: 208
                                         visible: status === Image.Ready
                                     }
 
@@ -511,13 +513,93 @@ Scope {
                             }
                         }
 
+                        // Chrome-style scrolling. Hyprland's touchpad scroll_factor (0.1) is
+                        // undone here so content tracks the fingers 1:1, and since Wayland has
+                        // no kinetic scrolling, flings are simulated with exponential decay.
                         WheelHandler {
+                            id: scroller
                             target: null
                             acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+
+                            readonly property real touchpadGain: 10 // 1 / hyprland scroll_factor
+                            readonly property real wheelStep: 100 // px per mouse wheel notch
+                            readonly property real friction: 4 // fling decay rate (1/s); lower glides further
+                            readonly property real minFlingVelocity: 150 // px/s
+                            readonly property int velocityWindow: 80 // ms of history used for fling velocity
+
+                            property var samples: [] // [{t, dy}] for the current gesture
+                            property real velocity: 0 // px/s while flinging, positive = content moves up
+                            property real wheelRemaining: 0 // px still to animate for mouse wheel
+
+                            function scrollBy(dy) {
+                                const top = notifList.originY;
+                                const bottom = top + Math.max(0, notifList.contentHeight - notifList.height);
+                                const y = Math.max(top, Math.min(bottom, notifList.contentY + dy));
+                                const moved = y !== notifList.contentY;
+                                notifList.contentY = y;
+                                return moved;
+                            }
+
+                            function stop() {
+                                velocity = 0;
+                                wheelRemaining = 0;
+                            }
+
                             onWheel: event => {
-                                const dy = event.pixelDelta.y !== 0 ? event.pixelDelta.y : (event.angleDelta.y / 2);
-                                const maxScroll = Math.max(0, notifList.contentHeight - notifList.height);
-                                notifList.contentY = Math.max(0, Math.min(maxScroll, notifList.contentY - dy * 4));
+                                const now = Date.now();
+
+                                // Mouse wheel: smooth ease-out to the accumulated target
+                                if (event.phase === Qt.NoScrollPhase) {
+                                    velocity = 0;
+                                    wheelRemaining -= event.angleDelta.y / 120 * wheelStep;
+                                    return;
+                                }
+
+                                if (event.phase === Qt.ScrollBegin) {
+                                    stop();
+                                    samples = [];
+                                    return;
+                                }
+
+                                if (event.phase === Qt.ScrollEnd) {
+                                    const recent = samples.filter(s => now - s.t <= velocityWindow);
+                                    if (recent.length >= 2) {
+                                        const span = Math.max(now - recent[0].t, 16);
+                                        const v = recent.reduce((sum, s) => sum + s.dy, 0) * 1000 / span;
+                                        if (Math.abs(v) >= minFlingVelocity)
+                                            velocity = v;
+                                    }
+                                    samples = [];
+                                    return;
+                                }
+
+                                // angleDelta is the precise axis value * 12; pixelDelta is rounded
+                                const dy = -event.angleDelta.y / 12 * touchpadGain;
+                                stop();
+                                scrollBy(dy);
+                                samples.push({ t: now, dy: dy });
+                                if (samples.length > 20)
+                                    samples.shift();
+                            }
+                        }
+
+                        FrameAnimation {
+                            running: scroller.velocity !== 0 || scroller.wheelRemaining !== 0
+                            onTriggered: {
+                                const dt = Math.min(frameTime, 0.05);
+                                if (scroller.velocity !== 0) {
+                                    const moved = scroller.scrollBy(scroller.velocity * dt);
+                                    scroller.velocity *= Math.exp(-scroller.friction * dt);
+                                    if (!moved || Math.abs(scroller.velocity) < 20)
+                                        scroller.velocity = 0;
+                                }
+                                if (scroller.wheelRemaining !== 0) {
+                                    const step = scroller.wheelRemaining * (1 - Math.exp(-18 * dt));
+                                    const moved = scroller.scrollBy(step);
+                                    scroller.wheelRemaining -= step;
+                                    if (!moved || Math.abs(scroller.wheelRemaining) < 0.5)
+                                        scroller.wheelRemaining = 0;
+                                }
                             }
                         }
 

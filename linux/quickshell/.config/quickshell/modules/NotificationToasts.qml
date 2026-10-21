@@ -59,11 +59,11 @@ Scope {
         PanelWindow {
             anchors.top: true
             anchors.right: true
-            margins.top: Theme.barHeight + 10
-            margins.right: 12
+            margins.top: 20
+            margins.right: 20
             exclusiveZone: 0
 
-            implicitWidth: 420
+            implicitWidth: 630
             implicitHeight: toastColumn.implicitHeight
             color: "transparent"
 
