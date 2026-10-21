@@ -31,4 +31,8 @@ export FZF_CTRL_T_OPTS="
   --preview 'bat -n --color=always {}'
   --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
-export FZF_CTRL_R_OPTS="--preview '' --no-info"
+# Key bindings and completion from the installed fzf; leave ctrl-r to atuin
+if command -v fzf >/dev/null; then
+  FZF_CTRL_R_COMMAND=
+  source <(fzf --zsh)
+fi

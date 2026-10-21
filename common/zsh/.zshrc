@@ -20,7 +20,6 @@ bindkey -e
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-zinit pack"default+keys" for fzf
 zinit light atuinsh/atuin
 zinit light asdf-vm/asdf
 
