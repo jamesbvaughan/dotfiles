@@ -53,3 +53,8 @@ profile = "Arcol"
 name = "Intercom"
 match = ["*intercom.com*"]
 profile = "Arcol"
+
+[[rules]]
+name = "Procore"
+match = ["*procore.com*"]
+profile = "Arcol"
