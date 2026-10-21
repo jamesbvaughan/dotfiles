@@ -1,5 +1,7 @@
 # Docs: https://starship.rs/config/
 
+command_timeout = 2000
+
 [aws]
 disabled = true
 
